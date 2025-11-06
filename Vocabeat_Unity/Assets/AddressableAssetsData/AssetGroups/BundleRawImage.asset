@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: BundleRawImage
+  m_EditorClassIdentifier: 
+  m_GroupName: BundleRawImage
+  m_GUID: ed01238ce4ad2764290a109a498c6724
+  m_SerializeEntries:
+  - m_GUID: 69306d7a2e7c5ce47b50cdcbff5ea1b3
+    m_Address: SprRawStageBack_FieldA
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a8b1ca93548ce41428c611742f8c4fec
+    m_Address: UIRaw_KessokuBand
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 7025a4780879b6848a702540fd30cb5f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: acaf0f433b7457143aab456dd62b7286, type: 2}

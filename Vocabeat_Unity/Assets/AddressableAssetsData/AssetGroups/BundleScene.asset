@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: BundleScene
+  m_EditorClassIdentifier: 
+  m_GroupName: BundleScene
+  m_GUID: a0145fe23f8725f45b47ff1331afc5f6
+  m_SerializeEntries:
+  - m_GUID: 02d83f124b700fd47bf2cf1f9ebf863d
+    m_Address: SceneMaster
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 392075857d1e8244a87d2190e9ddc218
+    m_Address: SceneHome
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 817c781f5ad402a4a863b6336a63a2bd
+    m_Address: SceneBattleStageNormal
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 81de4f24fc5b205489742bea9a85c74c
+    m_Address: SceneLoading
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c2302c04bcaa7104ca89368feb697de3
+    m_Address: SceneUIContainerMain
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 7025a4780879b6848a702540fd30cb5f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: d6033381979eec845944599787df1ba2, type: 2}

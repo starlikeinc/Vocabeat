@@ -1,0 +1,238 @@
+{
+  "BuffData": [
+    {
+      "Key": 8800001,
+      "BuffName": "공격력 증가(+)",
+      "BuffIconName": "UIIconBuff_Attack_Up",
+      "BuffIconAttribute": "None",
+      "BuffDesc": "캐릭터의 공격력이 증가해요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "Key": 8800002,
+      "BuffName": "공격력 증가(%)",
+      "BuffIconName": "UIIconBuff_Attack_Up",
+      "BuffIconAttribute": "Percentage",
+      "BuffDesc": "캐릭터의 공격력이 증가해요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "Key": 8800003,
+      "BuffName": "공격력 감소(+)",
+      "BuffIconName": "UIIconBuff_Attack_Down",
+      "BuffIconAttribute": "None",
+      "BuffDesc": "캐릭터의 공격력이 감소해요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "Key": 8800004,
+      "BuffName": "공격력 감소(%)",
+      "BuffIconName": "UIIconBuff_Attack_Down",
+      "BuffIconAttribute": "Percentage",
+      "BuffDesc": "캐릭터의 공격력이 감소해요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "Key": 8800005,
+      "BuffName": "방어력 증가(+)",
+      "BuffIconName": "UIIconBuff_Defense_Up",
+      "BuffIconAttribute": "None",
+      "BuffDesc": "캐릭터의 방어력이 증가해요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "Key": 8800006,
+      "BuffName": "방어력 증가(%)",
+      "BuffIconName": "UIIconBuff_Defense_Up",
+      "BuffIconAttribute": "Percentage",
+      "BuffDesc": "캐릭터의 방어력이 증가해요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "Key": 8800007,
+      "BuffName": "방어력 감소(+)",
+      "BuffIconName": "UIIconBuff_Defense_Down",
+      "BuffIconAttribute": "None",
+      "BuffDesc": "캐릭터의 방어력이 감소해요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "Key": 8800008,
+      "BuffName": "방어력 감소(%)",
+      "BuffIconName": "UIIconBuff_Defense_Down",
+      "BuffIconAttribute": "Percentage",
+      "BuffDesc": "캐릭터의 방어력이 감소해요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "Key": 8800009,
+      "BuffName": "명중력 증가",
+      "BuffIconName": "UIIconBuff_Accurate_Up",
+      "BuffIconAttribute": "None",
+      "BuffDesc": "캐릭터의 명중력이 증가해요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "Key": 8800010,
+      "BuffName": "명중력 감소",
+      "BuffIconName": "UIIconBuff_Accurate_Down",
+      "BuffIconAttribute": "None",
+      "BuffDesc": "캐릭터의 명중력이 감소해요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "Key": 8800011,
+      "BuffName": "회피력 증가",
+      "BuffIconName": "UIIconBuff_Evade_Up",
+      "BuffIconAttribute": "None",
+      "BuffDesc": "캐릭터의 회피력이 증가해요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "Key": 8800012,
+      "BuffName": "회피력 감소",
+      "BuffIconName": "UIIconBuff_Evade_Down",
+      "BuffIconAttribute": "None",
+      "BuffDesc": "캐릭터의 회피력이 감소해요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "Key": 8800013,
+      "BuffName": "속도 증가",
+      "BuffIconName": "UIIconBuff_Speed_Up",
+      "BuffIconAttribute": "None",
+      "BuffDesc": "캐릭터의 속도가 증가해요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "Key": 8800014,
+      "BuffName": "속도 감소",
+      "BuffIconName": "UIIconBuff_Speed_Down",
+      "BuffIconAttribute": "None",
+      "BuffDesc": "캐릭터의 속도가 감소해요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "Key": 8810001,
+      "BuffName": "중독",
+      "BuffIconName": "UIIconBuff_Poison",
+      "BuffIconAttribute": "None",
+      "BuffDesc": "턴 시작 시 적용 값 만큼 중독 데미지를 받아요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "Key": 8810002,
+      "BuffName": "출혈",
+      "BuffIconName": "UIIconBuff_Bleeding",
+      "BuffIconAttribute": "None",
+      "BuffDesc": "캐릭터가 피해를 입을 때, 추가 데미지를 받어요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "Key": 8810003,
+      "BuffName": "화상",
+      "BuffIconName": "UIIconBuff_Burn",
+      "BuffIconAttribute": "None",
+      "BuffDesc": "턴 시작 시 적용 값 만큼 화상 데미지를 받아요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "Key": 8810004,
+      "BuffName": "폭탄",
+      "BuffIconName": "UIIconBuff_Bomb",
+      "BuffIconAttribute": "None",
+      "BuffDesc": "턴마다 피해량이 1.2배 증가하고, 해제 시 피해량만큼 피해를 입어요.",
+      "DescArgument": [
+        {
+          "Level": 1,
+          "Value": 0
+        }
+      ]
+    }
+  ]
+}

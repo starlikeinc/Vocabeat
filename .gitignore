@@ -1,0 +1,17 @@
+Vocabeat_Unity/*.vsconfig
+Vocabeat_Unity/*.sln
+Vocabeat_Unity/*.user
+Vocabeat_Unity/*.csproj
+Vocabeat_Unity/.vs/
+Vocabeat_Unity/Assets/Ignore
+Vocabeat_Unity/Assets/Ignore.meta
+Vocabeat_Unity/Library/
+Vocabeat_Unity/Temp/
+Vocabeat_Unity/obj/
+Vocabeat_Unity/UserSettings/
+Vocabeat_Unity/Logs/
+Vocabeat_Unity/Assets/BattleLog/
+Vocabeat_Unity/MemoryCaptures/
+Vocabeat_Unity/.idea/
+Vocabeat_Unity/.utmp/
+Vocabeat_Unity/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json

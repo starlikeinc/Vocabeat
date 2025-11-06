@@ -1,0 +1,128 @@
+{
+  "startMainNodeID": "14327efd-9250-4a40-bcee-0e74a1b68a4e",
+  "listMainNodes": [
+    {
+      "id": "14327efd-9250-4a40-bcee-0e74a1b68a4e",
+      "info": {
+        "name": "샘플 메인노드 1",
+        "description": "",
+        "listRewards": []
+      },
+      "listNextNodeIDs": [
+        "d9e3e78f-2bbd-4a80-961c-496ff8df023f",
+        "05a689da-917f-484d-9616-28237ade06a7"
+      ],
+      "listSteps": [
+        {
+          "id": "4b4be180-185e-4e12-b391-b13027aee6b3",
+          "description": "샘플 스탭1",
+          "listNextStepIDs": [
+            "4cb19902-a192-415f-b39b-c077980d2dc9"
+          ],
+          "condition": {
+            "listConditions": [
+              {
+                "item": 0,
+                "amount": 3
+              }
+            ]
+          }
+        },
+        {
+          "id": "4cb19902-a192-415f-b39b-c077980d2dc9",
+          "description": null,
+          "listNextStepIDs": [
+            "df7c1aa3-600e-4725-b979-73ece5b5d5c4",
+            "2c25c34e-944f-4d61-a50b-f7029e86f128"
+          ],
+          "condition": {
+            "listConditions": []
+          }
+        },
+        {
+          "id": "df7c1aa3-600e-4725-b979-73ece5b5d5c4",
+          "description": "",
+          "listNextStepIDs": [],
+          "condition": {
+            "listConditions": []
+          }
+        },
+        {
+          "id": "2c25c34e-944f-4d61-a50b-f7029e86f128",
+          "description": "",
+          "listNextStepIDs": [],
+          "condition": {
+            "listConditions": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "d9e3e78f-2bbd-4a80-961c-496ff8df023f",
+      "info": {
+        "name": "",
+        "description": "",
+        "listRewards": []
+      },
+      "listNextNodeIDs": [
+        "bf10e654-512f-4873-b4b3-d8ae520eeae2",
+        "759ffac3-a1e0-42dd-abdb-a5ac57240dfc"
+      ],
+      "listSteps": []
+    },
+    {
+      "id": "bf10e654-512f-4873-b4b3-d8ae520eeae2",
+      "info": {
+        "name": "",
+        "description": "",
+        "listRewards": []
+      },
+      "listNextNodeIDs": [],
+      "listSteps": []
+    },
+    {
+      "id": "759ffac3-a1e0-42dd-abdb-a5ac57240dfc",
+      "info": {
+        "name": "",
+        "description": "",
+        "listRewards": []
+      },
+      "listNextNodeIDs": [],
+      "listSteps": []
+    },
+    {
+      "id": "05a689da-917f-484d-9616-28237ade06a7",
+      "info": {
+        "name": "",
+        "description": "",
+        "listRewards": []
+      },
+      "listNextNodeIDs": [
+        "5290e7ab-36be-44ea-9296-26c0ab5ec98e"
+      ],
+      "listSteps": []
+    },
+    {
+      "id": "5290e7ab-36be-44ea-9296-26c0ab5ec98e",
+      "info": {
+        "name": "",
+        "description": "",
+        "listRewards": []
+      },
+      "listNextNodeIDs": [
+        "570b2b4e-932c-4577-a934-3bfd9f33c646"
+      ],
+      "listSteps": []
+    },
+    {
+      "id": "570b2b4e-932c-4577-a934-3bfd9f33c646",
+      "info": {
+        "name": "",
+        "description": "",
+        "listRewards": []
+      },
+      "listNextNodeIDs": [],
+      "listSteps": []
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+    "name": "LUIZ.DataGraphSamples",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a57e96bb758fe2d4eb0bf18e721d04c7"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

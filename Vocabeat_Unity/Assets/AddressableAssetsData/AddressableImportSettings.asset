@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4457b6e6d3304bd46a31be63dad3325c, type: 3}
+  m_Name: AddressableImportSettings
+  m_EditorClassIdentifier: 
+  allowGroupCreation: 1
+  rules:
+  - path: Assets/01.AssetBundle/01.BundleUIAtlas*.*
+    matchType: 0
+    groupName: BundleUIAtlas
+    LabelMode: 0
+    labelRefs:
+    - m_LabelString: Main
+    dynamicLabels: []
+    groupTemplate: {fileID: 11400000, guid: 5dd2789c43845b94dbce7f0c69e9ddfb, type: 2}
+    groupTemplateApplicationMode: 0
+    simplified: 1
+    addressReplacement: 
+  - path: Assets/01.AssetBundle/02.BundleScene*.*
+    matchType: 0
+    groupName: BundleScene
+    LabelMode: 0
+    labelRefs:
+    - m_LabelString: Main
+    dynamicLabels: []
+    groupTemplate: {fileID: 11400000, guid: 5dd2789c43845b94dbce7f0c69e9ddfb, type: 2}
+    groupTemplateApplicationMode: 0
+    simplified: 1
+    addressReplacement: 
+  - path: Assets/01.AssetBundle/03.BundleSoundEffect*.*
+    matchType: 0
+    groupName: BundleSoundEffect
+    LabelMode: 0
+    labelRefs:
+    - m_LabelString: Main
+    dynamicLabels: []
+    groupTemplate: {fileID: 11400000, guid: 5dd2789c43845b94dbce7f0c69e9ddfb, type: 2}
+    groupTemplateApplicationMode: 0
+    simplified: 1
+    addressReplacement: 
+  - path: Assets/01.AssetBundle/04.BundleSoundBGM*.*
+    matchType: 0
+    groupName: BundleSoundBGM
+    LabelMode: 0
+    labelRefs:
+    - m_LabelString: Main
+    dynamicLabels: []
+    groupTemplate: {fileID: 11400000, guid: 5dd2789c43845b94dbce7f0c69e9ddfb, type: 2}
+    groupTemplateApplicationMode: 0
+    simplified: 1
+    addressReplacement: 
+  - path: Assets/01.AssetBundle/07.BundleRawImage*.*
+    matchType: 0
+    groupName: BundleRawImage
+    LabelMode: 0
+    labelRefs:
+    - m_LabelString: Main
+    dynamicLabels: []
+    groupTemplate: {fileID: 11400000, guid: 5dd2789c43845b94dbce7f0c69e9ddfb, type: 2}
+    groupTemplateApplicationMode: 0
+    simplified: 1
+    addressReplacement: 
+  - path: Assets/01.AssetBundle/10.BundleBackground*.*
+    matchType: 0
+    groupName: BundleBackground
+    LabelMode: 0
+    labelRefs:
+    - m_LabelString: Main
+    dynamicLabels: []
+    groupTemplate: {fileID: 11400000, guid: 5dd2789c43845b94dbce7f0c69e9ddfb, type: 2}
+    groupTemplateApplicationMode: 0
+    simplified: 1
+    addressReplacement: 
+  - path: Assets/01.AssetBundle/20.BundleManager*.*
+    matchType: 0
+    groupName: BundleManager
+    LabelMode: 0
+    labelRefs:
+    - m_LabelString: Main
+    dynamicLabels: []
+    groupTemplate: {fileID: 11400000, guid: 5dd2789c43845b94dbce7f0c69e9ddfb, type: 2}
+    groupTemplateApplicationMode: 0
+    simplified: 1
+    addressReplacement: 

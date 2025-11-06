@@ -1,0 +1,20 @@
+{
+    "name": "LUIZ.DataGraphSamples.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a57e96bb758fe2d4eb0bf18e721d04c7",
+        "GUID:d0a8492ac0573d14790450c2263735b5",
+        "GUID:5f4446ad52d2a87408dbcd9b0f1ee654"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
