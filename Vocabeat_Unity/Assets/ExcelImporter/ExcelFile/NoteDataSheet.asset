@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3acce651a4783344b38d624f05cd66e, type: 3}
+  m_Name: NoteDataSheet
+  m_EditorClassIdentifier: CodeContents::NoteDataSheet
+  NoteData:
+  - ID: 0
+    PageIndex: 0
+    NoteType: 0
+    Tick: 240
+    Y: 0.5
+    HasSibling: 0
+    HoldTick: 0
+    NextID: 0
+  - ID: 1
+    PageIndex: 0
+    NoteType: 0
+    Tick: 480
+    Y: 0.3
+    HasSibling: 1
+    HoldTick: 0
+    NextID: 0
+  - ID: 2
+    PageIndex: 0
+    NoteType: 0
+    Tick: 480
+    Y: 0.7
+    HasSibling: 1
+    HoldTick: 0
+    NextID: 0
+  - ID: 3
+    PageIndex: 0
+    NoteType: 0
+    Tick: 720
+    Y: 0.4
+    HasSibling: 1
+    HoldTick: 0
+    NextID: 0
+  - ID: 4
+    PageIndex: 0
+    NoteType: 0
+    Tick: 720
+    Y: 0.6
+    HasSibling: 1
+    HoldTick: 0
+    NextID: 0
+  - ID: 5
+    PageIndex: 0
+    NoteType: 0
+    Tick: 1080
+    Y: 0.5
+    HasSibling: 0
+    HoldTick: 0
+    NextID: 0
+  - ID: 6
+    PageIndex: 0
+    NoteType: 0
+    Tick: 1200
+    Y: 0.5
+    HasSibling: 0
+    HoldTick: 0
+    NextID: 0
+  - ID: 7
+    PageIndex: 0
+    NoteType: 0
+    Tick: 1440
+    Y: 0.5
+    HasSibling: 0
+    HoldTick: 0
+    NextID: 0
+  - ID: 8
+    PageIndex: 0
+    NoteType: 0
+    Tick: 1560
+    Y: 0.5
+    HasSibling: 0
+    HoldTick: 0
+    NextID: 0
