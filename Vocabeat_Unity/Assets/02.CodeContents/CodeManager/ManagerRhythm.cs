@@ -6,7 +6,7 @@ using UnityEngine;
 public class ManagerRhythm : SingletonBase<ManagerRhythm>
 {    
     public event Action<float> OnTickUpdate;
-    public event Action<RhythmTimeline> OnSongStarted;
+    public event Action OnSongStarted;
     public event Action OnSongEnded;
 
     [Header("Refs")]
@@ -15,6 +15,9 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>
 
     [Header("Test - Metronome")]
     [SerializeField] private AudioSource _metronomSrc;
+
+    public RhythmTimeline RTimeline => _rTimeline;
+    public NoteTouchJudgeSystem NoteJudegeSystem => _noteJudgeSystem;
 
     public bool IsPlaying => _rTimeline.IsPlaying;
 
@@ -48,7 +51,7 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>
 
         _rTimeline.Play();
 
-        OnSongStarted?.Invoke(_rTimeline);       
+        OnSongStarted?.Invoke();       
     }
 
     private void StopTestPlay()

@@ -10,15 +10,13 @@ public class UIItemNote : UITemplateItemBase, INote
     public RectTransform RectTrs { get; private set; }
     public ENoteType NoteType { get; private set; }    
 
-    private RectTransform _spawnRectTrs;
-    private UIFrameInGame _frameInGame;
+    private RectTransform _spawnRectTrs;    
 
     // ========================================
     protected override void OnUIWidgetInitialize(UIFrameBase parentFrame)
     {
         base.OnUIWidgetInitialize(parentFrame);
-        RectTrs = (RectTransform)transform;
-        _frameInGame = parentFrame as UIFrameInGame;        
+        RectTrs = (RectTransform)transform;        
     }
 
     // ========================================
@@ -38,7 +36,7 @@ public class UIItemNote : UITemplateItemBase, INote
         float parentWidth = _spawnRectTrs.rect.width;
         float parentHeight = _spawnRectTrs.rect.height;
 
-        int tickPerPage = _frameInGame.R_Timeline.TicksPerPage;
+        int tickPerPage = ManagerRhythm.Instance.RTimeline.TicksPerPage;
         int tickInPage = NoteData.Tick % tickPerPage; // 현재 노트의 페이지 내 Tick
         float x01 = (float)tickInPage / tickPerPage;
 

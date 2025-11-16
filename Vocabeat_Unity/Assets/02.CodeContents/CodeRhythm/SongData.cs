@@ -11,11 +11,12 @@ public interface INote
 
 public enum EJudgementType
 {
-    BuleStar,   // Perfect
+    BlueStar,   // Perfect
     WhiteStar,  // Great
     YellowStar, // Good
-
     RedStar,    // Bad
+
+    Miss,
 }
 
 public enum EDifficulty

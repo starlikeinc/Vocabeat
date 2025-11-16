@@ -8,8 +8,7 @@ public class UITemplateNoteSpawner : UITemplateBase
     [SerializeField] private RectTransform _spawnRectTrs;
 
     [Header("Note Spawner")]    
-    [SerializeField] private int _appearOffsetTicks = 480;  // 자신의 Tick 기준 몇 Tick 전에 등장할지 - 이건 나중에 따로 빼야됨.    
-    [SerializeField] private int _disappearOffsetTick = 60; // 자신의 Tick 기준 몇 Tick 이상 지날 동안 터치 없으면 비활성화 할 건지. (Miss처리는 JudgeSystem에서 함)
+    [SerializeField] private int _appearOffsetTicks = 480;  // 자신의 Tick 기준 몇 Tick 전에 등장할지 - 이건 나중에 따로 빼야됨.        
 
     private readonly List<UIItemNote> _activeNotes = new List<UIItemNote>();
     private Queue<Note> _pendingNotes;
@@ -19,13 +18,21 @@ public class UITemplateNoteSpawner : UITemplateBase
     public IReadOnlyList<UIItemNote> ActiveNotes => _activeNotes;
 
     // ========================================
+    protected override void OnUIWidgetInitialize(UIFrameBase parentFrame)
+    {
+        base.OnUIWidgetInitialize(parentFrame);
+        ManagerRhythm.Instance.NoteJudegeSystem.OnJudgeResult -= OnDisappearByJudgement;
+        ManagerRhythm.Instance.NoteJudegeSystem.OnJudgeResult += OnDisappearByJudgement;
+    }
+
+    // ========================================
     /// <summary>
     /// 노트 시트 + 타임라인을 바인딩하고, 내부 상태 초기화
     /// </summary>
-    public void Setup(List<Note> listNote, RhythmTimeline timeline)
+    public void Setup(List<Note> listNote)
     {
-        _timeline = timeline;
-        _preSongTicks = (timeline != null) ? timeline.PreSongTicks : 0;        
+        _timeline = ManagerRhythm.Instance.RTimeline;
+        _preSongTicks = _timeline?.PreSongTicks ?? 0;
 
         ClearAllNotes();
 
@@ -53,8 +60,7 @@ public class UITemplateNoteSpawner : UITemplateBase
         // 곡 기준 Tick(0 = 곡 시작 시점)
         int songTick = timelineTick - _preSongTicks;
 
-        SpawnNotes(songTick);
-        DespawnNotes(songTick);
+        SpawnNotes(songTick);        
     }
 
     public void ResetSpawner()
@@ -89,23 +95,16 @@ public class UITemplateNoteSpawner : UITemplateBase
         }
     }
 
-    private void DespawnNotes(int songTick)
+    private void DespawnNote(INote targetNote)
     {
-        for (int i = _activeNotes.Count - 1; i >= 0; i--)
-        {
-            var item = _activeNotes[i];
-            if (item == null)
-            {
-                _activeNotes.RemoveAt(i);
-                continue;
-            }
-            
-            if (songTick >= item.NoteData.Tick + _disappearOffsetTick)
-            {
-                DoUITemplateReturn(item);
-                _activeNotes.RemoveAt(i);
-            }
-        }
+        // TODO : 사라지는 연출 등
+
+        UIItemNote item = targetNote as UIItemNote;
+        if (item == null)
+            return;
+
+        DoUITemplateReturn(item);
+        _activeNotes.Remove(item);
     }
 
     private UIItemNote GetNoteItem(Note data)
@@ -113,6 +112,11 @@ public class UITemplateNoteSpawner : UITemplateBase
         UIItemNote item = DoTemplateRequestItem<UIItemNote>(transform);
         item.DoUINoteVisualSetting(data, _spawnRectTrs);
         return item;
+    }
+
+    private void OnDisappearByJudgement(INote note, EJudgementType _)
+    {
+        DespawnNote(note);
     }
 
     private void ClearAllNotes()

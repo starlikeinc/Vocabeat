@@ -12,7 +12,7 @@ public class UIFrameInGame : UIFrameBase
     [Header("Spawner")]
     [SerializeField] private UITemplateNoteSpawner _noteSpawner;
 
-    public RhythmTimeline R_Timeline { get; private set; }
+    private RhythmTimeline _rTimeline;
 
     private SongData_SO _curSongDataSO;
     private EDifficulty _songDiff;
@@ -34,9 +34,9 @@ public class UIFrameInGame : UIFrameBase
         ManagerRhythm.Instance.OnSongEnded += StopTestPlay;
     }
 
-    private void StartTestPlay(RhythmTimeline rTimeline)
+    private void StartTestPlay()
     {
-        R_Timeline = rTimeline;
+        _rTimeline = ManagerRhythm.Instance.RTimeline;
 
         // 스캔라인은 RhythmTimeline.PageT를 보고 움직이기 때문에 
         if (_widgetScanLine != null)
@@ -48,7 +48,7 @@ public class UIFrameInGame : UIFrameBase
             var listNoteDatas = _curSongDataSO.NoteDatasByDiff[_songDiff];
 
             if (listNoteDatas != null)
-                _noteSpawner.Setup(listNoteDatas, R_Timeline);
+                _noteSpawner.Setup(listNoteDatas);
         }
     }
 

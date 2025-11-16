@@ -25,7 +25,10 @@ public class RhythmTimeline : MonoBehaviour
     /// <summary>현재 페이지 내 진행도(0~1) - 스캔라인이 보는 값</summary>
     public float PageT { get; private set; }
 
+    /// <summary>한 페이지 당 Tick 값</summary>
     public int TicksPerPage => _ticksPerPage;
+
+    /// <summary>곡이 시작하기 전 여유 Tick</summary>
     public int PreSongTicks => _preSongTicks;
 
     public bool IsPlaying => _playing;
