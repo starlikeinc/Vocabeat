@@ -4,30 +4,30 @@ using UnityEngine;
 public class UIWidgetScanLine : UIWidgetBase
 {
     [Header("Refs")]
-    [SerializeField] private RectTransform ScanLine;
-    [SerializeField] private RhythmTimeline Timeline;
+    [SerializeField] private RectTransform ScanLine;    
 
     private float _leftX;
-    private float _rightX;
+    private float _rightX;    
+
+    protected override void OnUIWidgetInitialize(UIFrameBase parentFrame)
+    {
+        base.OnUIWidgetInitialize(parentFrame);
+    }
 
     private void Awake()
     {
         if (ScanLine == null) return;
 
-        var parent = ScanLine.parent as RectTransform;
-        if (parent == null) return;
+        RectTransform myRectTrs = (RectTransform)transform;        
 
-        float width = parent.rect.width;
+        float width = myRectTrs.rect.width;
         _leftX = -width * 0.5f;
         _rightX = width * 0.5f;
     }
 
-    private void Update()
+    public void UpdateScanline(float pageT)
     {
-        if (ScanLine == null || Timeline == null || !Timeline.IsPlaying)
-            return;
-
-        SetPageProgress(Timeline.PageT);
+        SetPageProgress(pageT);
     }
 
     public void SetPageProgress(float pageT)

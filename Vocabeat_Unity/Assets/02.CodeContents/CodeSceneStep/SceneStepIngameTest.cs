@@ -1,16 +1,25 @@
+using LUIZ.UI;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneStepIngameTest : MonoBehaviour
+public class SceneStepIngameTest : SceneStepBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private Camera DevelopCamera;
+    [SerializeField] private UIContainerBase UIContainerDevelop;
+
+    //-------------------------------------------------------------
+    protected override void OnUnityStart()
     {
-        
+        ProtLoadBasicDependencies(() =>
+        {
+            UIContainerDevelop.DoRegisterContainer();
+            PrivSceneStepFinish();
+        });
     }
 
-    // Update is called once per frame
-    void Update()
+    //-------------------------------------------------------------
+    private void PrivSceneStepFinish()
     {
-        
+        UIChannel.UIShow<UIFrameInGame>();
     }
 }

@@ -1,4 +1,22 @@
 using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+public interface INote
+{
+    ENoteType NoteType { get; }
+    Note NoteData { get; }
+    RectTransform RectTrs { get; }
+}
+
+public enum EJudgementType
+{
+    BuleStar,   // Perfect
+    WhiteStar,  // Great
+    YellowStar, // Good
+
+    RedStar,    // Bad
+}
 
 public enum EDifficulty
 {
@@ -16,12 +34,10 @@ public enum ENoteType
 }
 
 [Serializable]
-public class Song
+public class DiffNoteData
 {
-    public int SongID;
-    public string SongName;
-    public string ThumbName;
-    public int BPM;    
+    public EDifficulty Diff;
+    public List<Note> Notes = new();
 }
 
 [Serializable]

@@ -4,43 +4,45 @@ using UnityEngine;
 
 public class UITemplateNoteSpawner : UITemplateBase
 {
-    [Header("Note Spawner")]
-    [SerializeField] private UIItemNote _notePrefab;
-    [SerializeField] private RectTransform _noteParent; // 스캔라인 위젯으로 두면 됨.
-    [SerializeField] private int _appearOffsetTicks = 480; // 자신의 Tick 기준 몇 Tick 전에 등장할지 - 이건 나중에 따로 빼야됨.
+    [Header("노트가 보여질 RectTrs")] // WidgetScanline으로 두면 됨.
+    [SerializeField] private RectTransform _spawnRectTrs;
+
+    [Header("Note Spawner")]    
+    [SerializeField] private int _appearOffsetTicks = 480;  // 자신의 Tick 기준 몇 Tick 전에 등장할지 - 이건 나중에 따로 빼야됨.    
+    [SerializeField] private int _disappearOffsetTick = 60; // 자신의 Tick 기준 몇 Tick 이상 지날 동안 터치 없으면 비활성화 할 건지. (Miss처리는 JudgeSystem에서 함)
 
     private readonly List<UIItemNote> _activeNotes = new List<UIItemNote>();
     private Queue<Note> _pendingNotes;
     private RhythmTimeline _timeline;
-    private int _preSongTicks;
-    private RectTransform _parentRect;
+    private int _preSongTicks;    
 
+    public IReadOnlyList<UIItemNote> ActiveNotes => _activeNotes;
+
+    // ========================================
     /// <summary>
     /// 노트 시트 + 타임라인을 바인딩하고, 내부 상태 초기화
     /// </summary>
-    public void Setup(NoteDataSheet sheet, RhythmTimeline timeline)
+    public void Setup(List<Note> listNote, RhythmTimeline timeline)
     {
         _timeline = timeline;
-        _preSongTicks = (timeline != null) ? timeline.PreSongTicks : 0;
-        _parentRect = _noteParent != null ? _noteParent : (RectTransform)transform;
+        _preSongTicks = (timeline != null) ? timeline.PreSongTicks : 0;        
 
         ClearAllNotes();
 
-        if (sheet == null)
+        if (listNote == null)
         {
             _pendingNotes = null;
             return;
         }
         
-        var notes = new List<Note>(sheet.NoteData);
+        var notes = new List<Note>(listNote);
         notes.Sort((a, b) => a.Tick.CompareTo(b.Tick));
-
+        
         _pendingNotes = new Queue<Note>(notes);
     }
 
     /// <summary>
-    /// 매 프레임 Tick 기준으로 스폰/삭제 처리
-    /// UIFrameInGame.Update 에서 호출해 줄 것
+    /// 매 프레임 Tick 기준으로 스폰/삭제 처리    
     /// </summary>
     public void TickUpdate()
     {
@@ -62,8 +64,7 @@ public class UITemplateNoteSpawner : UITemplateBase
         _timeline = null;
     }
 
-    // -----------------------------------------------------
-
+    // ========================================
     private void SpawnNotes(int songTick)
     {
         if (_pendingNotes == null) return;
@@ -73,8 +74,10 @@ public class UITemplateNoteSpawner : UITemplateBase
         {
             var next = _pendingNotes.Peek();
             int appearTick = next.Tick - _appearOffsetTicks;
+            
+            if (appearTick < 0)
+                appearTick = 0;
 
-            // 아직 등장할 시간이 안 됐으면 멈춤
             if (songTick < appearTick)
                 break;
 
@@ -96,9 +99,8 @@ public class UITemplateNoteSpawner : UITemplateBase
                 _activeNotes.RemoveAt(i);
                 continue;
             }
-
-            // 자신의 Tick 이 된 순간 바로 제거
-            if (songTick >= item.Data.Tick)
+            
+            if (songTick >= item.NoteData.Tick + _disappearOffsetTick)
             {
                 DoUITemplateReturn(item);
                 _activeNotes.RemoveAt(i);
@@ -106,10 +108,10 @@ public class UITemplateNoteSpawner : UITemplateBase
         }
     }
 
-    private UIItemNote GetNoteItem(Note data) // 수정 중
+    private UIItemNote GetNoteItem(Note data)
     {
         UIItemNote item = DoTemplateRequestItem<UIItemNote>(transform);
-        item.Init(data, _parentRect);
+        item.DoUINoteVisualSetting(data, _spawnRectTrs);
         return item;
     }
 

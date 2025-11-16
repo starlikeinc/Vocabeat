@@ -2,27 +2,54 @@ using LUIZ.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIItemNote : UITemplateItemBase
+public class UIItemNote : UITemplateItemBase, INote
 {
-    [SerializeField] private Image _noteImage;  // 실제 노트 이미지
-    [SerializeField] private RectTransform _rect; // 이 노트의 RectTransform
+    [SerializeField] private Image ImgNote;  // 실제 노트 이미지    
 
-    public Note Data { get; private set; }
+    public Note NoteData { get; private set; }
+    public RectTransform RectTrs { get; private set; }
+    public ENoteType NoteType { get; private set; }    
 
-    public void Init(Note data, RectTransform parentRect)
+    private RectTransform _spawnRectTrs;
+    private UIFrameInGame _frameInGame;
+
+    // ========================================
+    protected override void OnUIWidgetInitialize(UIFrameBase parentFrame)
     {
-        Data = data;
+        base.OnUIWidgetInitialize(parentFrame);
+        RectTrs = (RectTransform)transform;
+        _frameInGame = parentFrame as UIFrameInGame;        
+    }
 
-        if (_rect == null)
-            _rect = (RectTransform)transform;
+    // ========================================
+    public void DoUINoteVisualSetting(Note data, RectTransform spawnRect)
+    {
+        NoteData = data;
+        NoteType = data.NoteType;
 
-        // Y는 0~1 비율이라고 했으니까, 부모 높이에 맞게 위치 계산
-        float parentHeight = parentRect.rect.height;
-        Vector2 pos = _rect.anchoredPosition;
-        pos.y = (data.Y - 0.5f) * parentHeight; // 가운데 기준으로 하고 싶으면 이런 식 
-        _rect.anchoredPosition = pos;
+        _spawnRectTrs = spawnRect;
 
-        // 타입에 따라 색을 다르게 한다든지, 이미지 바꾸고 싶으면 여기서
-        // if (Data.NoteType == ENoteType.Normal) { ... }
+        RectTrs.anchoredPosition = GetNotePosition();
+    }
+
+    // ========================================
+    private Vector2 GetNotePosition()
+    {
+        float parentWidth = _spawnRectTrs.rect.width;
+        float parentHeight = _spawnRectTrs.rect.height;
+
+        int tickPerPage = _frameInGame.R_Timeline.TicksPerPage;
+        int tickInPage = NoteData.Tick % tickPerPage; // 현재 노트의 페이지 내 Tick
+        float x01 = (float)tickInPage / tickPerPage;
+
+        float halfWidth = parentWidth * 0.5f;
+        float posX = (x01 - 0.5f) * parentWidth;
+
+        Vector2 pos = RectTrs.anchoredPosition;
+
+        pos.x = posX;
+        pos.y = (NoteData.Y - 0.5f) * parentHeight;
+
+        return pos;
     }
 }

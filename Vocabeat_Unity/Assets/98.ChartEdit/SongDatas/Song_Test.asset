@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 811bd822933a2b840af725b84adfb2f8, type: 3}
+  m_Name: Song_Test
+  m_EditorClassIdentifier: CodeContents::SongData_SO
+  _songName: FutureSight
+  _bpm: 125
+  _songThumb: {fileID: 0}
+  _bgmClip: {fileID: 8300000, guid: 9c5058c9d040aa248972de1113f8635e, type: 3}
+  _diffNotes:
+  - Diff: 0
+    Notes:
+    - ID: 0
+      PageIndex: 0
+      NoteType: 0
+      Tick: 240
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: 0
+    - ID: 1
+      PageIndex: 0
+      NoteType: 0
+      Tick: 480
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: 0
+    - ID: 2
+      PageIndex: 0
+      NoteType: 0
+      Tick: 520
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: 0
+    - ID: 3
+      PageIndex: 0
+      NoteType: 0
+      Tick: 640
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: 0
+    - ID: 4
+      PageIndex: 1
+      NoteType: 0
+      Tick: 1080
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: 0
+    - ID: 5
+      PageIndex: 1
+      NoteType: 0
+      Tick: 1880
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: 0

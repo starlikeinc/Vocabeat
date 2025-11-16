@@ -3,107 +3,79 @@ using UnityEngine;
 
 public class UIFrameInGame : UIFrameBase
 {
-    [Header("Test")]
-    [SerializeField] private NoteDataSheet NoteData;
-    [SerializeField] private AudioSource MetronomeSrc;
-
-    [Header("R_Timeline")]
-    [SerializeField] private RhythmTimeline RTimeline;
+    [Header("UICam")]
+    [SerializeField] private Camera _uiCam;
 
     [Header("Scanline")]
-    [SerializeField] private UIWidgetScanLine WidgetScanLine;
+    [SerializeField] private UIWidgetScanLine _widgetScanLine;
 
     [Header("Spawner")]
-    [SerializeField] private UITemplateNoteSpawner NoteSpawner;
+    [SerializeField] private UITemplateNoteSpawner _noteSpawner;
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-    private int _nextBeatIndex;
-#endif
+    public RhythmTimeline R_Timeline { get; private set; }
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-    private void Update()
+    private SongData_SO _curSongDataSO;
+    private EDifficulty _songDiff;
+
+    // ========================================
+    protected override void OnUIFrameInitialize()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            if (RTimeline.IsPlaying)
-                StopTestPlay();
-            else
-                StartTestPlay();
-        }
-
-        if (RTimeline == null || !RTimeline.IsPlaying)
-            return;
-        
-        if (NoteSpawner != null)
-            NoteSpawner.TickUpdate();
-
-        UpdateMetronome();
+        base.OnUIFrameInitialize();
+        RegistEvents();        
     }
-#endif
 
-    private void StartTestPlay()
+    private void RegistEvents()
     {
-        if (RTimeline == null) return;
+        ManagerRhythm.Instance.OnTickUpdate -= OnTickUpdate;
+        ManagerRhythm.Instance.OnTickUpdate += OnTickUpdate;
+        ManagerRhythm.Instance.OnSongStarted -= StartTestPlay;
+        ManagerRhythm.Instance.OnSongStarted += StartTestPlay;
+        ManagerRhythm.Instance.OnSongEnded -= StopTestPlay;
+        ManagerRhythm.Instance.OnSongEnded += StopTestPlay;
+    }
 
-        RTimeline.Play();
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-        _nextBeatIndex = 1;
-#endif
+    private void StartTestPlay(RhythmTimeline rTimeline)
+    {
+        R_Timeline = rTimeline;
 
         // 스캔라인은 RhythmTimeline.PageT를 보고 움직이기 때문에 
-        if (WidgetScanLine != null)
-            WidgetScanLine.ResetPosition();
+        if (_widgetScanLine != null)
+            _widgetScanLine.ResetPosition();
 
         // 노트 스폰 초기화 및 바인딩
-        if (NoteSpawner != null && NoteData != null)
+        if (_noteSpawner != null && _curSongDataSO != null)
         {
-            NoteSpawner.Setup(NoteData, RTimeline);
+            var listNoteDatas = _curSongDataSO.NoteDatasByDiff[_songDiff];
+
+            if (listNoteDatas != null)
+                _noteSpawner.Setup(listNoteDatas, R_Timeline);
         }
     }
 
     private void StopTestPlay()
     {
-        if (RTimeline == null) return;
-
-        RTimeline.Stop();
-
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-        _nextBeatIndex = 0;
-#endif
-
-        if (MetronomeSrc != null)
-            MetronomeSrc.Stop();
-
-        if (WidgetScanLine != null)
-            WidgetScanLine.ResetPosition();
+        if (_widgetScanLine != null)
+            _widgetScanLine.ResetPosition();
 
         // 노트 모두 정리
-        if (NoteSpawner != null)
-            NoteSpawner.ResetSpawner();
+        if (_noteSpawner != null)
+            _noteSpawner.ResetSpawner();
     }
 
-    private void UpdateMetronome()
+    private void OnTickUpdate(float pageT)
     {
-        if (MetronomeSrc == null) return;
-
-        float songTime = RTimeline.SongTime;
-        float secPerBeat = RTimeline.SecPerBeat;
-
-        // songTime이 n * secPerBeat를 지날 때마다 메트로놈 1번 재생
-        while (songTime >= _nextBeatIndex * secPerBeat)
-        {
-            PlayMetronome();
-            _nextBeatIndex++;
-        }
+        _widgetScanLine.UpdateScanline(pageT);
+        _noteSpawner.TickUpdate();
     }
 
-    public void PlayMetronome()
+    // ========================================
+    public void BindSongData(SongData_SO songDataSO, EDifficulty diff)
     {
-        MetronomeSrc.Play();
-    }
+        _curSongDataSO = songDataSO;
+        _songDiff = diff;
 
-    public void BindSongData(int songID, EDifficulty diff)
-    {
-        // TODO : 곡 SO 파일 불러와서 난이도에 맞는 NoteData 불러오기
+        RectTransform touchArea = (RectTransform)_widgetScanLine.transform;
+
+        ManagerRhythm.Instance.BindSongData(songDataSO, touchArea, _uiCam, _noteSpawner.ActiveNotes);
     }
 }

@@ -3,15 +3,14 @@ using UnityEngine;
 public class RhythmTimeline : MonoBehaviour
 {
     [Header("Timing")]
-    [SerializeField] private AudioSource bgm;
-    [SerializeField] private float bpm = 120f;
-    [SerializeField] private int ticksPerBeat = 240;
-    [SerializeField] private int ticksPerPage = 960;
+    [SerializeField] private AudioSource _bgmSrc;    
+    [SerializeField] private int _ticksPerBeat = 240;
+    [SerializeField] private int _ticksPerPage = 960;
 
     [Header("Pre-Roll")]
-    [SerializeField] private int preSongTicks = 1920; // 곡 시작 전에 2페이지 만큼 미리 움직이기
+    [SerializeField] private int _preSongTicks = 1920; // 곡 시작 전에 2페이지 만큼 미리 움직이기
 
-    public float Bpm => bpm;
+    public float Bpm => _bpm;
     public float SecPerBeat => _secPerBeat;
 
     /// <summary>오디오(곡) 재생이 시작된 후 경과 시간 (프리롤 도중에는 0)</summary>
@@ -26,37 +25,29 @@ public class RhythmTimeline : MonoBehaviour
     /// <summary>현재 페이지 내 진행도(0~1) - 스캔라인이 보는 값</summary>
     public float PageT { get; private set; }
 
-    public int TicksPerPage => ticksPerPage;
-    public int PreSongTicks => preSongTicks;
+    public int TicksPerPage => _ticksPerPage;
+    public int PreSongTicks => _preSongTicks;
 
     public bool IsPlaying => _playing;
 
     private double _timelineStartDsp;
     private bool _playing;
+    private float _bpm;
     private float _secPerBeat;
     private float _secPerTick;
 
-    private void Awake()
+    // ========================================            
+    public void InitTimeline(SongData_SO songDataSO)
     {
-        RecalculateTiming();
-    }
-
-    private void RecalculateTiming()
-    {
-        _secPerBeat = 60f / bpm;
-        _secPerTick = _secPerBeat / ticksPerBeat;
-    }
-
-    private void OnValidate()
-    {
-        RecalculateTiming();
+        _bgmSrc.clip = songDataSO.BGMClip;
+        _bpm = songDataSO.BPM;
     }
 
     public void Play()
     {
         RecalculateTiming();
 
-        float preSongSec = preSongTicks * _secPerTick;
+        float preSongSec = _preSongTicks * _secPerTick;
 
         _timelineStartDsp = AudioSettings.dspTime;
         TimelineTime = 0f;
@@ -64,11 +55,11 @@ public class RhythmTimeline : MonoBehaviour
         CurTick = 0;
         PageT = 0f;
 
-        if (bgm)
+        if (_bgmSrc)
         {
             double songStartDsp = _timelineStartDsp + preSongSec;
-            bgm.Stop();
-            bgm.PlayScheduled(songStartDsp);
+            _bgmSrc.Stop();
+            _bgmSrc.PlayScheduled(songStartDsp);
         }
 
         _playing = true;
@@ -78,8 +69,8 @@ public class RhythmTimeline : MonoBehaviour
     {
         _playing = false;
 
-        if (bgm)
-            bgm.Stop();
+        if (_bgmSrc)
+            _bgmSrc.Stop();
 
         TimelineTime = 0f;
         SongTime = 0f;
@@ -87,7 +78,7 @@ public class RhythmTimeline : MonoBehaviour
         PageT = 0f;
     }
 
-    private void Update()
+    public void UpdateTimeline()
     {
         if (!_playing) return;
 
@@ -98,14 +89,21 @@ public class RhythmTimeline : MonoBehaviour
         CurTick = Mathf.FloorToInt(TimelineTime / _secPerTick);
 
         // 곡(오디오) 기준 시간 = 전체 시간 - 프리롤
-        float preSongSec = preSongTicks * _secPerTick;
+        float preSongSec = _preSongTicks * _secPerTick;
         float songTime = TimelineTime - preSongSec;
         if (songTime < 0f) songTime = 0f;
         SongTime = songTime;
 
         // 스캔라인용 PageT
-        int pageIndex = CurTick / ticksPerPage;
-        int pageTick = CurTick % ticksPerPage;
-        PageT = (float)pageTick / ticksPerPage;
+        int pageIndex = CurTick / _ticksPerPage;
+        int pageTick = CurTick % _ticksPerPage;
+        PageT = (float)pageTick / _ticksPerPage;
+    }
+
+    // ========================================        
+    private void RecalculateTiming()
+    {
+        _secPerBeat = 60f / _bpm;
+        _secPerTick = _secPerBeat / _ticksPerBeat;
     }
 }
