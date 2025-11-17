@@ -94,8 +94,7 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     {        
         _rTimeline.BindTimelineData(songDataSO);
         _noteJudgeSystem.InitJudgementSystem(this, touchArea, uiCam);
-        _noteJudgeSystem.BindJudgementNoteDatas(listNotes);
-        PlaySong();
+        _noteJudgeSystem.BindJudgementNoteDatas(listNotes);        
     }
 
     public void PlaySong()

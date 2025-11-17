@@ -33,7 +33,8 @@ public class AudioPlayerBGM : AudioPlayerBase
         _audioSource.clip = clip;
         _audioSource.loop = cue.Loop;
         _audioSource.volume = cue.Volume;
-        _audioSource.Play();
+        
+        // BGM쪽은 클립 설정만 하고 Play는 따로.
     }
 
     protected override void OnAudioStop()
@@ -43,6 +44,9 @@ public class AudioPlayerBGM : AudioPlayerBase
 
     private void OnPlayScheduled(double time)
     {
-        _audioSource.PlayScheduled(time);
+        if(time == 0)
+            _audioSource.Play();
+        else
+            _audioSource.PlayScheduled(time);
     }
 }

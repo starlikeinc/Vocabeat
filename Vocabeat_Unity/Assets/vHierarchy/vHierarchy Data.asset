@@ -30,6 +30,7 @@ MonoBehaviour:
         keys:
         - globalObjectIdString: GlobalObjectId_V1-2-736bd84aa25186c42879685f67200dee-920324635-0
         - globalObjectIdString: GlobalObjectId_V1-2-736bd84aa25186c42879685f67200dee-1810767873-0
+        - globalObjectIdString: GlobalObjectId_V1-2-736bd84aa25186c42879685f67200dee-948091467-0
         values:
         - colorIndex: 4
           iconNameOrGuid: BoxCollider Icon
@@ -39,6 +40,10 @@ MonoBehaviour:
           iconNameOrGuid: Settings Icon
           isIconRecursive: 1
           isColorRecursive: 1
+        - colorIndex: 0
+          iconNameOrGuid: PreMatCylinder
+          isIconRecursive: 1
+          isColorRecursive: 0
     - goDatas_byGlobalId:
         keys:
         - globalObjectIdString: GlobalObjectId_V1-1-8edcccb5b33d23644ac3c672f40b7ba4-6003354848903301388-0

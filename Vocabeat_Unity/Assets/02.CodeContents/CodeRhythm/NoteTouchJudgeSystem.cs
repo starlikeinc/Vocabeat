@@ -147,15 +147,9 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         else if (diff <= _yellowStarRange)
             judgeType = EJudgementType.YellowStar;
         else 
-            judgeType = EJudgementType.RedStar;        
-
-        // 카운트 누적
-        if (_dictNoteJudgementCounts.TryGetValue(judgeType, out int count))
-            _dictNoteJudgementCounts[judgeType] = count + 1;
-        else
-            _dictNoteJudgementCounts[judgeType] = 1;
-
-        PlayJudgeSFX(judgeType);
+            judgeType = EJudgementType.RedStar;
+        
+        ApplyJudge(note, EJudgementType.RedStar);
 
         FinalizeJudge(note, judgeType);        
     }
@@ -190,8 +184,21 @@ public class NoteTouchJudgeSystem : MonoBehaviour
 
         for (int i = 0; i < _tempMissCandidates.Count; i++)
         {
-            FinalizeJudge(_tempMissCandidates[i], EJudgementType.Miss);
+            INote note = _tempMissCandidates[i];
+            ApplyJudge(note, EJudgementType.RedStar);            
         }
+    }
+
+    private void ApplyJudge(INote note, EJudgementType type)
+    {
+        if (_dictNoteJudgementCounts.TryGetValue(type, out int count))
+            _dictNoteJudgementCounts[type] = count + 1;
+        else
+            _dictNoteJudgementCounts[type] = 1;
+
+        PlayJudgeSFX(type);
+
+        FinalizeJudge(note, type);
     }
 
     private void FinalizeJudge(INote note, EJudgementType type)

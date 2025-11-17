@@ -71,17 +71,20 @@ public class UIFrameInGame : UIFrameBase
     public void BindSongData(SongDataSO songDataSO, EDifficulty diff)
     {
         _curSongDataSO = songDataSO;
-        _songDiff = diff;                
+        _songDiff = diff;
 
-        _widgetGameBG.DoUIGameBGSetting(songDataSO.SongThumb, OnDimComplete);        
+        RectTransform touchArea = (RectTransform)_widgetScanLine.transform;
+        Camera uiCam = ManagerUI.Instance.GetRootCanvas().worldCamera;
+
+        ManagerRhythm.Instance.BindSongData(_curSongDataSO, touchArea, uiCam, _noteSpawner.ActiveNotes);
+
+        _widgetGameBG.DoUIGameBGSetting(songDataSO.SongThumb, OnDimComplete);
+
     }
 
     // ========================================
     private void OnDimComplete()
     {
-        RectTransform touchArea = (RectTransform)_widgetScanLine.transform;
-        Camera uiCam = ManagerUI.Instance.GetRootCanvas().worldCamera;
-
-        ManagerRhythm.Instance.BindSongData(_curSongDataSO, touchArea, uiCam, _noteSpawner.ActiveNotes);
+        ManagerRhythm.Instance.PlaySong();
     }
 }

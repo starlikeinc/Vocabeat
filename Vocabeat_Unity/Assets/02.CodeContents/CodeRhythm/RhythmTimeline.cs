@@ -44,7 +44,7 @@ public class RhythmTimeline : MonoBehaviour
     // ========================================            
     public void BindTimelineData(SongDataSO songDataSO)
     {
-        _bgmEventChannel.Raise(songDataSO.BGMCue); // 게임 곡은 랜덤이지만 어차피 하나임.
+        _bgmEventChannel.Raise(songDataSO.BGMCue);
         _bpm = songDataSO.BPM;
     }
 
