@@ -15,7 +15,7 @@ MonoBehaviour:
   _songName: FutureSight
   _bpm: 125
   _songThumb: {fileID: 0}
-  _bgmClip: {fileID: 8300000, guid: 9c5058c9d040aa248972de1113f8635e, type: 3}
+  _bgmCue: {fileID: 11400000, guid: ca6ad976992e58248827be5da06db00c, type: 2}
   _diffNotes:
   - Diff: 0
     Notes:

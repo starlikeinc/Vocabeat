@@ -16,6 +16,7 @@ MonoBehaviour:
     keys:
     - 76f687f49b2c5b345a836c365c2e96e6
     - 736bd84aa25186c42879685f67200dee
+    - 8edcccb5b33d23644ac3c672f40b7ba4
     values:
     - goDatas_byGlobalId:
         keys:
@@ -34,8 +35,21 @@ MonoBehaviour:
           iconNameOrGuid: BoxCollider Icon
           isIconRecursive: 1
           isColorRecursive: 1
-        - colorIndex: 1
+        - colorIndex: 3
           iconNameOrGuid: Settings Icon
+          isIconRecursive: 1
+          isColorRecursive: 1
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-1-8edcccb5b33d23644ac3c672f40b7ba4-6003354848903301388-0
+        - globalObjectIdString: GlobalObjectId_V1-1-8edcccb5b33d23644ac3c672f40b7ba4-2117760291160645544-0
+        values:
+        - colorIndex: 4
+          iconNameOrGuid: BoxCollider Icon
+          isIconRecursive: 1
+          isColorRecursive: 1
+        - colorIndex: 7
+          iconNameOrGuid: AudioSource Icon
           isIconRecursive: 1
           isColorRecursive: 1
   bookmarks: []

@@ -7,19 +7,28 @@ public class SceneStepIngameTest : SceneStepBase
     [SerializeField] private Camera DevelopCamera;
     [SerializeField] private UIContainerBase UIContainerDevelop;
 
+    [Header("Test")]
+    [SerializeField] private SongDataSO TestSongData;
+    [SerializeField] private EDifficulty Diff;
+
     //-------------------------------------------------------------
     protected override void OnUnityStart()
     {
         ProtLoadBasicDependencies(() =>
         {
-            UIContainerDevelop.DoRegisterContainer();
-            PrivSceneStepFinish();
+            ManagerLoaderScene.Instance.DoMoveToSceneHome(() =>
+            {
+                DevelopCamera.gameObject.SetActive(false);
+                UIContainerDevelop.DoRegisterContainer();
+
+                PrivSceneStepFinish();
+            });            
         });
     }
 
     //-------------------------------------------------------------
     private void PrivSceneStepFinish()
     {
-        UIChannel.UIShow<UIFrameInGame>();
+        UIChannel.UIShow<UIFrameInGame>().BindSongData(TestSongData, Diff);
     }
 }

@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class RhythmTimeline : MonoBehaviour
 {
-    [Header("Timing")]
-    [SerializeField] private AudioSource _bgmSrc;    
+    [Header("BGM Channel")]
+    [SerializeField] private BGMEventChannelSO _bgmEventChannel;
+
+    [Header("Timing")]    
     [SerializeField] private int _ticksPerBeat = 240;
     [SerializeField] private int _ticksPerPage = 960;
 
@@ -42,7 +44,7 @@ public class RhythmTimeline : MonoBehaviour
     // ========================================            
     public void BindTimelineData(SongDataSO songDataSO)
     {
-        _bgmSrc.clip = songDataSO.BGMClip;
+        _bgmEventChannel.Raise(songDataSO.BGMCue); // 게임 곡은 랜덤이지만 어차피 하나임.
         _bpm = songDataSO.BPM;
     }
 
@@ -58,11 +60,11 @@ public class RhythmTimeline : MonoBehaviour
         CurTick = 0;
         PageT = 0f;
 
-        if (_bgmSrc)
+        if (_bgmEventChannel)
         {
             double songStartDsp = _timelineStartDsp + preSongSec;
-            _bgmSrc.Stop();
-            _bgmSrc.PlayScheduled(songStartDsp);
+            _bgmEventChannel.StopAudio();
+            _bgmEventChannel.PlayScheduled(songStartDsp);
         }
 
         _playing = true;
@@ -72,8 +74,8 @@ public class RhythmTimeline : MonoBehaviour
     {
         _playing = false;
 
-        if (_bgmSrc)
-            _bgmSrc.Stop();
+        if (_bgmEventChannel)
+            _bgmEventChannel.StopAudio();
 
         TimelineTime = 0f;
         SongTime = 0f;

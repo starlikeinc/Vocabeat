@@ -1,4 +1,3 @@
-using DG.Tweening;
 using LUIZ.UI;
 using UnityEngine;
 
@@ -81,6 +80,8 @@ public class UIFrameInGame : UIFrameBase
     private void OnDimComplete()
     {
         RectTransform touchArea = (RectTransform)_widgetScanLine.transform;
-        ManagerRhythm.Instance.BindSongData(_curSongDataSO, touchArea, _uiCam, _noteSpawner.ActiveNotes);
+        Camera uiCam = ManagerUI.Instance.GetRootCanvas().worldCamera;
+
+        ManagerRhythm.Instance.BindSongData(_curSongDataSO, touchArea, uiCam, _noteSpawner.ActiveNotes);
     }
 }

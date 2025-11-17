@@ -18,14 +18,26 @@ public abstract class AudioPlayerBase : MonoBehaviour
     private void OnEnable()
     {
         if (_eventChannel != null)
+        {
             _eventChannel.OnEventRaised += OnAudioEvent;
+            _eventChannel.OnEventStop += OnAudioStop;
+            OnBaseChannelEnable();
+        }            
     }
 
     private void OnDisable()
     {
         if (_eventChannel != null)
+        {
             _eventChannel.OnEventRaised -= OnAudioEvent;
+            _eventChannel.OnEventStop -= OnAudioStop;
+            OnBaseChannelDisable();
+        }            
     }
 
+    protected virtual void OnBaseChannelEnable() { }
+    protected virtual void OnBaseChannelDisable() { }
+
     protected abstract void OnAudioEvent(AudioCueSO cue);    
+    protected abstract void OnAudioStop();
 }
