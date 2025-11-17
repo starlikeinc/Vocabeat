@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManagerRhythm : SingletonBase<ManagerRhythm>
+public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
 {    
     public event Action<float> OnTickUpdate;
     public event Action OnSongStarted;
@@ -84,19 +84,34 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>
     #endregion
 #endif
 
-    // ========================================        
-    public void BindSongData(SongData_SO songDataSO, RectTransform touchArea, Camera uiCam, IReadOnlyList<INote> listNotes)
+    // ========================================
+    public bool IsInitialized()
+    {
+        return Instance != null;
+    }
+
+    public void BindSongData(SongDataSO songDataSO, RectTransform touchArea, Camera uiCam, IReadOnlyList<INote> listNotes)
     {        
-        _rTimeline.InitTimeline(songDataSO);
-        _noteJudgeSystem.InitJudgementSystem(this, touchArea, uiCam, listNotes);
+        _rTimeline.BindTimelineData(songDataSO);
+        _noteJudgeSystem.InitJudgementSystem(this, touchArea, uiCam);
+        _noteJudgeSystem.BindJudgementNoteDatas(listNotes);
+        PlaySong();
     }
 
     public void PlaySong()
     {
+        if (_rTimeline == null) return;
 
+        _rTimeline.Play();
+        OnSongStarted?.Invoke();
     }
 
     public void PauseSong()
+    {
+
+    }
+
+    public void ResumeSong()
     {
 
     }
@@ -109,5 +124,5 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>
     public void ExitSong()
     {
 
-    }
+    }    
 }

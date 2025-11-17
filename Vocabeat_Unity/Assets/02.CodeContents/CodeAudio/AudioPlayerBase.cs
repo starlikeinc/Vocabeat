@@ -1,0 +1,31 @@
+using UnityEngine;
+
+[RequireComponent(typeof(AudioSource))]
+public abstract class AudioPlayerBase : MonoBehaviour
+{
+    [Header("Event Channel")]
+    [SerializeField] protected AudioEventChannelSO _eventChannel;
+
+    [Header("Audio Source")]
+    [SerializeField] protected AudioSource _audioSource;
+
+    private void Reset()
+    {
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.playOnAwake = false;
+    }
+
+    private void OnEnable()
+    {
+        if (_eventChannel != null)
+            _eventChannel.OnEventRaised += OnAudioEvent;
+    }
+
+    private void OnDisable()
+    {
+        if (_eventChannel != null)
+            _eventChannel.OnEventRaised -= OnAudioEvent;
+    }
+
+    protected abstract void OnAudioEvent(AudioCueSO cue);    
+}

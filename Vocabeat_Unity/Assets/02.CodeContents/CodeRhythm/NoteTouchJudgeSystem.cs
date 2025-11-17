@@ -6,6 +6,10 @@ public class NoteTouchJudgeSystem : MonoBehaviour
 {
     public event Action<INote, EJudgementType> OnJudgeResult;
 
+    [Header("Judge SFX")]
+    [SerializeField] private SFXEventChannelSO _sfxEventChannel;
+    [SerializeField] private JudgeSFXTableSO _judgeSFXTable;
+
     [Header("Judge Option")]
     [SerializeField] private float _touchRadius = 80f;
     [SerializeField] private int _blueStarRange = 30;
@@ -26,10 +30,13 @@ public class NoteTouchJudgeSystem : MonoBehaviour
 
     private readonly List<INote> _tempMissCandidates = new();
 
+    private bool _isInit = false;
+
     // ========================================
     private void Update()
     {
-        AutoMissUpdate();
+        if (_isInit)
+            AutoMissUpdate();
 
 #if UNITY_EDITOR
         PCInput();
@@ -61,11 +68,20 @@ public class NoteTouchJudgeSystem : MonoBehaviour
     }
 
     // ========================================
-    public void InitJudgementSystem(ManagerRhythm ctx,  RectTransform touchArea, Camera uiCam, IReadOnlyList<INote> listNotes)
+    public void InitJudgementSystem(ManagerRhythm ctx, RectTransform touchArea, Camera uiCam)
     {
+        if (_isInit)
+            return;
+
         _context = ctx;
         _touchArea = touchArea;
         _uiCam = uiCam;
+
+        _isInit = true;
+    }
+
+    public void BindJudgementNoteDatas(IReadOnlyList<INote> listNotes)
+    {
         _listNotes = listNotes;
 
         _judgedNoteIds.Clear();
@@ -138,19 +154,24 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             _dictNoteJudgementCounts[judgeType] = count + 1;
         else
             _dictNoteJudgementCounts[judgeType] = 1;
-        
+
+        PlayJudgeSFX(judgeType);
+
         FinalizeJudge(note, judgeType);        
     }
 
     private void AutoMissUpdate()
     {
-        var timeline = _context.RTimeline;
-        int songTick = timeline.CurTick - timeline.PreSongTicks;
+        if (!_context.IsPlaying)
+            return;        
 
         if(_listNotes == null || _listNotes.Count == 0) 
             return;
 
         _tempMissCandidates.Clear();
+
+        var timeline = _context.RTimeline;
+        int songTick = timeline.CurTick - timeline.PreSongTicks;
 
         for (int i = 0; i < _listNotes.Count; i++)
         {
@@ -178,5 +199,17 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         Debug.Log($"[{note.NoteData.ID}]노트 판정: [{type}]");
         _judgedNoteIds.Add(note.NoteData.ID);        
         OnJudgeResult?.Invoke(note, type);
+    }
+
+    private void PlayJudgeSFX(EJudgementType type)
+    {
+        if (_judgeSFXTable == null || _sfxEventChannel == null)
+            return;
+
+        var cue = _judgeSFXTable.GetCue(type);
+        if (cue != null)
+        {
+            _sfxEventChannel.Raise(cue);
+        }
     }
 }

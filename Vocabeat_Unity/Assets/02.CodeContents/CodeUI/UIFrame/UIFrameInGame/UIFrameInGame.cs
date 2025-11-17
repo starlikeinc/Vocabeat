@@ -1,3 +1,4 @@
+using DG.Tweening;
 using LUIZ.UI;
 using UnityEngine;
 
@@ -12,9 +13,10 @@ public class UIFrameInGame : UIFrameBase
     [Header("Spawner")]
     [SerializeField] private UITemplateNoteSpawner _noteSpawner;
 
-    private RhythmTimeline _rTimeline;
+    [Header("Spawner")]
+    [SerializeField] private UIWidgetGameBG _widgetGameBG;
 
-    private SongData_SO _curSongDataSO;
+    private SongDataSO _curSongDataSO;
     private EDifficulty _songDiff;
 
     // ========================================
@@ -28,16 +30,14 @@ public class UIFrameInGame : UIFrameBase
     {
         ManagerRhythm.Instance.OnTickUpdate -= OnTickUpdate;
         ManagerRhythm.Instance.OnTickUpdate += OnTickUpdate;
-        ManagerRhythm.Instance.OnSongStarted -= StartTestPlay;
-        ManagerRhythm.Instance.OnSongStarted += StartTestPlay;
-        ManagerRhythm.Instance.OnSongEnded -= StopTestPlay;
-        ManagerRhythm.Instance.OnSongEnded += StopTestPlay;
+        ManagerRhythm.Instance.OnSongStarted -= StartSong;
+        ManagerRhythm.Instance.OnSongStarted += StartSong;
+        ManagerRhythm.Instance.OnSongEnded -= StopSong;
+        ManagerRhythm.Instance.OnSongEnded += StopSong;
     }
 
-    private void StartTestPlay()
+    private void StartSong()
     {
-        _rTimeline = ManagerRhythm.Instance.RTimeline;
-
         // 스캔라인은 RhythmTimeline.PageT를 보고 움직이기 때문에 
         if (_widgetScanLine != null)
             _widgetScanLine.ResetPosition();
@@ -52,7 +52,7 @@ public class UIFrameInGame : UIFrameBase
         }
     }
 
-    private void StopTestPlay()
+    private void StopSong()
     {
         if (_widgetScanLine != null)
             _widgetScanLine.ResetPosition();
@@ -60,7 +60,7 @@ public class UIFrameInGame : UIFrameBase
         // 노트 모두 정리
         if (_noteSpawner != null)
             _noteSpawner.ResetSpawner();
-    }
+    }    
 
     private void OnTickUpdate(float pageT)
     {
@@ -69,13 +69,18 @@ public class UIFrameInGame : UIFrameBase
     }
 
     // ========================================
-    public void BindSongData(SongData_SO songDataSO, EDifficulty diff)
+    public void BindSongData(SongDataSO songDataSO, EDifficulty diff)
     {
         _curSongDataSO = songDataSO;
-        _songDiff = diff;
+        _songDiff = diff;                
 
+        _widgetGameBG.DoUIGameBGSetting(songDataSO.SongThumb, OnDimComplete);        
+    }
+
+    // ========================================
+    private void OnDimComplete()
+    {
         RectTransform touchArea = (RectTransform)_widgetScanLine.transform;
-
-        ManagerRhythm.Instance.BindSongData(songDataSO, touchArea, _uiCam, _noteSpawner.ActiveNotes);
+        ManagerRhythm.Instance.BindSongData(_curSongDataSO, touchArea, _uiCam, _noteSpawner.ActiveNotes);
     }
 }

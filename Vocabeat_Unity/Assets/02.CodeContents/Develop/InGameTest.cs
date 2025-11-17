@@ -8,7 +8,7 @@ public class InGameTest : MonoBehaviour
     [SerializeField] private UIContainerBase UIContainer;
 
     [Header("Test")]
-    [SerializeField] private SongData_SO TestSongData;
+    [SerializeField] private SongDataSO TestSongData;
     [SerializeField] private EDifficulty Diff;
 
     private void Start()

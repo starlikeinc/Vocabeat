@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChartEdit : MonoBehaviour
 {
     [Header("Target SO")]
-    [SerializeField] private SongData_SO TargetSongData;
+    [SerializeField] private SongDataSO TargetSongData;
 
     private readonly Dictionary<EDifficulty, List<Note>> EditNotesDict = new();
 

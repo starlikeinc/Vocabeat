@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28e0e4c745fbd4646a91ffb0c7a130c9, type: 3}
+  m_Name: JudgeSfxTable
+  m_EditorClassIdentifier: CodeContents::JudgeSFXTableSO
+  _entries:
+  - judgeType: 0
+    cue: {fileID: 11400000, guid: 8837fe5b03f784c4db11bc600fd4d944, type: 2}
+  - judgeType: 1
+    cue: {fileID: 11400000, guid: a5670d24c3e461346a4120c27ce3e024, type: 2}
+  - judgeType: 2
+    cue: {fileID: 11400000, guid: 8000e3c4f44cef24980e5e461e9f02a7, type: 2}
+  - judgeType: 3
+    cue: {fileID: 11400000, guid: 7a5b583a4eb207245b34bf8a6e823e7b, type: 2}

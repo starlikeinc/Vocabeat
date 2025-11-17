@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Song_", menuName = "SongData/New SongData")]
-public class SongData_SO : ScriptableObject
+public class SongDataSO : ScriptableObject
 {
     [SerializeField] private string _songName;
     [SerializeField] private int _bpm;

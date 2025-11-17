@@ -40,7 +40,7 @@ public class RhythmTimeline : MonoBehaviour
     private float _secPerTick;
 
     // ========================================            
-    public void InitTimeline(SongData_SO songDataSO)
+    public void BindTimelineData(SongDataSO songDataSO)
     {
         _bgmSrc.clip = songDataSO.BGMClip;
         _bpm = songDataSO.BPM;
