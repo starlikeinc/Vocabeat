@@ -51,8 +51,10 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     {
         if (_rTimeline == null) return;
 
-        _rTimeline.Play();
+        if (_noteJudgeSystem != null) _noteJudgeSystem.ResetForNewSong();
+        _nextBeatIndex = 0; // 추가
 
+        _rTimeline.Play();
         OnSongStarted?.Invoke();       
     }
 
@@ -61,9 +63,9 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
         if (_rTimeline == null) return;
 
         _rTimeline.Stop();
-
-        if (_metronomSrc != null)
-            _metronomSrc.Stop();
+        if (_metronomSrc != null) _metronomSrc.Stop();
+        if (_noteJudgeSystem != null) _noteJudgeSystem.ResetForNewSong();
+        _nextBeatIndex = 0; // 추가
 
         OnSongEnded?.Invoke();
     }
@@ -99,6 +101,9 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     public void PlaySong()
     {
         if (_rTimeline == null) return;
+
+        if (_noteJudgeSystem != null) _noteJudgeSystem.ResetForNewSong();
+        _nextBeatIndex = 0; // 추가
 
         _rTimeline.Play();
         OnSongStarted?.Invoke();

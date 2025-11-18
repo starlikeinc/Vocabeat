@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using LUIZ.UI;
 using UnityEngine;
 
-public class UITemplateNoteSpawner : UITemplateBase
+public class UITemplateNoteSpawnerBase : UITemplateBase
 {
     [Header("노트가 보여질 RectTrs")] // WidgetScanline으로 두면 됨.
     [SerializeField] private RectTransform _spawnRectTrs;

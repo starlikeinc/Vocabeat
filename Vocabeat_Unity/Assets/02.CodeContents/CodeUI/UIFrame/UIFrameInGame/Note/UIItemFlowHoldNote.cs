@@ -18,35 +18,27 @@ public class UIItemFlowHoldNote : UITemplateItemBase, IFlowHoldNote
 
     private RectTransform _spawnRect;
 
+    private FlowLongMeta _flowMeta;
+
     protected override void OnUIWidgetInitialize(UIFrameBase parent)
     {
         base.OnUIWidgetInitialize(parent);
         RectTrs = (RectTransform)transform;
     }
 
-    public void Setup(Note data, RectTransform spawn)
+    public void Setup(Note data, RectTransform spawn, FlowLongMeta flowMeta = null)
     {
         NoteData = data;
         _spawnRect = spawn;
+        _flowMeta = flowMeta;
 
-        LayoutLongNote();
+        LayoutLongNote();   // 헤드/테일 기본 배치
     }
 
     public void UpdateCursor(int currentTick)
     {
-        if (currentTick < StartTick) return;
-        if (currentTick > EndTick) currentTick = EndTick;
-
-        float ratio = (float)(currentTick - StartTick) / (EndTick - StartTick);
-        ratio = Mathf.Clamp01(ratio);
-
-        float startX = _imgHead.rectTransform.anchoredPosition.x;
-        float endX = _imgTail.rectTransform.anchoredPosition.x;
-
-        float cursorX = Mathf.Lerp(startX, endX, ratio);
-
-        _imgCursor.rectTransform.anchoredPosition =
-            new Vector2(cursorX, _imgHead.rectTransform.anchoredPosition.y);
+        Vector2 pos = GetLocalPositionAtTick(currentTick);
+        _imgCursor.rectTransform.anchoredPosition = pos;
     }
 
     private void LayoutLongNote()
@@ -92,5 +84,42 @@ public class UIItemFlowHoldNote : UITemplateItemBase, IFlowHoldNote
         float posY = (y01 - 0.5f) * parentHeight;
 
         return new Vector2(posX, posY);
-    }    
+    }
+
+    public Vector2 GetLocalPositionAtTick(int songTick)
+    {        
+        if (_flowMeta == null)
+        {
+            // 아직 시작 전이면 Head 위치
+            if (songTick <= StartTick)
+                return _imgHead.rectTransform.anchoredPosition;
+
+            // 끝난 뒤면 Tail 위치
+            if (songTick >= EndTick)
+                return _imgTail.rectTransform.anchoredPosition;
+
+            float ratio = (float)(songTick - StartTick) / (EndTick - StartTick);
+            ratio = Mathf.Clamp01(ratio);
+
+            float startX = _imgHead.rectTransform.anchoredPosition.x;
+            float endX = _imgTail.rectTransform.anchoredPosition.x;
+
+            float x = Mathf.Lerp(startX, endX, ratio);
+            float y = _imgHead.rectTransform.anchoredPosition.y; // 직선 롱노트라 y는 고정
+
+            return new Vector2(x, y);
+        }
+        else
+        {
+            // FlowLong 버전
+            float t = Mathf.InverseLerp(StartTick, EndTick, songTick);
+            t = Mathf.Clamp01(t);
+
+            // 곡선 y01 계산 (FlowLongUtil.EvaluateY01 같은 헬퍼 사용)
+            float y01 = FlowLongUtil.EvaluateY01(_flowMeta, t);
+
+            // x는 Tick 기반, y는 곡선 기반
+            return GetNoteAnchoredPos(songTick, y01);
+        }
+    }
 }

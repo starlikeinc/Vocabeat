@@ -5,6 +5,8 @@ using UnityEngine;
 public class NoteTouchJudgeSystem : MonoBehaviour
 {
     public event Action<INote, EJudgementType> OnJudgeResult;
+    // 필요 시 롱노트 시작/종료 구분 이벤트(옵션)
+    public event Action<INote, EJudgementType, bool> OnHoldJudgeResult; // isEnd=true면 종료
 
     [Header("Judge SFX")]
     [SerializeField] private SFXEventChannelSO _sfxEventChannel;
@@ -20,7 +22,6 @@ public class NoteTouchJudgeSystem : MonoBehaviour
     private ManagerRhythm _context;
 
     private Dictionary<EJudgementType, int> _dictNoteJudgementCounts = new();
-
     private HashSet<int> _judgedNoteIds = new();
 
     private RectTransform _touchArea;
@@ -29,27 +30,55 @@ public class NoteTouchJudgeSystem : MonoBehaviour
     private IReadOnlyList<INote> _listNotes;
 
     private readonly List<INote> _tempMissCandidates = new();
+    private readonly List<int> _tempFinalizeIds = new();
 
     private bool _isInit = false;
+
+    // 롱노트 상태 -------------------------------------------------
+    private class HoldState
+    {
+        public INote Note;
+        public int StartTick;
+        public int EndTick;
+        public int PointerId; // 모바일 fingerId, PC는 -1
+        public bool Started;
+        public bool Completed;
+        public bool ReleasedEarly;
+        public EJudgementType StartJudgeType;
+    }
+
+    private readonly Dictionary<int, HoldState> _activeHoldStates = new(); // NoteID -> HoldState
+    private readonly Dictionary<int, int> _pointerToNoteId = new();        // PointerId -> NoteID
 
     // ========================================
     private void Update()
     {
-        if (_isInit)
-            AutoMissUpdate();
-
-#if UNITY_EDITOR
+        // 1) 입력 먼저
+#if UNITY_STANDALONE || UNITY_EDITOR
         PCInput();
-#elif UNITY_ANDROID || UNITY_IOS
+#endif
+#if UNITY_ANDROID || UNITY_IOS
         MobileInput();
 #endif
+
+        // 2) Hold 상태 업데이트
+        if (_isInit)
+        {
+            UpdateHoldStates();
+            // 3) 마지막에 AutoMiss
+            AutoMissUpdate();
+        }
     }
 
     private void PCInput()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            TryTouchNote(Input.mousePosition);
+            TryTouchNoteFromPointer(Input.mousePosition, -1);
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            HandlePointerRelease(-1);
         }
     }
 
@@ -62,8 +91,16 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         for (int i = 0; i < touchCount; i++)
         {
             var touch = Input.GetTouch(i);
-            if (touch.phase == TouchPhase.Began)
-                TryTouchNote(touch.position);
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    TryTouchNoteFromPointer(touch.position, touch.fingerId);
+                    break;
+                case TouchPhase.Ended:
+                case TouchPhase.Canceled:
+                    HandlePointerRelease(touch.fingerId);
+                    break;
+            }
         }
     }
 
@@ -86,12 +123,27 @@ public class NoteTouchJudgeSystem : MonoBehaviour
 
         _judgedNoteIds.Clear();
         _dictNoteJudgementCounts.Clear();
+        _activeHoldStates.Clear();
+        _pointerToNoteId.Clear();
+    }
+
+    // 재생/중지 시 외부에서 호출(ManagerRhythm에서 호출)
+    public void ResetForNewSong()
+    {
+        _judgedNoteIds.Clear();
+        _dictNoteJudgementCounts.Clear();
+        _activeHoldStates.Clear();
+        _pointerToNoteId.Clear();
+        _tempMissCandidates.Clear();
     }
 
     // ========================================
-    private void TryTouchNote(Vector2 screenPos)
+    private void TryTouchNoteFromPointer(Vector2 screenPos, int pointerId)
     {
         if (_context == null || !_context.IsPlaying)
+            return;
+
+        if (_touchArea == null || _uiCam == null)
             return;
 
         RectTransformUtility.ScreenPointToLocalPointInRectangle(_touchArea, screenPos, _uiCam, out Vector2 localPos);
@@ -99,67 +151,305 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         if (_listNotes == null || _listNotes.Count == 0)
             return;
 
+        // 시간 우선 필터링
+        var timeline = _context.RTimeline;
+        int songTick = timeline.CurTick - timeline.PreSongTicks;
+
         INote bestNote = null;
+        int bestDiff = int.MaxValue;
         float bestDist = float.MaxValue;
 
         foreach (var note in _listNotes)
         {
+            if (note == null) continue;
+
+            int id = note.NoteData.ID;
+
+            if (_judgedNoteIds.Contains(id))
+                continue;
+            if (_activeHoldStates.ContainsKey(id))
+                continue;
+
+            int diffTick = Mathf.Abs(note.NoteData.Tick - songTick);
+            if (diffTick > _redStarRange) // 시간 창 밖이면 스킵
+                continue;
+
             float dist = Vector2.Distance(localPos, note.RectTrs.anchoredPosition);
 
-            if (dist < bestDist)
+            // 1차: 시간 diff 작은 것, 2차: 거리 작은 것
+            if (diffTick < bestDiff || (diffTick == bestDiff && dist < bestDist))
             {
+                bestDiff = diffTick;
                 bestDist = dist;
                 bestNote = note;
             }
         }
 
         if (bestNote != null && bestDist < _touchRadius)
-            JudgeNote(bestNote);
+        {
+            JudgeOrStartHold(bestNote, pointerId);
+        }
     }
 
-    private void JudgeNote(INote note) // 기획서 보니까 RedStar == Miss임 해당 부분 수정예정
+    private void JudgeOrStartHold(INote note, int pointerId)
     {
-        Debug.Log($"노트 터치됨: Tick={note.NoteData.Tick}");
-
-        if (_judgedNoteIds.Contains(note.NoteData.ID))
-            return;
-
         if (_context == null || _context.RTimeline == null)
             return;
 
         var timeline = _context.RTimeline;
-        
-        int songTick = timeline.CurTick - timeline.PreSongTicks;        
-
-        // 곡이 아직 시작 안 했으면 (프리롤 구간) 판정 무시
+        int songTick = timeline.CurTick - timeline.PreSongTicks;
         if (songTick < 0)
             return;
 
         int noteTick = note.NoteData.Tick;
         int diff = Mathf.Abs(noteTick - songTick);
 
-        EJudgementType judgeType;
+        EJudgementType judgeType =
+            diff <= _blueStarRange ? EJudgementType.BlueStar :
+            diff <= _whiteStarRange ? EJudgementType.WhiteStar :
+            diff <= _yellowStarRange ? EJudgementType.YellowStar :
+            EJudgementType.RedStar;
 
-        if (diff <= _blueStarRange)
-            judgeType = EJudgementType.BlueStar;
-        else if (diff <= _whiteStarRange)
-            judgeType = EJudgementType.WhiteStar;
-        else if (diff <= _yellowStarRange)
-            judgeType = EJudgementType.YellowStar;
-        else 
-            judgeType = EJudgementType.RedStar;
-        
-        ApplyJudge(note, EJudgementType.RedStar);
+        // 롱노트 판정 기준: IFlowHoldNote 우선, 없으면 HoldTick
+        bool isHold =
+            (note is IFlowHoldNote) ||
+            note.NoteData.HoldTick > 0 ||
+            note.NoteData.NoteType == ENoteType.FlowHold ||
+            note.NoteData.NoteType == ENoteType.LongHold;
 
-        FinalizeJudge(note, judgeType);        
+        if (!isHold)
+        {
+            ApplyJudge(note, judgeType);
+            return;
+        }
+
+        int endTick;
+        if (note is IFlowHoldNote flow)
+        {
+            endTick = flow.EndTick; // 데이터에서 보장되는 종료 Tick 사용
+        }
+        else
+        {
+            endTick = noteTick + Mathf.Max(0, note.NoteData.HoldTick);
+        }
+
+        int id = note.NoteData.ID;
+        if (_activeHoldStates.ContainsKey(id))
+            return;
+
+        var holdState = new HoldState
+        {
+            Note = note,
+            StartTick = noteTick,
+            EndTick = endTick,
+            PointerId = pointerId,
+            Started = true,
+            Completed = false,
+            ReleasedEarly = false,
+            StartJudgeType = judgeType
+        };
+
+        _activeHoldStates.Add(id, holdState);
+        if (!_pointerToNoteId.ContainsKey(pointerId))
+            _pointerToNoteId.Add(pointerId, id);
+
+        PlayJudgeSFX(judgeType);
+        OnHoldJudgeResult?.Invoke(note, judgeType, false);
     }
 
+    private void UpdateHoldStates()
+    {
+        if (_activeHoldStates.Count == 0 || _context?.RTimeline == null)
+            return;
+
+        var timeline = _context.RTimeline;
+        int songTick = timeline.CurTick - timeline.PreSongTicks;
+
+        _tempFinalizeIds.Clear();
+
+        foreach (var kv in _activeHoldStates)
+        {
+            var hs = kv.Value;
+            if (hs.Completed) continue;
+
+            int id = hs.Note.NoteData.ID;
+            var note = hs.Note;
+
+            int startTick = hs.StartTick;
+            int endTick = hs.EndTick;
+
+            // 아직 시작 전이면 스킵 (혹시라도)
+            if (songTick < startTick)
+                continue;
+
+            // 포인터가 살아있는지 체크
+            bool pointerActive = IsPointerStillActive(hs.PointerId);
+            if (!pointerActive)
+            {
+                // 중간에 손가락을 떼버렸다면 -> 조기 해제 Miss
+                hs.ReleasedEarly = true;
+                PlayJudgeSFX(EJudgementType.RedStar);
+                OnHoldJudgeResult?.Invoke(note, EJudgementType.RedStar, true);
+                ApplyJudgeFinal(note, EJudgementType.RedStar);
+                hs.Completed = true;
+                _tempFinalizeIds.Add(id);
+                continue;
+            }
+
+            // 3) FlowLong이면 경로 안에 있는지도 체크
+            if (note is IFlowHoldNote flowNote)
+            {
+                if (TryGetPointerLocalPosition(hs.PointerId, out Vector2 pointerLocal))
+                {
+                    Vector2 idealLocal = flowNote.GetLocalPositionAtTick(songTick);
+                    float dist = Vector2.Distance(pointerLocal, idealLocal);
+                    if (dist > _touchRadius)
+                    {
+                        // 곡선에서 벗어났다고 판단 -> 조기 해제 Miss
+                        hs.ReleasedEarly = true;
+                        PlayJudgeSFX(EJudgementType.RedStar);
+                        OnHoldJudgeResult?.Invoke(note, EJudgementType.RedStar, true);
+                        ApplyJudgeFinal(note, EJudgementType.RedStar);
+                        hs.Completed = true;
+                        _tempFinalizeIds.Add(id);
+                        continue;
+                    }
+                }
+            }
+
+            // 4) 아직 끝 Tick 전이면 계속 유지
+            if (songTick < endTick)
+                continue;
+
+            // 5) 끝 Tick 이후 → 종료 판정 (지금 코드처럼 diffEnd 기준으로 Blue/White/Yellow/Red)
+            int diffEnd = Mathf.Abs(endTick - songTick);
+            EJudgementType endJudge =
+                diffEnd <= _blueStarRange ? EJudgementType.BlueStar :
+                diffEnd <= _whiteStarRange ? EJudgementType.WhiteStar :
+                diffEnd <= _yellowStarRange ? EJudgementType.YellowStar :
+                EJudgementType.RedStar;
+
+            hs.Completed = true;
+            _tempFinalizeIds.Add(id);
+
+            PlayJudgeSFX(endJudge);
+            OnHoldJudgeResult?.Invoke(note, endJudge, true);
+            ApplyJudgeFinal(note, endJudge);
+        }
+
+        for (int i = 0; i < _tempFinalizeIds.Count; i++)
+        {
+            RemoveHoldState(_tempFinalizeIds[i]);
+        }
+    }
+
+    private bool IsPointerStillActive(int pointerId)
+    {
+#if UNITY_EDITOR
+        if (pointerId == -1)
+            return Input.GetMouseButton(0);
+#endif
+#if UNITY_ANDROID || UNITY_IOS
+        if (pointerId >= 0)
+        {
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                var t = Input.GetTouch(i);
+                if (t.fingerId == pointerId &&
+                    (t.phase == TouchPhase.Moved || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Began))
+                    return true;
+            }
+            return false;
+        }
+#endif
+        if (pointerId == -1)
+            return Input.GetMouseButton(0);
+
+        return false;
+    }
+
+    private bool TryGetPointerLocalPosition(int pointerId, out Vector2 localPos)
+    {
+#if UNITY_EDITOR
+        if (pointerId == -1)
+        {
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(_touchArea, Input.mousePosition, _uiCam, out localPos);
+            return true;
+        }
+#endif
+#if UNITY_ANDROID || UNITY_IOS
+        if (pointerId >= 0)
+        {
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                var t = Input.GetTouch(i);
+                if (t.fingerId == pointerId)
+                {
+                    RectTransformUtility.ScreenPointToLocalPointInRectangle(_touchArea, t.position, _uiCam, out localPos);
+                    return true;
+                }
+            }
+        }
+#endif
+        localPos = Vector2.zero;
+        return false;
+    }
+
+    private void HandlePointerRelease(int pointerId)
+    {
+        if (!_pointerToNoteId.TryGetValue(pointerId, out int noteId))
+            return;
+
+        if (_activeHoldStates.TryGetValue(noteId, out var hs))
+        {
+            if (!hs.Completed && _context != null && _context.RTimeline != null)
+            {
+                int songTick = _context.RTimeline.CurTick - _context.RTimeline.PreSongTicks;
+                int endTick = hs.EndTick;
+                
+                int diffEnd = Mathf.Abs(endTick - songTick);
+                EJudgementType endJudge =
+                    diffEnd <= _blueStarRange ? EJudgementType.BlueStar :
+                    diffEnd <= _whiteStarRange ? EJudgementType.WhiteStar :
+                    diffEnd <= _yellowStarRange ? EJudgementType.YellowStar :
+                                                  EJudgementType.RedStar;                
+
+                hs.ReleasedEarly = songTick < endTick; // 도착 전에 뗐는지 기록만 남겨둠
+
+                PlayJudgeSFX(endJudge);
+                OnHoldJudgeResult?.Invoke(hs.Note, endJudge, true);
+                ApplyJudgeFinal(hs.Note, endJudge);
+                hs.Completed = true;
+
+                RemoveHoldState(noteId);
+            }
+        }
+    }
+
+    private void RemoveHoldState(int noteId)
+    {
+        _activeHoldStates.Remove(noteId);
+
+        int removePointer = int.MinValue;
+        foreach (var p in _pointerToNoteId)
+        {
+            if (p.Value == noteId)
+            {
+                removePointer = p.Key;
+                break;
+            }
+        }
+        if (removePointer != int.MinValue)
+            _pointerToNoteId.Remove(removePointer);
+    }
+
+    // 아직 시작하지 않은 노트만 AutoMiss 처리 (롱노트 진행 중 제외)
     private void AutoMissUpdate()
     {
-        if (!_context.IsPlaying)
-            return;        
+        if (_context == null || !_context.IsPlaying)
+            return;
 
-        if(_listNotes == null || _listNotes.Count == 0) 
+        if (_listNotes == null || _listNotes.Count == 0)
             return;
 
         _tempMissCandidates.Clear();
@@ -173,7 +463,12 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             if (note == null)
                 continue;
 
-            if (_judgedNoteIds.Contains(note.NoteData.ID))
+            int id = note.NoteData.ID;
+
+            if (_judgedNoteIds.Contains(id))
+                continue;
+
+            if (_activeHoldStates.ContainsKey(id))
                 continue;
 
             if (songTick > note.NoteData.Tick + _redStarRange)
@@ -185,26 +480,35 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         for (int i = 0; i < _tempMissCandidates.Count; i++)
         {
             INote note = _tempMissCandidates[i];
-            ApplyJudge(note, EJudgementType.RedStar);            
+            ApplyJudge(note, EJudgementType.RedStar);
         }
     }
 
-    private void ApplyJudge(INote note, EJudgementType type)
+    // 단일 노트 / 롱노트 종료 최종 통계용
+    private void ApplyJudgeFinal(INote note, EJudgementType type)
     {
         if (_dictNoteJudgementCounts.TryGetValue(type, out int count))
             _dictNoteJudgementCounts[type] = count + 1;
         else
             _dictNoteJudgementCounts[type] = 1;
 
-        PlayJudgeSFX(type);
-
         FinalizeJudge(note, type);
+    }
+
+    // 단일 노트용(최종)
+    private void ApplyJudge(INote note, EJudgementType type)
+    {
+        if (_judgedNoteIds.Contains(note.NoteData.ID))
+            return;
+
+        PlayJudgeSFX(type);
+        ApplyJudgeFinal(note, type);
     }
 
     private void FinalizeJudge(INote note, EJudgementType type)
     {
         Debug.Log($"[{note.NoteData.ID}]노트 판정: [{type}]");
-        _judgedNoteIds.Add(note.NoteData.ID);        
+        _judgedNoteIds.Add(note.NoteData.ID);
         OnJudgeResult?.Invoke(note, type);
     }
 

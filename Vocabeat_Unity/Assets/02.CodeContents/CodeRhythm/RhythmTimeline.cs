@@ -111,4 +111,9 @@ public class RhythmTimeline : MonoBehaviour
         _secPerBeat = 60f / _bpm;
         _secPerTick = _secPerBeat / _ticksPerBeat;
     }
+
+    public float SecPerTick => _secPerTick;
+
+    public float TicksToSeconds(int ticks) => ticks * _secPerTick;
+    public int SecondsToTicks(float seconds) => Mathf.FloorToInt(seconds / _secPerTick);
 }

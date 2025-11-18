@@ -10,9 +10,10 @@ public class UIFrameInGame : UIFrameBase
     [SerializeField] private UIWidgetScanLine _widgetScanLine;
 
     [Header("Spawner")]
-    [SerializeField] private UITemplateNoteSpawner _noteSpawner;
+    [SerializeField] private UITemplateNoteSpawnerBase _noteNormalSpawner;
+    [SerializeField] private UITemplateNoteSpawnerBase _noteFlowHoldSpawner;
 
-    [Header("Spawner")]
+    [Header("BG")]
     [SerializeField] private UIWidgetGameBG _widgetGameBG;
 
     private SongDataSO _curSongDataSO;
@@ -42,12 +43,12 @@ public class UIFrameInGame : UIFrameBase
             _widgetScanLine.ResetPosition();
 
         // 노트 스폰 초기화 및 바인딩
-        if (_noteSpawner != null && _curSongDataSO != null)
+        if (_noteNormalSpawner != null && _curSongDataSO != null)
         {
             var listNoteDatas = _curSongDataSO.NoteDatasByDiff[_songDiff];
 
             if (listNoteDatas != null)
-                _noteSpawner.Setup(listNoteDatas);
+                _noteNormalSpawner.Setup(listNoteDatas);
         }
     }
 
@@ -57,14 +58,14 @@ public class UIFrameInGame : UIFrameBase
             _widgetScanLine.ResetPosition();
 
         // 노트 모두 정리
-        if (_noteSpawner != null)
-            _noteSpawner.ResetSpawner();
+        if (_noteNormalSpawner != null)
+            _noteNormalSpawner.ResetSpawner();
     }    
 
     private void OnTickUpdate(float pageT)
     {
         _widgetScanLine.UpdateScanline(pageT);
-        _noteSpawner.TickUpdate();
+        _noteNormalSpawner.TickUpdate();
     }
 
     // ========================================
@@ -76,7 +77,7 @@ public class UIFrameInGame : UIFrameBase
         RectTransform touchArea = (RectTransform)_widgetScanLine.transform;
         Camera uiCam = ManagerUI.Instance.GetRootCanvas().worldCamera;
 
-        ManagerRhythm.Instance.BindSongData(_curSongDataSO, touchArea, uiCam, _noteSpawner.ActiveNotes);
+        ManagerRhythm.Instance.BindSongData(_curSongDataSO, touchArea, uiCam, _noteNormalSpawner.ActiveNotes);
 
         _widgetGameBG.DoUIGameBGSetting(songDataSO.SongThumb, OnDimComplete);
 

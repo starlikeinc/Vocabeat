@@ -12,7 +12,9 @@ public interface INote
 public interface IFlowHoldNote : INote
 {
     int StartTick { get; }
-    int EndTick { get; }    
+    int EndTick { get; }
+
+    Vector2 GetLocalPositionAtTick(int songTick);
 }
 
 public enum EJudgementType

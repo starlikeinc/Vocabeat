@@ -29,7 +29,7 @@ public class SongDataSO : ScriptableObject
         get
         {
             if (_flowLongDatasByDiff == null)
-                BuildNoteDataDict();
+                BuildFlowLongDataDict(); // 기존: BuildNoteDataDict()
             return _flowLongDatasByDiff;
         }
     }
