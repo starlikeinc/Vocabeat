@@ -29,9 +29,8 @@ public enum EDifficulty
 public enum ENoteType
 {
     Normal,
-    Long,
-    Hold,
-    Curve,
+    LongFollow,
+    LongHold,    
 }
 
 [Serializable]
