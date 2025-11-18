@@ -21,13 +21,12 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
 
     public bool IsPlaying => _rTimeline.IsPlaying;
 
-    // ========================================    
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-    #region Test
-    private int _nextBeatIndex;
+    // ========================================        
+    private int _nextBeatIndex; // Editor 전용
 
     private void Update()
     {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         if (Input.GetKeyUp(KeyCode.Space))
         {
             if (!_rTimeline.IsPlaying)
@@ -35,12 +34,15 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
             else
                 StopTestPlay();
         }
-
+#endif
         if (_rTimeline == null || !_rTimeline.IsPlaying)
             return;
 
-        _rTimeline.UpdateTimeline();        
+        _rTimeline.UpdateTimeline();
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         UpdateMetronome();
+#endif
 
         OnTickUpdate?.Invoke(_rTimeline.PageT);        
     }
@@ -80,9 +82,6 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
             _nextBeatIndex++;
         }
     }
-
-    #endregion
-#endif
 
     // ========================================
     public bool IsInitialized()

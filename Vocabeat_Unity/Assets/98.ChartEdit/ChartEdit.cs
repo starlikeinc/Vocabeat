@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +5,9 @@ public class ChartEdit : MonoBehaviour
 {
     [Header("Target SO")]
     [SerializeField] private SongDataSO TargetSongData;
+
+    [Header("Visualizer")]
+    [SerializeField] private ChartVisualizer _visualizer;
 
     private readonly Dictionary<EDifficulty, List<Note>> EditNotesDict = new();
 
