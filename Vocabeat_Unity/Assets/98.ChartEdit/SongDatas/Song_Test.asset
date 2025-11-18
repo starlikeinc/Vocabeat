@@ -18,4 +18,84 @@ MonoBehaviour:
   _bgmCue: {fileID: 11400000, guid: ca6ad976992e58248827be5da06db00c, type: 2}
   _diffNotes:
   - Diff: 0
-    Notes: []
+    Notes:
+    - ID: 1
+      PageIndex: 0
+      NoteType: 0
+      Tick: 300
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+    - ID: 2
+      PageIndex: 0
+      NoteType: 0
+      Tick: 540
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+    - ID: 3
+      PageIndex: 0
+      NoteType: 0
+      Tick: 720
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+    - ID: 4
+      PageIndex: 0
+      NoteType: 0
+      Tick: 840
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+    - ID: 5
+      PageIndex: 1
+      NoteType: 0
+      Tick: 1140
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+    - ID: 6
+      PageIndex: 1
+      NoteType: 0
+      Tick: 1260
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+    - ID: 7
+      PageIndex: 1
+      NoteType: 0
+      Tick: 1380
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+    - ID: 8
+      PageIndex: 1
+      NoteType: 0
+      Tick: 1500
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+    - ID: 9
+      PageIndex: 1
+      NoteType: 0
+      Tick: 1620
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+    - ID: 10
+      PageIndex: 1
+      NoteType: 0
+      Tick: 1740
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1

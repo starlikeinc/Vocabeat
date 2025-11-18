@@ -10,8 +10,11 @@ public class SongDataSO : ScriptableObject
     [SerializeField] private AudioCueSO _bgmCue;
 
     [SerializeField] private List<DiffNoteData> _diffNotes = new();
+    [SerializeField] private List<DiffFlowLongData> _diffFlowLongs = new();
 
     private Dictionary<EDifficulty, List<Note>> _noteDatasByDiff;
+    private Dictionary<EDifficulty, List<FlowLongMeta>> _flowLongDatasByDiff;
+
     public Dictionary<EDifficulty, List<Note>> NoteDatasByDiff
     {
         get
@@ -19,6 +22,15 @@ public class SongDataSO : ScriptableObject
             if (_noteDatasByDiff == null)
                 BuildNoteDataDict();
             return _noteDatasByDiff;
+        }
+    }
+    public Dictionary<EDifficulty, List<FlowLongMeta>> FlowLongDatasByDiff
+    {
+        get
+        {
+            if (_flowLongDatasByDiff == null)
+                BuildNoteDataDict();
+            return _flowLongDatasByDiff;
         }
     }
 
@@ -29,13 +41,7 @@ public class SongDataSO : ScriptableObject
 
     public List<DiffNoteData> DiffNotes => _diffNotes;
 
-    // ========================================
-    //private void OnEnable()
-    //{
-    //    Debug.Log($"<color=green> 노트 딕셔너리 초기화 </color>");
-    //    BuildNoteDataDict();
-    //}
-
+    // ========================================    
     private void BuildNoteDataDict()
     {
         _noteDatasByDiff = new();
@@ -49,6 +55,22 @@ public class SongDataSO : ScriptableObject
                 _noteDatasByDiff.Add(noteData.Diff, noteData.Notes);
             else
                 _noteDatasByDiff[noteData.Diff] = noteData.Notes;
+        }
+    }
+
+    private void BuildFlowLongDataDict()
+    {
+        _flowLongDatasByDiff = new();
+
+        foreach(var flowLongData in _diffFlowLongs)
+        {
+            if (flowLongData == null)
+                continue;
+
+            if (!_flowLongDatasByDiff.ContainsKey(flowLongData.Diff))
+                _flowLongDatasByDiff.Add(flowLongData.Diff, flowLongData.FlowLongs);
+            else
+                _flowLongDatasByDiff[flowLongData.Diff] = flowLongData.FlowLongs;
         }
     }
 
@@ -84,5 +106,33 @@ public class SongDataSO : ScriptableObject
         }
 
         BuildNoteDataDict();
+    }
+
+    public void SaveFlowLongDatas(EDifficulty diff, IList<FlowLongMeta> src)
+    {
+        var diffFlowLongData = _diffFlowLongs.Find(x => x.Diff == diff);
+
+        if(diffFlowLongData == null)
+        {
+            diffFlowLongData = new DiffFlowLongData { Diff = diff };
+            _diffFlowLongs.Add(diffFlowLongData);
+        }
+
+        if (diffFlowLongData.FlowLongs == null)
+            diffFlowLongData.FlowLongs = new();
+        else
+            diffFlowLongData.FlowLongs.Clear();
+
+        foreach(var flowLongData in src)
+        {
+            diffFlowLongData.FlowLongs.Add(new FlowLongMeta
+            {
+                StartNoteID = flowLongData.StartNoteID,
+                EndNoteID = flowLongData.EndNoteID,
+                CurvePoints = flowLongData.CurvePoints,
+            });
+        }
+
+        BuildFlowLongDataDict();
     }
 }

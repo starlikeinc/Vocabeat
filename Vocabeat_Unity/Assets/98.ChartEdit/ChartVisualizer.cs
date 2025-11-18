@@ -433,7 +433,7 @@ public class ChartVisualizer : MonoBehaviour
 
     public void OnChangeNoteLongFollow()
     {
-        _curNoteType = ENoteType.LongFollow;
+        _curNoteType = ENoteType.FlowHold;
         ChangeGhostNoteType();
     }
 

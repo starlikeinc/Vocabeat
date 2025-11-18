@@ -9,14 +9,18 @@ public interface INote
     RectTransform RectTrs { get; }
 }
 
+public interface IFlowHoldNote : INote
+{
+    int StartTick { get; }
+    int EndTick { get; }    
+}
+
 public enum EJudgementType
 {
     BlueStar,   // Perfect
     WhiteStar,  // Great
     YellowStar, // Good
-    RedStar,    // Bad
-
-    Miss,
+    RedStar,    // Bad or Miss
 }
 
 public enum EDifficulty
@@ -29,7 +33,7 @@ public enum EDifficulty
 public enum ENoteType
 {
     Normal,
-    LongFollow,
+    FlowHold,
     LongHold,    
 }
 
@@ -38,6 +42,28 @@ public class DiffNoteData
 {
     public EDifficulty Diff;
     public List<Note> Notes = new();
+}
+
+[Serializable]
+public class DiffFlowLongData
+{
+    public EDifficulty Diff;
+    public List<FlowLongMeta> FlowLongs = new();
+}
+
+[Serializable]
+public class FlowCurvePoint
+{
+    public float t;   // A, B 사이 진행비율
+    public float y01; // 화면 상 보이는 세로 위치
+}
+
+[Serializable]
+public class FlowLongMeta
+{
+    public int StartNoteID;
+    public int EndNoteID;
+    public List<FlowCurvePoint> CurvePoints = new();
 }
 
 [Serializable]
