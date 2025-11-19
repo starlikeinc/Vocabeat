@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class NoteTouchJudgeSystem : MonoBehaviour
 {
-    public event Action<INote, EJudgementType> OnJudgeResult;
-    // 필요 시 롱노트 시작/종료 구분 이벤트(옵션)
-    public event Action<INote, EJudgementType, bool> OnHoldJudgeResult; // isEnd=true면 종료
+    public event Action<Note, EJudgementType> OnJudgeResult;
+    // 롱노트 시작/종료 (isEnd=true면 종료)
+    public event Action<Note, EJudgementType, bool> OnHoldJudgeResult;
 
     [Header("Judge SFX")]
     [SerializeField] private SFXEventChannelSO _sfxEventChannel;
@@ -27,9 +27,9 @@ public class NoteTouchJudgeSystem : MonoBehaviour
     private RectTransform _touchArea;
     private Camera _uiCam;
 
-    private IReadOnlyList<INote> _listNotes;
+    private IReadOnlyList<Note> _listNotes;
 
-    private readonly List<INote> _tempMissCandidates = new();
+    private readonly List<Note> _tempMissCandidates = new();
     private readonly List<int> _tempFinalizeIds = new();
 
     private bool _isInit = false;
@@ -37,7 +37,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
     // 롱노트 상태 -------------------------------------------------
     private class HoldState
     {
-        public INote Note;
+        public Note Note;
         public int StartTick;
         public int EndTick;
         public int PointerId; // 모바일 fingerId, PC는 -1
@@ -53,7 +53,6 @@ public class NoteTouchJudgeSystem : MonoBehaviour
     // ========================================
     private void Update()
     {
-        // 1) 입력 먼저
 #if UNITY_STANDALONE || UNITY_EDITOR
         PCInput();
 #endif
@@ -61,11 +60,9 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         MobileInput();
 #endif
 
-        // 2) Hold 상태 업데이트
         if (_isInit)
         {
             UpdateHoldStates();
-            // 3) 마지막에 AutoMiss
             AutoMissUpdate();
         }
     }
@@ -117,7 +114,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         _isInit = true;
     }
 
-    public void BindJudgementNoteDatas(IReadOnlyList<INote> listNotes)
+    public void BindJudgementNoteDatas(IReadOnlyList<Note> listNotes)
     {
         _listNotes = listNotes;
 
@@ -127,7 +124,6 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         _pointerToNoteId.Clear();
     }
 
-    // 재생/중지 시 외부에서 호출(ManagerRhythm에서 호출)
     public void ResetForNewSong()
     {
         _judgedNoteIds.Clear();
@@ -151,11 +147,10 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         if (_listNotes == null || _listNotes.Count == 0)
             return;
 
-        // 시간 우선 필터링
         var timeline = _context.RTimeline;
         int songTick = timeline.CurTick - timeline.PreSongTicks;
 
-        INote bestNote = null;
+        Note bestNote = null;
         int bestDiff = int.MaxValue;
         float bestDist = float.MaxValue;
 
@@ -163,20 +158,20 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         {
             if (note == null) continue;
 
-            int id = note.NoteData.ID;
+            int id = note.ID;
 
             if (_judgedNoteIds.Contains(id))
                 continue;
             if (_activeHoldStates.ContainsKey(id))
                 continue;
 
-            int diffTick = Mathf.Abs(note.NoteData.Tick - songTick);
-            if (diffTick > _redStarRange) // 시간 창 밖이면 스킵
+            int diffTick = Mathf.Abs(note.Tick - songTick);
+            if (diffTick > _redStarRange)
                 continue;
 
-            float dist = Vector2.Distance(localPos, note.RectTrs.anchoredPosition);
+            Vector2 idealLocal = GetExpectedLocalPositionForTap(note, songTick);
+            float dist = Vector2.Distance(localPos, idealLocal);
 
-            // 1차: 시간 diff 작은 것, 2차: 거리 작은 것
             if (diffTick < bestDiff || (diffTick == bestDiff && dist < bestDist))
             {
                 bestDiff = diffTick;
@@ -191,7 +186,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         }
     }
 
-    private void JudgeOrStartHold(INote note, int pointerId)
+    private void JudgeOrStartHold(Note note, int pointerId)
     {
         if (_context == null || _context.RTimeline == null)
             return;
@@ -201,7 +196,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         if (songTick < 0)
             return;
 
-        int noteTick = note.NoteData.Tick;
+        int noteTick = note.Tick;
         int diff = Mathf.Abs(noteTick - songTick);
 
         EJudgementType judgeType =
@@ -210,12 +205,11 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             diff <= _yellowStarRange ? EJudgementType.YellowStar :
             EJudgementType.RedStar;
 
-        // 롱노트 판정 기준: IFlowHoldNote 우선, 없으면 HoldTick
+        // 롱노트 여부 판단
         bool isHold =
-            (note is IFlowHoldNote) ||
-            note.NoteData.HoldTick > 0 ||
-            note.NoteData.NoteType == ENoteType.FlowHold ||
-            note.NoteData.NoteType == ENoteType.LongHold;
+            note.NoteType == ENoteType.FlowHold ||
+            note.NoteType == ENoteType.LongHold ||
+            note.HoldTick > 0;
 
         if (!isHold)
         {
@@ -223,17 +217,9 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             return;
         }
 
-        int endTick;
-        if (note is IFlowHoldNote flow)
-        {
-            endTick = flow.EndTick; // 데이터에서 보장되는 종료 Tick 사용
-        }
-        else
-        {
-            endTick = noteTick + Mathf.Max(0, note.NoteData.HoldTick);
-        }
+        int endTick = noteTick + Mathf.Max(0, note.HoldTick);
 
-        int id = note.NoteData.ID;
+        int id = note.ID;
         if (_activeHoldStates.ContainsKey(id))
             return;
 
@@ -259,7 +245,6 @@ public class NoteTouchJudgeSystem : MonoBehaviour
 
     private EJudgementType GetEndJudgeType(int endTick, int songTick)
     {
-        // EndTick을 이미 지난 상태에서 끝났다면 무조건 Perfect
         if (songTick >= endTick)
             return EJudgementType.BlueStar;
 
@@ -272,7 +257,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             EJudgementType.RedStar;
     }
 
-    private void FinalizeHoldByEnd(INote note, HoldState hs, int songTick)
+    private void FinalizeHoldByEnd(Note note, HoldState hs, int songTick)
     {
         int endTick = hs.EndTick;
         EJudgementType endJudge = GetEndJudgeType(endTick, songTick);
@@ -280,7 +265,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         hs.Completed = true;
 
         PlayJudgeSFX(endJudge);
-        OnHoldJudgeResult?.Invoke(note, endJudge, true); // isEnd = true
+        OnHoldJudgeResult?.Invoke(note, endJudge, true);
         ApplyJudgeFinal(note, endJudge);
     }
 
@@ -299,37 +284,33 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             var hs = kv.Value;
             if (hs.Completed) continue;
 
-            int id = hs.Note.NoteData.ID;
             var note = hs.Note;
+            int id = note.ID;
 
             int startTick = hs.StartTick;
             int endTick = hs.EndTick;
 
-            // 아직 시작 전이면 스킵(안전용)
             if (songTick < startTick)
                 continue;
 
-            // 1) 포인터가 살아있는지 체크
             bool pointerActive = IsPointerStillActive(hs.PointerId);
             if (!pointerActive)
             {
-                // OS가 터치를 끊어버렸거나, 입력이 갑자기 사라진 경우
                 hs.ReleasedEarly = songTick < endTick;
                 FinalizeHoldByEnd(note, hs, songTick);
                 _tempFinalizeIds.Add(id);
                 continue;
             }
 
-            // 2) FlowLong이면 곡선 안에 있는지 체크
-            if (note is IFlowHoldNote flowNote)
+            // ✅ FlowHold(커브) 판정: Tick 기반 기대 위치와 거리 비교
+            if (note.NoteType == ENoteType.FlowHold && note.HoldTick > 0)
             {
                 if (TryGetPointerLocalPosition(hs.PointerId, out Vector2 pointerLocal))
                 {
-                    Vector2 idealLocal = flowNote.GetLocalPositionAtTick(songTick);
+                    Vector2 idealLocal = GetExpectedLocalPositionForHold(note, songTick);
                     float dist = Vector2.Distance(pointerLocal, idealLocal);
                     if (dist > _touchRadius)
                     {
-                        // 라인에서 벗어난 순간을 "이 시점에 손을 뗀 것"처럼 취급
                         hs.ReleasedEarly = songTick < endTick;
                         FinalizeHoldByEnd(note, hs, songTick);
                         _tempFinalizeIds.Add(id);
@@ -338,17 +319,14 @@ public class NoteTouchJudgeSystem : MonoBehaviour
                 }
             }
 
-            // 3) 아직 끝 Tick 전이면 계속 유지
             if (songTick < endTick)
                 continue;
 
-            // 4) 끝 Tick을 지날 때까지 잘 버텼다면 → 무조건 Perfect
             hs.ReleasedEarly = false;
             FinalizeHoldByEnd(note, hs, songTick);
             _tempFinalizeIds.Add(id);
         }
 
-        // 끝난 롱노트 정리
         for (int i = 0; i < _tempFinalizeIds.Count; i++)
         {
             RemoveHoldState(_tempFinalizeIds[i]);
@@ -419,10 +397,8 @@ public class NoteTouchJudgeSystem : MonoBehaviour
                 int songTick = _context.RTimeline.CurTick - _context.RTimeline.PreSongTicks;
                 int endTick = hs.EndTick;
 
-                // EndTick 전에 뗐는지 여부 기록
                 hs.ReleasedEarly = songTick < endTick;
 
-                // 여기서도 동일하게 EndTick 기준 판정
                 FinalizeHoldByEnd(hs.Note, hs, songTick);
 
                 RemoveHoldState(noteId);
@@ -447,7 +423,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             _pointerToNoteId.Remove(removePointer);
     }
 
-    // 아직 시작하지 않은 노트만 AutoMiss 처리 (롱노트 진행 중 제외)
+    // ======================================== AutoMiss
     private void AutoMissUpdate()
     {
         if (_context == null || !_context.IsPlaying)
@@ -467,7 +443,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             if (note == null)
                 continue;
 
-            int id = note.NoteData.ID;
+            int id = note.ID;
 
             if (_judgedNoteIds.Contains(id))
                 continue;
@@ -475,7 +451,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             if (_activeHoldStates.ContainsKey(id))
                 continue;
 
-            if (songTick > note.NoteData.Tick + _redStarRange)
+            if (songTick > note.Tick + _redStarRange)
             {
                 _tempMissCandidates.Add(note);
             }
@@ -483,13 +459,13 @@ public class NoteTouchJudgeSystem : MonoBehaviour
 
         for (int i = 0; i < _tempMissCandidates.Count; i++)
         {
-            INote note = _tempMissCandidates[i];
+            Note note = _tempMissCandidates[i];
             ApplyJudge(note, EJudgementType.RedStar);
         }
     }
 
-    // 단일 노트 / 롱노트 종료 최종 통계용
-    private void ApplyJudgeFinal(INote note, EJudgementType type)
+    // ======================================== Judge 적용 & SFX
+    private void ApplyJudgeFinal(Note note, EJudgementType type)
     {
         if (_dictNoteJudgementCounts.TryGetValue(type, out int count))
             _dictNoteJudgementCounts[type] = count + 1;
@@ -499,20 +475,19 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         FinalizeJudge(note, type);
     }
 
-    // 단일 노트용(최종)
-    private void ApplyJudge(INote note, EJudgementType type)
+    private void ApplyJudge(Note note, EJudgementType type)
     {
-        if (_judgedNoteIds.Contains(note.NoteData.ID))
+        if (_judgedNoteIds.Contains(note.ID))
             return;
 
         PlayJudgeSFX(type);
         ApplyJudgeFinal(note, type);
     }
 
-    private void FinalizeJudge(INote note, EJudgementType type)
+    private void FinalizeJudge(Note note, EJudgementType type)
     {
-        Debug.Log($"[{note.NoteData.ID}]노트 판정: [{type}]");
-        _judgedNoteIds.Add(note.NoteData.ID);
+        Debug.Log($"[{note.ID}]노트 판정: [{type}]");
+        _judgedNoteIds.Add(note.ID);
         OnJudgeResult?.Invoke(note, type);
     }
 
@@ -526,5 +501,48 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         {
             _sfxEventChannel.Raise(cue);
         }
+    }
+
+    // ======================================== 기대 좌표 계산부 (핵심)
+
+    /// <summary>
+    /// 첫 터치 시, 이 노트를 어느 위치로 간주하고 거리 비교할지
+    /// </summary>
+    private Vector2 GetExpectedLocalPositionForTap(Note note, int songTick)
+    {
+        // Normal: 고정 위치
+        if (note.NoteType == ENoteType.Normal || note.HoldTick <= 0 || note.FlowLongMeta == null)
+        {
+            return NoteUtility.GetNotePosition(_touchArea, note.Tick, note.Y);
+        }
+
+        // FlowHold: 시작 쪽에 가깝게
+        return GetExpectedLocalPositionForHold(note, songTick);
+    }
+
+    /// <summary>
+    /// FlowHold 진행 중, 현재 Tick에서 기대되는 위치
+    /// </summary>
+    private Vector2 GetExpectedLocalPositionForHold(Note note, int songTick)
+    {
+        int startTick = note.Tick;
+        int endTick = note.Tick + Mathf.Max(0, note.HoldTick);
+
+        int clampedTick = Mathf.Clamp(songTick, startTick, endTick);
+        float t = Mathf.InverseLerp(startTick, endTick, songTick);
+        t = Mathf.Clamp01(t);
+
+        float y01;
+        if (note.FlowLongMeta != null && note.FlowLongMeta.CurvePoints != null && note.FlowLongMeta.CurvePoints.Count > 0)
+        {
+            y01 = NoteUtility.EvaluateY01(note.FlowLongMeta, t);
+        }
+        else
+        {
+            y01 = note.Y;
+        }
+
+        // X는 Tick 기반, Y는 커브 기반
+        return NoteUtility.GetNotePosition(_touchArea, clampedTick, y01);
     }
 }

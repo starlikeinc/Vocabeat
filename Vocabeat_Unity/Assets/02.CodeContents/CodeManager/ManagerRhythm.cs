@@ -1,6 +1,5 @@
 using LUIZ;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
@@ -18,6 +17,9 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
 
     public RhythmTimeline RTimeline => _rTimeline;
     public NoteTouchJudgeSystem NoteJudegeSystem => _noteJudgeSystem;
+
+    private SongDataSO _curSongDataSO;
+    private EDifficulty _curDiff;
 
     public bool IsPlaying => _rTimeline.IsPlaying;
 
@@ -91,11 +93,17 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
         return Instance != null;
     }
 
-    public void BindSongData(SongDataSO songDataSO, RectTransform touchArea, Camera uiCam, IReadOnlyList<INote> listNotes)
-    {        
-        _rTimeline.BindTimelineData(songDataSO);
-        _noteJudgeSystem.InitJudgementSystem(this, touchArea, uiCam);
-        _noteJudgeSystem.BindJudgementNoteDatas(listNotes);        
+    public void BindSongData(SongDataSO songDataSO, EDifficulty diff, RectTransform touchArea, Camera uiCam)
+    {
+        _curSongDataSO = songDataSO;
+        _curDiff = diff;
+
+        RTimeline.BindTimelineData(songDataSO);
+
+        NoteJudegeSystem.InitJudgementSystem(this, touchArea, uiCam);
+        
+        var listNoteDatas = songDataSO.NoteDatasByDiff[diff];
+        NoteJudegeSystem.BindJudgementNoteDatas(listNoteDatas);
     }
 
     public void PlaySong()

@@ -8,6 +8,7 @@ public class UINoteNormalSpawner : UITemplateNoteSpawnerBase<UIItemNoteNormal>
     {
         filteredNotes = notes.Where(note => note.NoteType == ENoteType.Normal).ToList();
     }
+
     protected override UIItemNoteNormal GetUIItemNote(Note note)
     {
         UIItemNoteNormal item = DoTemplateRequestItem<UIItemNoteNormal>(transform);

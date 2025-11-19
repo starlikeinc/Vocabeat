@@ -2,9 +2,8 @@ using System.Collections.Generic;
 using LUIZ.UI;
 using UnityEngine;
 using UnityEngine.UI;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
-//[RequireComponent]
+[RequireComponent(typeof(LineDrawer))]
 public class UIItemNoteFlowHold : UITemplateItemBase, IFlowHoldNote
 {
     [Header("Images")]

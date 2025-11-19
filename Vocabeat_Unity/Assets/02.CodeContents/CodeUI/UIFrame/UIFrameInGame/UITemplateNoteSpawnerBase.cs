@@ -2,19 +2,21 @@ using System.Collections.Generic;
 using LUIZ.UI;
 using UnityEngine;
 
-public abstract class UITemplateNoteSpawnerBase<T> : UITemplateBase where T : UITemplateItemBase
+public abstract class UITemplateNoteSpawnerBase<T> : UITemplateBase where T : UITemplateItemBase, INote
 {
-    [Header("노트가 보여질 RectTrs")] // WidgetScanline으로 두면 됨.
+    [Header("노트가 보여질 RectTrs")]
     [SerializeField] protected RectTransform _spawnRectTrs;
 
-    [Header("Note Spawner")]    
-    [SerializeField] private int _appearOffsetTicks = 480;  // 자신의 Tick 기준 몇 Tick 전에 등장할지 - 이건 나중에 따로 빼야됨.        
+    [Header("Note Spawner")]
+    [SerializeField] private int _appearOffsetTicks = 480;
 
-    protected readonly List<T> _activeNotes = new List<T>();
+    protected readonly List<T> _activeNotes = new();
 
     private Queue<Note> _pendingNotes;
     private RhythmTimeline _timeline;
-    private int _preSongTicks;    
+    private int _preSongTicks;
+
+    private readonly Dictionary<int, T> _dictNotesByNotId = new();
 
     public IReadOnlyList<T> ActiveNotes => _activeNotes;
 
@@ -22,14 +24,12 @@ public abstract class UITemplateNoteSpawnerBase<T> : UITemplateBase where T : UI
     protected override void OnUIWidgetInitialize(UIFrameBase parentFrame)
     {
         base.OnUIWidgetInitialize(parentFrame);
-        ManagerRhythm.Instance.NoteJudegeSystem.OnJudgeResult -= OnDisappearByJudgement;
-        ManagerRhythm.Instance.NoteJudegeSystem.OnJudgeResult += OnDisappearByJudgement;
+        var judge = ManagerRhythm.Instance.NoteJudegeSystem;
+        judge.OnJudgeResult -= OnDisappearByJudgement;
+        judge.OnJudgeResult += OnDisappearByJudgement;
     }
 
     // ========================================
-    /// <summary>
-    /// 노트 시트 + 타임라인을 바인딩하고, 내부 상태 초기화
-    /// </summary>
     public void Setup(List<Note> listNote)
     {
         _timeline = ManagerRhythm.Instance.RTimeline;
@@ -47,20 +47,16 @@ public abstract class UITemplateNoteSpawnerBase<T> : UITemplateBase where T : UI
 
         var notes = filteredNotes;
         notes.Sort((a, b) => a.Tick.CompareTo(b.Tick));
-        
+
         _pendingNotes = new Queue<Note>(notes);
     }
 
-    /// <summary>
-    /// 매 프레임 Tick 기준으로 스폰/삭제 처리    
-    /// </summary>
     public void TickUpdate()
     {
         if (_timeline == null || _pendingNotes == null)
             return;
 
         int timelineTick = _timeline.CurTick;
-        // 곡 기준 Tick(0 = 곡 시작 시점)
         int songTick = timelineTick - _preSongTicks;
 
         SpawnNotes(songTick);
@@ -79,39 +75,37 @@ public abstract class UITemplateNoteSpawnerBase<T> : UITemplateBase where T : UI
     {
         if (_pendingNotes == null) return;
 
-        // 등장해야 할 노트들 다 뽑기 
         while (_pendingNotes.Count > 0)
         {
             var next = _pendingNotes.Peek();
             int appearTick = next.Tick - _appearOffsetTicks;
-            
+
             if (appearTick < 0)
                 appearTick = 0;
 
             if (songTick < appearTick)
                 break;
 
-            // 등장 시간 지났으니 실제 생성
             _pendingNotes.Dequeue();
 
             var item = GetUIItemNote(next);
             _activeNotes.Add(item);
+
+            _dictNotesByNotId[next.ID] = item;
         }
     }
 
-    private void DespawnNote(INote targetNote)
+    private void DespawnNote(Note targetNote)
     {
-        // TODO : 사라지는 연출 등
-
-        T item = targetNote as T;
-        if (item == null)
+        if (!_dictNotesByNotId.TryGetValue(targetNote.ID, out T item))
             return;
 
         DoUITemplateReturn(item);
         _activeNotes.Remove(item);
+        _dictNotesByNotId.Remove(targetNote.ID);
     }
 
-    private void OnDisappearByJudgement(INote note, EJudgementType _)
+    private void OnDisappearByJudgement(Note note, EJudgementType _)
     {
         DespawnNote(note);
     }
@@ -120,6 +114,7 @@ public abstract class UITemplateNoteSpawnerBase<T> : UITemplateBase where T : UI
     {
         DoUITemplateReturnAll();
         _activeNotes.Clear();
+        _dictNotesByNotId.Clear();
     }
 
     // ========================================

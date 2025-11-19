@@ -19,7 +19,7 @@ public class UINoteFlowHoldSpawner : UITemplateNoteSpawnerBase<UIItemNoteFlowHol
     protected override void OnUpdateTick(int tick)
     {
         base.OnUpdateTick(tick);
-        foreach(var uiNote in _activeNotes)
+        foreach (var uiNote in _activeNotes)
         {
             uiNote.UpdateCursor(tick);
         }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using LUIZ.UI;
 using UnityEngine;
 
@@ -82,11 +83,10 @@ public class UIFrameInGame : UIFrameBase
 
         RectTransform touchArea = (RectTransform)_widgetScanLine.transform;
         Camera uiCam = ManagerUI.Instance.GetRootCanvas().worldCamera;
-
-        ManagerRhythm.Instance.BindSongData(_curSongDataSO, touchArea, uiCam, _noteNormalSpawner.ActiveNotes);
+        
+        ManagerRhythm.Instance.BindSongData(_curSongDataSO, _songDiff, touchArea, uiCam);
 
         _widgetGameBG.DoUIGameBGSetting(songDataSO.SongThumb, OnDimComplete);
-
     }
 
     // ========================================
