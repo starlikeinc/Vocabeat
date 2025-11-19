@@ -6,6 +6,8 @@ public class ChartVisualizer : MonoBehaviour
 {
     [SerializeField] private RectTransform _targetRect; // 선/노트가 그려질 영역
 
+    [SerializeField] private Canvas _targetRectCanvas;
+
     [Header("Grid Settings")]
     [Min(1)]
     [SerializeField] private int _horizonDivisionCount = 16;
@@ -80,8 +82,7 @@ public class ChartVisualizer : MonoBehaviour
         if (!Application.isPlaying)
             return;
 
-        UpdateGhost();
-        HandleMouseInput();
+        UpdateGhost();        
     }
 
     // ========================================
@@ -225,9 +226,8 @@ public class ChartVisualizer : MonoBehaviour
 
         if (_targetRect == null || _noteGhost == null)
             return;
-
-        var canvas = _targetRect.GetComponentInParent<Canvas>();
-        var cam = canvas != null ? canvas.worldCamera : null;
+        
+        var cam = _targetRectCanvas != null ? _targetRectCanvas.worldCamera : null;
 
         if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(_targetRect, Input.mousePosition, cam, out var localPoint))
         {
@@ -252,48 +252,7 @@ public class ChartVisualizer : MonoBehaviour
         _noteGhost.gameObject.SetActive(true);
     }
 
-    private void HandleMouseInput()
-    {
-        if (!Application.isPlaying)
-            return;
-
-        if (_chartEdit == null)
-            return;
-
-        // 좌클릭: 노트 추가 / 타입 변경
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (TryGetGhostNoteData(out int pageIndex, out int tick, out float yNorm))
-            {
-                if (_curNoteType == ENoteType.FlowHold)
-                    _chartEdit.OnFlowHoldLeftClick(tick, yNorm, pageIndex);
-                else
-                    _chartEdit.OnRequestAddOrUpdateNote(tick, yNorm, pageIndex, _curNoteType);
-            }
-        }
-
-        // 우클릭: 노트 삭제
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (_curNoteType == ENoteType.FlowHold)
-            {
-                if (TryGetGhostNoteData(out int pageIndex, out int tick, out float yNorm))
-                {
-                    _chartEdit.OnFlowHoldRightClickAddCurvePoint(tick, yNorm);
-                    return;
-                }
-            }
-            else
-            {
-                if (TryGetGhostNoteData(out int pageIndex, out int tick, out float yNorm))
-                {
-                    _chartEdit.OnRequestRemoveNote(tick, yNorm, pageIndex);
-                }
-            }            
-        }
-    }
-
-    private bool TryGetGhostNoteData(out int pageIndex, out int tick, out float yNorm)
+    public bool TryGetGhostNoteData(out int pageIndex, out int tick, out float yNorm)
     {
         pageIndex = 0;
         tick = 0;

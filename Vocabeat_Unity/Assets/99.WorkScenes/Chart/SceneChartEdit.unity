@@ -573,9 +573,9 @@ MonoBehaviour:
   ImgPreview: {fileID: 1770301204}
   GhostDatas:
   - NoteType: 0
-    NotePreview: {fileID: 21300002, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
+    NotePreview: {fileID: 21300000, guid: 8a2ae07868bb53e48b7205989a350cb2, type: 3}
   - NoteType: 1
-    NotePreview: {fileID: 21300012, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
+    NotePreview: {fileID: 21300000, guid: bb6f380541e49ae468b5b13abe960e50, type: 3}
   - NoteType: 2
     NotePreview: {fileID: 21300008, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
 --- !u!1 &118604687
@@ -1507,6 +1507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChartVisualizer
   _targetRect: {fileID: 1263624917}
+  _targetRectCanvas: {fileID: 0}
   _horizonDivisionCount: 8
   _verticalDivisionCount: 16
   _ticksPerPage: 960
@@ -1519,7 +1520,7 @@ MonoBehaviour:
   _verticalLinePrefab: {fileID: 1444076186}
   _notePreView: {fileID: 634094766}
   _noteGhost: {fileID: 115180867}
-  _chartEdit: {fileID: 0}
+  _chartEdit: {fileID: 809374472}
 --- !u!1 &469390466
 GameObject:
   m_ObjectHideFlags: 0
