@@ -28,6 +28,13 @@ public class ChartEdit : MonoBehaviour
     // Undo 스택 (현재 난이도용)
     private readonly Stack<List<Note>> _undoStack = new();
 
+    private bool _isFlowHoldMode = false;
+    private bool _isFlowHoldWaitingSecondPoint = false;
+
+    private Note _flowHoldStartNote = null;
+    private Note _flowHoldEndNote = null;
+    private FlowLongMeta _currentFlowMeta = null;
+
     public ENoteType CurrentNoteType => _currentNoteType;
 
     // ========================================
@@ -241,6 +248,16 @@ public class ChartEdit : MonoBehaviour
 
         _currentNoteType = (ENoteType)noteTypeIndex;
 
+        _isFlowHoldMode = (_currentNoteType == ENoteType.FlowHold);
+
+        if (!_isFlowHoldMode)
+        {
+            _isFlowHoldWaitingSecondPoint = false;
+            _flowHoldStartNote = null;
+            _flowHoldEndNote = null;
+            _currentFlowMeta = null;
+        }
+
         if (_visualizer != null)
             _visualizer.SetGhostNoteType(_currentNoteType);
     }
@@ -346,6 +363,107 @@ public class ChartEdit : MonoBehaviour
         });
 
         RecalculatePageCount();
+        RefreshPageView();
+    }
+
+    public void OnFlowHoldLeftClick(int tick, float yNorm, int pageIndex)
+    {
+        if (!_isFlowHoldMode)
+            return;
+
+        EditNotesDict.TryGetValue(_currentDifficulty, out var list);
+        if (list == null)
+        {
+            list = new();
+            EditNotesDict[_currentDifficulty] = list;
+        }
+
+        RecordUndoSnapshot();
+
+        // === 1회차 클릭: Start 생성 ===
+        if (!_isFlowHoldWaitingSecondPoint)
+        {
+            int newId = GenerateNextNoteId(list);
+
+            _flowHoldStartNote = new Note
+            {
+                ID = newId,
+                Tick = tick,
+                PageIndex = pageIndex,
+                Y = yNorm,
+                NoteType = ENoteType.FlowHold,
+                FlowLongMeta = new FlowLongMeta()
+            };
+
+            _flowHoldStartNote.FlowLongMeta.CurvePoints.Add(new FlowCurvePoint
+            {
+                t = 0f,
+                y01 = yNorm
+            });
+
+            list.Add(_flowHoldStartNote);
+
+            _currentFlowMeta = _flowHoldStartNote.FlowLongMeta;
+            _isFlowHoldWaitingSecondPoint = true;
+            return;
+        }
+
+        // === 2회차 클릭: End 생성 ===
+        {
+            int newId = GenerateNextNoteId(list);
+
+            _flowHoldEndNote = new Note
+            {
+                ID = newId,
+                Tick = tick,
+                PageIndex = pageIndex,
+                Y = yNorm,
+                NoteType = ENoteType.FlowHold,
+                FlowLongMeta = _currentFlowMeta
+            };
+
+            _flowHoldEndNote.FlowLongMeta.CurvePoints.Add(new FlowCurvePoint
+            {
+                t = 1f,
+                y01 = yNorm
+            });
+
+            list.Add(_flowHoldEndNote);
+
+            // Tick 기반 정렬
+            list.Sort((a, b) => a.Tick.CompareTo(b.Tick));
+
+            _isFlowHoldWaitingSecondPoint = false;
+
+            // 이제부터는 우클릭으로 중간 커브 입력
+            return;
+        }
+    }
+
+    public void OnFlowHoldRightClickAddCurvePoint(int tick, float yNorm)
+    {
+        if (_currentFlowMeta == null || _flowHoldStartNote == null || _flowHoldEndNote == null)
+            return;
+
+        int startTick = _flowHoldStartNote.Tick;
+        int endTick = _flowHoldEndNote.Tick;
+
+        if (tick <= startTick || tick >= endTick)
+            return; // 범위 밖이면 무시
+
+        float t = Mathf.InverseLerp(startTick, endTick, tick);
+
+        RecordUndoSnapshot();
+
+        _currentFlowMeta.CurvePoints.Add(new FlowCurvePoint
+        {
+            t = t,
+            y01 = yNorm
+        });
+
+        // 정렬 유지
+        _currentFlowMeta.CurvePoints.Sort((a, b) => a.t.CompareTo(b.t));
+
         RefreshPageView();
     }
 

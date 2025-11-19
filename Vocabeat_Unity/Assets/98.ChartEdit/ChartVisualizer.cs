@@ -265,17 +265,31 @@ public class ChartVisualizer : MonoBehaviour
         {
             if (TryGetGhostNoteData(out int pageIndex, out int tick, out float yNorm))
             {
-                _chartEdit.OnRequestAddOrUpdateNote(tick, yNorm, pageIndex, _curNoteType);
+                if (_curNoteType == ENoteType.FlowHold)
+                    _chartEdit.OnFlowHoldLeftClick(tick, yNorm, pageIndex);
+                else
+                    _chartEdit.OnRequestAddOrUpdateNote(tick, yNorm, pageIndex, _curNoteType);
             }
         }
 
         // 우클릭: 노트 삭제
         if (Input.GetMouseButtonDown(1))
         {
-            if (TryGetGhostNoteData(out int pageIndex, out int tick, out float yNorm))
+            if (_curNoteType == ENoteType.FlowHold)
             {
-                _chartEdit.OnRequestRemoveNote(tick, yNorm, pageIndex);
+                if (TryGetGhostNoteData(out int pageIndex, out int tick, out float yNorm))
+                {
+                    _chartEdit.OnFlowHoldRightClickAddCurvePoint(tick, yNorm);
+                    return;
+                }
             }
+            else
+            {
+                if (TryGetGhostNoteData(out int pageIndex, out int tick, out float yNorm))
+                {
+                    _chartEdit.OnRequestRemoveNote(tick, yNorm, pageIndex);
+                }
+            }            
         }
     }
 
