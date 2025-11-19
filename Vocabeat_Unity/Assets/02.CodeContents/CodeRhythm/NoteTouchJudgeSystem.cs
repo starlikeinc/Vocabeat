@@ -257,6 +257,33 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         OnHoldJudgeResult?.Invoke(note, judgeType, false);
     }
 
+    private EJudgementType GetEndJudgeType(int endTick, int songTick)
+    {
+        // EndTick을 이미 지난 상태에서 끝났다면 무조건 Perfect
+        if (songTick >= endTick)
+            return EJudgementType.BlueStar;
+
+        int diffEnd = Mathf.Abs(endTick - songTick);
+
+        return
+            diffEnd <= _blueStarRange ? EJudgementType.BlueStar :
+            diffEnd <= _whiteStarRange ? EJudgementType.WhiteStar :
+            diffEnd <= _yellowStarRange ? EJudgementType.YellowStar :
+            EJudgementType.RedStar;
+    }
+
+    private void FinalizeHoldByEnd(INote note, HoldState hs, int songTick)
+    {
+        int endTick = hs.EndTick;
+        EJudgementType endJudge = GetEndJudgeType(endTick, songTick);
+
+        hs.Completed = true;
+
+        PlayJudgeSFX(endJudge);
+        OnHoldJudgeResult?.Invoke(note, endJudge, true); // isEnd = true
+        ApplyJudgeFinal(note, endJudge);
+    }
+
     private void UpdateHoldStates()
     {
         if (_activeHoldStates.Count == 0 || _context?.RTimeline == null)
@@ -278,25 +305,22 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             int startTick = hs.StartTick;
             int endTick = hs.EndTick;
 
-            // 아직 시작 전이면 스킵 (혹시라도)
+            // 아직 시작 전이면 스킵(안전용)
             if (songTick < startTick)
                 continue;
 
-            // 포인터가 살아있는지 체크
+            // 1) 포인터가 살아있는지 체크
             bool pointerActive = IsPointerStillActive(hs.PointerId);
             if (!pointerActive)
             {
-                // 중간에 손가락을 떼버렸다면 -> 조기 해제 Miss
-                hs.ReleasedEarly = true;
-                PlayJudgeSFX(EJudgementType.RedStar);
-                OnHoldJudgeResult?.Invoke(note, EJudgementType.RedStar, true);
-                ApplyJudgeFinal(note, EJudgementType.RedStar);
-                hs.Completed = true;
+                // OS가 터치를 끊어버렸거나, 입력이 갑자기 사라진 경우
+                hs.ReleasedEarly = songTick < endTick;
+                FinalizeHoldByEnd(note, hs, songTick);
                 _tempFinalizeIds.Add(id);
                 continue;
             }
 
-            // 3) FlowLong이면 경로 안에 있는지도 체크
+            // 2) FlowLong이면 곡선 안에 있는지 체크
             if (note is IFlowHoldNote flowNote)
             {
                 if (TryGetPointerLocalPosition(hs.PointerId, out Vector2 pointerLocal))
@@ -305,38 +329,26 @@ public class NoteTouchJudgeSystem : MonoBehaviour
                     float dist = Vector2.Distance(pointerLocal, idealLocal);
                     if (dist > _touchRadius)
                     {
-                        // 곡선에서 벗어났다고 판단 -> 조기 해제 Miss
-                        hs.ReleasedEarly = true;
-                        PlayJudgeSFX(EJudgementType.RedStar);
-                        OnHoldJudgeResult?.Invoke(note, EJudgementType.RedStar, true);
-                        ApplyJudgeFinal(note, EJudgementType.RedStar);
-                        hs.Completed = true;
+                        // 라인에서 벗어난 순간을 "이 시점에 손을 뗀 것"처럼 취급
+                        hs.ReleasedEarly = songTick < endTick;
+                        FinalizeHoldByEnd(note, hs, songTick);
                         _tempFinalizeIds.Add(id);
                         continue;
                     }
                 }
             }
 
-            // 4) 아직 끝 Tick 전이면 계속 유지
+            // 3) 아직 끝 Tick 전이면 계속 유지
             if (songTick < endTick)
                 continue;
 
-            // 5) 끝 Tick 이후 → 종료 판정 (지금 코드처럼 diffEnd 기준으로 Blue/White/Yellow/Red)
-            int diffEnd = Mathf.Abs(endTick - songTick);
-            EJudgementType endJudge =
-                diffEnd <= _blueStarRange ? EJudgementType.BlueStar :
-                diffEnd <= _whiteStarRange ? EJudgementType.WhiteStar :
-                diffEnd <= _yellowStarRange ? EJudgementType.YellowStar :
-                EJudgementType.RedStar;
-
-            hs.Completed = true;
+            // 4) 끝 Tick을 지날 때까지 잘 버텼다면 → 무조건 Perfect
+            hs.ReleasedEarly = false;
+            FinalizeHoldByEnd(note, hs, songTick);
             _tempFinalizeIds.Add(id);
-
-            PlayJudgeSFX(endJudge);
-            OnHoldJudgeResult?.Invoke(note, endJudge, true);
-            ApplyJudgeFinal(note, endJudge);
         }
 
+        // 끝난 롱노트 정리
         for (int i = 0; i < _tempFinalizeIds.Count; i++)
         {
             RemoveHoldState(_tempFinalizeIds[i]);
@@ -406,20 +418,12 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             {
                 int songTick = _context.RTimeline.CurTick - _context.RTimeline.PreSongTicks;
                 int endTick = hs.EndTick;
-                
-                int diffEnd = Mathf.Abs(endTick - songTick);
-                EJudgementType endJudge =
-                    diffEnd <= _blueStarRange ? EJudgementType.BlueStar :
-                    diffEnd <= _whiteStarRange ? EJudgementType.WhiteStar :
-                    diffEnd <= _yellowStarRange ? EJudgementType.YellowStar :
-                                                  EJudgementType.RedStar;                
 
-                hs.ReleasedEarly = songTick < endTick; // 도착 전에 뗐는지 기록만 남겨둠
+                // EndTick 전에 뗐는지 여부 기록
+                hs.ReleasedEarly = songTick < endTick;
 
-                PlayJudgeSFX(endJudge);
-                OnHoldJudgeResult?.Invoke(hs.Note, endJudge, true);
-                ApplyJudgeFinal(hs.Note, endJudge);
-                hs.Completed = true;
+                // 여기서도 동일하게 EndTick 기준 판정
+                FinalizeHoldByEnd(hs.Note, hs, songTick);
 
                 RemoveHoldState(noteId);
             }

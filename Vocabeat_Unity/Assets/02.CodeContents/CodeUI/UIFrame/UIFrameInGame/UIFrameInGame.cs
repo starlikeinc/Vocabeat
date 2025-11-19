@@ -9,9 +9,9 @@ public class UIFrameInGame : UIFrameBase
     [Header("Scanline")]
     [SerializeField] private UIWidgetScanLine _widgetScanLine;
 
-    [Header("Spawner")]
-    [SerializeField] private UITemplateNoteSpawnerBase _noteNormalSpawner;
-    [SerializeField] private UITemplateNoteSpawnerBase _noteFlowHoldSpawner;
+    [Header("Spawners")]
+    [SerializeField] private UINoteNormalSpawner _noteNormalSpawner;
+    [SerializeField] private UINoteFlowHoldSpawner _noteFlowHoldSpawner;
 
     [Header("BG")]
     [SerializeField] private UIWidgetGameBG _widgetGameBG;
@@ -23,7 +23,7 @@ public class UIFrameInGame : UIFrameBase
     protected override void OnUIFrameInitialize()
     {
         base.OnUIFrameInitialize();
-        RegistEvents();        
+        RegistEvents();
     }
 
     private void RegistEvents()
@@ -43,12 +43,15 @@ public class UIFrameInGame : UIFrameBase
             _widgetScanLine.ResetPosition();
 
         // 노트 스폰 초기화 및 바인딩
-        if (_noteNormalSpawner != null && _curSongDataSO != null)
+        if (_noteNormalSpawner != null && _noteFlowHoldSpawner != null && _curSongDataSO != null)
         {
             var listNoteDatas = _curSongDataSO.NoteDatasByDiff[_songDiff];
 
             if (listNoteDatas != null)
+            {
                 _noteNormalSpawner.Setup(listNoteDatas);
+                _noteFlowHoldSpawner.Setup(listNoteDatas);
+            }                
         }
     }
 
@@ -60,12 +63,15 @@ public class UIFrameInGame : UIFrameBase
         // 노트 모두 정리
         if (_noteNormalSpawner != null)
             _noteNormalSpawner.ResetSpawner();
-    }    
+        if (_noteFlowHoldSpawner != null)
+            _noteFlowHoldSpawner.ResetSpawner();
+    }
 
     private void OnTickUpdate(float pageT)
     {
         _widgetScanLine.UpdateScanline(pageT);
         _noteNormalSpawner.TickUpdate();
+        _noteFlowHoldSpawner.TickUpdate();
     }
 
     // ========================================

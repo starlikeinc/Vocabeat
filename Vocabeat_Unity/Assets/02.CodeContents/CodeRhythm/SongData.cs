@@ -47,13 +47,6 @@ public class DiffNoteData
 }
 
 [Serializable]
-public class DiffFlowLongData
-{
-    public EDifficulty Diff;
-    public List<FlowLongMeta> FlowLongs = new();
-}
-
-[Serializable]
 public class FlowCurvePoint
 {
     public float t;   // A, B 사이 진행비율
@@ -62,9 +55,7 @@ public class FlowCurvePoint
 
 [Serializable]
 public class FlowLongMeta
-{
-    public int StartNoteID;
-    public int EndNoteID;
+{    
     public List<FlowCurvePoint> CurvePoints = new();
 }
 
@@ -79,4 +70,5 @@ public class Note
     public bool HasSibling;
     public int HoldTick;
     public int NextID;
+    public FlowLongMeta FlowLongMeta;
 }

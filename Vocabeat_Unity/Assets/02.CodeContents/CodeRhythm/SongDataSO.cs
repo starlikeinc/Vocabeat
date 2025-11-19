@@ -9,11 +9,9 @@ public class SongDataSO : ScriptableObject
     [SerializeField] private Sprite _songThumb;
     [SerializeField] private AudioCueSO _bgmCue;
 
-    [SerializeField] private List<DiffNoteData> _diffNotes = new();
-    [SerializeField] private List<DiffFlowLongData> _diffFlowLongs = new();
+    [SerializeField] private List<DiffNoteData> _diffNotes = new();    
 
-    private Dictionary<EDifficulty, List<Note>> _noteDatasByDiff;
-    private Dictionary<EDifficulty, List<FlowLongMeta>> _flowLongDatasByDiff;
+    private Dictionary<EDifficulty, List<Note>> _noteDatasByDiff;    
 
     public Dictionary<EDifficulty, List<Note>> NoteDatasByDiff
     {
@@ -23,16 +21,7 @@ public class SongDataSO : ScriptableObject
                 BuildNoteDataDict();
             return _noteDatasByDiff;
         }
-    }
-    public Dictionary<EDifficulty, List<FlowLongMeta>> FlowLongDatasByDiff
-    {
-        get
-        {
-            if (_flowLongDatasByDiff == null)
-                BuildFlowLongDataDict(); // 기존: BuildNoteDataDict()
-            return _flowLongDatasByDiff;
-        }
-    }
+    }    
 
     public string SongName => _songName;
     public int BPM => _bpm;
@@ -55,22 +44,6 @@ public class SongDataSO : ScriptableObject
                 _noteDatasByDiff.Add(noteData.Diff, noteData.Notes);
             else
                 _noteDatasByDiff[noteData.Diff] = noteData.Notes;
-        }
-    }
-
-    private void BuildFlowLongDataDict()
-    {
-        _flowLongDatasByDiff = new();
-
-        foreach(var flowLongData in _diffFlowLongs)
-        {
-            if (flowLongData == null)
-                continue;
-
-            if (!_flowLongDatasByDiff.ContainsKey(flowLongData.Diff))
-                _flowLongDatasByDiff.Add(flowLongData.Diff, flowLongData.FlowLongs);
-            else
-                _flowLongDatasByDiff[flowLongData.Diff] = flowLongData.FlowLongs;
         }
     }
 
@@ -102,37 +75,10 @@ public class SongDataSO : ScriptableObject
                 HasSibling = noteData.HasSibling,
                 HoldTick = noteData.HoldTick,
                 NextID = noteData.NextID,
+                FlowLongMeta = noteData.FlowLongMeta,
             });
         }
 
         BuildNoteDataDict();
-    }
-
-    public void SaveFlowLongDatas(EDifficulty diff, IList<FlowLongMeta> src)
-    {
-        var diffFlowLongData = _diffFlowLongs.Find(x => x.Diff == diff);
-
-        if(diffFlowLongData == null)
-        {
-            diffFlowLongData = new DiffFlowLongData { Diff = diff };
-            _diffFlowLongs.Add(diffFlowLongData);
-        }
-
-        if (diffFlowLongData.FlowLongs == null)
-            diffFlowLongData.FlowLongs = new();
-        else
-            diffFlowLongData.FlowLongs.Clear();
-
-        foreach(var flowLongData in src)
-        {
-            diffFlowLongData.FlowLongs.Add(new FlowLongMeta
-            {
-                StartNoteID = flowLongData.StartNoteID,
-                EndNoteID = flowLongData.EndNoteID,
-                CurvePoints = flowLongData.CurvePoints,
-            });
-        }
-
-        BuildFlowLongDataDict();
     }
 }
