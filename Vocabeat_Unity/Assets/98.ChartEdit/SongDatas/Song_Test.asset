@@ -19,10 +19,20 @@ MonoBehaviour:
   _diffNotes:
   - Diff: 0
     Notes:
-    - ID: 1
+    - ID: 0
       PageIndex: 0
       NoteType: 0
       Tick: 480
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+    - ID: 1
+      PageIndex: 0
+      NoteType: 0
+      Tick: 540
       Y: 0.5
       HasSibling: 0
       HoldTick: 0

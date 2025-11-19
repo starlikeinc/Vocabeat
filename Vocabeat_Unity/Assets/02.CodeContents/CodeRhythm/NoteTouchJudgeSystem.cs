@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class NoteTouchJudgeSystem : MonoBehaviour
@@ -264,6 +265,8 @@ public class NoteTouchJudgeSystem : MonoBehaviour
 
         hs.Completed = true;
 
+        Debug.Log($"<color=yellow>[{note.ID}]롱 노트 최종 판정: [{endJudge}]</color>");
+
         PlayJudgeSFX(endJudge);
         OnHoldJudgeResult?.Invoke(note, endJudge, true);
         ApplyJudgeFinal(note, endJudge);
@@ -302,7 +305,6 @@ public class NoteTouchJudgeSystem : MonoBehaviour
                 continue;
             }
 
-            // ✅ FlowHold(커브) 판정: Tick 기반 기대 위치와 거리 비교
             if (note.NoteType == ENoteType.FlowHold && note.HoldTick > 0)
             {
                 if (TryGetPointerLocalPosition(hs.PointerId, out Vector2 pointerLocal))
@@ -398,7 +400,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
                 int endTick = hs.EndTick;
 
                 hs.ReleasedEarly = songTick < endTick;
-
+                
                 FinalizeHoldByEnd(hs.Note, hs, songTick);
 
                 RemoveHoldState(noteId);
@@ -545,4 +547,63 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         // X는 Tick 기반, Y는 커브 기반
         return NoteUtility.GetNotePosition(_touchArea, clampedTick, y01);
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (!Application.isPlaying)
+            return;
+
+        if (_touchArea == null || _context == null || _context.RTimeline == null)
+            return;
+
+        var timeline = _context.RTimeline;
+        int songTick = timeline.CurTick - timeline.PreSongTicks;
+
+        Vector3 forward = Vector3.forward;
+        float radius = _touchRadius * _touchArea.lossyScale.x;
+
+        // ================================
+        // NORMAL 노트 판정 유효 범위 표시
+        // ================================
+        Handles.color = new Color(0.2f, 0.7f, 1f, 0.6f); // 파란색
+
+        if (_listNotes != null)
+        {
+            foreach (var note in _listNotes)
+            {
+                if (note == null) continue;
+                if (note.NoteType != ENoteType.Normal) continue;
+                if (_judgedNoteIds.Contains(note.ID)) continue;
+                if (_activeHoldStates.ContainsKey(note.ID)) continue;
+
+                // Normal은 GetExpectedLocalPositionForTap()
+                Vector2 idealLocal = GetExpectedLocalPositionForTap(note, songTick);
+                Vector3 world = _touchArea.TransformPoint(idealLocal);
+
+                Handles.DrawWireDisc(world, forward, radius);
+            }
+        }
+
+        // ================================
+        // FLOW HOLD 현재 진행 중 판정 범위
+        // ================================
+        Handles.color = new Color(1f, 0.2f, 0.2f, 0.6f); // 빨간색
+
+        foreach (var kv in _activeHoldStates)
+        {
+            HoldState hs = kv.Value;
+            if (hs.Completed) continue;
+
+            Note note = hs.Note;
+
+            // FlowHold 진행 중 기대 위치
+            Vector2 idealLocal = GetExpectedLocalPositionForHold(note, songTick);
+            Vector3 world = _touchArea.TransformPoint(idealLocal);
+
+            Handles.DrawWireDisc(world, forward, radius);
+        }
+    }
+#endif
+
 }
