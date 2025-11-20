@@ -1,6 +1,7 @@
-using System.Collections.Generic;
 using LUIZ.UI;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIFrameInGame : UIFrameBase
 {
@@ -14,8 +15,20 @@ public class UIFrameInGame : UIFrameBase
     [SerializeField] private UINoteNormalSpawner _noteNormalSpawner;
     [SerializeField] private UINoteFlowHoldSpawner _noteFlowHoldSpawner;
 
+    [Header("Top Info")]
+    [SerializeField] private Image _imgSongThumb;
+    [SerializeField] private TMP_Text _textSongName;
+    [SerializeField] private TMP_Text _textSongComposer;
+    [SerializeField] private UITemplateGameScore _templateGameScore;
+
     [Header("BG")]
     [SerializeField] private UIWidgetGameBG _widgetGameBG;
+
+    [Header("Song Progress")]
+    [SerializeField] private UIWidgetSongProgress _widgetSongProgress;    
+
+    [Header("PausePopup")]
+    [SerializeField] private UIWidgetPausePopup _widgetPausePopup;
 
     private SongDataSO _curSongDataSO;
     private EDifficulty _songDiff;
@@ -86,12 +99,39 @@ public class UIFrameInGame : UIFrameBase
         
         ManagerRhythm.Instance.BindSongData(_curSongDataSO, _songDiff, touchArea, uiCam);
 
-        _widgetGameBG.DoUIGameBGSetting(songDataSO.SongThumb, OnDimComplete);
+        SetGameTopInfo();
+        SetGameBG();
+        SetSongProgress();
+    }
+
+    // ========================================
+    private void SetGameTopInfo()
+    {
+        _imgSongThumb.overrideSprite = _curSongDataSO.SongThumb;
+        _textSongName.text = _curSongDataSO.SongName;
+
+        _templateGameScore.SetScore(0);
+    }
+
+    private void SetGameBG()
+    {
+        _widgetGameBG.DoUIGameBGSetting(_curSongDataSO.SongThumb, OnDimComplete);
+    }
+
+    private void SetSongProgress()
+    {
+        _widgetSongProgress.WidgetSongProgressSetting(_curSongDataSO.BGMCue.GetRandomClip());
     }
 
     // ========================================
     private void OnDimComplete()
     {
         ManagerRhythm.Instance.PlaySong();
+    }
+
+    // ========================================
+    public void OnGamePause()
+    {
+        _widgetPausePopup.DoUIWidgetShow();
     }
 }

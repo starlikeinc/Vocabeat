@@ -1,7 +1,11 @@
+using System;
 using UnityEngine;
 
 public class RhythmTimeline : MonoBehaviour
 {
+    public event Action<float> OnSongProgress;
+    public event Action OnSongComplete;
+
     [Header("BGM Channel")]
     [SerializeField] private BGMEventChannelSO _bgmEventChannel;
 
@@ -41,11 +45,16 @@ public class RhythmTimeline : MonoBehaviour
     private float _secPerBeat;
     private float _secPerTick;
 
+    private float _songTotalTime;
+    private bool _isCompleted;
+
     // ========================================            
     public void BindTimelineData(SongDataSO songDataSO)
     {
         _bgmEventChannel.Raise(songDataSO.BGMCue);
         _bpm = songDataSO.BPM;
+
+        _songTotalTime = songDataSO.BGMCue.GetRandomClip().length;
     }
 
     public void Play()
@@ -59,6 +68,7 @@ public class RhythmTimeline : MonoBehaviour
         SongTime = 0f;
         CurTick = 0;
         PageT = 0f;
+        _isCompleted = false;
 
         if (_bgmEventChannel)
         {
@@ -81,6 +91,7 @@ public class RhythmTimeline : MonoBehaviour
         SongTime = 0f;
         CurTick = 0;
         PageT = 0f;
+        _isCompleted = false;
     }
 
     public void UpdateTimeline()
@@ -98,11 +109,23 @@ public class RhythmTimeline : MonoBehaviour
         float songTime = TimelineTime - preSongSec;
         if (songTime < 0f) songTime = 0f;
         SongTime = songTime;
+        OnSongProgress?.Invoke(SongTime);
 
         // 스캔라인용 PageT
         int pageIndex = CurTick / _ticksPerPage;
         int pageTick = CurTick % _ticksPerPage;
         PageT = (float)pageTick / _ticksPerPage;
+
+        if (!_isCompleted && _songTotalTime > 0f && SongTime >= _songTotalTime)
+        {
+            _isCompleted = true;
+            _playing = false;
+
+            if (_bgmEventChannel)
+                _bgmEventChannel.StopAudio();
+
+            OnSongComplete?.Invoke();
+        }
     }
 
     // ========================================        

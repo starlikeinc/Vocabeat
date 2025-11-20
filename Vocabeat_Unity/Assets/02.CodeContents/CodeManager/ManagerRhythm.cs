@@ -26,6 +26,18 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     // ========================================        
     private int _nextBeatIndex; // Editor 전용
 
+    private void Awake()
+    {
+        if (RTimeline != null)
+            RTimeline.OnSongComplete += HandleSongComplete;
+    }
+
+    private void OnDestroy()
+    {
+        if (RTimeline != null)
+            RTimeline.OnSongComplete -= HandleSongComplete;
+    }
+
     private void Update()
     {
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
@@ -85,6 +97,11 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
             _metronomSrc.Play();
             _nextBeatIndex++;
         }
+    }
+
+    private void HandleSongComplete()
+    {
+        OnSongEnded?.Invoke();
     }
 
     // ========================================

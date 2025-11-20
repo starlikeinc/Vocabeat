@@ -7,13 +7,21 @@ public class UIWidgetScanLine : UIWidgetBase
     [SerializeField] private RectTransform ScanLine;    
 
     private float _leftX;
-    private float _rightX;    
+    private float _rightX;
 
+    private bool _isMoveLine;
+
+    // ========================================        
     protected override void OnUIWidgetInitialize(UIFrameBase parentFrame)
     {
         base.OnUIWidgetInitialize(parentFrame);
+        ManagerRhythm.Instance.OnSongStarted -= HandleInitScanline;
+        ManagerRhythm.Instance.OnSongStarted += HandleInitScanline;
+        ManagerRhythm.Instance.OnSongEnded -= HandleClearScanline;
+        ManagerRhythm.Instance.OnSongEnded += HandleClearScanline;
     }
 
+    // ========================================        
     private void Awake()
     {
         if (ScanLine == null) return;
@@ -25,12 +33,22 @@ public class UIWidgetScanLine : UIWidgetBase
         _rightX = width * 0.5f;
     }
 
+    // ========================================        
     public void UpdateScanline(float pageT)
     {
+        if (!_isMoveLine)
+            return;
+
         SetPageProgress(pageT);
+    }    
+
+    public void ResetPosition()
+    {
+        SetPageProgress(0f);
     }
 
-    public void SetPageProgress(float pageT)
+    // ========================================        
+    private void SetPageProgress(float pageT)
     {
         float t = Mathf.Clamp01(pageT);
         var pos = ScanLine.anchoredPosition;
@@ -38,8 +56,16 @@ public class UIWidgetScanLine : UIWidgetBase
         ScanLine.anchoredPosition = pos;
     }
 
-    public void ResetPosition()
+    private void HandleInitScanline()
     {
-        SetPageProgress(0f);
+        _isMoveLine = true;
+        ResetPosition();
+        DoUIWidgetShow();
+    }
+
+    private void HandleClearScanline()
+    {
+        _isMoveLine = false;
+        DoUIWidgetHide();
     }
 }

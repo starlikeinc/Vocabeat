@@ -14,63 +14,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: VHierarchy::VHierarchy.VHierarchyData
   sceneDatas_byGuid:
     keys:
-    - 76f687f49b2c5b345a836c365c2e96e6
-    - 736bd84aa25186c42879685f67200dee
-    - 8edcccb5b33d23644ac3c672f40b7ba4
+    - 0135c8f5ead72004cad25a6194f995b6
     values:
     - goDatas_byGlobalId:
         keys:
-        - globalObjectIdString: GlobalObjectId_V1-2-76f687f49b2c5b345a836c365c2e96e6-809374470-0
-        - globalObjectIdString: GlobalObjectId_V1-2-76f687f49b2c5b345a836c365c2e96e6-427346452-0
-        - globalObjectIdString: GlobalObjectId_V1-2-76f687f49b2c5b345a836c365c2e96e6-2001583709-0
-        - globalObjectIdString: GlobalObjectId_V1-2-76f687f49b2c5b345a836c365c2e96e6-1263624916-0
+        - globalObjectIdString: GlobalObjectId_V1-1-0135c8f5ead72004cad25a6194f995b6-4001107393652542878-0
+        - globalObjectIdString: GlobalObjectId_V1-1-0135c8f5ead72004cad25a6194f995b6-7293213314602281668-0
+        - globalObjectIdString: GlobalObjectId_V1-1-0135c8f5ead72004cad25a6194f995b6-8871148680634869745-0
+        - globalObjectIdString: GlobalObjectId_V1-1-0135c8f5ead72004cad25a6194f995b6-5257586690305207321-0
+        - globalObjectIdString: GlobalObjectId_V1-1-0135c8f5ead72004cad25a6194f995b6-2239284769739836962-0
+        - globalObjectIdString: GlobalObjectId_V1-1-0135c8f5ead72004cad25a6194f995b6-6531364732368586530-0
+        - globalObjectIdString: GlobalObjectId_V1-1-0135c8f5ead72004cad25a6194f995b6-9036513844798965059-0
         values:
         - colorIndex: 2
-          iconNameOrGuid: Settings Icon
+          iconNameOrGuid: 
           isIconRecursive: 0
           isColorRecursive: 1
-        - colorIndex: 5
-          iconNameOrGuid: BoxCollider Icon
-          isIconRecursive: 1
-          isColorRecursive: 1
-        - colorIndex: 0
-          iconNameOrGuid: Canvas Icon
-          isIconRecursive: 1
-          isColorRecursive: 0
-        - colorIndex: 0
-          iconNameOrGuid: Camera Icon
-          isIconRecursive: 1
-          isColorRecursive: 0
-    - goDatas_byGlobalId:
-        keys:
-        - globalObjectIdString: GlobalObjectId_V1-2-736bd84aa25186c42879685f67200dee-920324635-0
-        - globalObjectIdString: GlobalObjectId_V1-2-736bd84aa25186c42879685f67200dee-1810767873-0
-        - globalObjectIdString: GlobalObjectId_V1-2-736bd84aa25186c42879685f67200dee-948091467-0
-        values:
-        - colorIndex: 4
-          iconNameOrGuid: BoxCollider Icon
-          isIconRecursive: 1
+        - colorIndex: 2
+          iconNameOrGuid: 
+          isIconRecursive: 0
           isColorRecursive: 1
         - colorIndex: 3
-          iconNameOrGuid: Settings Icon
-          isIconRecursive: 1
+          iconNameOrGuid: 
+          isIconRecursive: 0
           isColorRecursive: 1
-        - colorIndex: 0
-          iconNameOrGuid: PreMatCylinder
-          isIconRecursive: 1
-          isColorRecursive: 0
-    - goDatas_byGlobalId:
-        keys:
-        - globalObjectIdString: GlobalObjectId_V1-1-8edcccb5b33d23644ac3c672f40b7ba4-6003354848903301388-0
-        - globalObjectIdString: GlobalObjectId_V1-1-8edcccb5b33d23644ac3c672f40b7ba4-2117760291160645544-0
-        values:
-        - colorIndex: 4
-          iconNameOrGuid: BoxCollider Icon
-          isIconRecursive: 1
+        - colorIndex: 3
+          iconNameOrGuid: 
+          isIconRecursive: 0
           isColorRecursive: 1
-        - colorIndex: 7
-          iconNameOrGuid: AudioSource Icon
-          isIconRecursive: 1
+        - colorIndex: 2
+          iconNameOrGuid: 
+          isIconRecursive: 0
+          isColorRecursive: 1
+        - colorIndex: 2
+          iconNameOrGuid: 
+          isIconRecursive: 0
+          isColorRecursive: 1
+        - colorIndex: 3
+          iconNameOrGuid: 
+          isIconRecursive: 0
           isColorRecursive: 1
   bookmarks: []
   bookmarkedScenePaths: []
