@@ -20,6 +20,7 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     public RhythmTimeline RTimeline => _rTimeline;
     public NoteTouchJudgeSystem NoteJudegeSystem => _noteJudgeSystem;
 
+    public SongDataSO CurSongDataSO { get; private set; }
     public int CurrentScore
     {
         get => _currentScore;
@@ -31,8 +32,8 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
         }
     }
     private int _currentScore;
+    
 
-    private SongDataSO _curSongDataSO;
     private EDifficulty _curDiff;
 
     public bool IsPlaying => _rTimeline.IsPlaying;
@@ -128,7 +129,7 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
 
     public void BindSongData(SongDataSO songDataSO, EDifficulty diff, RectTransform touchArea, Camera uiCam)
     {
-        _curSongDataSO = songDataSO;
+        CurSongDataSO = songDataSO;
         _curDiff = diff;
 
         RTimeline.BindTimelineData(songDataSO);

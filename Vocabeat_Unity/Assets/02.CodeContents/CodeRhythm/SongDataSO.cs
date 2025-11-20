@@ -7,6 +7,7 @@ public class SongDataSO : ScriptableObject
     [SerializeField] private string _songName;
     [SerializeField] private int _bpm;
     [SerializeField] private Sprite _songThumb;
+    [SerializeField] private Sprite _songBG;
     [SerializeField] private AudioCueSO _bgmCue;
 
     [SerializeField] private List<DiffNoteData> _diffNotes = new();    
@@ -26,6 +27,7 @@ public class SongDataSO : ScriptableObject
     public string SongName => _songName;
     public int BPM => _bpm;
     public Sprite SongThumb => _songThumb;
+    public Sprite SongBG => _songBG;
     public AudioCueSO BGMCue => _bgmCue;
 
     public List<DiffNoteData> DiffNotes => _diffNotes;

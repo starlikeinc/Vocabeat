@@ -134,6 +134,13 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         _tempMissCandidates.Clear();
     }
 
+    public int GetJudgeCountByType(EJudgementType judgeType)
+    {
+        if (!_dictNoteJudgementCounts.TryGetValue(judgeType, out int count))
+            Debug.LogError($"{judgeType} 에 해당하는 판정 횟수 없음");
+        return count;
+    }
+
     // ========================================
     private void TryTouchNoteFromPointer(Vector2 screenPos, int pointerId)
     {

@@ -46,8 +46,8 @@ public class UIFrameInGame : UIFrameBase
         ManagerRhythm.Instance.OnTickUpdate += OnTickUpdate;
         ManagerRhythm.Instance.OnSongStarted -= StartSong;
         ManagerRhythm.Instance.OnSongStarted += StartSong;
-        ManagerRhythm.Instance.OnSongEnded -= StopSong;
-        ManagerRhythm.Instance.OnSongEnded += StopSong;
+        ManagerRhythm.Instance.OnSongEnded -= EndSong;
+        ManagerRhythm.Instance.OnSongEnded += EndSong;
     }
 
     private void StartSong()
@@ -69,7 +69,7 @@ public class UIFrameInGame : UIFrameBase
         }
     }
 
-    private void StopSong()
+    private void EndSong()
     {
         if (_widgetScanLine != null)
             _widgetScanLine.ResetPosition();
@@ -79,6 +79,12 @@ public class UIFrameInGame : UIFrameBase
             _noteNormalSpawner.ResetSpawner();
         if (_noteFlowHoldSpawner != null)
             _noteFlowHoldSpawner.ResetSpawner();
+
+        UIChannel.UIShow<UIFrameBlinder>().BlindWithNextStep(() =>
+        {
+            UIChannel.UIHide<UIFrameInGame>();
+            UIChannel.UIShow<UIFrameResult>();
+        });
     }
 
     private void OnTickUpdate(float pageT)
