@@ -76,6 +76,9 @@ public class RhythmTimeline : MonoBehaviour
         PageT = 0f;
         _isCompleted = false;
 
+        _accumulatedPauseDuration = 0;
+        _paused = false;
+
         if (_bgmEventChannel)
         {
             double songStartDsp = _timelineStartDsp + preSongSec;
@@ -119,6 +122,8 @@ public class RhythmTimeline : MonoBehaviour
     public void Stop()
     {
         _playing = false;
+        _paused = false;
+        _accumulatedPauseDuration = 0;
 
         if (_bgmEventChannel)
             _bgmEventChannel.StopAudio();

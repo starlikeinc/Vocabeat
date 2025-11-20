@@ -5,6 +5,7 @@ using UnityEngine;
 public class SongDataSO : ScriptableObject
 {
     [SerializeField] private string _songName;
+    [SerializeField] private string _songComposer;
     [SerializeField] private int _bpm;
     [SerializeField] private Sprite _songThumb;
     [SerializeField] private Sprite _songBG;
@@ -25,6 +26,7 @@ public class SongDataSO : ScriptableObject
     }    
 
     public string SongName => _songName;
+    public string SongComposer => _songComposer;
     public int BPM => _bpm;
     public Sprite SongThumb => _songThumb;
     public Sprite SongBG => _songBG;

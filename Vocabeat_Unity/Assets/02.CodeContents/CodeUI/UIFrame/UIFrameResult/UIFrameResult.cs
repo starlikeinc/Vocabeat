@@ -109,4 +109,16 @@ public class UIFrameResult : UIFrameBase
         Debug.LogError($"{rank} 에 해당하는 데이터가 없습니다.");
         return null;
     }
+
+    // ========================================            
+    public void OnRetry()
+    {
+        UIChannel.UIHide<UIFrameResult>();
+        ManagerRhythm.Instance.RetrySong();
+    }
+
+    public void OnResume()
+    {
+        Debug.Log("Resume");
+    }
 }

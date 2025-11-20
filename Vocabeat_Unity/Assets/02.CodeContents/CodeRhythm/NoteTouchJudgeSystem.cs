@@ -137,7 +137,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
     public int GetJudgeCountByType(EJudgementType judgeType)
     {
         if (!_dictNoteJudgementCounts.TryGetValue(judgeType, out int count))
-            Debug.LogError($"{judgeType} 에 해당하는 판정 횟수 없음");
+            Debug.LogWarning($"{judgeType} 에 해당하는 판정 횟수 없음");
         return count;
     }
 

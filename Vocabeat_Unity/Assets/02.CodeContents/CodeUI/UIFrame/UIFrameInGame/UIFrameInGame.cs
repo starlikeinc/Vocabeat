@@ -44,10 +44,22 @@ public class UIFrameInGame : UIFrameBase
     {
         ManagerRhythm.Instance.OnTickUpdate -= OnTickUpdate;
         ManagerRhythm.Instance.OnTickUpdate += OnTickUpdate;
+        ManagerRhythm.Instance.OnSongBinded -= OnSongDataBinded;
+        ManagerRhythm.Instance.OnSongBinded += OnSongDataBinded;
         ManagerRhythm.Instance.OnSongStarted -= StartSong;
         ManagerRhythm.Instance.OnSongStarted += StartSong;
         ManagerRhythm.Instance.OnSongEnded -= EndSong;
         ManagerRhythm.Instance.OnSongEnded += EndSong;
+    }
+
+    private void OnSongDataBinded()
+    {
+        if(!UIChannel.IsUIFrameShow<UIFrameInGame>())
+            UIChannel.UIShow<UIFrameInGame>();
+
+        SetGameTopInfo();
+        SetGameBG();
+        SetSongProgress();
     }
 
     private void StartSong()
@@ -83,7 +95,7 @@ public class UIFrameInGame : UIFrameBase
         UIChannel.UIShow<UIFrameBlinder>().BlindWithNextStep(() =>
         {
             UIChannel.UIHide<UIFrameInGame>();
-            UIChannel.UIShow<UIFrameResult>();
+            UIChannel.UIShow<UIFrameResult>().DoFrameResultSetting();
         });
     }
 
@@ -103,11 +115,7 @@ public class UIFrameInGame : UIFrameBase
         RectTransform touchArea = (RectTransform)_widgetScanLine.transform;
         Camera uiCam = ManagerUI.Instance.GetRootCanvas().worldCamera;
         
-        ManagerRhythm.Instance.BindSongData(_curSongDataSO, _songDiff, touchArea, uiCam);
-
-        SetGameTopInfo();
-        SetGameBG();
-        SetSongProgress();
+        ManagerRhythm.Instance.BindSongData(_curSongDataSO, _songDiff, touchArea, uiCam);        
     }
 
     // ========================================
@@ -115,8 +123,6 @@ public class UIFrameInGame : UIFrameBase
     {
         _imgSongThumb.overrideSprite = _curSongDataSO.SongThumb;
         _textSongName.text = _curSongDataSO.SongName;
-
-        _templateGameScore.SetScore(0);
     }
 
     private void SetGameBG()

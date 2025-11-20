@@ -5,8 +5,9 @@ using UnityEngine;
 public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
 {    
     public event Action<float> OnTickUpdate;
+    public event Action OnSongBinded;
     public event Action OnSongStarted;
-    public event Action OnSongEnded;
+    public event Action OnSongEnded;    
 
     public event Action<int> OnScoreChanged;
 
@@ -28,15 +29,18 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
         {
             int prevScore = _currentScore;
             _currentScore = Mathf.Clamp(prevScore + value, 0, int.MaxValue);
-            OnScoreChanged?.Invoke(prevScore);
+            OnScoreChanged?.Invoke(_currentScore);
         }
     }
-    private int _currentScore;
-    
-
-    private EDifficulty _curDiff;
-
     public bool IsPlaying => _rTimeline.IsPlaying;
+
+    private SongDataSO _lastSongData;
+    private EDifficulty _lastDiff;
+    private RectTransform _touchArea;
+    private Camera _uiCam;
+    private bool _hasBindContext;
+
+    private int _currentScore;    
 
     // ========================================        
     private int _nextBeatIndex; // Editor 전용
@@ -83,7 +87,7 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
         if (_rTimeline == null) return;
 
         if (_noteJudgeSystem != null) _noteJudgeSystem.ResetForNewSong();
-        _nextBeatIndex = 0; // 추가
+        _nextBeatIndex = 0;
 
         _rTimeline.Play();
         OnSongStarted?.Invoke();       
@@ -96,7 +100,7 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
         _rTimeline.Stop();
         if (_metronomSrc != null) _metronomSrc.Stop();
         if (_noteJudgeSystem != null) _noteJudgeSystem.ResetForNewSong();
-        _nextBeatIndex = 0; // 추가
+        _nextBeatIndex = 0;
 
         OnSongEnded?.Invoke();
     }
@@ -121,6 +125,14 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
         OnSongEnded?.Invoke();
     }
 
+    private void ClearSong()
+    {
+        CurSongDataSO = null;
+        _currentScore = 0;
+        OnScoreChanged?.Invoke(_currentScore);
+        _nextBeatIndex = 0;
+    }
+
     // ========================================
     public bool IsInitialized()
     {
@@ -130,7 +142,11 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     public void BindSongData(SongDataSO songDataSO, EDifficulty diff, RectTransform touchArea, Camera uiCam)
     {
         CurSongDataSO = songDataSO;
-        _curDiff = diff;
+
+        _lastSongData = songDataSO;
+        _lastDiff = diff;
+        _touchArea = touchArea;
+        _uiCam = uiCam;
 
         RTimeline.BindTimelineData(songDataSO);
 
@@ -138,14 +154,22 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
         
         var listNoteDatas = songDataSO.NoteDatasByDiff[diff];
         NoteJudegeSystem.BindJudgementNoteDatas(listNoteDatas);
+
+        OnSongBinded?.Invoke();
+
+        _currentScore = 0;
+        OnScoreChanged?.Invoke(_currentScore);
+        _nextBeatIndex = 0;
     }
 
     public void PlaySong()
     {
         if (_rTimeline == null) return;
 
-        if (_noteJudgeSystem != null) _noteJudgeSystem.ResetForNewSong();
-        _nextBeatIndex = 0; // 추가
+        if (_noteJudgeSystem != null)
+            _noteJudgeSystem.ResetForNewSong();
+
+        _nextBeatIndex = 0;
 
         _rTimeline.Play();
         OnSongStarted?.Invoke();
@@ -163,12 +187,23 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
 
     public void RetrySong()
     {
+        if (_rTimeline == null) return;
 
+        _rTimeline.Stop();
+        if (_metronomSrc != null)
+            _metronomSrc.Stop();
+
+        if (_noteJudgeSystem != null)
+            _noteJudgeSystem.ResetForNewSong();
+
+        ClearSong();
+        BindSongData(_lastSongData, _lastDiff, _touchArea, _uiCam);
+        PlaySong();
     }
 
     public void ExitSong()
     {
-
+        ClearSong();
     }
 
     // ======================================== 점수관련 - 어차피 기획 상 따로 저장 안 하는 거 같아서 그냥 여기다 함
