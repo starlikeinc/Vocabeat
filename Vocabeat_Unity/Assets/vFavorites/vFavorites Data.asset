@@ -50,6 +50,14 @@ MonoBehaviour:
       isFolder: 0
       isAsset: 1
       _id: 1058817467
+    - globalId:
+        globalObjectIdString: GlobalObjectId_V1-3-aa99d383f3d933040a17b40ae26af2c8-11400000-0
+      _typeString: SongDataSO, CodeContents, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      _obj: {fileID: 11400000, guid: aa99d383f3d933040a17b40ae26af2c8, type: 2}
+      isSceneGameObject: 0
+      isFolder: 0
+      isAsset: 1
+      _id: 1061023143
     name: Page 1
     _id: 1060948013
   - items: []

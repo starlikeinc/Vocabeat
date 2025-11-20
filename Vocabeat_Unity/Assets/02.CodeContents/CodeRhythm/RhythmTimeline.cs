@@ -38,12 +38,18 @@ public class RhythmTimeline : MonoBehaviour
     public int PreSongTicks => _preSongTicks;
 
     public bool IsPlaying => _playing;
+    public bool IsPaused => _paused;
 
     private double _timelineStartDsp;
     private bool _playing;
+    private bool _paused;
+
     private float _bpm;
     private float _secPerBeat;
     private float _secPerTick;
+
+    private double _pauseDspTime;             // Pause 눌렀던 시점의 dspTime
+    private double _accumulatedPauseDuration; // 지금까지 Pause로 멈춰있던 총 시간
 
     private float _songTotalTime;
     private bool _isCompleted;
@@ -80,6 +86,36 @@ public class RhythmTimeline : MonoBehaviour
         _playing = true;
     }
 
+    public void Pause()
+    {
+        if (!_playing || _paused)
+            return;
+
+        _paused = true;
+        _playing = false;
+
+        _pauseDspTime = AudioSettings.dspTime;
+
+        if (_bgmEventChannel)
+            _bgmEventChannel.PauseAudio();
+    }
+
+    public void Resume()
+    {
+        if (_playing || !_paused)
+            return;
+
+        double now = AudioSettings.dspTime;
+        // 이번에 멈춰있던 구간 시간 추가
+        _accumulatedPauseDuration += (now - _pauseDspTime);
+
+        _paused = false;
+        _playing = true;
+
+        if (_bgmEventChannel)
+            _bgmEventChannel.ResumeAudio();
+    }
+
     public void Stop()
     {
         _playing = false;
@@ -101,7 +137,9 @@ public class RhythmTimeline : MonoBehaviour
         double now = AudioSettings.dspTime;
 
         // 타임라인 전체 시간 (프리롤 포함) 
-        TimelineTime = (float)(now - _timelineStartDsp);
+        TimelineTime = (float)(now - _timelineStartDsp - _accumulatedPauseDuration);
+        if (TimelineTime < 0f) TimelineTime = 0f;
+
         CurTick = Mathf.FloorToInt(TimelineTime / _secPerTick);
 
         // 곡(오디오) 기준 시간 = 전체 시간 - 프리롤
@@ -124,6 +162,7 @@ public class RhythmTimeline : MonoBehaviour
             if (_bgmEventChannel)
                 _bgmEventChannel.StopAudio();
 
+            Debug.Log($"<color=green>곡 종료</color>");
             OnSongComplete?.Invoke();
         }
     }

@@ -8,6 +8,8 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     public event Action OnSongStarted;
     public event Action OnSongEnded;
 
+    public event Action<int> OnScoreChanged;
+
     [Header("Refs")]
     [SerializeField] private RhythmTimeline _rTimeline;
     [SerializeField] private NoteTouchJudgeSystem _noteJudgeSystem;
@@ -18,6 +20,18 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     public RhythmTimeline RTimeline => _rTimeline;
     public NoteTouchJudgeSystem NoteJudegeSystem => _noteJudgeSystem;
 
+    public int CurrentScore
+    {
+        get => _currentScore;
+        set
+        {
+            int prevScore = _currentScore;
+            _currentScore = Mathf.Clamp(prevScore + value, 0, int.MaxValue);
+            OnScoreChanged?.Invoke(prevScore);
+        }
+    }
+    private int _currentScore;
+
     private SongDataSO _curSongDataSO;
     private EDifficulty _curDiff;
 
@@ -26,14 +40,16 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     // ========================================        
     private int _nextBeatIndex; // Editor 전용
 
-    private void Awake()
+    protected override void OnUnityAwake()
     {
+        base.OnUnityAwake();
         if (RTimeline != null)
             RTimeline.OnSongComplete += HandleSongComplete;
     }
 
-    private void OnDestroy()
+    protected override void OnUnityDestroy()
     {
+        base.OnUnityDestroy();
         if (RTimeline != null)
             RTimeline.OnSongComplete -= HandleSongComplete;
     }
@@ -136,7 +152,7 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
 
     public void PauseSong()
     {
-
+        RTimeline.Pause();
     }
 
     public void ResumeSong()
@@ -152,5 +168,12 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     public void ExitSong()
     {
 
-    }    
+    }
+
+    // ======================================== 점수관련 - 어차피 기획 상 따로 저장 안 하는 거 같아서 그냥 여기다 함
+    public void SetScoreValueByJudgeType(EJudgementType judgeType)
+    {
+        int getPoint = GameConstant.GetPointByJudgement(judgeType);
+        CurrentScore = getPoint; // 프로퍼티에서 prev + getPoint 해둠
+    }
 }

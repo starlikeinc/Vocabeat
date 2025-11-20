@@ -21,6 +21,10 @@ public abstract class AudioPlayerBase : MonoBehaviour
         {
             _eventChannel.OnEventRaised += OnAudioEvent;
             _eventChannel.OnEventStop += OnAudioStop;
+
+            _eventChannel.OnEventPause += OnAudioPause;
+            _eventChannel.OnEventResume += OnAudioResume;
+
             OnBaseChannelEnable();
         }            
     }
@@ -31,6 +35,10 @@ public abstract class AudioPlayerBase : MonoBehaviour
         {
             _eventChannel.OnEventRaised -= OnAudioEvent;
             _eventChannel.OnEventStop -= OnAudioStop;
+
+            _eventChannel.OnEventPause -= OnAudioPause;
+            _eventChannel.OnEventResume -= OnAudioResume;
+
             OnBaseChannelDisable();
         }            
     }
@@ -40,4 +48,6 @@ public abstract class AudioPlayerBase : MonoBehaviour
 
     protected abstract void OnAudioEvent(AudioCueSO cue);    
     protected abstract void OnAudioStop();
+    protected abstract void OnAudioPause();
+    protected abstract void OnAudioResume();
 }

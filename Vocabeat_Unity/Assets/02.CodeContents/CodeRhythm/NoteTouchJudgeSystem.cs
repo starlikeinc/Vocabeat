@@ -490,6 +490,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
     {
         Debug.Log($"[{note.ID}]노트 판정: [{type}]");
         _judgedNoteIds.Add(note.ID);
+        _context.SetScoreValueByJudgeType(type);
         OnJudgeResult?.Invoke(note, type);
     }
 

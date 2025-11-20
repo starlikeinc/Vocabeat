@@ -132,6 +132,7 @@ public class UIFrameInGame : UIFrameBase
     // ========================================
     public void OnGamePause()
     {
+        ManagerRhythm.Instance.PauseSong();
         _widgetPausePopup.DoUIWidgetShow();
     }
 }

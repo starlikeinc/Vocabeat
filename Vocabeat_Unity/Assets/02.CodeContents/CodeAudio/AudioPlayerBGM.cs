@@ -42,6 +42,18 @@ public class AudioPlayerBGM : AudioPlayerBase
         _audioSource.Stop();
     }   
 
+    protected override void OnAudioPause()
+    {
+        if (_audioSource != null && _audioSource.isPlaying)
+            _audioSource.Pause();        
+    }
+
+    protected override void OnAudioResume()
+    {
+        if (_audioSource != null)
+            _audioSource.UnPause();
+    }
+
     private void OnPlayScheduled(double time)
     {
         if(time == 0)

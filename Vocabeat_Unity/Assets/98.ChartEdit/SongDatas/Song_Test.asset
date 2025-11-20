@@ -57,3 +57,43 @@ MonoBehaviour:
           y01: 0
         - t: 1
           y01: 0.25
+    - ID: 3
+      PageIndex: 2
+      NoteType: 0
+      Tick: 2160
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+    - ID: 4
+      PageIndex: 2
+      NoteType: 0
+      Tick: 2320
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+    - ID: 5
+      PageIndex: 2
+      NoteType: 0
+      Tick: 2440
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+    - ID: 6
+      PageIndex: 2
+      NoteType: 0
+      Tick: 2560
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
