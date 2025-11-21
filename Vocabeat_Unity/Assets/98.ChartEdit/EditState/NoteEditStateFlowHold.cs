@@ -29,6 +29,20 @@ public class NoteEditStateFlowHold : NoteEditStateBase
         _subState.OnEnter();
     }
 
+    public override void UpdateGhost()
+    {
+        var ghost = _context.Visualizer.GetGhost();
+        if (ghost == null) return;
+
+        // Place 모드
+        if (_subState is NoteEditFlowHoldPlaceState)
+            ghost.NoteEditVisualSetting(ENoteType.FlowHold);
+
+        // Curve 모드
+        else if (_subState is NoteEditFlowHoldCurveState)
+            ghost.NoteEditVisualSetting(ENoteType.FlowHold);
+    }
+
     private void HandleInputRightClick()
     {
         if (Input.GetMouseButtonDown(1))

@@ -135,7 +135,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1903220227
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &7774926324617553900
@@ -179,7 +179,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5538cca716474847b0d624366cd3a55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CodeContents::UIFrameBlinder
-  OrderType: 1
+  OrderType: 2
+  _eventChannel: {fileID: 0}
+  _audioCue: {fileID: 0}
   _blinder: {fileID: 7814744451316946420}
   _duration: 1
   _blindWait: 0.5

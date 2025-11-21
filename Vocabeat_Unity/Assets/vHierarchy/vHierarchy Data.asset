@@ -16,6 +16,7 @@ MonoBehaviour:
     keys:
     - 0135c8f5ead72004cad25a6194f995b6
     - 736bd84aa25186c42879685f67200dee
+    - 76f687f49b2c5b345a836c365c2e96e6
     values:
     - goDatas_byGlobalId:
         keys:
@@ -61,6 +62,14 @@ MonoBehaviour:
         values:
         - colorIndex: 2
           iconNameOrGuid: Settings Icon
+          isIconRecursive: 1
+          isColorRecursive: 1
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-2-76f687f49b2c5b345a836c365c2e96e6-809374470-0
+        values:
+        - colorIndex: 2
+          iconNameOrGuid: BoxCollider Icon
           isIconRecursive: 1
           isColorRecursive: 1
   bookmarks: []

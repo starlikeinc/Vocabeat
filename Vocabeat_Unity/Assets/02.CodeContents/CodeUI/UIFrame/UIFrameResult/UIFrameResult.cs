@@ -16,6 +16,10 @@ public class UIFrameResult : UIFrameBase
         public Sprite RankSprite;
     }
 
+    [Header("Result BGM")]
+    [SerializeField] private BGMEventChannelSO _eventChannel;
+    [SerializeField] private AudioCueSO _audioCue;
+
     [Header("판정 횟수")]
     [SerializeField] private TMP_Text _textBlueStarCount;
     [SerializeField] private TMP_Text _textWhiteStarCount;
@@ -49,6 +53,9 @@ public class UIFrameResult : UIFrameBase
     // ========================================            
     public void DoFrameResultSetting()
     {
+        _eventChannel.Raise(_audioCue);
+        _eventChannel.PlayScheduled(0);
+
         SetJudgementCount();
         SetPointAndRank();
         SetImages();

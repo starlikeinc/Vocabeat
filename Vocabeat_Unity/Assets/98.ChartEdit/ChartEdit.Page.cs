@@ -3,6 +3,57 @@ using UnityEngine;
 
 public partial class ChartEdit
 {
+    private float _secPerBeat;
+    private float _secPerTick;
+
+    // Timeline 세팅 (곡 로딩할 때 호출하면 좋음)
+    private void SetupTiming()
+    {
+        float bpm = TargetSongData.BPM;
+        _secPerBeat = 60f / bpm;
+        _secPerTick = _secPerBeat / 240f; // Tick당 시간 (현재 시스템 기준)
+    }
+
+    private void UpdateScanlineByMusic()
+    {
+        if (_bgmAudioSource == null || !_bgmAudioSource.isPlaying)
+            return;
+
+        if (_visualizer == null || _scanline == null)
+            return;
+
+        float time = _bgmAudioSource.time;
+        int curTick = Mathf.FloorToInt(time / _secPerTick);
+
+        int ticksPerPage = _visualizer.TicksPerPage;
+
+        // 🔥 재생 시작 기준 상대 Tick
+        int relativeTick = curTick - _playStartPageTick;
+        if (relativeTick < 0)
+            relativeTick = 0;
+
+        // 🔥 페이지 계산은 절대 Tick 기반 유지
+        int newPage = Mathf.FloorToInt((float)curTick / ticksPerPage);
+
+        if (newPage >= _pageCount)
+            _pageCount = newPage + 1;
+
+        if (newPage != _currentPageIndex)
+        {
+            _currentPageIndex = Mathf.Clamp(newPage, 0, _pageCount - 1);
+            RefreshPageView();
+        }
+
+        // 🔥 페이지 시작 Tick을 "재생 기준 상대 좌표계"로 변환
+        int startTickOfPage = (_currentPageIndex * ticksPerPage) - _playStartPageTick;
+        int localTick = relativeTick - startTickOfPage;
+        localTick = Mathf.Max(localTick, 0);
+
+        float t = Mathf.Clamp01((float)localTick / ticksPerPage);
+
+        _scanline.SetProgress(t);
+    }
+
     private void RecalculatePageCount()
     {
         if (!EditNotesDict.TryGetValue(_currentDifficulty, out var list)
@@ -60,6 +111,8 @@ public partial class ChartEdit
     // ========================================    
     public void ChangePage(int delta)
     {
+        if (_isPlayingFromPage) return;
+
         int newPage = Mathf.Clamp(_currentPageIndex + delta, 0, Mathf.Max(_pageCount - 1, 0));
         if (newPage == _currentPageIndex)
             return;

@@ -14,5 +14,16 @@ public abstract class NoteEditStateBase
     public virtual void OnUpdate() { }
 
 
-    public virtual void UpdateGhost(NoteGhost ghost) { }
+    public virtual void UpdateGhost()
+    {
+        if (_context.Visualizer == null)
+            return;
+
+        var ghost = _context.Visualizer.GetGhost();
+        if (ghost == null)
+            return;
+
+        // 기본 행동: 현재 타입으로 표시
+        ghost.NoteEditVisualSetting(_context.CurrentNoteType);
+    }
 }

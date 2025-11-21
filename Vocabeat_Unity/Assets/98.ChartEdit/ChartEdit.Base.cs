@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class ChartEdit : MonoBehaviour
+public partial class ChartEdit
 {
     [Header("Target SO")]
     [SerializeField] private SongDataSO TargetSongData;
@@ -11,6 +11,9 @@ public partial class ChartEdit : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private AudioSource _bgmAudioSource;
+
+    [Header("Scanline")]
+    [SerializeField] private ChartScanline _scanline;    
 
     [Header("Edit State")]
     [SerializeField] private EDifficulty _currentDifficulty = EDifficulty.Easy;
@@ -32,6 +35,8 @@ public partial class ChartEdit : MonoBehaviour
     private NoteEditStateBase _currentState = null;
 
     public ENoteType CurrentNoteType => _currentNoteType;
+
+    private bool _isPlayingFromPage;
 
     // ========================================
     private void Start()
@@ -56,6 +61,8 @@ public partial class ChartEdit : MonoBehaviour
 
         RecalculatePageCount();
         RefreshPageView();
+
+        SetupTiming();
     }
 
     private void Update()
@@ -64,7 +71,10 @@ public partial class ChartEdit : MonoBehaviour
             return;
 
         if (_currentState != null)
+        {
             _currentState.OnUpdate();
+            _currentState.UpdateGhost();
+        }            
 
         // 마우스 휠로 페이지 이동
         float scroll = Input.mouseScrollDelta.y;
@@ -76,6 +86,8 @@ public partial class ChartEdit : MonoBehaviour
         {
             ChangePage(1);
         }
+
+        UpdateScanlineByMusic();
     }
 
     private void InitEditState()
@@ -84,38 +96,43 @@ public partial class ChartEdit : MonoBehaviour
         _currentState.OnEnter();
     }
 
-    private void ChangeState()
+    private void ChangeState(NoteEditStateBase newState)
     {
+        if (_currentState != null)
+            _currentState.OnExit();
 
-    }   
+        _currentState = newState;
+
+        if (_currentState != null)
+            _currentState.OnEnter();
+    }
 
     // ========================================    
+    private int _playStartPageTick; // 플레이 시작지점 기록
+
     // 재생 버튼
     public void PlayBGM()
     {
-        if (!Application.isPlaying)
+        if (!Application.isPlaying || _bgmAudioSource == null)
             return;
 
-        if (_bgmAudioSource == null)
-            return;
+        int startTick = _currentPageIndex * _visualizer.TicksPerPage;
+        _playStartPageTick = startTick;
 
-        // 이미 재생중이면 무시
-        if (_bgmAudioSource.isPlaying)
-            return;
+        // Tick -> Time 변환
+        float startTime = startTick * _secPerTick;
 
+        // BGM 시작 위치 조정
         if (_bgmAudioSource.clip == null)
             _bgmAudioSource.clip = TargetSongData.BGMCue.GetRandomClip();
 
-        if (_bgmAudioSource.time > 0f)
-        {
-            // Pause 상태에서 재개
-            _bgmAudioSource.UnPause();
-        }
-        else
-        {
-            // 처음부터 재생
-            _bgmAudioSource.Play();
-        }
+        _bgmAudioSource.time = Mathf.Clamp(startTime, 0f, _bgmAudioSource.clip.length);
+        _bgmAudioSource.Play();
+
+        _isPlayingFromPage = true;
+
+        // 스캔라인 초기화 (페이지 시작 기준)
+        _scanline.SetProgress(0f);
     }
 
     // 일시정지 버튼
@@ -128,7 +145,10 @@ public partial class ChartEdit : MonoBehaviour
             return;
 
         if (_bgmAudioSource.isPlaying)
+        {
+            _isPlayingFromPage = false;
             _bgmAudioSource.Pause();
+        }            
     }
 
     // 멈춤(정지 + 처음으로)
@@ -140,11 +160,14 @@ public partial class ChartEdit : MonoBehaviour
         if (_bgmAudioSource == null)
             return;
 
+        _scanline.ResetPosition();
+
         _bgmAudioSource.Stop();
         _bgmAudioSource.time = 0f;
 
         // 정지할 때 1페이지로 돌아가고 싶으면 유지
         _currentPageIndex = 0;
+        _isPlayingFromPage = false;
         RefreshPageView();
     }
 }

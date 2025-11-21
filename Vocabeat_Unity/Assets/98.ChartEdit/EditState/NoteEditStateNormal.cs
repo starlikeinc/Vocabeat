@@ -32,4 +32,12 @@ public class NoteEditStateNormal : NoteEditStateBase
                 _context.OnRequestRemoveNote(tick, yNorm, pageIndex);
         }
     }
+
+    public override void UpdateGhost()
+    {
+        var ghost = _context.Visualizer.GetGhost();
+        if (ghost == null) return;
+
+        ghost.NoteEditVisualSetting(ENoteType.Normal);
+    }
 }

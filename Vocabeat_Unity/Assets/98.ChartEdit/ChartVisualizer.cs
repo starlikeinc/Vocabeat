@@ -44,6 +44,8 @@ public class ChartVisualizer : MonoBehaviour
     private readonly List<float> _gridXs = new();
     private readonly List<float> _gridYs = new();
 
+    public int TicksPerPage => _ticksPerPage;
+
     private ENoteType _curNoteType;
     private int _currentPageIndex = 0;
 
@@ -420,4 +422,6 @@ public class ChartVisualizer : MonoBehaviour
     {
         _noteGhost.NoteEditVisualSetting(_curNoteType);
     }
+
+    public NoteGhost GetGhost() => _noteGhost;
 }

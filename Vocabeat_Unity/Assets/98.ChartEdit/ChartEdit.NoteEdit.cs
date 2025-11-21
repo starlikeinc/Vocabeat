@@ -47,6 +47,26 @@ public partial class ChartEdit
     }
 
     // ========================================    
+    public void OnGhostChangeNormal()
+    {
+        ChangeState(new NoteEditStateNormal(this));
+        _currentNoteType = ENoteType.Normal;
+        _visualizer.SetGhostNoteType(_currentNoteType);
+    }
+
+    public void OnGhostChangeFollowPlace()
+    {
+        ChangeState(new NoteEditStateFlowHold(this));
+        _currentNoteType = ENoteType.FlowHold;
+        _visualizer.SetGhostNoteType(_currentNoteType);
+    }
+
+    public void OnGhostChangeFollowCurve()
+    {
+        // TODO : 커브 포인트 찍는 모드로 변경
+    }
+
+    // ========================================    
     public void RecordUndoSnapshot()
     {
         if (!EditNotesDict.TryGetValue(_currentDifficulty, out var list) || list == null)

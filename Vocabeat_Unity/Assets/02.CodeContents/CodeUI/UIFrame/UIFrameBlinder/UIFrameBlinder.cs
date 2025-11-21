@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UIFrameBlinder : UIFrameBase
 {
+    [Header("Blind Options")]
     [SerializeField] private Image _blinder;
 
     [SerializeField] private float _duration;
@@ -23,14 +24,18 @@ public class UIFrameBlinder : UIFrameBase
     {
         void OnNextStep() => onNextStep?.Invoke();
 
+        void DoNextStepWithDelay()
+        {
+            OnNextStep();
+            DOVirtual.DelayedCall(_blindWait, () =>
+            {                
+                _blinder.DOFade(0f, _duration)
+                        .SetEase(Ease.OutSine);
+            });
+        }
+
         _blinder.DOFade(1f, _duration)
                 .SetEase(Ease.InSine)
-                .OnComplete(OnNextStep);
-
-        DOVirtual.DelayedCall(_blindWait, () =>
-        {
-            _blinder.DOFade(0f, _duration)
-                    .SetEase(Ease.OutSine);
-        });
+                .OnComplete(DoNextStepWithDelay);        
     }   
 }
