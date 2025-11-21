@@ -943,6 +943,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: CodeContents::UIFrameResult
   OrderType: 1
+  _eventChannel: {fileID: 11400000, guid: d7b0973cfa1b80a479da370502b278e9, type: 2}
+  _audioCue: {fileID: 11400000, guid: b7e71e10cc3c65d49aabf51282d894f1, type: 2}
   _textBlueStarCount: {fileID: 537148950437378869}
   _textWhiteStarCount: {fileID: 2697364139692250884}
   _textYellowStarCount: {fileID: 6809295745973938421}

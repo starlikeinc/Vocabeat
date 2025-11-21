@@ -581,7 +581,11 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             foreach (var note in _listNotes)
             {
                 if (note == null) continue;
-                if (note.NoteType != ENoteType.Normal) continue;
+                bool isNormal = note.NoteType == ENoteType.Normal;
+                bool isFlow = note.NoteType == ENoteType.FlowHold;
+
+                if (!isNormal && !isFlow)
+                    continue;
                 if (_judgedNoteIds.Contains(note.ID)) continue;
                 if (_activeHoldStates.ContainsKey(note.ID)) continue;
 

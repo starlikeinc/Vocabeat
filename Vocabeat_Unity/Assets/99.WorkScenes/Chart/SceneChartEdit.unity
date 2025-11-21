@@ -1060,9 +1060,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 809374470}
-        m_TargetAssemblyTypeName: ChartVisualizer, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 809374474}
+        m_TargetAssemblyTypeName: ChartEdit, Assembly-CSharp
+        m_MethodName: OnGhostChangeNormal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1849,9 +1849,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 427346454}
-        m_TargetAssemblyTypeName: ChartVisualizer, Assembly-CSharp
-        m_MethodName: OnChangeNoteLongFollow
+      - m_Target: {fileID: 809374474}
+        m_TargetAssemblyTypeName: ChartEdit, Assembly-CSharp
+        m_MethodName: OnGhostChangeFollowPlace
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

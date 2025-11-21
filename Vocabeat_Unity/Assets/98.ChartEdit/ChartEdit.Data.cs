@@ -72,6 +72,24 @@ public partial class ChartEdit
         }
     }
 
+    private void SortAndReindexNotes(List<Note> list)
+    {
+        if (list == null || list.Count <= 0)
+            return;
+
+        // 1) Tick → Y 정렬
+        list.Sort((a, b) =>
+        {
+            int cmp = a.Tick.CompareTo(b.Tick);
+            if (cmp != 0) return cmp;
+            return a.Y.CompareTo(b.Y);
+        });
+
+        // 2) 정렬된 순서대로 ID 재할당
+        for (int i = 0; i < list.Count; i++)
+            list[i].ID = i;
+    }
+
     // Save 버튼에서 쓸 래핑용
     public void SaveCurrentDifficulty()
     {

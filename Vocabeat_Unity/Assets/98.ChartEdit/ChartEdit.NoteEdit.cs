@@ -109,6 +109,7 @@ public partial class ChartEdit
             return;
 
         var prev = _undoStack.Pop();
+        SortAndReindexNotes(prev);
         EditNotesDict[_currentDifficulty] = prev;
 
         RecalculatePageCount();
@@ -145,6 +146,8 @@ public partial class ChartEdit
                 break;
         }
 
+        SortAndReindexNotes(list);
+
         RecalculatePageCount();
         RefreshPageView();
     }
@@ -163,6 +166,8 @@ public partial class ChartEdit
 
         RecordUndoSnapshot();
         list.Remove(target);
+
+        SortAndReindexNotes(list);
 
         RecalculatePageCount();
         RefreshPageView();

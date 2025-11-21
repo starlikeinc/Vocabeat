@@ -54,8 +54,9 @@ public class AudioPlayerBGM : AudioPlayerBase
             _audioSource.UnPause();
     }
 
-    private void OnPlayScheduled(double time)
+    private void OnPlayScheduled(double time, bool isLoop)
     {
+        _audioSource.loop = isLoop;
         if(time == 0)
             _audioSource.Play();
         else
