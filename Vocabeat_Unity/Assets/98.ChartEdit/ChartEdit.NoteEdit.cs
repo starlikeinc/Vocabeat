@@ -16,9 +16,12 @@ public partial class ChartEdit
     private int _flowLastStartTick;
     private int _flowLastEndTick;
 
+    public bool IsNoStartNote { get; private set; } = true;
+    public bool IsNoEndNote { get; private set; } = true;
+
     // ========================================    
     // FlowHold Curve 편집 진입 가능 여부
-    public bool HasCurveStartNote()
+    public bool HasCurveNotePair()
     {
         // Start/End가 모두 결정된 상태에서만 Curve 편집 허용
         if (_currentFlowMeta == null)
@@ -47,23 +50,24 @@ public partial class ChartEdit
     }
 
     // ========================================    
-    public void OnGhostChangeNormal()
+    public void OnGhostChangeNormal() // 일반 노트 모드
     {
+        if (EditState == EEditState.Long_Curve)
+        {
+            Debug.LogWarning("Curve 모드 풀고 바꾸세요.");
+            return;
+        }            
+
         ChangeState(new NoteEditStateNormal(this));
         _currentNoteType = ENoteType.Normal;
-        _visualizer.SetGhostNoteType(_currentNoteType);
+        _visualizer.SetGhostNoteType(EditState);
     }
 
-    public void OnGhostChangeFollowPlace()
+    public void OnGhostChangeFollowPlace() // 롱 노트(따라가기) 모드 - 세부 내용은 NoteEditStateFlowHold 에 서술
     {
         ChangeState(new NoteEditStateFlowHold(this));
         _currentNoteType = ENoteType.FlowHold;
-        _visualizer.SetGhostNoteType(_currentNoteType);
-    }
-
-    public void OnGhostChangeFollowCurve()
-    {
-        // TODO : 커브 포인트 찍는 모드로 변경
+        _visualizer.SetGhostNoteType(EditState);
     }
 
     // ========================================    
@@ -117,7 +121,7 @@ public partial class ChartEdit
     }
 
     // ========================================    
-    public void OnRequestAddOrUpdateNote(int tick, float yNorm, int pageIndex, ENoteType noteType, EChartEditType chartEditType = EChartEditType.Normal)
+    public void OnRequestAddOrUpdateNote(int tick, float yNorm, int pageIndex, EChartEditType chartEditType)
     {
         if (!Application.isPlaying)
             return;
@@ -134,11 +138,11 @@ public partial class ChartEdit
         switch (chartEditType)
         {
             case EChartEditType.Normal:
-                HandleNormalNote(list, tick, yNorm, pageIndex, noteType);
+                HandleNormalNote(list, tick, yNorm, pageIndex);
                 break;
 
             case EChartEditType.FlowPlace:
-                HandleFlowHoldPlace(list, tick, yNorm, pageIndex, noteType);
+                HandleFlowHoldPlace(list, tick, yNorm, pageIndex);
                 break;
 
             case EChartEditType.FlowCurve:
@@ -174,37 +178,30 @@ public partial class ChartEdit
     }
 
     #region 편집 모드 별 편집요청
-    private void HandleNormalNote(List<Note> list, int tick, float yNorm, int pageIndex, ENoteType noteType)
+    // 일반 노트 찍기
+    private void HandleNormalNote(List<Note> list, int tick, float yNorm, int pageIndex)
     {
         if (pageIndex < 0) pageIndex = 0;
 
         Note target = FindNoteAt(list, tick, yNorm);
-
         if (target != null)
-        {
-            target.Tick = tick;
-            target.PageIndex = pageIndex;
-            target.Y = yNorm;
-            target.NoteType = noteType;
-        }
-        else
-        {
-            int newId = GenerateNextNoteId(list);
+            return;
 
-            var newNote = new Note
-            {
-                ID = newId,
-                Tick = tick,
-                PageIndex = pageIndex,
-                Y = yNorm,
-                NoteType = noteType,
-                HasSibling = false,
-                HoldTick = 0,
-                NextID = -1,
-            };
+        int newId = GenerateNextNoteId(list);
 
-            list.Add(newNote);
-        }
+        var newNote = new Note
+        {
+            ID = newId,
+            Tick = tick,
+            PageIndex = pageIndex,
+            Y = yNorm,
+            NoteType = ENoteType.Normal,
+            HasSibling = false,
+            HoldTick = 0,
+            NextID = -1,
+        };
+
+        list.Add(newNote);
 
         list.Sort((a, b) =>
         {
@@ -214,7 +211,8 @@ public partial class ChartEdit
         });
     }
 
-    private void HandleFlowHoldPlace(List<Note> list, int tick, float yNorm, int pageIndex, ENoteType noteType)
+    // 롱 노트(따라가기) 첫, 끝 점 찍기
+    private void HandleFlowHoldPlace(List<Note> list, int tick, float yNorm, int pageIndex)
     {
         Note target = FindNoteAt(list, tick, yNorm);
         if (target != null)
@@ -228,13 +226,17 @@ public partial class ChartEdit
             _currentFlowMeta = new FlowLongMeta();
             _currentFlowMeta.CurvePoints.Add(new FlowCurvePoint { t = 0f, y01 = yNorm });
 
+            Debug.Log($"[FlowHold] Start Tick::[{tick}] Y Normal::[{yNorm}] Page Index::[{pageIndex}] 찍음");
+            IsNoStartNote = false;
+            IsNoEndNote = true;
+
             _flowStartNote = new Note
             {
                 ID = newId,
                 Tick = tick,
                 PageIndex = pageIndex,
                 Y = yNorm,
-                NoteType = noteType,
+                NoteType = ENoteType.FlowHold,
                 HoldTick = 0,
                 FlowLongMeta = _currentFlowMeta,
             };
@@ -248,17 +250,21 @@ public partial class ChartEdit
         {
             if (tick <= _flowLastStartTick)
             {                
-                Debug.LogWarning($"[FlowHold] End Tick({tick}) 이 Start Tick({_flowLastStartTick}) 보다 작거나 같아서 무시됨.");
+                Debug.LogWarning($"[FlowHoldPlace] End Tick({tick}) 이 Start Tick({_flowLastStartTick}) 보다 작거나 같아서 무시됨.");
                 return;
             }
 
             // 이미 Start가 있다면 Start에 해당하는 Note의 t = 1인 CurvePoint 추가.
             _currentFlowMeta.CurvePoints.Add(new FlowCurvePoint { t = 1f, y01 = yNorm });
+            Debug.Log($"[FlowHoldPlace] End Tick::[{tick}] Y Normal::[{yNorm}] Page Index::[{pageIndex}] 찍음");
+            IsNoStartNote = true;
+            IsNoEndNote = false;
 
             _flowLastEndTick = tick;
 
             _flowStartNote.HoldTick = _flowLastEndTick - _flowLastStartTick;
-            
+            Debug.Log($"[FlowHoldPlace] Hold Tick::[{_flowStartNote.HoldTick}]");
+
             _flowStartNote = null;            
         }
 
@@ -269,7 +275,10 @@ public partial class ChartEdit
     {
         // 마지막 FlowHold 메타가 뭔지 알고 있다는 전제 필요
         if (_currentFlowMeta == null)
+        {
+            Debug.LogError($"[FlowHoldCurve] 현재 편집중인 Long Hold Note 데이터가 없거나 End 지점 찍지 않음.");
             return;
+        }            
 
         // Start/End Tick 기준으로 t 계산
         int startTick = _flowLastStartTick;
@@ -288,6 +297,8 @@ public partial class ChartEdit
             t = t,
             y01 = yNorm
         });
+
+        Debug.Log($"[FlowHoldCurve] Tick::[{tick}] Y Normal::[{yNorm}] Page Index::[{pageIndex}] 찍음");
 
         _currentFlowMeta.CurvePoints.Sort((a, b) => a.t.CompareTo(b.t));
     }

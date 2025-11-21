@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public abstract class NoteEditFlowHoldSubState
+public abstract class NoteEditFlowHoldSubStateBase
 {
     protected ChartEdit _context;
     protected NoteEditStateFlowHold _parent;
 
-    public NoteEditFlowHoldSubState(ChartEdit context, NoteEditStateFlowHold parent)
+    public NoteEditFlowHoldSubStateBase(ChartEdit context, NoteEditStateFlowHold parent)
     {
         _context = context;
         _parent = parent;        
     }
 
+    // ========================================    
     public virtual void OnEnter() { }
     public virtual void OnExit() { }
     public virtual void OnUpdate()

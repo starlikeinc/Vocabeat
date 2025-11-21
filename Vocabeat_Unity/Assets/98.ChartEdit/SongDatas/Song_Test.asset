@@ -24,6 +24,40 @@ MonoBehaviour:
     - ID: 0
       PageIndex: 0
       NoteType: 1
+      Tick: 240
+      Y: 0.875
+      HasSibling: 0
+      HoldTick: 180
+      NextID: 0
+      FlowLongMeta:
+        CurvePoints:
+        - t: 0
+          y01: 0.875
+        - t: 1
+          y01: 0.875
+    - ID: 1
+      PageIndex: 0
+      NoteType: 1
+      Tick: 360
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 300
+      NextID: 0
+      FlowLongMeta:
+        CurvePoints:
+        - t: 0
+          y01: 0.625
+        - t: 0.4
+          y01: 0.625
+        - t: 0.6
+          y01: 0.625
+        - t: 0.8
+          y01: 0.75
+        - t: 1
+          y01: 0.625
+    - ID: 2
+      PageIndex: 0
+      NoteType: 1
       Tick: 480
       Y: 0.25
       HasSibling: 0
@@ -37,7 +71,21 @@ MonoBehaviour:
           y01: 0.4
         - t: 1
           y01: 0.3
-    - ID: 1
+    - ID: 3
+      PageIndex: 0
+      NoteType: 1
+      Tick: 540
+      Y: 0.875
+      HasSibling: 0
+      HoldTick: 60
+      NextID: 0
+      FlowLongMeta:
+        CurvePoints:
+        - t: 0
+          y01: 0.875
+        - t: 1
+          y01: 0.75
+    - ID: 4
       PageIndex: 1
       NoteType: 0
       Tick: 1200
@@ -47,7 +95,7 @@ MonoBehaviour:
       NextID: -1
       FlowLongMeta:
         CurvePoints: []
-    - ID: 2
+    - ID: 5
       PageIndex: 1
       NoteType: 0
       Tick: 1440
@@ -57,7 +105,7 @@ MonoBehaviour:
       NextID: -1
       FlowLongMeta:
         CurvePoints: []
-    - ID: 3
+    - ID: 6
       PageIndex: 1
       NoteType: 0
       Tick: 1680
@@ -67,7 +115,7 @@ MonoBehaviour:
       NextID: -1
       FlowLongMeta:
         CurvePoints: []
-    - ID: 4
+    - ID: 7
       PageIndex: 2
       NoteType: 0
       Tick: 2160
@@ -77,7 +125,7 @@ MonoBehaviour:
       NextID: -1
       FlowLongMeta:
         CurvePoints: []
-    - ID: 5
+    - ID: 8
       PageIndex: 2
       NoteType: 0
       Tick: 2400
@@ -87,7 +135,7 @@ MonoBehaviour:
       NextID: -1
       FlowLongMeta:
         CurvePoints: []
-    - ID: 6
+    - ID: 9
       PageIndex: 2
       NoteType: 0
       Tick: 2640
@@ -97,7 +145,7 @@ MonoBehaviour:
       NextID: -1
       FlowLongMeta:
         CurvePoints: []
-    - ID: 7
+    - ID: 10
       PageIndex: 4
       NoteType: 0
       Tick: 3900
@@ -107,7 +155,7 @@ MonoBehaviour:
       NextID: -1
       FlowLongMeta:
         CurvePoints: []
-    - ID: 8
+    - ID: 11
       PageIndex: 4
       NoteType: 0
       Tick: 4080
@@ -117,7 +165,7 @@ MonoBehaviour:
       NextID: -1
       FlowLongMeta:
         CurvePoints: []
-    - ID: 9
+    - ID: 12
       PageIndex: 4
       NoteType: 0
       Tick: 4260
@@ -127,7 +175,7 @@ MonoBehaviour:
       NextID: -1
       FlowLongMeta:
         CurvePoints: []
-    - ID: 10
+    - ID: 13
       PageIndex: 4
       NoteType: 0
       Tick: 4740
@@ -137,7 +185,7 @@ MonoBehaviour:
       NextID: -1
       FlowLongMeta:
         CurvePoints: []
-    - ID: 11
+    - ID: 14
       PageIndex: 5
       NoteType: 1
       Tick: 4900

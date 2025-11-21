@@ -5,8 +5,8 @@ using UnityEngine.UI;
 [Serializable]
 public class NoteEditData
 {
-    public ENoteType NoteType;
-    public Sprite NotePreview;
+    public ENoteVisualType VisualType;
+    public Sprite NoteSymbol;
 }
 
 public abstract class NoteEditBase : MonoBehaviour
@@ -19,29 +19,28 @@ public abstract class NoteEditBase : MonoBehaviour
 
     public RectTransform RectTrs => (RectTransform)transform;
 
-    protected NoteEditData GetGhostData(ENoteType noteType)
+    protected NoteEditData GetGhostData(ENoteVisualType visualType)
     {
         foreach (var data in GhostDatas)
         {
-            if (data.NoteType == noteType)
+            if (data.VisualType == visualType)
                 return data;
         }
         return null;
     }
 
-    public virtual void NoteEditVisualSetting(ENoteType noteType)
+    public virtual void NoteEditVisualSetting(Note noteData)
     {
-        NoteEditData data = GetGhostData(noteType);
+        // TODO : 노트 프리뷰 보여주는 로직 바꿔야함.
+
+        ENoteVisualType visualType = ENoteVisualType.Normal; // 이거 아님
+
+
+        NoteEditData data = GetGhostData(visualType);
         if (data == null)
             return;
 
-        ImgPreview.overrideSprite = data.NotePreview;
-        gameObject.SetActive(true);
-    }
-
-    public virtual void SetNoteEditPosition(Vector2 localPosition)
-    {
-        RectTrs.anchoredPosition = localPosition;
+        ImgPreview.overrideSprite = data.NoteSymbol;
         gameObject.SetActive(true);
     }
 }

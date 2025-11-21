@@ -1,8 +1,13 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EEditState { None, Nomral, Long_Place, Long_Curve }
+
 public partial class ChartEdit
 {
+    public event Action<EEditState> OnEditStateChanged;
+
     [Header("Target SO")]
     [SerializeField] private SongDataSO TargetSongData;
 
@@ -30,10 +35,22 @@ public partial class ChartEdit
 
     private readonly Dictionary<EDifficulty, List<Note>> EditNotesDict = new();
     // Undo 스택 (현재 난이도용)
-    private readonly Stack<List<Note>> _undoStack = new();    
+    private readonly Stack<List<Note>> _undoStack = new();
 
+    protected EEditState _editState;
+    public EEditState EditState
+    {
+        get => _editState;
+        set
+        {
+            _editState = value;
+            OnEditStateChanged?.Invoke(_editState);
+        }
+    }
+
+    public NoteEditStateBase CurrentState => _currentState;
     private NoteEditStateBase _currentState = null;
-
+    
     public ENoteType CurrentNoteType => _currentNoteType;
 
     private bool _isPlayingFromPage;
@@ -45,6 +62,7 @@ public partial class ChartEdit
             return;
 
         InitFromSO();
+        InitEditState();
 
         if (_visualizer != null)
         {
@@ -54,10 +72,9 @@ public partial class ChartEdit
                 _visualizer.VisualizerSetting(TargetSongData);
 
             // 초기 고스트 노트 타입 반영
-            _visualizer.SetGhostNoteType(_currentNoteType);
-        }
-
-        InitEditState();
+            EditState = EEditState.Nomral;
+            _visualizer.SetGhostNoteType(EditState);
+        }        
 
         RecalculatePageCount();
         RefreshPageView();
@@ -71,10 +88,7 @@ public partial class ChartEdit
             return;
 
         if (_currentState != null)
-        {
             _currentState.OnUpdate();
-            _currentState.UpdateGhost();
-        }            
 
         // 마우스 휠로 페이지 이동
         float scroll = Input.mouseScrollDelta.y;

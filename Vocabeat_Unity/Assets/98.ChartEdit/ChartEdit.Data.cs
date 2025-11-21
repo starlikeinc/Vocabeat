@@ -109,6 +109,6 @@ public partial class ChartEdit
         RefreshPageView();
 
         if (_visualizer != null)
-            _visualizer.SetGhostNoteType(_currentNoteType);
+            _visualizer.SetGhostNoteType(EditState);
     }
 }

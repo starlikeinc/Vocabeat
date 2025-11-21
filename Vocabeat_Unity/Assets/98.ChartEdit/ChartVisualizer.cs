@@ -2,6 +2,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+public enum ENoteVisualType
+{
+    Normal,
+    Place_Start,
+    Place_End,
+    Curve,
+}
+
 public class ChartVisualizer : MonoBehaviour
 {
     [SerializeField] private RectTransform _targetRect; // 선/노트가 그려질 영역
@@ -25,6 +33,7 @@ public class ChartVisualizer : MonoBehaviour
     [SerializeField] private TMP_Text TextCurPage;
     [SerializeField] private TMP_Text TextLastPage;
     [SerializeField] private TMP_Text TextDifficulty;
+    [SerializeField] private TMP_Text TextEditMode;
 
     [Header("Line Prefab")]
     [SerializeField] private LineHorizontal _horizontalLinePrefab;
@@ -46,7 +55,7 @@ public class ChartVisualizer : MonoBehaviour
 
     public int TicksPerPage => _ticksPerPage;
 
-    private ENoteType _curNoteType;
+    private EEditState _curEditState;
     private int _currentPageIndex = 0;
 
     // ========================================
@@ -60,7 +69,7 @@ public class ChartVisualizer : MonoBehaviour
     private void Start()
     {
         if (!Application.isPlaying)
-            return;
+            return;        
 
         RegenerateLines();
         EnsureGhostInstance();
@@ -69,6 +78,7 @@ public class ChartVisualizer : MonoBehaviour
     public void Initialize(ChartEdit editor)
     {
         _chartEdit = editor;
+        _chartEdit.OnEditStateChanged += (state) => { TextEditMode.text = $"EditMode\n{state}"; };
     }
 
     private void OnRectTransformDimensionsChange()
@@ -381,14 +391,14 @@ public class ChartVisualizer : MonoBehaviour
             rt.pivot = new Vector2(0.5f, 0.5f);
             rt.anchoredPosition = new Vector2(x, finalY);
 
-            inst.NoteEditVisualSetting(n.NoteType);
+            inst.NoteEditVisualSetting(n);
 
             _spawnedNotes.Add(inst);
         }
     }
 
     // === 노트 타입 비주얼 컨트롤 =====================
-    public void SetGhostNoteType(ENoteType noteType)
+    public void SetGhostNoteType(EEditState editState)
     {
         if (!Application.isPlaying)
             return;
@@ -396,31 +406,13 @@ public class ChartVisualizer : MonoBehaviour
         if (_noteGhost == null)
             return;
 
-        _curNoteType = noteType;
-        ChangeGhostNoteType();
-    }
-
-    public void OnChangeNoteNormal()
-    {
-        _curNoteType = ENoteType.Normal;
-        ChangeGhostNoteType();
-    }
-
-    public void OnChangeNoteLongFollow()
-    {
-        _curNoteType = ENoteType.FlowHold;
-        ChangeGhostNoteType();
-    }
-
-    public void OnChangeNoteLongHold()
-    {
-        _curNoteType = ENoteType.LongHold;
+        _curEditState = editState;
         ChangeGhostNoteType();
     }
 
     private void ChangeGhostNoteType()
     {
-        _noteGhost.NoteEditVisualSetting(_curNoteType);
+        _noteGhost.NoteEditVisualSetting(null);
     }
 
     public NoteGhost GetGhost() => _noteGhost;
