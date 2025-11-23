@@ -10,16 +10,22 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     public event Action OnSongEnded;    
 
     public event Action<int> OnScoreChanged;
+    public event Action<int> OnSongIndexChanged;
 
     [Header("Refs")]
     [SerializeField] private RhythmTimeline _rTimeline;
     [SerializeField] private NoteTouchJudgeSystem _noteJudgeSystem;
+
+    [Header("SongDB")]
+    [SerializeField] private SongDatabaseSO _songDB;
 
     [Header("Test - Metronome")]
     [SerializeField] private AudioSource _metronomSrc;
 
     public RhythmTimeline RTimeline => _rTimeline;
     public NoteTouchJudgeSystem NoteJudegeSystem => _noteJudgeSystem;
+
+    public SongDatabaseSO SongDB => _songDB;
 
     public SongDataSO CurSongDataSO { get; private set; }
     public int CurrentScore
@@ -34,12 +40,23 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     }
     public bool IsPlaying => _rTimeline.IsPlaying;
 
+    public int CurrentSongIndex
+    {
+        get => _currentSongIndex;
+        set
+        {
+            _currentSongIndex = Mathf.Clamp(value, 0, SongDB.Songs.Count - 1);
+            OnSongIndexChanged?.Invoke(_currentSongIndex);
+        }
+    }
+
     private SongDataSO _lastSongData;
     private EDifficulty _lastDiff;
     private RectTransform _touchArea;
     private Camera _uiCam;
     private bool _hasBindContext;
 
+    private int _currentSongIndex;
     private int _currentScore;    
 
     // ========================================        
@@ -49,7 +66,7 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     {
         base.OnUnityAwake();
         if (RTimeline != null)
-            RTimeline.OnSongComplete += HandleSongComplete;
+            RTimeline.OnSongComplete += HandleSongComplete;        
     }
 
     protected override void OnUnityDestroy()

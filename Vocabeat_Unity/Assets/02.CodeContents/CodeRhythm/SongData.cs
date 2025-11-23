@@ -43,6 +43,8 @@ public enum ENoteType
 public class DiffNoteData
 {
     public EDifficulty Diff;
+    [Min(1)]
+    public int DifficultyValue;
     public List<Note> Notes = new();
 }
 

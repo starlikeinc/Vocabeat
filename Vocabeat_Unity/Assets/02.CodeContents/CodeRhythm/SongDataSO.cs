@@ -13,7 +13,8 @@ public class SongDataSO : ScriptableObject
 
     [SerializeField] private List<DiffNoteData> _diffNotes = new();    
 
-    private Dictionary<EDifficulty, List<Note>> _noteDatasByDiff;    
+    private Dictionary<EDifficulty, List<Note>> _noteDatasByDiff;
+    private Dictionary<EDifficulty, int> _difficultyValueByDiff;
 
     public Dictionary<EDifficulty, List<Note>> NoteDatasByDiff
     {
@@ -23,7 +24,17 @@ public class SongDataSO : ScriptableObject
                 BuildNoteDataDict();
             return _noteDatasByDiff;
         }
-    }    
+    }
+
+    public Dictionary<EDifficulty, int> DifficultyValueByDiff
+    {
+        get
+        {
+            if (_difficultyValueByDiff == null)
+                BuildNoteDataDict();
+            return _difficultyValueByDiff;
+        }
+    }
 
     public string SongName => _songName;
     public string SongComposer => _songComposer;
@@ -38,27 +49,39 @@ public class SongDataSO : ScriptableObject
     private void BuildNoteDataDict()
     {
         _noteDatasByDiff = new();
+        _difficultyValueByDiff = new();
 
         foreach (var noteData in _diffNotes)
         {
             if (noteData == null)
                 continue;
 
-            if (!_noteDatasByDiff.ContainsKey(noteData.Diff))
-                _noteDatasByDiff.Add(noteData.Diff, noteData.Notes);
-            else
-                _noteDatasByDiff[noteData.Diff] = noteData.Notes;
+            _noteDatasByDiff[noteData.Diff] = noteData.Notes;
+            _difficultyValueByDiff[noteData.Diff] = noteData.DifficultyValue;
         }
     }
 
     // ========================================
-    public void SaveNoteDatas(EDifficulty diff, IList<Note> src)
+    public int GetDifficultyLevel(EDifficulty diff, int defaultLevel = 1)
+    {
+        if (DifficultyValueByDiff != null &&
+            DifficultyValueByDiff.TryGetValue(diff, out int level) &&
+            level > 0)
+        {
+            return level;
+        }
+
+        return defaultLevel;
+    }
+
+    // ========================================
+    public void SaveNoteDatas(EDifficulty diff, IList<Note> src, int level)
     {
         var diffNoteData = _diffNotes.Find(x => x.Diff == diff);
 
         if (diffNoteData == null)
         {
-            diffNoteData = new DiffNoteData { Diff = diff };
+            diffNoteData = new DiffNoteData { Diff = diff, DifficultyValue = level };
             _diffNotes.Add(diffNoteData);
         }
 

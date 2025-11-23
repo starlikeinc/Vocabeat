@@ -1048,6 +1048,7 @@ MonoBehaviour:
   DontDestroy: 1
   _rTimeline: {fileID: 9214069441211490358}
   _noteJudgeSystem: {fileID: 7016943012331917170}
+  _songDB: {fileID: 11400000, guid: 67b60c92656a7774cb32e8c39cd3611d, type: 2}
   _metronomSrc: {fileID: 6457830119375295167}
 --- !u!114 &7016943012331917170
 MonoBehaviour:

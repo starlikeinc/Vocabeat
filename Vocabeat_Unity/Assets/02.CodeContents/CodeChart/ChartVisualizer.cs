@@ -28,6 +28,7 @@ public class ChartVisualizer : MonoBehaviour
     [Header("Song Info")]
     [SerializeField] private TMP_Text TextSongName;
     [SerializeField] private TMP_Text TextSongBPM;
+    [SerializeField] private TMP_Text TextSongDiffLevel;
 
     [Header("Editor Info")]
     [SerializeField] private TMP_Text TextCurPage;
@@ -361,6 +362,15 @@ public class ChartVisualizer : MonoBehaviour
             TextSongBPM.text = $"{songDataSO.BPM} BPM";
     }
 
+    public void UpdateDifficultyDisplay(EDifficulty diff, int diffValue)
+    {
+        if (TextDifficulty != null)
+            TextDifficulty.text = diff.ToString();
+
+        if (TextSongDiffLevel != null)
+            TextSongDiffLevel.text = $"Lv. {Mathf.Max(1, diffValue)}";
+    }
+
     // ChartEdit에서 매 페이지 이동마다 호출
     public void RefreshPageView(EDifficulty difficulty, int curPageIndex, int lastPageIndexWithNote, IList<Note> notesForDiff)
     {
@@ -374,8 +384,11 @@ public class ChartVisualizer : MonoBehaviour
         RegenerateLines();
 
         // 에디터 정보 표시
-        if (TextDifficulty != null)
-            TextDifficulty.text = difficulty.ToString();
+        int level = 1;
+        if (_chartEdit != null)
+            level = Mathf.Max(1, _chartEdit.CurrentDifficultyLevel);
+
+        UpdateDifficultyDisplay(difficulty, level);
 
         if (TextCurPage != null)
             TextCurPage.text = (curPageIndex + 1).ToString();

@@ -6,6 +6,13 @@ public enum EEditState { None, Nomral, Long_Place, Long_Curve }
 
 public partial class ChartEdit
 {
+    private static readonly EDifficulty[] s_diffOrder =
+{
+    EDifficulty.Easy,
+    EDifficulty.Normal,
+    EDifficulty.Hard,
+};
+
     public event Action<EEditState> OnEditStateChanged;
 
     [Header("FlowHold Spline (Editor Only)")]
@@ -25,6 +32,7 @@ public partial class ChartEdit
 
     [Header("Edit State")]
     [SerializeField] private EDifficulty _currentDifficulty = EDifficulty.Easy;
+    [SerializeField] private int _currentDifficultyLevel = 1;
     [SerializeField] private int _currentPageIndex = 0;
 
     // 이 값은 "존재 가능한 페이지 수"
@@ -35,6 +43,9 @@ public partial class ChartEdit
     [SerializeField] private ENoteType _currentNoteType = ENoteType.Normal;
 
     public ChartVisualizer Visualizer => _visualizer;
+
+    public EDifficulty CurrentDifficulty => _currentDifficulty;
+    public int CurrentDifficultyLevel => _currentDifficultyLevel;
 
     private readonly Dictionary<EDifficulty, List<Note>> EditNotesDict = new();
     // Undo 스택 (현재 난이도용)
@@ -80,6 +91,9 @@ public partial class ChartEdit
         }        
 
         RecalculatePageCount();
+
+        RefreshDifficultyUI();
+
         RefreshPageView();
 
         SetupTiming();
@@ -122,6 +136,14 @@ public partial class ChartEdit
 
         if (_currentState != null)
             _currentState.OnEnter();
+    }
+
+    private void RefreshDifficultyUI()
+    {
+        if (_visualizer != null)
+        {
+            _visualizer.UpdateDifficultyDisplay(_currentDifficulty, _currentDifficultyLevel);
+        }
     }
 
     // ========================================    
@@ -187,4 +209,67 @@ public partial class ChartEdit
         _isPlayingFromPage = false;
         RefreshPageView();
     }
+
+    #region 난이도
+    private void SetDifficultyInternal(EDifficulty newDiff)
+    {
+        if (_currentDifficulty == newDiff)
+            return;
+
+        _currentDifficulty = newDiff;
+
+        // SO에 저장돼 있던 레벨 있으면 가져오고, 없으면 최소 1
+        _currentDifficultyLevel = TargetSongData != null
+            ? TargetSongData.GetDifficultyLevel(_currentDifficulty, 1)
+            : Math.Max(1, _currentDifficultyLevel);
+
+        // 현재 난이도의 노트로 화면 다시 그림
+        RefreshPageView();
+
+        // 텍스트 갱신
+        RefreshDifficultyUI();
+    }
+
+    public void OnClick_DifficultyPrev()
+    {
+        int idx = Array.IndexOf(s_diffOrder, _currentDifficulty);
+        if (idx < 0) idx = 0;
+
+        idx = (idx - 1 + s_diffOrder.Length) % s_diffOrder.Length;
+        SetDifficultyInternal(s_diffOrder[idx]);
+    }
+
+    public void OnClick_DifficultyNext()
+    {
+        int idx = Array.IndexOf(s_diffOrder, _currentDifficulty);
+        if (idx < 0) idx = 0;
+
+        idx = (idx + 1) % s_diffOrder.Length;
+        SetDifficultyInternal(s_diffOrder[idx]);
+    }
+
+    private void ClampDifficultyLevel()
+    {
+        if (_currentDifficultyLevel < 1)
+            _currentDifficultyLevel = 1;
+    }
+
+    public void OnClick_LevelUp()
+    {
+        _currentDifficultyLevel++;
+        ClampDifficultyLevel();
+        RefreshDifficultyUI();
+    }
+
+    public void OnClick_LevelDown()
+    {
+        _currentDifficultyLevel--;
+        ClampDifficultyLevel();
+        RefreshDifficultyUI();
+    }
+
+    public void OnClick_SetDifficultyEasy() => SetDifficultyInternal(EDifficulty.Easy);
+    public void OnClick_SetDifficultyNormal() => SetDifficultyInternal(EDifficulty.Normal);
+    public void OnClick_SetDifficultyHard() => SetDifficultyInternal(EDifficulty.Hard);
+    #endregion
 }

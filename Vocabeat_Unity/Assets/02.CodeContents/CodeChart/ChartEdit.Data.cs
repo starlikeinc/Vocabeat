@@ -40,7 +40,7 @@ public partial class ChartEdit
         }
     }
 
-    public void OnSaveNoteData(EDifficulty diff)
+    public void OnSaveNoteData(EDifficulty diff, int level)
     {
         if (TargetSongData == null)
         {
@@ -55,7 +55,7 @@ public partial class ChartEdit
             EditNotesDict[diff] = listNoteData;
         }
 
-        TargetSongData.SaveNoteDatas(diff, listNoteData);
+        TargetSongData.SaveNoteDatas(diff, listNoteData, level);
 
 #if UNITY_EDITOR
         UnityEditor.EditorUtility.SetDirty(TargetSongData);
@@ -93,7 +93,7 @@ public partial class ChartEdit
     // Save 버튼에서 쓸 래핑용
     public void SaveCurrentDifficulty()
     {
-        OnSaveNoteData(_currentDifficulty);
+        OnSaveNoteData(_currentDifficulty, _currentDifficultyLevel);
     }
 
     // ========================================

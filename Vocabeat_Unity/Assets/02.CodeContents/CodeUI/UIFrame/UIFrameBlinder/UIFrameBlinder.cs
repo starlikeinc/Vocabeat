@@ -12,30 +12,42 @@ public class UIFrameBlinder : UIFrameBase
     [SerializeField] private float _duration;
     [SerializeField] private float _blindWait;
 
+    private Sequence _blindSequence;
+
+    private Action _onNextStep;
+
     protected override void OnUIFrameInitialize()
     {
         base.OnUIFrameInitialize();
-        if (_blinder == null)
-            _blinder = GetComponentInChildren<Image>();
-        _blinder.DOFade(0f, 0f);
+        CacheSequence();
     }
 
     public void BlindWithNextStep(Action onNextStep)
     {
-        void OnNextStep() => onNextStep?.Invoke();
+        _onNextStep = onNextStep;
 
-        void DoNextStepWithDelay()
-        {
-            OnNextStep();
-            DOVirtual.DelayedCall(_blindWait, () =>
-            {                
-                _blinder.DOFade(0f, _duration)
-                        .SetEase(Ease.OutSine);
-            });
-        }
+        ResetSequenceTargets();
 
-        _blinder.DOFade(1f, _duration)
-                .SetEase(Ease.InSine)
-                .OnComplete(DoNextStepWithDelay);        
+        _blindSequence.Restart();
     }   
+
+    private void ResetSequenceTargets()
+    {
+        Color color = _blinder.color;
+        color.a = 0f;
+        _blinder.color = color;
+    }
+
+    private void CacheSequence()
+    {
+        _blindSequence = DOTween.Sequence()
+        .SetAutoKill(false)
+        .Pause();
+
+        _blindSequence
+            .Append(_blinder.DOFade(1f, _duration).SetEase(Ease.InSine))
+            .AppendCallback(() => _onNextStep?.Invoke())
+            .AppendInterval(_blindWait)
+            .Append(_blinder.DOFade(0f, _duration).SetEase(Ease.InSine));
+    }
 }
