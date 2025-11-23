@@ -16,6 +16,8 @@ public partial class ChartEdit
     private int _flowLastStartTick;
     private int _flowLastEndTick;
 
+    private Note _lastCompletedFlowHoldNote;
+
     public bool IsNoStartNote { get; private set; } = true;
     public bool IsNoEndNote { get; private set; } = true;
 
@@ -56,18 +58,28 @@ public partial class ChartEdit
         {
             Debug.LogWarning("Curve 모드 풀고 바꾸세요.");
             return;
-        }            
+        }
+
+        // 편집 상태를 명시적으로 Normal로 설정
+        EditState = EEditState.Nomral;
 
         ChangeState(new NoteEditStateNormal(this));
         _currentNoteType = ENoteType.Normal;
-        _visualizer.SetGhostNoteType(EditState);
+
+        if (_visualizer != null)
+            _visualizer.SetGhostNoteType(EditState);
     }
 
     public void OnGhostChangeFollowPlace() // 롱 노트(따라가기) 모드 - 세부 내용은 NoteEditStateFlowHold 에 서술
     {
         ChangeState(new NoteEditStateFlowHold(this));
         _currentNoteType = ENoteType.FlowHold;
-        _visualizer.SetGhostNoteType(EditState);
+
+        // 서브 State(NoteEditFlowHoldPlaceState.OnEnter) 에서
+        // EditState = EEditState.Long_Place 로 설정하므로,
+        // 여기서는 현재 EditState 값을 기준으로 고스트 갱신만 하면 됨.
+        if (_visualizer != null)
+            _visualizer.SetGhostNoteType(EditState);
     }
 
     // ========================================    
@@ -249,26 +261,45 @@ public partial class ChartEdit
         else
         {
             if (tick <= _flowLastStartTick)
-            {                
+            {
                 Debug.LogWarning($"[FlowHoldPlace] End Tick({tick}) 이 Start Tick({_flowLastStartTick}) 보다 작거나 같아서 무시됨.");
                 return;
             }
 
-            // 이미 Start가 있다면 Start에 해당하는 Note의 t = 1인 CurvePoint 추가.
+            // 이미 Start가 있다면 해당 FlowHold의 끝 지점(t=1) 추가
             _currentFlowMeta.CurvePoints.Add(new FlowCurvePoint { t = 1f, y01 = yNorm });
             Debug.Log($"[FlowHoldPlace] End Tick::[{tick}] Y Normal::[{yNorm}] Page Index::[{pageIndex}] 찍음");
             IsNoStartNote = true;
             IsNoEndNote = false;
 
             _flowLastEndTick = tick;
-
             _flowStartNote.HoldTick = _flowLastEndTick - _flowLastStartTick;
+
+            _lastCompletedFlowHoldNote = _flowStartNote;
+
             Debug.Log($"[FlowHoldPlace] Hold Tick::[{_flowStartNote.HoldTick}]");
 
-            _flowStartNote = null;            
+            // --- 여기서부터 Spline Bake 호출 ---
+            if (_flowSplineContext != null && _lastCompletedFlowHoldNote != null)
+            {
+                // 1) 기존 FlowLongMeta.CurvePoints 기반으로 Spline 구성
+                _flowSplineContext.BeginEdit(_lastCompletedFlowHoldNote);
+
+                // 2) Spline을 샘플링해서 FlowLongMeta.CurvePoints에 굽기
+                _flowSplineContext.BakeToMeta();
+
+                // 3) Spline 컨텍스트 정리
+                _flowSplineContext.ClearEditing();
+            }
+
+            _flowStartNote = null;
         }
 
         list.Sort((a, b) => a.Tick.CompareTo(b.Tick));
+
+        // Start ↔ End 찍힌 상태가 바뀌었으니, 고스트 비주얼도 갱신
+        if (_visualizer != null)
+            _visualizer.SetGhostNoteType(EditState);
     }
 
     private void HandleFlowHoldCurvePoint(List<Note> list, int tick, float yNorm, int pageIndex)
@@ -301,6 +332,9 @@ public partial class ChartEdit
         Debug.Log($"[FlowHoldCurve] Tick::[{tick}] Y Normal::[{yNorm}] Page Index::[{pageIndex}] 찍음");
 
         _currentFlowMeta.CurvePoints.Sort((a, b) => a.t.CompareTo(b.t));
+
+        if (_currentFlowMeta.SampledPoints != null)
+            _currentFlowMeta.SampledPoints.Clear();
     }
     #endregion
     private Note FindNoteAt(List<Note> list, int tick, float yNorm)

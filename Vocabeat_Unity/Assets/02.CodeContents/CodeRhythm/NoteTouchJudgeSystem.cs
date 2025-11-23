@@ -543,16 +543,22 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         t = Mathf.Clamp01(t);
 
         float y01;
-        if (note.FlowLongMeta != null && note.FlowLongMeta.CurvePoints != null && note.FlowLongMeta.CurvePoints.Count > 0)
+
+        if (note.NoteType == ENoteType.FlowHold &&
+            note.FlowLongMeta != null &&
+            note.FlowLongMeta.CurvePoints != null &&
+            note.FlowLongMeta.CurvePoints.Count > 0)
         {
-            y01 = NoteUtility.EvaluateY01(note.FlowLongMeta, t);
+            // FlowHold: 커브 데이터 따라가기
+            y01 = NoteUtility.EvaluateFlowHoldY(note.FlowLongMeta, t);
         }
         else
         {
+            // LongHold 등, 커브가 없는 경우: 고정 Y 사용
             y01 = note.Y;
         }
 
-        // X는 Tick 기반, Y는 커브 기반
+        // X는 Tick 기반, Y는 커브(또는 고정값) 기반
         return NoteUtility.GetNotePosition(_touchArea, clampedTick, y01);
     }
 

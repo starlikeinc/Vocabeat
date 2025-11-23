@@ -43,12 +43,16 @@ public class ChartVisualizer : MonoBehaviour
     [SerializeField] private NotePreview _notePreView;  // 실제 노트 표시용
     [SerializeField] private NoteGhost _noteGhost;      // 마우스 따라다니는 고스트
 
+    [Header("FlowHold Preview")]
+    [SerializeField] private LineDrawer _flowHoldCurvePrefab; // 곡선 라인용
+
     [Header("Edit Link")]
     [SerializeField] private ChartEdit _chartEdit;     
 
     private readonly List<LineHorizontal> _spawnedHorizonLines = new();
     private readonly List<LineVertical> _spawnedVertLines = new();
     private readonly List<NotePreview> _spawnedNotes = new();
+    private readonly List<LineDrawer> _spawnedFlowCurves = new();
 
     private readonly List<float> _gridXs = new();
     private readonly List<float> _gridYs = new();
@@ -78,7 +82,20 @@ public class ChartVisualizer : MonoBehaviour
     public void Initialize(ChartEdit editor)
     {
         _chartEdit = editor;
-        _chartEdit.OnEditStateChanged += (state) => { TextEditMode.text = $"EditMode\n{state}"; };
+
+        if (_chartEdit != null)
+        {
+            _chartEdit.OnEditStateChanged += OnEditStateChanged;
+        }
+    }
+
+    private void OnEditStateChanged(EEditState state)
+    {
+        if (TextEditMode != null)
+            TextEditMode.text = $"EditMode\n{state}";
+
+        // 에디트 모드 바뀔 때마다 고스트 비주얼도 갱신
+        SetGhostNoteType(state);
     }
 
     private void OnRectTransformDimensionsChange()
@@ -205,6 +222,7 @@ public class ChartVisualizer : MonoBehaviour
     // ========================================
     private void ClearNotes()
     {
+        // 노트 아이콘들 삭제
         foreach (var n in _spawnedNotes)
         {
             if (n == null) continue;
@@ -214,10 +232,25 @@ public class ChartVisualizer : MonoBehaviour
             else
                 Destroy(n.gameObject);
 #else
-            Destroy(n.gameObject);
+        Destroy(n.gameObject);
 #endif
         }
         _spawnedNotes.Clear();
+
+        // FlowHold 곡선 라인들 삭제
+        foreach (var line in _spawnedFlowCurves)
+        {
+            if (line == null) continue;
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+                DestroyImmediate(line.gameObject);
+            else
+                Destroy(line.gameObject);
+#else
+        Destroy(line.gameObject);
+#endif
+        }
+        _spawnedFlowCurves.Clear();
     }
 
     private void EnsureGhostInstance()
@@ -370,31 +403,202 @@ public class ChartVisualizer : MonoBehaviour
             if (n.PageIndex != curPageIndex)
                 continue;
 
-            int localTick = n.Tick - startTickOfPage;
-            float t = Mathf.Clamp01((float)localTick / _ticksPerPage);
-            float x = Mathf.Lerp(xMin, xMax, t);
-            
-            float yNorm = Mathf.Clamp01(n.Y);
-            float y = Mathf.Lerp(rect.yMin, rect.yMax, yNorm);
-            
+            // Normal / 기타 단일 노트
+            if (n.NoteType != ENoteType.FlowHold)
+            {
+                SpawnSingleNotePreview(n, rect, startTickOfPage);
+            }
+            else
+            {
+                // FlowHold 노트 전용: Start/End/CurvePoint + 곡선까지 그리기
+                SpawnFlowHoldPreview(n, rect, startTickOfPage);
+            }
+        }
+    }
+
+    private void SpawnSingleNotePreview(Note n, Rect rect, int startTickOfPage)
+    {
+        if (_notePreView == null)
+            return;
+
+        int localTick = n.Tick - startTickOfPage;
+        float t = Mathf.Clamp01((float)localTick / _ticksPerPage);
+        float x = Mathf.Lerp(rect.xMin, rect.xMax, t);
+
+        float yNorm = Mathf.Clamp01(n.Y);
+        float y = Mathf.Lerp(rect.yMin, rect.yMax, yNorm);
+        float centeredY = y - rect.center.y;
+
+        var inst = Instantiate(_notePreView, _targetRect);
+        var rt = inst.RectTrs;
+
+        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+        rt.pivot = new Vector2(0.5f, 0.5f);
+        rt.anchoredPosition = new Vector2(x, centeredY);
+
+        // Normal 포함한 단일 노트들은 기존 로직 사용
+        inst.NoteEditVisualSetting(n);
+
+        _spawnedNotes.Add(inst);
+    }
+
+    private void SpawnFlowHoldPreview(Note n, Rect rect, int startTickOfPage)
+    {
+        if (_notePreView == null)
+            return;
+
+        int startTick = n.Tick;
+        int endTick = n.Tick + Mathf.Max(0, n.HoldTick);
+        if (endTick <= startTick)
+        {
+            // HoldTick 없는 경우: 그냥 시작점 하나만 보여줌
+            SpawnNoteMarker(startTick, n.Y, rect, startTickOfPage, ENoteVisualType.Place_Start);
+            return;
+        }
+
+        FlowLongMeta meta = n.FlowLongMeta;
+
+        var control = (meta != null) ? meta.CurvePoints : null;
+
+        // --- Start 마커 ---
+        float startY01 = n.Y;
+        if (meta != null && meta.CurvePoints != null && meta.CurvePoints.Count > 0)
+        {
+            // t가 0에 가장 가까운 포인트 사용
+            float bestT = float.MaxValue;
+            float bestY = startY01;
+            foreach (var cp in meta.CurvePoints)
+            {
+                float dt = Mathf.Abs(cp.t - 0f);
+                if (dt < bestT)
+                {
+                    bestT = dt;
+                    bestY = cp.y01;
+                }
+            }
+            startY01 = bestY;
+        }
+        SpawnNoteMarker(startTick, startY01, rect, startTickOfPage, ENoteVisualType.Place_Start);
+
+        // --- End 마커 ---
+        float endY01 = n.Y;
+        if (meta != null && meta.CurvePoints != null && meta.CurvePoints.Count > 0)
+        {
+            float bestT = float.MaxValue;
+            float bestY = endY01;
+            foreach (var cp in meta.CurvePoints)
+            {
+                float dt = Mathf.Abs(cp.t - 1f);
+                if (dt < bestT)
+                {
+                    bestT = dt;
+                    bestY = cp.y01;
+                }
+            }
+            endY01 = bestY;
+        }
+        SpawnNoteMarker(endTick, endY01, rect, startTickOfPage, ENoteVisualType.Place_End);
+
+        // --- CurvePoint 마커들 ---
+        if (meta != null && meta.CurvePoints != null)
+        {
+            foreach (var cp in meta.CurvePoints)
+            {
+                if (cp.t <= 0f || cp.t >= 1f)
+                    continue; // 0/1 근처는 Start/End가 이미 표시
+
+                int cpTick = Mathf.RoundToInt(Mathf.Lerp(startTick, endTick, cp.t));
+                SpawnNoteMarker(cpTick, cp.y01, rect, startTickOfPage, ENoteVisualType.Curve);
+            }
+        }
+
+        // --- 곡선 라인 프리뷰 (옵션) ---
+        SpawnFlowHoldCurveLine(n, rect, startTickOfPage);
+    }
+
+    private NotePreview SpawnNoteMarker(int tick, float y01, Rect rect, int startTickOfPage, ENoteVisualType visualType)
+    {
+        if (_notePreView == null)
+            return null;
+
+        int localTick = tick - startTickOfPage;
+        if (localTick < 0 || localTick > _ticksPerPage)
+            return null; // 이 페이지 밖이면 스킵
+
+        float t = Mathf.Clamp01((float)localTick / _ticksPerPage);
+        float x = Mathf.Lerp(rect.xMin, rect.xMax, t);
+
+        y01 = Mathf.Clamp01(y01);
+        float y = Mathf.Lerp(rect.yMin, rect.yMax, y01);
+        float centeredY = y - rect.center.y;
+
+        var inst = Instantiate(_notePreView, _targetRect);
+        var rt = inst.RectTrs;
+
+        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+        rt.pivot = new Vector2(0.5f, 0.5f);
+        rt.anchoredPosition = new Vector2(x, centeredY);
+
+        inst.SetVisualByType(visualType);
+
+        _spawnedNotes.Add(inst);
+        return inst;
+    }
+
+    private void SpawnFlowHoldCurveLine(Note n, Rect rect, int startTickOfPage)
+    {
+        if (_flowHoldCurvePrefab == null)
+            return;
+
+        int startTick = n.Tick;
+        int endTick = n.Tick + Mathf.Max(0, n.HoldTick);
+        if (endTick <= startTick)
+            return;
+
+        FlowLongMeta meta = n.FlowLongMeta;
+
+        var line = Instantiate(_flowHoldCurvePrefab, _targetRect);
+        var rt = (RectTransform)line.transform;
+
+        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+        rt.pivot = new Vector2(0.5f, 0.5f);
+
+        List<Vector2> points = new List<Vector2>();
+        const int resolution = 32; // 샘플 포인트 개수
+
+        for (int i = 0; i <= resolution; i++)
+        {
+            float t01 = i / (float)resolution;
+
+            int tick = Mathf.RoundToInt(Mathf.Lerp(startTick, endTick, t01));
+            int localTick = tick - startTickOfPage;
+            if (localTick < 0 || localTick > _ticksPerPage)
+                continue; // 페이지 밖이면 그리지 않음
+
+            float xT = Mathf.Clamp01((float)localTick / _ticksPerPage);
+            float x = Mathf.Lerp(rect.xMin, rect.xMax, xT);
+
+            float y01;
+            if (meta != null && meta.CurvePoints != null && meta.CurvePoints.Count > 0)
+            {
+                y01 = NoteUtility.EvaluateFlowHoldY(meta, t01);
+            }
+            else
+            {
+                y01 = Mathf.Clamp01(n.Y);
+            }
+
+            float y = Mathf.Lerp(rect.yMin, rect.yMax, y01);
             float centeredY = y - rect.center.y;
 
-            if (_gridYs != null && _gridYs.Count > 0)
-                centeredY = FindNearest(_gridYs, centeredY);
-            
-            float finalY = centeredY;
-
-            var inst = Instantiate(_notePreView, _targetRect);
-            var rt = inst.RectTrs;
-
-            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
-            rt.pivot = new Vector2(0.5f, 0.5f);
-            rt.anchoredPosition = new Vector2(x, finalY);
-
-            inst.NoteEditVisualSetting(n);
-
-            _spawnedNotes.Add(inst);
+            points.Add(new Vector2(x, centeredY));
         }
+
+        line.useExternalPoints = true;
+        line.externalPoints = points;
+        line.SetVerticesDirty();
+
+        _spawnedFlowCurves.Add(line);
     }
 
     // === 노트 타입 비주얼 컨트롤 =====================
@@ -402,7 +606,7 @@ public class ChartVisualizer : MonoBehaviour
     {
         if (!Application.isPlaying)
             return;
-        
+
         if (_noteGhost == null)
             return;
 
@@ -412,7 +616,35 @@ public class ChartVisualizer : MonoBehaviour
 
     private void ChangeGhostNoteType()
     {
-        _noteGhost.NoteEditVisualSetting(null);
+        if (_noteGhost == null)
+            return;
+
+        ENoteVisualType visualType = ENoteVisualType.Normal;
+
+        switch (_curEditState)
+        {
+            case EEditState.Nomral:
+            case EEditState.None:
+            default:
+                visualType = ENoteVisualType.Normal;
+                break;
+
+            case EEditState.Long_Place:
+                // FlowHold Place 모드:
+                // 아직 Start 안 찍었으면 → Start 고스트
+                // Start 찍었으면 → End 고스트
+                if (_chartEdit != null && !_chartEdit.IsNoStartNote)
+                    visualType = ENoteVisualType.Place_End;
+                else
+                    visualType = ENoteVisualType.Place_Start;
+                break;
+
+            case EEditState.Long_Curve:
+                visualType = ENoteVisualType.Curve;
+                break;
+        }
+
+        _noteGhost.SetVisualByType(visualType);
     }
 
     public NoteGhost GetGhost() => _noteGhost;

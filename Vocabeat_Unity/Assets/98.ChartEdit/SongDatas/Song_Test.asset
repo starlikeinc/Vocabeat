@@ -20,4 +20,32 @@ MonoBehaviour:
   _bgmCue: {fileID: 11400000, guid: ca6ad976992e58248827be5da06db00c, type: 2}
   _diffNotes:
   - Diff: 0
-    Notes: []
+    Notes:
+    - ID: 0
+      PageIndex: 0
+      NoteType: 0
+      Tick: 480
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: 0
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 1
+      PageIndex: 1
+      NoteType: 1
+      Tick: 1080
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 720
+      NextID: 0
+      FlowLongMeta:
+        CurvePoints:
+        - t: 0
+          y01: 0.75
+        - t: 0.5
+          y01: 0.125
+        - t: 1
+          y01: 0.75
+        SampledPoints: []

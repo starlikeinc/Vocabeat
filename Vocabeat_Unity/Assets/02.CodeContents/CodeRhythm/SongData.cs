@@ -55,8 +55,12 @@ public class FlowCurvePoint
 
 [Serializable]
 public class FlowLongMeta
-{    
+{
+    // 사용자가 직접 찍은 컨트롤 포인트 (Start/End + CurvePoint들)
     public List<FlowCurvePoint> CurvePoints = new();
+
+    // Spline에서 샘플링한 촘촘한 점들 (런타임 평가용)
+    public List<FlowCurvePoint> SampledPoints = new();
 }
 
 [Serializable]

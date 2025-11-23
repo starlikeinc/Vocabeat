@@ -8,6 +8,9 @@ public partial class ChartEdit
 {
     public event Action<EEditState> OnEditStateChanged;
 
+    [Header("FlowHold Spline (Editor Only)")]
+    [SerializeField] private FlowHoldSplineContext _flowSplineContext;
+
     [Header("Target SO")]
     [SerializeField] private SongDataSO TargetSongData;
 
