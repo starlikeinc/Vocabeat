@@ -20,35 +20,213 @@ MonoBehaviour:
   _bgmCue: {fileID: 11400000, guid: ca6ad976992e58248827be5da06db00c, type: 2}
   _diffNotes:
   - Diff: 0
-    DifficultyValue: 0
+    DifficultyValue: 1
     Notes:
     - ID: 0
-      PageIndex: 0
+      PageIndex: 1
       NoteType: 0
-      Tick: 480
+      Tick: 1260
       Y: 0.5
       HasSibling: 0
       HoldTick: 0
-      NextID: 0
+      NextID: -1
       FlowLongMeta:
         CurvePoints: []
         SampledPoints: []
     - ID: 1
       PageIndex: 1
-      NoteType: 1
-      Tick: 1080
+      NoteType: 0
+      Tick: 1680
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 2
+      PageIndex: 2
+      NoteType: 0
+      Tick: 1980
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 3
+      PageIndex: 2
+      NoteType: 0
+      Tick: 2160
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 4
+      PageIndex: 2
+      NoteType: 0
+      Tick: 2160
       Y: 0.75
       HasSibling: 0
-      HoldTick: 720
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 5
+      PageIndex: 2
+      NoteType: 0
+      Tick: 2400
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 6
+      PageIndex: 2
+      NoteType: 0
+      Tick: 2400
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 7
+      PageIndex: 2
+      NoteType: 0
+      Tick: 2580
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 8
+      PageIndex: 3
+      NoteType: 0
+      Tick: 3180
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 9
+      PageIndex: 3
+      NoteType: 0
+      Tick: 3420
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 10
+      PageIndex: 3
+      NoteType: 0
+      Tick: 3660
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 11
+      PageIndex: 4
+      NoteType: 1
+      Tick: 3900
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 240
       NextID: 0
       FlowLongMeta:
         CurvePoints:
         - t: 0
-          y01: 0.75
-        - t: 0.5
-          y01: 0.125
+          y01: 0.375
         - t: 1
-          y01: 0.75
+          y01: 0.375
+        SampledPoints:
+        - t: 0
+          y01: 0.375
+        - t: 0.04347826
+          y01: 0.37499997
+        - t: 0.08695652
+          y01: 0.375
+        - t: 0.13043478
+          y01: 0.375
+        - t: 0.17391305
+          y01: 0.375
+        - t: 0.2173913
+          y01: 0.37499997
+        - t: 0.26086956
+          y01: 0.375
+        - t: 0.3043478
+          y01: 0.375
+        - t: 0.3478261
+          y01: 0.375
+        - t: 0.39130434
+          y01: 0.375
+        - t: 0.4347826
+          y01: 0.375
+        - t: 0.47826087
+          y01: 0.375
+        - t: 0.5217391
+          y01: 0.375
+        - t: 0.5652174
+          y01: 0.375
+        - t: 0.6086956
+          y01: 0.375
+        - t: 0.65217394
+          y01: 0.375
+        - t: 0.6956522
+          y01: 0.375
+        - t: 0.73913044
+          y01: 0.375
+        - t: 0.7826087
+          y01: 0.375
+        - t: 0.82608694
+          y01: 0.375
+        - t: 0.8695652
+          y01: 0.375
+        - t: 0.9130435
+          y01: 0.375
+        - t: 0.95652175
+          y01: 0.375
+        - t: 1
+          y01: 0.375
+    - ID: 12
+      PageIndex: 4
+      NoteType: 0
+      Tick: 4380
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 13
+      PageIndex: 4
+      NoteType: 0
+      Tick: 4620
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
         SampledPoints: []
   - Diff: 1
     DifficultyValue: 3
