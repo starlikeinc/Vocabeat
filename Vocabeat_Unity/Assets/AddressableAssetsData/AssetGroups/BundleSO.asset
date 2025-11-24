@@ -15,14 +15,32 @@ MonoBehaviour:
   m_GroupName: BundleSO
   m_GUID: d256751c4ef31414fb46a118d2ea8507
   m_SerializeEntries:
-  - m_GUID: 05e6bc19c043056449ad9951c1e82abd
-    m_Address: Song_Test4
+  - m_GUID: 146234032185a43458cae4a1273107aa
+    m_Address: SFX_DifficultySelect
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2b76420126f134149a0e86c222e3117b
+    m_Address: SFX_SongUnlock
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 397033f900142f441945c5f9419f7069
+    m_Address: SFX_Play
     m_ReadOnly: 0
     m_SerializedLabels:
     - Main
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 67b60c92656a7774cb32e8c39cd3611d
     m_Address: SongDB
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7620a160b96e34045bd2e83112ac4659
+    m_Address: SFX_Slide
     m_ReadOnly: 0
     m_SerializedLabels:
     - Main
@@ -64,7 +82,7 @@ MonoBehaviour:
     - Main
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: aec63a6b30a163940a50f13135029ec7
-    m_Address: Song_Test5
+    m_Address: Song_Leo
     m_ReadOnly: 0
     m_SerializedLabels:
     - Main
@@ -76,31 +94,31 @@ MonoBehaviour:
     - Main
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c13389a3d05704c45a6177058d2199b5
-    m_Address: Song_Test2
+    m_Address: Song_KnockoutYou
     m_ReadOnly: 0
     m_SerializedLabels:
     - Main
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c34e73a43cf88f74bb93e562034ea178
-    m_Address: Song_Test1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Main
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ca6ad976992e58248827be5da06db00c
-    m_Address: Song_FutureSight
+    m_Address: Song_SenkouHanabi
     m_ReadOnly: 0
     m_SerializedLabels:
     - Main
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e0879996b1917df4bb4f580cc057a58a
-    m_Address: Song_Test3
+    m_Address: Song_Variathyella
     m_ReadOnly: 0
     m_SerializedLabels:
     - Main
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: edeac89f9bad2bb44b26c730305a638e
-    m_Address: Song_Test6
+    m_Address: Song_WowCuteIncome
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fb82140d6853dd542a1f6ec3a1a84019
+    m_Address: SFX_ButtonClick
     m_ReadOnly: 0
     m_SerializedLabels:
     - Main

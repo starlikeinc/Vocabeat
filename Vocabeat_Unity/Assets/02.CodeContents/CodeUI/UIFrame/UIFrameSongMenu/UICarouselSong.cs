@@ -36,7 +36,7 @@ public class UICarouselSong : UITemplateCarouselBase<UIItemSongSlot, SongDataSO>
     protected override void BindItemVisual(UIItemSongSlot slot, int itemIndex, SongDataSO data, bool isCenter)
     {
         if (data == null) return;
-        slot.SetVisual(data.SongThumb); // 썸네일은 SongDataSO에서 바로
+        slot.SetVisual(data);
     }
 
     protected override void OnSlotCreated(UIItemSongSlot slot)

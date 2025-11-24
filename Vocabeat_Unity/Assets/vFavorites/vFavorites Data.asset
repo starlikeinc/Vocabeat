@@ -33,6 +33,15 @@ MonoBehaviour:
       isAsset: 0
       _id: 1062463984
     - globalId:
+        globalObjectIdString: GlobalObjectId_V1-1-d735e7a750732a841b0d4d8a76d52a72-102900000-0
+      _typeString: UnityEditor.DefaultAsset, UnityEditor.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      _obj: {fileID: 102900000, guid: d735e7a750732a841b0d4d8a76d52a72, type: 3}
+      isSceneGameObject: 0
+      isFolder: 1
+      isAsset: 0
+      _id: 1062534344
+    - globalId:
         globalObjectIdString: GlobalObjectId_V1-1-06ff566dee806044c9be3481718c058b-102900000-0
       _typeString: UnityEditor.DefaultAsset, UnityEditor.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
@@ -60,6 +69,15 @@ MonoBehaviour:
       isAsset: 1
       _id: 1058817467
     - globalId:
+        globalObjectIdString: GlobalObjectId_V1-3-67b60c92656a7774cb32e8c39cd3611d-11400000-0
+      _typeString: SongDatabaseSO, CodeContents, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      _obj: {fileID: 11400000, guid: 67b60c92656a7774cb32e8c39cd3611d, type: 2}
+      isSceneGameObject: 0
+      isFolder: 0
+      isAsset: 1
+      _id: 1059725435
+    - globalId:
         globalObjectIdString: GlobalObjectId_V1-3-aa99d383f3d933040a17b40ae26af2c8-11400000-0
       _typeString: SongDataSO, CodeContents, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       _obj: {fileID: 11400000, guid: aa99d383f3d933040a17b40ae26af2c8, type: 2}
@@ -80,5 +98,23 @@ MonoBehaviour:
     _id: 1060948013
   - items: []
     name: Page 2
+    _id: 1059832923
+  - items: []
+    name: Page 3
+    _id: 1043414969
+  - items: []
+    name: Page 4
+    _id: 1033736081
+  - items: []
+    name: Page 5
+    _id: 1045001194
+  - items: []
+    name: Page 6
+    _id: 1054466534
+  - items: []
+    name: Page 7
+    _id: 1045323450
+  - items: []
+    name: Page 8
     _id: 0
   rowScale: 1

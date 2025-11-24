@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: CodeContents::SongDatabaseSO
   _songs:
   - {fileID: 11400000, guid: aa99d383f3d933040a17b40ae26af2c8, type: 2}
-  - {fileID: 11400000, guid: c34e73a43cf88f74bb93e562034ea178, type: 2}
   - {fileID: 11400000, guid: c13389a3d05704c45a6177058d2199b5, type: 2}
-  - {fileID: 11400000, guid: e0879996b1917df4bb4f580cc057a58a, type: 2}
-  - {fileID: 11400000, guid: 05e6bc19c043056449ad9951c1e82abd, type: 2}
-  - {fileID: 11400000, guid: aec63a6b30a163940a50f13135029ec7, type: 2}
   - {fileID: 11400000, guid: edeac89f9bad2bb44b26c730305a638e, type: 2}
+  - {fileID: 11400000, guid: c34e73a43cf88f74bb93e562034ea178, type: 2}
+  - {fileID: 11400000, guid: e0879996b1917df4bb4f580cc057a58a, type: 2}
+  - {fileID: 11400000, guid: aec63a6b30a163940a50f13135029ec7, type: 2}

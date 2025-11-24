@@ -1,4 +1,24 @@
+using System;
 using UnityEngine;
+
+public enum EUIFrameSfxKey
+{
+    Open,
+    Close,
+    TabChange,
+    Confirm,
+    Cancel,
+    Error,
+    Custom1,
+    Custom2,
+}
+
+[Serializable]
+public struct FrameSfxEntry
+{
+    public EUIFrameSfxKey Key;
+    public AudioCueSO Cue;
+}
 
 [RequireComponent(typeof(AudioSource))]
 public abstract class AudioPlayerBase : MonoBehaviour

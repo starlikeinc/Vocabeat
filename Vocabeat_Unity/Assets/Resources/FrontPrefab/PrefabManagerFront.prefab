@@ -304,6 +304,7 @@ GameObject:
   - component: {fileID: 6796484366474717263}
   - component: {fileID: 503901780765403494}
   - component: {fileID: 5151872269952625647}
+  - component: {fileID: 5658396355229639888}
   m_Layer: 0
   m_Name: PrefabManagerFront
   m_TagString: Untagged
@@ -412,6 +413,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DontDestroy: 1
   MainLabelName: Main
+--- !u!114 &5658396355229639888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6970754477570354538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56ec6fa8a82da7746a4ebf7fb26bf09a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CodeContents::ManagerUnlock
+  DontDestroy: 1
 --- !u!1 &7123158197504360446
 GameObject:
   m_ObjectHideFlags: 0

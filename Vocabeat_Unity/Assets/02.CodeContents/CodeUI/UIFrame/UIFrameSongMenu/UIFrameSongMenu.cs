@@ -2,7 +2,16 @@ using LUIZ.UI;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class UIFrameSongMenu : UIFrameBase
+public enum ESongMenuSfxKey
+{    
+    DifficultySelect,
+    Slide,
+    Play,
+    Unlock,
+    BtnClick,    
+}
+
+public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
 {
     [Header("곡 배경")]
     [SerializeField] private UISongBGScroll _bgScroll;

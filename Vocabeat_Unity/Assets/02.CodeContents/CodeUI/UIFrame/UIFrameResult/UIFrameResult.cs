@@ -16,7 +16,7 @@ public class UIFrameResult : UIFrameBase
         public Sprite RankSprite;
     }
 
-    [Header("Result BGM")]
+    [Header("BGM")]
     [SerializeField] private BGMEventChannelSO _eventChannel;
     [SerializeField] private AudioCueSO _audioCue;
 

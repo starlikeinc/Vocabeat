@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 811bd822933a2b840af725b84adfb2f8, type: 3}
   m_Name: Song_FutureSight
   m_EditorClassIdentifier: CodeContents::SongData_SO
+  _songId: 39001
   _songName: FutureSight
   _songComposer: 
   _bpm: 125
-  _songThumb: {fileID: 21300000, guid: 48ce76e6b3affec458b506b8a46ef0af, type: 3}
-  _songBG: {fileID: 21300000, guid: 48ce76e6b3affec458b506b8a46ef0af, type: 3}
-  _bgmCue: {fileID: 11400000, guid: ca6ad976992e58248827be5da06db00c, type: 2}
+  _songThumb: {fileID: 21300000, guid: 2f3eb559edb42734697c545ac6edb21f, type: 3}
+  _songBG: {fileID: 21300000, guid: ad77e2aff0b169348b4a353f74b779ed, type: 3}
+  _bgmCue: {fileID: 11400000, guid: eb958db8ba992e24a9e892c5da07a22f, type: 2}
   _diffNotes:
   - Diff: 0
     DifficultyValue: 1
@@ -355,3 +356,11 @@ MonoBehaviour:
       FlowLongMeta:
         CurvePoints: []
         SampledPoints: []
+  _unlockCondition:
+    UnlockType: 0
+    RequiredSong: {fileID: 0}
+    RequiredDiff: 0
+    RequiredRank: 0
+    RequiredPlayerLevel: 0
+    CostCurrencyTid: 0
+    CostAmount: 0

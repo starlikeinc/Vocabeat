@@ -55,7 +55,9 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     {
         base.OnUnityAwake();
         if (RTimeline != null)
-            RTimeline.OnSongComplete += HandleSongComplete;        
+            RTimeline.OnSongComplete += HandleSongComplete;
+
+        PreWarmSong();
     }
 
     protected override void OnUnityDestroy()
@@ -137,6 +139,27 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
         _currentScore = 0;
         OnScoreChanged?.Invoke(_currentScore);
         _nextBeatIndex = 0;
+    }
+
+    private void PreWarmSong()
+    {
+        foreach(var data in _songDB.Songs)
+        {
+            if (data == null || data.BGMCue == null)
+                return;
+
+            var clip = data.BGMCue.GetRandomClip(); // AudioCueSO 안에 Clip 프로퍼티 있다고 가정
+
+            if (clip == null)
+                return;
+
+            // 이미 로드된 경우면 생략
+            if (clip.loadState == AudioDataLoadState.Loaded)
+                return;
+
+            // 비동기 로드
+            clip.LoadAudioData();
+        }
     }
 
     // ========================================

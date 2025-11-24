@@ -39,6 +39,34 @@ public enum ENoteType
     LongHold,    
 }
 
+public enum ESongUnlockType
+{
+    AlwaysOpen,      // 항상 열려있음 (튜토리얼 곡 등)
+    ByDefault,       // 처음부터 언락
+    ByClearOtherSong,// 특정 곡 클리어 시
+    ByPlayerLevel,   // 유저 레벨로 언락
+    ByPurchase,      // 재화 소모 언락
+    ComingSoon,      // 목록에 있지만 잠금해제 불가
+}
+
+[System.Serializable]
+public class SongUnlockCondition
+{
+    public ESongUnlockType UnlockType = ESongUnlockType.AlwaysOpen;
+
+    [Header("For ByClearOtherSong")]
+    public SongDataSO RequiredSong;
+    public EDifficulty RequiredDiff;
+    public int RequiredRank; // 예: S 이상 클리어
+
+    [Header("For ByPlayerLevel")]
+    public int RequiredPlayerLevel;
+
+    [Header("For ByPurchase")]
+    public int CostCurrencyTid;
+    public int CostAmount;
+}
+
 [Serializable]
 public class DiffNoteData
 {

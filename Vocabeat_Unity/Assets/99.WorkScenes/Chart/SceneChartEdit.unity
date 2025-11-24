@@ -3526,7 +3526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChartEdit
   _flowSplineContext: {fileID: 1964378104}
-  TargetSongData: {fileID: 11400000, guid: aa99d383f3d933040a17b40ae26af2c8, type: 2}
+  TargetSongData: {fileID: 11400000, guid: edeac89f9bad2bb44b26c730305a638e, type: 2}
   _visualizer: {fileID: 427346454}
   _bgmAudioSource: {fileID: 809374473}
   _scanline: {fileID: 556030396}

@@ -14,7 +14,7 @@ public class UIWidgetSongInfo : UIWidgetBase
         var songDataSO = ManagerRhythm.Instance.SongDB.GetSong(songIndex);
 
         _textSongName.text = songDataSO.SongName;
-        //_textSongBPM.text = songDataSO.BPM.ToString();
+        _textSongBPM.text = songDataSO.BPM.ToString();
         SongDifficultySetting(songDataSO);
     }
 

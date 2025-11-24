@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Song_", menuName = "SongData/New SongData")]
 public class SongDataSO : ScriptableObject
 {
+    [SerializeField] private int _songId;
     [SerializeField] private string _songName;
     [SerializeField] private string _songComposer;
     [SerializeField] private int _bpm;
@@ -11,7 +12,10 @@ public class SongDataSO : ScriptableObject
     [SerializeField] private Sprite _songBG;
     [SerializeField] private AudioCueSO _bgmCue;
 
-    [SerializeField] private List<DiffNoteData> _diffNotes = new();    
+    [SerializeField] private List<DiffNoteData> _diffNotes = new();
+
+    [SerializeField] private SongUnlockCondition _unlockCondition;
+    public SongUnlockCondition UnlockCondition => _unlockCondition;
 
     private Dictionary<EDifficulty, List<Note>> _noteDatasByDiff;
     private Dictionary<EDifficulty, int> _difficultyValueByDiff;
@@ -36,6 +40,7 @@ public class SongDataSO : ScriptableObject
         }
     }
 
+    public int SongId => _songId;
     public string SongName => _songName;
     public string SongComposer => _songComposer;
     public int BPM => _bpm;
