@@ -10,7 +10,6 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     public event Action OnSongEnded;    
 
     public event Action<int> OnScoreChanged;
-    public event Action<int> OnSongIndexChanged;
 
     [Header("Refs")]
     [SerializeField] private RhythmTimeline _rTimeline;
@@ -40,15 +39,6 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     }
     public bool IsPlaying => _rTimeline.IsPlaying;
 
-    public int CurrentSongIndex
-    {
-        get => _currentSongIndex;
-        set
-        {
-            _currentSongIndex = Mathf.Clamp(value, 0, SongDB.Songs.Count - 1);
-            OnSongIndexChanged?.Invoke(_currentSongIndex);
-        }
-    }
 
     private SongDataSO _lastSongData;
     private EDifficulty _lastDiff;
@@ -56,7 +46,6 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     private Camera _uiCam;
     private bool _hasBindContext;
 
-    private int _currentSongIndex;
     private int _currentScore;    
 
     // ========================================        

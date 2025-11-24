@@ -7,6 +7,9 @@ public class UIFrameSongMenu : UIFrameBase
     [Header("곡 배경")]
     [SerializeField] private UISongBGScroll _bgScroll;
 
+    [Header("캐러셀")]
+    [SerializeField] private UICarouselSong _carouselSong;
+
     [Header("곡 정보")]
     [SerializeField] private UIWidgetSongInfo _widgetSongInfo;
 
@@ -25,12 +28,17 @@ public class UIFrameSongMenu : UIFrameBase
             _onFrameShowFromInGame?.Invoke();
         _bgScroll.DoBGScrollInfinite();
 
-        _widgetSongInfo.WidgetSongInfoSetting(ManagerRhythm.Instance.CurrentSongIndex);
+        _carouselSong.Initialize();        
     }
 
     public void SongDifficultySetting()
     {
 
+    }
+
+    public void SetSelectedSong(int index)
+    {
+        _widgetSongInfo.WidgetSongInfoSetting(index);
     }
 
     public void OnPlay()
