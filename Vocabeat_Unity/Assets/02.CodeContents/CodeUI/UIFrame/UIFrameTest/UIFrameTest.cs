@@ -16,7 +16,7 @@ public class UIFrameTest : UIFrameBase
     [SerializeField] private string BGMName;
     [SerializeField] private string StageBackGroundName;
 
-    [SerializeField] private InputSO InputChannel;
+    private InputSO InputChannel => ManagerInput.Instance.GetInputChannel;
     
     private StageBackground m_stageBackground;
 

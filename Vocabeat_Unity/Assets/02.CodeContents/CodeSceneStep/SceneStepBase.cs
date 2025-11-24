@@ -14,7 +14,7 @@ public abstract class SceneStepBase : SceneAttacherBase
     {
         get
         {
-            if (UIChannel == null)
+            if (s_uiChannel == null)
                 s_uiChannel = Resources.Load("ManagerUISO") as ManagerUISO;
             
             return s_uiChannel;

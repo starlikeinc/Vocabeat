@@ -233,23 +233,66 @@ public abstract class UITemplateCarouselBase<TItem, TData> : UITemplateBase wher
         if (m_itemCount <= 0) return;
         if (delta == 0) return;
 
-        // 이미 이동 중이면 현재 애니 정지 + 상태 정리
-        if (m_isAnimating)
+        // 1) 이미 이동 중이면 "지금 애니메이션을 끝까지 완료" 시킨다.
+        //    => 이전 targetIndex 기준으로 centerIndex, 레이아웃, SlotRoot가 딱 정리된 상태가 됨.
+        if (m_isAnimating && m_moveTween != null && m_moveTween.IsActive())
         {
-            StopAnimation();
+            m_moveTween.Complete();   // OnComplete 콜백이 즉시 실행됨
         }
 
-        // 1) 센터 인덱스 먼저 바꾸고
-        m_centerItemIndex = WrapIndex(m_centerItemIndex + delta, m_itemCount);
+        // 2) 새 target 인덱스 계산 (이제 m_centerItemIndex는 직전 이동이 끝난 값)
+        int targetIndex = WrapIndex(m_centerItemIndex + delta, m_itemCount);
+        TData targetData = GetItemData(targetIndex);
 
-        // 2) 새 센터 기준으로 슬롯 즉시 재배치 + 포커스/스케일 갱신
+        // 3) 논리상 centerIndex를 "새 target"으로 먼저 바꾼 뒤,
+        //    그 기준으로 레이아웃/포커스/비주얼을 재배치
+        m_centerItemIndex = targetIndex;
         RefreshImmediate();
 
-        // 3) Frame 쪽에 "선택된 인덱스/곡" 즉시 알림
-        RaiseCenterChanged();
+        // 4) 프레임 쪽에 "선택된 인덱스/데이터"를 바로 알려줌
+        OnCenterChanged?.Invoke(targetIndex, targetData);
+        OnCenterIndexChanged(targetIndex, targetData);
 
-        // 4) 실제 슬라이드 애니메이션 (슬롯 개별 이동)
-        StartSlideAnimation(delta);
+        // 5) 애니메이션이 불가능한 환경이면 여기서 끝
+        if (SlotRoot == null ||
+            Mathf.Approximately(SlotSpacing, 0f) ||
+            Mathf.Approximately(MoveDuration, 0f))
+        {
+            return;
+        }
+
+        m_isAnimating = true;
+
+        float y = SlotRoot.anchoredPosition.y;
+
+        // *** 핵심 포인트 ***
+        // "목표 레이아웃" 상태에서 SlotRoot를 delta * SlotSpacing 만큼 옆으로 밀어놓고
+        // 0으로 미끄러져 오게 한다.
+        //
+        // 예) center 0 → 1 (delta=+1)
+        //  - RefreshImmediate 후:  [-1,0,1,2,3] 배치, center=1
+        //  - SlotRoot.x = +SlotSpacing 으로 두면
+        //    화면 상엔 여전히 [-2,-1,0,1,2]처럼 보임(사람 눈엔 변화 없음)
+        //  - 거기서 0까지 슬라이드하면서 오른쪽에서 index 3이 서서히 등장
+        float fromX = delta * SlotSpacing;
+        float toX = 0f;
+
+        SlotRoot.anchoredPosition = new Vector2(fromX, y);
+
+        m_moveTween = SlotRoot
+            .DOAnchorPosX(toX, MoveDuration)
+            .SetEase(MoveEase)
+            .OnComplete(() =>
+            {
+                m_isAnimating = false;
+                m_moveTween = null;
+
+                // 혹시 남은 오차 정리
+                SlotRoot.anchoredPosition = new Vector2(0f, y);
+
+                // floating 오차나 스케일 트윗 등으로 어긋난 것이 있을 수 있으니 한 번 더 스냅
+                RefreshImmediate();
+            });
     }
 
     protected void RefreshImmediate()
@@ -293,17 +336,23 @@ public abstract class UITemplateCarouselBase<TItem, TData> : UITemplateBase wher
 
     protected void StopAnimation()
     {
-        // 위치 이동 트윈만 정리 (스케일 트윈 등은 건드리지 않음)
-        foreach (var t in m_moveTweens)
+        if (m_moveTween != null && m_moveTween.IsActive())
         {
-            if (t != null && t.IsActive())
-                t.Kill();
+            // OnComplete를 호출하지 않고 그냥 끊고,
+            // 현재 centerIndex 기준으로 다시 스냅한다.
+            m_moveTween.Kill();
+            m_moveTween = null;
         }
-        m_moveTweens.Clear();
 
         m_isAnimating = false;
 
-        // 현재 centerIndex 기준으로 한 번 스냅
+        if (SlotRoot != null)
+        {
+            Vector2 pos = SlotRoot.anchoredPosition;
+            SlotRoot.anchoredPosition = new Vector2(0f, pos.y);
+        }
+
+        // 현재 m_centerItemIndex 기준으로 레이아웃 다시 구성
         RefreshImmediate();
     }
 
