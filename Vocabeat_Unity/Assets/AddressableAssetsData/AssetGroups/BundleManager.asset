@@ -15,8 +15,20 @@ MonoBehaviour:
   m_GroupName: BundleManager
   m_GUID: 6faa1cd1933ce5049ba9c841e0e46f2f
   m_SerializeEntries:
+  - m_GUID: 6e6dbd00ef99ab147a87cd3c041f5e51
+    m_Address: SFX_EventChannel
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8edcccb5b33d23644ac3c672f40b7ba4
     m_Address: PrefabManagerBundle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7b0973cfa1b80a479da370502b278e9
+    m_Address: BGM_EventChannel
     m_ReadOnly: 0
     m_SerializedLabels:
     - Main

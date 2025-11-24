@@ -162,8 +162,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d50ecf20d4ba938468b82aff1315ec29, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  UIChannel: {fileID: 11400000, guid: 7d9fff8694230a645af61d42d75733d4, type: 2}
+  m_EditorClassIdentifier: CodeContents::SceneStepMaster
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

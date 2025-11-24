@@ -29,7 +29,7 @@ public class SceneStepIngameTest : SceneStepBase
     //-------------------------------------------------------------
     private void PrivSceneStepFinish()
     {
-        //UIChannel.UIShow<UIFrameInGame>().BindSongData(TestSongData, Diff);
-        UIChannel.UIShow<UIFrameSongMenu>().DoFrameSongMenuSetting(true);
+        UIChannel.UIShow<UIFrameInGame>().BindSongData(TestSongData, Diff);
+        //UIChannel.UIShow<UIFrameSongMenu>().DoFrameSongMenuSetting(true);
     }
 }

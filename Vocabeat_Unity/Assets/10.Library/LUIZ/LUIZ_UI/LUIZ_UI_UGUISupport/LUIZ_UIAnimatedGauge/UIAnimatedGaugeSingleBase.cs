@@ -1,4 +1,3 @@
-using PlasticGui.WorkspaceWindow;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,7 +52,7 @@ namespace LUIZ.UI
 
         private float PrivCalculateFillPercentage(float maxValue, float currentValue)
         {
-            //¿ÀÇÁ¼Â ±îÁö Àû¿ëÇØ¼­ ¸®ÅÏ
+            //ì˜¤í”„ì…‹ ê¹Œì§€ ì ìš©í•´ì„œ ë¦¬í„´
             float percent = currentValue / maxValue;
             float fillPercent = Mathf.Lerp(FrontFillOffset, EndFillOffset, percent);
 

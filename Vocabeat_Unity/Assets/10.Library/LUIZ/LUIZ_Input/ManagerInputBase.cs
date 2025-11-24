@@ -28,7 +28,9 @@ namespace LUIZ.InputSystem
     [RequireComponent(typeof(InputSystemUIInputModule))]
     public abstract class ManagerInputBase : SingletonBase<ManagerInputBase>
     {
-        [SerializeField] private InputSO PlayerInputSO;
+        [SerializeField] private InputSO PlayerInputSO; 
+
+        public InputSO GetInputChannel => PlayerInputSO;
         
         private PlayerInput m_playerInput;
         private InputSystemUIInputModule m_uiInputModule;

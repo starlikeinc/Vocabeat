@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: BundleSO
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: BundleSO
+  m_GUID: d256751c4ef31414fb46a118d2ea8507
+  m_SerializeEntries:
+  - m_GUID: 05e6bc19c043056449ad9951c1e82abd
+    m_Address: Song_Test4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 67b60c92656a7774cb32e8c39cd3611d
+    m_Address: SongDB
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7a5b583a4eb207245b34bf8a6e823e7b
+    m_Address: SFX_RedStar
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8000e3c4f44cef24980e5e461e9f02a7
+    m_Address: SFX_YellowStar
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8837fe5b03f784c4db11bc600fd4d944
+    m_Address: SFX_BlueStar
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 98f673aaf0c2d714ab1d727142c10c21
+    m_Address: JudgeSfxTable
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a5670d24c3e461346a4120c27ce3e024
+    m_Address: SFX_WhiteStar
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa99d383f3d933040a17b40ae26af2c8
+    m_Address: Song_FutureSight
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aec63a6b30a163940a50f13135029ec7
+    m_Address: Song_Test5
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b7e71e10cc3c65d49aabf51282d894f1
+    m_Address: BGM_GameResult
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c13389a3d05704c45a6177058d2199b5
+    m_Address: Song_Test2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c34e73a43cf88f74bb93e562034ea178
+    m_Address: Song_Test1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca6ad976992e58248827be5da06db00c
+    m_Address: Song_FutureSight
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0879996b1917df4bb4f580cc057a58a
+    m_Address: Song_Test3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: edeac89f9bad2bb44b26c730305a638e
+    m_Address: Song_Test6
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 7025a4780879b6848a702540fd30cb5f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: c9e68f5d4969b1241a30b50fc229da6f, type: 2}
+    - {fileID: 11400000, guid: 11a798a71216d494aa3091eb43bcaa42, type: 2}

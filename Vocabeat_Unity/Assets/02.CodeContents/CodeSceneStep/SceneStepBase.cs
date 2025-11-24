@@ -10,8 +10,20 @@ using UnityEngine.Serialization;
 
 public abstract class SceneStepBase : SceneAttacherBase
 {
-    [SerializeField] protected ManagerUISO UIChannel;
-    
+    protected static ManagerUISO UIChannel
+    {
+        get
+        {
+            if (UIChannel == null)
+                s_uiChannel = Resources.Load("ManagerUISO") as ManagerUISO;
+            
+            return s_uiChannel;
+        }
+    }
+
+    protected static ManagerUISO s_uiChannel = null;
+
+
     protected const string c_ManagerPrefabPath = "FrontPrefab";
     protected const string c_ManagerPrefabName = "PrefabManagerFront";
 

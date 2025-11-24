@@ -241,6 +241,7 @@ public class LineDrawer : Image
     }
 
     //__________________________________________________________________________ Editor
+#if UNITY_EDITOR
     protected override void OnValidate() // 인스펙터 창에서 프로퍼티를 변경할 때 실행되는 함수
     {
         base.OnValidate();
@@ -257,6 +258,7 @@ public class LineDrawer : Image
         if (tintColor != color)
             color = tintColor;
     }
+#endif
 }
 
 #if UNITY_EDITOR

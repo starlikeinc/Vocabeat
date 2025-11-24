@@ -526,8 +526,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: PrefabManagerFront
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5337902822642446226, guid: 9b1d29a9cbb6b864887a031039aedbca, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
