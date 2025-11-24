@@ -45,7 +45,7 @@ public class UIItemSongSlot : UITemplateCarouselItemBase
     {
         transform.DOKill(true);
 
-        _isCenter = isCenter;
+        _isCenter = isCenter;                
         float targetScale = isCenter ? _focusScale : 1f;
         transform.DOScale(targetScale, _duration)
                  .SetEase(Ease.OutQuad);
@@ -62,10 +62,7 @@ public class UIItemSongSlot : UITemplateCarouselItemBase
     {
         OnClick?.Invoke(this);
         if (!_isCenter)
-        {
             _frameSongMenu.PlayFrameSfx(ESongMenuSfxKey.Slide);
-            _frameSongMenu.ChangeFrameBGM(_songDataSO.BGMCue);
-        }            
     }
 
     private void OnDestroy()

@@ -44,9 +44,8 @@ public abstract class UITemplateCarouselBase<TItem, TData> : UITemplateBase wher
 
     protected int CenterSlotIndex => VisibleSlotCount / 2;
 
-
     /// <summary>중앙 인덱스가 바뀔 때 알리는 이벤트 (데이터 같이 넘김)</summary>
-    public event Action<int, TData> OnCenterChanged;
+    public event Action<int, TData> OnCenterChanged;    
 
     //-----------------------------------------------------------
     #region Unity & 초기화
@@ -144,6 +143,15 @@ public abstract class UITemplateCarouselBase<TItem, TData> : UITemplateBase wher
         StopAnimation();
         RefreshImmediate();
         RaiseCenterChanged();
+    }
+
+    public void RefreshSlotsVisualOnly()
+    {
+        // 혹시 리스트 길이가 바뀌었을 수도 있으니 최신 값으로 갱신
+        m_itemCount = Mathf.Max(0, GetItemCount());
+        
+        // 현재 m_centerItemIndex 기준으로 슬롯들만 다시 그리기
+        RefreshImmediate();
     }
 
     public int GetCurrentCenterIndex() => m_centerItemIndex;
@@ -364,7 +372,6 @@ public abstract class UITemplateCarouselBase<TItem, TData> : UITemplateBase wher
         OnCenterChanged?.Invoke(m_centerItemIndex, data);
         OnCenterIndexChanged(m_centerItemIndex, data);
     }
-
     #endregion
 
     //-----------------------------------------------------------

@@ -337,10 +337,7 @@ MonoBehaviour:
   _widgetScanLine: {fileID: 3238610345010714446}
   _noteNormalSpawner: {fileID: 888901526933506399}
   _noteFlowHoldSpawner: {fileID: 5833727394412984397}
-  _imgSongThumb: {fileID: 6646556086320621935}
-  _textSongName: {fileID: 5901768963434447401}
-  _textSongComposer: {fileID: 3399058462321010392}
-  _templateGameScore: {fileID: 3178506338712075461}
+  _widgetTopPanel: {fileID: 7938990209234351710}
   _widgetGameBG: {fileID: 2248845079694957319}
   _widgetSongProgress: {fileID: 7654030598880558183}
   _widgetPausePopup: {fileID: 2629340483059847941}
@@ -1474,8 +1471,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5001917759250163268}
+  - component: {fileID: 4274873926931155800}
+  - component: {fileID: 4455895697520494948}
+  - component: {fileID: 7938990209234351710}
   m_Layer: 5
-  m_Name: UIContTopPanel
+  m_Name: UIWidgetTopPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1504,6 +1504,63 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!223 &4274873926931155800
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3073950268499479409}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &4455895697520494948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3073950268499479409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &7938990209234351710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3073950268499479409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9db8419a48c72fd4facf3637ac8a7aa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CodeContents::UIWidgetTopPanel
+  SortOrderOffset: 3
+  _imgSongThumb: {fileID: 6646556086320621935}
+  _textSongName: {fileID: 5901768963434447401}
+  _textSongComposer: {fileID: 3399058462321010392}
+  _templateGameScore: {fileID: 3178506338712075461}
 --- !u!1 &3505343819077895058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1552,6 +1609,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6806126151652149180}
   - component: {fileID: 3238610345010714446}
+  - component: {fileID: 7589686062383879696}
+  - component: {fileID: 6172617870447141296}
   m_Layer: 5
   m_Name: UIWidgetScanLine
   m_TagString: Untagged
@@ -1591,7 +1650,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37cd713fcbfa7c64d8e9e11cf0ce0f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CodeContents::UIWidgetScanLine
+  SortOrderOffset: 2
   ScanLine: {fileID: 1447704330628176896}
+--- !u!223 &7589686062383879696
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4001107393652542878}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &6172617870447141296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4001107393652542878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &4029865823648083013
 GameObject:
   m_ObjectHideFlags: 0
@@ -1940,7 +2040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6943bf7f93c02c449279c25a1b90623, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CodeContents::UITemplateGameScore
-  SortOrderOffset: 1
+  SortOrderOffset: 4
   TemplateItem: {fileID: 1634917926399990243}
   _container: {fileID: 6183030270807420967}
   sprite0: {fileID: 21300000, guid: 7edb5282cd7485b42ae86f82f074a609, type: 3}
@@ -1965,6 +2065,7 @@ GameObject:
   - component: {fileID: 2077033746869103054}
   - component: {fileID: 1767179881210904990}
   - component: {fileID: 3874668033042261667}
+  - component: {fileID: 447788107212028138}
   m_Layer: 5
   m_Name: UIImgGameBG
   m_TagString: Untagged
@@ -1981,13 +2082,13 @@ RectTransform:
   m_GameObject: {fileID: 5417821075391174285}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8249324481810889691}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2029,6 +2130,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &447788107212028138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5417821075391174285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
+  m_AspectMode: 4
+  m_AspectRatio: 2
 --- !u!1 &5425638797081168257
 GameObject:
   m_ObjectHideFlags: 0
@@ -2063,7 +2178,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 4, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5622418000803849751
@@ -2737,6 +2852,8 @@ GameObject:
   m_Component:
   - component: {fileID: 373511073951790305}
   - component: {fileID: 2629340483059847941}
+  - component: {fileID: 6907399097481192448}
+  - component: {fileID: 3043984032693150414}
   m_Layer: 5
   m_Name: UIWidgetPausePopup
   m_TagString: Untagged
@@ -2777,6 +2894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60370ed6995930d4496284fc3df19a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CodeContents::UIWidgetPausePopup
+  SortOrderOffset: 5
   OnPopupEnable:
     m_PersistentCalls:
       m_Calls:
@@ -2792,6 +2910,46 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!223 &6907399097481192448
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6531364732368586530}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &3043984032693150414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6531364732368586530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &7177317590612976850
 GameObject:
   m_ObjectHideFlags: 0
@@ -2934,7 +3092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b00ec316e07794a87b669720c127bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CodeContents::UIWidgetGameBG
-  _gameBG: {fileID: 7033028749637747066}
+  _gameBG: {fileID: 3874668033042261667}
   _bgDimmer: {fileID: 7033028749637747066}
   _bgDimAlphaValue: 0.7
   _bgDimDuration: 1

@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 9144051376481651727}
   - component: {fileID: 5308997103369432472}
   - component: {fileID: 8418006881521078793}
+  - component: {fileID: 3931530656008097866}
   m_Layer: 5
   m_Name: UIContainer
   m_TagString: Untagged
@@ -115,3 +116,18 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
+--- !u!114 &3931530656008097866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5756200354167423691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c02e863bfb85d7c4784d983abae5e8f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CodeContents::UISafeArea
+  rectTransfrom: {fileID: 9144051376481651727}
+  conformX: 1
+  conformY: 1

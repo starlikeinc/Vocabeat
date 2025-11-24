@@ -48,6 +48,7 @@ public class UIFrameBlinder : UIFrameBase
             .Append(_blinder.DOFade(1f, _duration).SetEase(Ease.InSine))
             .AppendCallback(() => _onNextStep?.Invoke())
             .AppendInterval(_blindWait)
-            .Append(_blinder.DOFade(0f, _duration).SetEase(Ease.InSine));
+            .Append(_blinder.DOFade(0f, _duration).SetEase(Ease.InSine))
+            .AppendCallback(() => UIChannel.UIHide<UIFrameBlinder>());
     }
 }

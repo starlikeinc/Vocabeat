@@ -1,7 +1,7 @@
 using LUIZ.UI;
 using UnityEngine;
 
-public class UIWidgetScanLine : UIWidgetBase
+public class UIWidgetScanLine : UIWidgetCanvasBase
 {
     [Header("Refs")]
     [SerializeField] private RectTransform ScanLine;    

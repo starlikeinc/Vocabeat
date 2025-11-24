@@ -17,7 +17,7 @@ public class UIWidgetGameBG : UIWidgetBase
     // ========================================
     public void DoUIGameBGSetting(Sprite bg, Action onDimComplete)
     {
-        _gameBG.sprite = bg;
+        _gameBG.overrideSprite = bg;
 
         void OnDimComplete() => onDimComplete?.Invoke();
 

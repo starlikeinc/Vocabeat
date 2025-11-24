@@ -9,6 +9,6 @@ public class UIContainerMain : UIContainerBase
     {
         base.OnContainerInitialize();
 
-        UIChannel.UIShow<UIFrameTest>();
+        UIChannel.UIShow<UIFrameSongMenu>().DoFrameSongMenuSetting(true);
     }
 }

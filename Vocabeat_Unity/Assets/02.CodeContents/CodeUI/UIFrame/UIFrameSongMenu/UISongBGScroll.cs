@@ -1,10 +1,12 @@
 using DG.Tweening;
 using LUIZ.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UISongBGScroll : UIWidgetBase
 {
-    [SerializeField] private RectTransform _bgRect;   
+    [SerializeField] private RectTransform _bgRect;
+    [SerializeField] private Image _bgImg;
     [SerializeField] private float _duration = 10f;
 
     private Tween _bgScrollTween;
@@ -15,6 +17,11 @@ public class UISongBGScroll : UIWidgetBase
     {
         base.OnUIWidgetInitialize(parentFrame);
         InitBGScrollSizeSetup();
+    }
+
+    public void DoBGChange(Sprite bg)
+    {
+        _bgImg.overrideSprite = bg;
     }
 
     public void DoBGScrollInfinite()

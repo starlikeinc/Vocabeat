@@ -16,10 +16,7 @@ public class UIFrameInGame : UIFrameBase
     [SerializeField] private UINoteFlowHoldSpawner _noteFlowHoldSpawner;
 
     [Header("Top Info")]
-    [SerializeField] private Image _imgSongThumb;
-    [SerializeField] private TMP_Text _textSongName;
-    [SerializeField] private TMP_Text _textSongComposer;
-    [SerializeField] private UITemplateGameScore _templateGameScore;
+    [SerializeField] private UIWidgetTopPanel _widgetTopPanel;    
 
     [Header("BG")]
     [SerializeField] private UIWidgetGameBG _widgetGameBG;
@@ -31,7 +28,7 @@ public class UIFrameInGame : UIFrameBase
     [SerializeField] private UIWidgetPausePopup _widgetPausePopup;
 
     private SongDataSO _curSongDataSO;
-    private EDifficulty _songDiff;
+    private EDifficulty _songDiff;    
 
     // ========================================
     protected override void OnUIFrameInitialize()
@@ -118,16 +115,25 @@ public class UIFrameInGame : UIFrameBase
         ManagerRhythm.Instance.BindSongData(_curSongDataSO, _songDiff, touchArea, uiCam);        
     }
 
+    public void ReturnToSongMenu()
+    {
+        UIChannel.UIShow<UIFrameBlinder>().BlindWithNextStep(() =>
+        {
+            ManagerRhythm.Instance.ExitSong();
+            UIChannel.UIHide<UIFrameInGame>();
+            UIChannel.UIShow<UIFrameSongMenu>().DoFrameSongMenuSetting(false);
+        });
+    }
+
     // ========================================
     private void SetGameTopInfo()
     {
-        _imgSongThumb.overrideSprite = _curSongDataSO.SongThumb;
-        _textSongName.text = _curSongDataSO.SongName;
+        _widgetTopPanel.DoWidgetTopPanelSetting(_curSongDataSO);
     }
 
     private void SetGameBG()
     {
-        _widgetGameBG.DoUIGameBGSetting(_curSongDataSO.SongThumb, OnDimComplete);
+        _widgetGameBG.DoUIGameBGSetting(_curSongDataSO.SongBG, OnDimComplete);
     }
 
     private void SetSongProgress()

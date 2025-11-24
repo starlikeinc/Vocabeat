@@ -64,6 +64,18 @@ public class UICarouselSong : UITemplateCarouselBase<UIItemSongSlot, SongDataSO>
 
     #endregion
 
+    protected override void OnClickNext()
+    {
+        base.OnClickNext();
+        _frameSongMenu.PlayFrameSfx(ESongMenuSfxKey.Slide);
+    }
+
+    protected override void OnClickPrev()
+    {
+        base.OnClickPrev();
+        _frameSongMenu.PlayFrameSfx(ESongMenuSfxKey.Slide);
+    }
+
     #region 외부 초기화
 
     /// <summary>

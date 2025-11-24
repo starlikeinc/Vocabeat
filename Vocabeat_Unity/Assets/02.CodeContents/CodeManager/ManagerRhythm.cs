@@ -3,7 +3,9 @@ using System;
 using UnityEngine;
 
 public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
-{    
+{
+    private const string MusicKey_Key = "MusicKey";
+
     public event Action<float> OnTickUpdate;
     public event Action OnSongBinded;
     public event Action OnSongStarted;
@@ -24,7 +26,7 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     public RhythmTimeline RTimeline => _rTimeline;
     public NoteTouchJudgeSystem NoteJudegeSystem => _noteJudgeSystem;
 
-    public SongDatabaseSO SongDB => _songDB;
+    public SongDatabaseSO SongDB => _songDB;    
 
     public SongDataSO CurSongDataSO { get; private set; }
     public int CurrentScore
@@ -37,6 +39,17 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
             OnScoreChanged?.Invoke(_currentScore);
         }
     }
+
+    public int MusicKey
+    {
+        get => _musicKey;
+        set
+        {
+            _musicKey = Mathf.Clamp(value, 0, int.MaxValue);
+            SecurePrefs.SetInt(MusicKey_Key, _musicKey);
+        }
+    }
+    private int _musicKey;
     public bool IsPlaying => _rTimeline.IsPlaying;
 
 
@@ -58,6 +71,7 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
             RTimeline.OnSongComplete += HandleSongComplete;
 
         PreWarmSong();
+        LoadKey();
     }
 
     protected override void OnUnityDestroy()
@@ -139,7 +153,7 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
         _currentScore = 0;
         OnScoreChanged?.Invoke(_currentScore);
         _nextBeatIndex = 0;
-    }
+    }    
 
     private void PreWarmSong()
     {
@@ -160,6 +174,12 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
             // 비동기 로드
             clip.LoadAudioData();
         }
+    }
+
+    private void LoadKey()
+    {
+        MusicKey = SecurePrefs.GetInt(MusicKey_Key);
+        Debug.Log($"Load된 키 개수 {MusicKey}");
     }
 
     // ========================================
@@ -211,7 +231,7 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
 
     public void ResumeSong()
     {
-
+        RTimeline.Resume();
     }
 
     public void RetrySong()
@@ -233,6 +253,13 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     public void ExitSong()
     {
         ClearSong();
+    }
+
+    // Test
+    public void AddMusicKey()
+    {
+        MusicKey++;
+        Debug.Log($"키 개수 {MusicKey}");
     }
 
     // ======================================== 점수관련 - 어차피 기획 상 따로 저장 안 하는 거 같아서 그냥 여기다 함

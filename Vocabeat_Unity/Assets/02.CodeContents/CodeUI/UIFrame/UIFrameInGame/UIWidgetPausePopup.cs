@@ -2,7 +2,7 @@ using LUIZ.UI;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class UIWidgetPausePopup : UIWidgetBase
+public class UIWidgetPausePopup : UIWidgetCanvasBase
 {
     [SerializeField] private UnityEvent OnPopupEnable;
 
@@ -25,6 +25,7 @@ public class UIWidgetPausePopup : UIWidgetBase
     public void OnResume()
     {
         DoUIWidgetHide();
+        ManagerRhythm.Instance.ResumeSong();
     }
 
     public void OnRetry()
@@ -35,6 +36,7 @@ public class UIWidgetPausePopup : UIWidgetBase
 
     public void OnExit()
     {
-
+        DoUIWidgetHide();
+        _frameInGame.ReturnToSongMenu();
     }
 }

@@ -57,7 +57,7 @@ public abstract class UIFrameUsage<TSfxKey> : UIFrameBase where TSfxKey : struct
     {
         _bgmChannel.Raise(cue);
         _bgmChannel.PlayScheduled(0.2f, true);
-    }
+    }    
 
     protected void PlayFrameBgm(bool isLoop = true)
     {
@@ -66,5 +66,13 @@ public abstract class UIFrameUsage<TSfxKey> : UIFrameBase where TSfxKey : struct
 
         _bgmChannel.Raise(_bgmCue);
         _bgmChannel.PlayScheduled(0, isLoop);
+    }
+
+    protected void StopFrameBgm()
+    {
+        if (_bgmChannel == null)
+            return;
+
+        _bgmChannel.StopAudio();
     }
 }
