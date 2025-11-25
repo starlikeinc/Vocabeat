@@ -48,11 +48,6 @@ public class UIWidgetUnlock : UIWidgetCanvasBase
         }
     }
 
-    public void OnAddKey()
-    {
-        ManagerRhythm.Instance.AddMusicKey();
-    }
-
     public void OnCancel()
     {
         _frameSongMenu.PlayFrameSfx(ESongMenuSfxKey.BtnClick);

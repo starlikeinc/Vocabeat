@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66d069e16034348478b969d35cf26c36, type: 3}
   m_Name: BGM_Main
   m_EditorClassIdentifier: CodeContents::AudioCueSO
-  _listClips: []
+  _listClips:
+  - {fileID: 8300000, guid: 4a5343a5c4144b84f92ce4407c049ebf, type: 3}
   _volume: 1
   _pitch: 1
   _loop: 0

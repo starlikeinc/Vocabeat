@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SceneStepIngameTest : SceneStepBase
 {
-    private enum EEntryType { SongMenu, InGame }
+    private enum EEntryType { Title, Main, SongMenu, InGame }
 
     [SerializeField] private Camera DevelopCamera;
     [SerializeField] private UIContainerBase UIContainerDevelop;
@@ -27,7 +27,7 @@ public class SceneStepIngameTest : SceneStepBase
                 UIContainerDevelop.DoRegisterContainer();
 
                 PrivSceneStepFinish();
-            });            
+            });
         });
     }
 
@@ -38,5 +38,9 @@ public class SceneStepIngameTest : SceneStepBase
             UIChannel.UIShow<UIFrameSongMenu>().DoFrameSongMenuSetting(true);
         else if (_entryType == EEntryType.InGame)
             UIChannel.UIShow<UIFrameInGame>().BindSongData(TestSongData, Diff);
+        else if (_entryType == EEntryType.Title)
+            UIChannel.UIShow<UIFrameTitle>();
+        else if (_entryType == EEntryType.Main)
+            UIChannel.UIShow<UIFrameMain>();
     }
 }

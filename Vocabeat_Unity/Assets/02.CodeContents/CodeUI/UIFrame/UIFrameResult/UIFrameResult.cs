@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics.Tracing;
+using DG.Tweening;
 using LUIZ.UI;
 using TMPro;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class UIFrameResult : UIFrameBase
         public ERank RankType;
         public Sprite RankSprite;
     }
+
+    private const int c_AddKeyValue = 1;
 
     [Header("BGM")]
     [SerializeField] private BGMEventChannelSO _eventChannel;
@@ -41,19 +44,18 @@ public class UIFrameResult : UIFrameBase
     [Header("BG")]
     [SerializeField] private Image _imgBG;
 
-    [Header("실패 연출")]
-    [SerializeField] private UnityEvent OnFailed;
+    [Header("키 획득 연출")]
+    [SerializeField] private GameObject _pivotKey;
+    [SerializeField] private DOTweenAnimation _tweenKeyAcquire;
 
-    // ========================================            
-    protected override void OnUIFrameHide()
-    {
-        base.OnUIFrameHide();
-        _objFail.gameObject.SetActive(false);
-    }
+    [Header("실패 연출")]
+    [SerializeField] private UnityEvent OnFailed;        
 
     // ========================================            
     public void DoFrameResultSetting()
     {
+        _objFail.gameObject.SetActive(false);
+
         _eventChannel.Raise(_audioCue);
         _eventChannel.PlayScheduled(0);
 
@@ -102,8 +104,15 @@ public class UIFrameResult : UIFrameBase
     private void TryInvokeFailEvent()
     {
         bool isFail = ManagerRhythm.Instance.CurrentScore < GameConstant.RequirePoint_C;
+        _pivotKey.SetActive(!isFail);
+
         if (isFail)
             OnFailed?.Invoke();
+        else
+        {
+            _tweenKeyAcquire.RecreateTweenAndPlay();
+            ManagerRhythm.Instance.AddMusicKey(c_AddKeyValue);
+        }
     }
 
     private Sprite GetRankSpriteByType(ERank rank)

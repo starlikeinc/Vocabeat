@@ -43,9 +43,9 @@ public class UITemplateGameScore : UITemplateBase
 
     protected override void OnUIWidgetInitialize(UIFrameBase parentFrame)
     {
-        base.OnUIWidgetInitialize(parentFrame);
-        ManagerRhythm.Instance.OnScoreChanged -= SetScore;
-        ManagerRhythm.Instance.OnScoreChanged += SetScore;
+        base.OnUIWidgetInitialize(parentFrame); // 현재 TMPText로 바꿔서 하는 중
+        //ManagerRhythm.Instance.OnScoreChanged -= SetScore;
+        //ManagerRhythm.Instance.OnScoreChanged += SetScore;
     }
 
     public void SetScore(int score)

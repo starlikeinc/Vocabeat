@@ -9,14 +9,14 @@ public class ManagerInput : ManagerInputBase
     {
         base.OnUnityAwake();
 
-        var playerInputActions = new PlayerInputActions();
-        ProtMgrInputBaseSetting(playerInputActions, playerInputActions.asset);
+        //var playerInputActions = new PlayerInputActions();
+        //ProtMgrInputBaseSetting(playerInputActions, playerInputActions.asset);
 
-        DoMgrInputBaseDisableAllActionMaps();
-        DoMgrInputBaseChangeActionMap("PC_Player");
+        //DoMgrInputBaseDisableAllActionMaps();
+        //DoMgrInputBaseChangeActionMap("PC_Player");
         
         //이거로 등록 해두면 InputSO의 이벤트에 등록 됨
-        ProtMgrInputAddAction<Vector2>("Move");
+        //ProtMgrInputAddAction<Vector2>("Move");
         //ProtMgrInputAddAction<bool>("CompositeTest"); 테스트중
     }
 }

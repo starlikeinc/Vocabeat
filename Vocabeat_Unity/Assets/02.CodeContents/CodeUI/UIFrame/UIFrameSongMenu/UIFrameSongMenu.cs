@@ -97,8 +97,13 @@ public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
     }
 
     public void OnBack()
-    {
-        // TODO : 메인 메뉴로
+    {                
+        UIChannel.UIShow<UIFrameBlinder>().BlindWithNextStep(() =>
+        {
+            StopFrameBgm();
+            UIChannel.UIHide<UIFrameSongMenu>();
+            UIChannel.UIShow<UIFrameMain>();
+        });
     }
 
     public void OnOption()

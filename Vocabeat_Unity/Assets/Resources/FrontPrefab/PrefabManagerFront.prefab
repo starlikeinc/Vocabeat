@@ -650,7 +650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 7657ee17bc03e7c4d9096c13f3195fee, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 7310050431963361545}
   m_DeviceLostEvent:
@@ -669,7 +669,7 @@ MonoBehaviour:
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: PC_Player
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &7128331239498329833
@@ -703,17 +703,17 @@ MonoBehaviour:
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: 7657ee17bc03e7c4d9096c13f3195fee, type: 3}
-  m_PointAction: {fileID: -7604588657019205643, guid: 7657ee17bc03e7c4d9096c13f3195fee, type: 3}
-  m_MoveAction: {fileID: -3694531713302363433, guid: 7657ee17bc03e7c4d9096c13f3195fee, type: 3}
-  m_SubmitAction: {fileID: 1037105544005604515, guid: 7657ee17bc03e7c4d9096c13f3195fee, type: 3}
-  m_CancelAction: {fileID: -492513034544843667, guid: 7657ee17bc03e7c4d9096c13f3195fee, type: 3}
-  m_LeftClickAction: {fileID: -6482254507822143265, guid: 7657ee17bc03e7c4d9096c13f3195fee, type: 3}
-  m_MiddleClickAction: {fileID: 7168269450919770636, guid: 7657ee17bc03e7c4d9096c13f3195fee, type: 3}
-  m_RightClickAction: {fileID: 6351588116777166101, guid: 7657ee17bc03e7c4d9096c13f3195fee, type: 3}
-  m_ScrollWheelAction: {fileID: -4970214969525370281, guid: 7657ee17bc03e7c4d9096c13f3195fee, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 0}
-  m_TrackedDeviceOrientationAction: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0

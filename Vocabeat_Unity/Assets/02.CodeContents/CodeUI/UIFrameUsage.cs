@@ -23,6 +23,8 @@ public abstract class UIFrameUsage<TSfxKey> : UIFrameBase where TSfxKey : struct
 
     private Dictionary<TSfxKey, AudioCueSO> _sfxDict;
 
+    protected AudioCueSO BGMCue => _bgmCue;
+
     protected override void OnUnityAwake()
     {
         base.OnUnityAwake();

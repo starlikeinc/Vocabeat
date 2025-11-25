@@ -57,6 +57,25 @@ public class ManagerUnlock : SingletonBase<ManagerUnlock>, IManagerInstance
             Save();
     }
 
+    public void UnlockAllSongs(bool saveImmediately = true)
+    {
+        // SongDatabase에서 모든 SongDataSO 리스트 가져온다고 가정
+        var allSongs = ManagerRhythm.Instance.SongDB.Songs;
+
+        foreach (var song in allSongs)
+        {
+            int songId = GetSongId(song);
+            _unlockedSongIds.Add(songId);
+        }
+
+        if (saveImmediately)
+            Save();
+
+#if UNITY_EDITOR
+        Debug.Log($"[ManagerUnlock] All songs unlocked. Total: {_unlockedSongIds.Count}");
+#endif
+    }
+
     // ---------------------------------------
     // 내부: SongId 추출
     // ---------------------------------------

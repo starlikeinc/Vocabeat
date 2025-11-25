@@ -33,15 +33,6 @@ MonoBehaviour:
       isAsset: 0
       _id: 1062463984
     - globalId:
-        globalObjectIdString: GlobalObjectId_V1-1-d735e7a750732a841b0d4d8a76d52a72-102900000-0
-      _typeString: UnityEditor.DefaultAsset, UnityEditor.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      _obj: {fileID: 102900000, guid: d735e7a750732a841b0d4d8a76d52a72, type: 3}
-      isSceneGameObject: 0
-      isFolder: 1
-      isAsset: 0
-      _id: 1062534344
-    - globalId:
         globalObjectIdString: GlobalObjectId_V1-1-06ff566dee806044c9be3481718c058b-102900000-0
       _typeString: UnityEditor.DefaultAsset, UnityEditor.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
@@ -78,13 +69,23 @@ MonoBehaviour:
       isAsset: 1
       _id: 1059725435
     - globalId:
-        globalObjectIdString: GlobalObjectId_V1-3-aa99d383f3d933040a17b40ae26af2c8-11400000-0
-      _typeString: SongDataSO, CodeContents, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      _obj: {fileID: 11400000, guid: aa99d383f3d933040a17b40ae26af2c8, type: 2}
+        globalObjectIdString: GlobalObjectId_V1-1-9b1d29a9cbb6b864887a031039aedbca-6970754477570354538-0
+      _typeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      _obj: {fileID: 6970754477570354538, guid: 9b1d29a9cbb6b864887a031039aedbca, type: 3}
       isSceneGameObject: 0
       isFolder: 0
       isAsset: 1
-      _id: 1061023143
+      _id: 1039649106
+    - globalId:
+        globalObjectIdString: GlobalObjectId_V1-1-8edcccb5b33d23644ac3c672f40b7ba4-4025543875063819741-0
+      _typeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      _obj: {fileID: 4025543875063819741, guid: 8edcccb5b33d23644ac3c672f40b7ba4, type: 3}
+      isSceneGameObject: 0
+      isFolder: 0
+      isAsset: 1
+      _id: 1058124197
     - globalId:
         globalObjectIdString: GlobalObjectId_V1-1-5123800741becde4395cc7200f8e3491-2796859011834062146-0
       _typeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,

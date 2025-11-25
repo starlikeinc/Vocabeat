@@ -1050,7 +1050,7 @@ MonoBehaviour:
   _rTimeline: {fileID: 9214069441211490358}
   _noteJudgeSystem: {fileID: 7016943012331917170}
   _songDB: {fileID: 11400000, guid: 67b60c92656a7774cb32e8c39cd3611d, type: 2}
-  _metronomSrc: {fileID: 6457830119375295167}
+  _metronomSrc: {fileID: 0}
 --- !u!114 &7016943012331917170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1065,11 +1065,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: CodeContents::NoteTouchJudgeSystem
   _sfxEventChannel: {fileID: 11400000, guid: 6e6dbd00ef99ab147a87cd3c041f5e51, type: 2}
   _judgeSFXTable: {fileID: 11400000, guid: 98f673aaf0c2d714ab1d727142c10c21, type: 2}
-  _touchRadius: 100
-  _blueStarRange: 30
-  _whiteStarRange: 80
-  _yellowStarRange: 120
-  _redStarRange: 150
+  _touchRadius: 150
+  _blueStarRange: 50
+  _whiteStarRange: 100
+  _yellowStarRange: 150
+  _redStarRange: 200
+  _autoMissDelayTicks: 100
 --- !u!114 &9214069441211490358
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -254,12 +254,10 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     {
         ClearSong();
     }
-
-    // Test
-    public void AddMusicKey()
+    
+    public void AddMusicKey(int addValue)
     {
-        MusicKey++;
-        Debug.Log($"키 개수 {MusicKey}");
+        MusicKey += addValue;        
     }
 
     // ======================================== 점수관련 - 어차피 기획 상 따로 저장 안 하는 거 같아서 그냥 여기다 함

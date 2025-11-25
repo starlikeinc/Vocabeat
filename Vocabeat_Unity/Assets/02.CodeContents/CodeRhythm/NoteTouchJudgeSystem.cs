@@ -20,6 +20,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
     [SerializeField] private int _whiteStarRange = 80;
     [SerializeField] private int _yellowStarRange = 120;
     [SerializeField] private int _redStarRange = 150;
+    [SerializeField] private int _autoMissDelayTicks = 30;
 
     private ManagerRhythm _context;
 
@@ -188,16 +189,25 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             if (_activeHoldStates.ContainsKey(id))
                 continue;
 
-            int diffTick = Mathf.Abs(note.Tick - songTick);
-            if (diffTick > _redStarRange)
+            int deltaTick = songTick - note.Tick; // 음수면 아직 Tick보다 이전, 양수면 Tick 지난 상태
+
+            // 1) 너무 이른 상태 (노트 Tick - _redStarRange 보다 더 이전이면 스킵)
+            if (deltaTick < -_redStarRange)
                 continue;
+
+            // 2) Tick 이후에는 아예 새 터치로 판정하지 않음 (늦게 친 건 무시)
+            if (deltaTick > _autoMissDelayTicks)
+                continue;
+
+            // 여기까지 통과했으면 deltaTick은 [-_redStarRange, 0] 구간
+            int absDiffTick = Mathf.Abs(deltaTick);
 
             Vector2 idealLocal = GetExpectedLocalPositionForTap(note, songTick);
             float dist = Vector2.Distance(localPos, idealLocal);
 
-            if (diffTick < bestDiff || (diffTick == bestDiff && dist < bestDist))
+            if (absDiffTick < bestDiff || (absDiffTick == bestDiff && dist < bestDist))
             {
-                bestDiff = diffTick;
+                bestDiff = absDiffTick;
                 bestDist = dist;
                 bestNote = note;
             }
@@ -220,7 +230,17 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             return;
 
         int noteTick = note.Tick;
-        int diff = Mathf.Abs(noteTick - songTick);
+        int deltaTick = songTick - noteTick;
+
+        // 늦게 들어온 입력은 그냥 무시
+        if (deltaTick > _autoMissDelayTicks)
+            return;
+
+        // 너무 이른 입력도 방어 (이론상 TryTouch에서 걸러졌지만 안전용)
+        if (deltaTick < -_redStarRange)
+            return;
+
+        int diff = Mathf.Abs(deltaTick);
 
         EJudgementType judgeType =
             diff <= _blueStarRange ? EJudgementType.BlueStar :
@@ -514,7 +534,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             if (_activeHoldStates.ContainsKey(id))
                 continue;
 
-            if (songTick > note.Tick + _redStarRange)
+            if (songTick > note.Tick + _autoMissDelayTicks)
             {
                 _tempMissCandidates.Add(note);
             }
