@@ -150,7 +150,7 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     private void ClearSong()
     {
         CurSongDataSO = null;
-        _currentScore = 0;
+        _currentScore = 0;        
         OnScoreChanged?.Invoke(_currentScore);
         _nextBeatIndex = 0;
     }    

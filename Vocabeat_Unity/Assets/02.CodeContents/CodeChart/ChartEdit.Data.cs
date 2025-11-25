@@ -55,6 +55,8 @@ public partial class ChartEdit
             EditNotesDict[diff] = listNoteData;
         }
 
+        FixBoundaryTicksForList(listNoteData);
+
         TargetSongData.SaveNoteDatas(diff, listNoteData, level);
 
 #if UNITY_EDITOR
@@ -88,6 +90,57 @@ public partial class ChartEdit
         // 2) 정렬된 순서대로 ID 재할당
         for (int i = 0; i < list.Count; i++)
             list[i].ID = i;
+    }
+
+    /// <summary>
+    /// 저장 전에, 페이지 오른쪽 끝에 있다고 봐야 하는데
+    /// Tick이 다음 페이지 시작(960, 1920...)에 걸려있는 노트들을 -1 Tick 보정.
+    /// </summary>
+    private void FixBoundaryTicksForList(List<Note> list)
+    {
+        if (list == null || list.Count == 0)
+            return;
+
+        int ticksPerPage = _visualizer != null ? _visualizer.TicksPerPage : 960;
+
+        foreach (var n in list)
+        {
+            if (n == null)
+                continue;
+
+            // 1) 시작 Tick 보정 (모든 노트 공통)
+            if (n.Tick > 0)
+            {
+                int pageFromTick = n.Tick / ticksPerPage;
+                int localTick = n.Tick % ticksPerPage;
+
+                // 예: Tick = 960, PageIndex = 0 같은 케이스만 보정
+                if (localTick == 0 && pageFromTick > 0 && n.PageIndex == pageFromTick - 1)
+                {
+                    n.Tick -= 1;
+                }
+            }
+
+            // 2) FlowHold 끝 지점 보정 (FlowHold 전용)
+            if (n.NoteType == ENoteType.FlowHold && n.HoldTick > 0)
+            {
+                int endTick = n.Tick + n.HoldTick;
+                if (endTick <= 0)
+                    continue;
+
+                int endPage = endTick / ticksPerPage;
+                int localEndTick = endTick % ticksPerPage;
+
+                // 예: start=460, hold=500 → endTick=960
+                // endPage = 1, localEndTick = 0, PageIndex = 0 이면
+                // "0페이지 오른쪽 끝"으로 본다
+                if (localEndTick == 0 && endPage > 0 && n.PageIndex == endPage - 1)
+                {
+                    // endTick을 1 줄이고 싶으니 HoldTick을 1 줄인다.
+                    n.HoldTick -= 1;
+                }
+            }
+        }
     }
 
     // Save 버튼에서 쓸 래핑용

@@ -909,9 +909,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: CodeContents::SceneStepIngameTest
   DevelopCamera: {fileID: 1647127337}
   UIContainerDevelop: {fileID: 977222666}
-  TestSongData: {fileID: 11400000, guid: aa99d383f3d933040a17b40ae26af2c8, type: 2}
+  TestSongData: {fileID: 11400000, guid: c13389a3d05704c45a6177058d2199b5, type: 2}
   Diff: 0
-  _entryType: 3
+  _entryType: 1
 --- !u!1001 &22802054536217421
 PrefabInstance:
   m_ObjectHideFlags: 0

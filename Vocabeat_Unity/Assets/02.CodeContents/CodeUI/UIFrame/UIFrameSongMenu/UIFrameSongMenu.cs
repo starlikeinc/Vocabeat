@@ -76,6 +76,12 @@ public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
         _carouselSong.RefreshSlotsVisualOnly();
     }
 
+    public void SetCurrentSongDifficulty(EDifficulty diff)
+    {
+        _difficulty = diff;
+        _widgetSongInfo.SetDifficulty(diff);
+    }
+
     public void OnPlay()
     {
         if (_songData == null)

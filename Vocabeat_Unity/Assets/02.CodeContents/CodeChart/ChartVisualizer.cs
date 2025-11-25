@@ -180,10 +180,11 @@ public class ChartVisualizer : MonoBehaviour
                 _spawnedVertLines.Add(line);
                 _gridXs.Add(x);
 
-                // 수정된 부분!
                 int localTick = Mathf.RoundToInt(_ticksPerPage * t);
-                int pageTick = startTickOfPage + localTick;
+                // 0 ~ (_ticksPerPage - 1) 로 고정
+                localTick = Mathf.Clamp(localTick, 0, _ticksPerPage - 1);
 
+                int pageTick = startTickOfPage + localTick;
                 line.VertLineSetting(pageTick);
             }
         }
@@ -312,11 +313,14 @@ public class ChartVisualizer : MonoBehaviour
 
         var rect = _targetRect.rect;
         Vector2 anchored = _noteGhost.RectTrs.anchoredPosition;
-        
+
         float tX = Mathf.InverseLerp(rect.xMin, rect.xMax, anchored.x);
         tX = Mathf.Clamp01(tX);
 
         int localTick = Mathf.RoundToInt(_ticksPerPage * tX);
+        // 0 ~ (_ticksPerPage - 1) 범위로 고정
+        localTick = Mathf.Clamp(localTick, 0, _ticksPerPage - 1);
+
         int startTickOfPage = _currentPageIndex * _ticksPerPage;
         tick = startTickOfPage + localTick;
 

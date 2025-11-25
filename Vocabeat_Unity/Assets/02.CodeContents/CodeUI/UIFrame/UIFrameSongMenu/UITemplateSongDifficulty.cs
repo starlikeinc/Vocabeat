@@ -15,14 +15,22 @@ public class UITemplateSongDifficulty : UITemplateBase
 
     [SerializeField] private SongDifficultyInfoData[] _infoDatas;
 
+    private bool _isInit = false;
+
     public void DoTemplateSongDiffSetting(SongDataSO songData)
     {
         DoUITemplateReturnAll();
 
         foreach (var data in songData.DifficultyValueByDiff)
-        {
+        {            
             var uiItem = DoTemplateRequestItem<UIItemSongDifficulty>(_content);
-            uiItem.DoSongDifficultySetting(GetSongDifficultyInfoData(data.Key), data.Value);
+            uiItem.DoSongDifficultySetting(GetSongDifficultyInfoData(data.Key), data.Value, data.Key);
+
+            if (!_isInit)
+            {
+                _isInit = true;
+                uiItem.OnSelectThisDifficulty();
+            }
         }        
     }
 

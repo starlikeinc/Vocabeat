@@ -116,7 +116,7 @@ public class UIFrameInGame : UIFrameBase
     }
 
     public void ReturnToSongMenu()
-    {
+    {        
         UIChannel.UIShow<UIFrameBlinder>().BlindWithNextStep(() =>
         {
             ManagerRhythm.Instance.ExitSong();
