@@ -885,6 +885,7 @@ MonoBehaviour:
   UIContainerDevelop: {fileID: 977222666}
   TestSongData: {fileID: 11400000, guid: aa99d383f3d933040a17b40ae26af2c8, type: 2}
   Diff: 0
+  _entryType: 1
 --- !u!1001 &22802054536217421
 PrefabInstance:
   m_ObjectHideFlags: 0
