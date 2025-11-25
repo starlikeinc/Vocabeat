@@ -1076,66 +1076,66 @@ MonoBehaviour:
     - ID: 90
       PageIndex: 18
       NoteType: 1
-      Tick: 18000
-      Y: 0.375
+      Tick: 17820
+      Y: 0.75
       HasSibling: 0
-      HoldTick: 240
+      HoldTick: 300
       NextID: 0
       FlowLongMeta:
         CurvePoints:
         - t: 0
-          y01: 0.375
+          y01: 0.75
         - t: 1
-          y01: 0.375
+          y01: 0.75
         SampledPoints:
         - t: 0
-          y01: 0.375
+          y01: 0.75
         - t: 0.04347826
-          y01: 0.37499997
+          y01: 0.74999994
         - t: 0.08695652
-          y01: 0.375
+          y01: 0.75
         - t: 0.13043478
-          y01: 0.375
+          y01: 0.75
         - t: 0.17391305
-          y01: 0.375
+          y01: 0.75
         - t: 0.2173913
-          y01: 0.37499997
+          y01: 0.74999994
         - t: 0.26086956
-          y01: 0.375
+          y01: 0.75
         - t: 0.3043478
-          y01: 0.375
+          y01: 0.75
         - t: 0.3478261
-          y01: 0.375
+          y01: 0.75
         - t: 0.39130434
-          y01: 0.375
+          y01: 0.75
         - t: 0.4347826
-          y01: 0.375
+          y01: 0.75
         - t: 0.47826087
-          y01: 0.375
+          y01: 0.75
         - t: 0.5217391
-          y01: 0.375
+          y01: 0.75
         - t: 0.5652174
-          y01: 0.375
+          y01: 0.75
         - t: 0.6086956
-          y01: 0.375
+          y01: 0.75
         - t: 0.65217394
-          y01: 0.375
+          y01: 0.75
         - t: 0.6956522
-          y01: 0.375
+          y01: 0.75
         - t: 0.73913044
-          y01: 0.375
+          y01: 0.75
         - t: 0.7826087
-          y01: 0.375
+          y01: 0.75
         - t: 0.82608694
-          y01: 0.375
+          y01: 0.75
         - t: 0.8695652
-          y01: 0.375
+          y01: 0.75
         - t: 0.9130435
-          y01: 0.375
+          y01: 0.75
         - t: 0.95652175
-          y01: 0.375
+          y01: 0.75
         - t: 1
-          y01: 0.375
+          y01: 0.75
     - ID: 91
       PageIndex: 19
       NoteType: 1
@@ -1328,7 +1328,7 @@ MonoBehaviour:
     - ID: 94
       PageIndex: 20
       NoteType: 0
-      Tick: 19440
+      Tick: 19200
       Y: 0.5
       HasSibling: 0
       HoldTick: 0
@@ -1339,7 +1339,7 @@ MonoBehaviour:
     - ID: 95
       PageIndex: 20
       NoteType: 0
-      Tick: 19680
+      Tick: 19440
       Y: 0.5
       HasSibling: 0
       HoldTick: 0
@@ -1350,7 +1350,7 @@ MonoBehaviour:
     - ID: 96
       PageIndex: 20
       NoteType: 0
-      Tick: 19920
+      Tick: 19680
       Y: 0.5
       HasSibling: 0
       HoldTick: 0
@@ -1361,7 +1361,7 @@ MonoBehaviour:
     - ID: 97
       PageIndex: 20
       NoteType: 0
-      Tick: 20160
+      Tick: 19920
       Y: 0.5
       HasSibling: 0
       HoldTick: 0
@@ -1369,6 +1369,3849 @@ MonoBehaviour:
       FlowLongMeta:
         CurvePoints: []
         SampledPoints: []
+    - ID: 98
+      PageIndex: 21
+      NoteType: 0
+      Tick: 20160
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 99
+      PageIndex: 21
+      NoteType: 0
+      Tick: 20160
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 100
+      PageIndex: 21
+      NoteType: 0
+      Tick: 20400
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 101
+      PageIndex: 21
+      NoteType: 0
+      Tick: 20640
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 102
+      PageIndex: 21
+      NoteType: 0
+      Tick: 20640
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 103
+      PageIndex: 21
+      NoteType: 0
+      Tick: 20880
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 104
+      PageIndex: 21
+      NoteType: 0
+      Tick: 20880
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 105
+      PageIndex: 22
+      NoteType: 0
+      Tick: 21360
+      Y: 0.125
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 106
+      PageIndex: 22
+      NoteType: 0
+      Tick: 21360
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 107
+      PageIndex: 22
+      NoteType: 0
+      Tick: 21600
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 108
+      PageIndex: 22
+      NoteType: 0
+      Tick: 21600
+      Y: 0.875
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 109
+      PageIndex: 22
+      NoteType: 0
+      Tick: 21840
+      Y: 0.125
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 110
+      PageIndex: 22
+      NoteType: 0
+      Tick: 21840
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 111
+      PageIndex: 23
+      NoteType: 0
+      Tick: 22200
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 112
+      PageIndex: 23
+      NoteType: 0
+      Tick: 22200
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 113
+      PageIndex: 23
+      NoteType: 0
+      Tick: 22440
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 114
+      PageIndex: 23
+      NoteType: 0
+      Tick: 22440
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 115
+      PageIndex: 23
+      NoteType: 0
+      Tick: 22680
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 116
+      PageIndex: 23
+      NoteType: 0
+      Tick: 22680
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 117
+      PageIndex: 23
+      NoteType: 0
+      Tick: 22920
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 118
+      PageIndex: 23
+      NoteType: 0
+      Tick: 22920
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 119
+      PageIndex: 24
+      NoteType: 0
+      Tick: 23280
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 120
+      PageIndex: 24
+      NoteType: 0
+      Tick: 23280
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 121
+      PageIndex: 24
+      NoteType: 0
+      Tick: 23280
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 122
+      PageIndex: 24
+      NoteType: 0
+      Tick: 23760
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 123
+      PageIndex: 24
+      NoteType: 0
+      Tick: 23760
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 124
+      PageIndex: 24
+      NoteType: 0
+      Tick: 23760
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 125
+      PageIndex: 25
+      NoteType: 0
+      Tick: 24000
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 126
+      PageIndex: 25
+      NoteType: 0
+      Tick: 24000
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 127
+      PageIndex: 25
+      NoteType: 0
+      Tick: 24240
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 128
+      PageIndex: 25
+      NoteType: 0
+      Tick: 24240
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 129
+      PageIndex: 25
+      NoteType: 0
+      Tick: 24360
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 130
+      PageIndex: 25
+      NoteType: 0
+      Tick: 24360
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 131
+      PageIndex: 25
+      NoteType: 0
+      Tick: 24600
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 132
+      PageIndex: 25
+      NoteType: 0
+      Tick: 24720
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 133
+      PageIndex: 25
+      NoteType: 0
+      Tick: 24840
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 134
+      PageIndex: 25
+      NoteType: 0
+      Tick: 24840
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 135
+      PageIndex: 26
+      NoteType: 0
+      Tick: 25080
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 136
+      PageIndex: 26
+      NoteType: 0
+      Tick: 25200
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 137
+      PageIndex: 26
+      NoteType: 0
+      Tick: 25320
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 138
+      PageIndex: 26
+      NoteType: 0
+      Tick: 25560
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 139
+      PageIndex: 26
+      NoteType: 0
+      Tick: 25560
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 140
+      PageIndex: 26
+      NoteType: 0
+      Tick: 25740
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 141
+      PageIndex: 26
+      NoteType: 0
+      Tick: 25740
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 142
+      PageIndex: 27
+      NoteType: 0
+      Tick: 26040
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 143
+      PageIndex: 27
+      NoteType: 0
+      Tick: 26040
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 144
+      PageIndex: 27
+      NoteType: 0
+      Tick: 26040
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 145
+      PageIndex: 27
+      NoteType: 0
+      Tick: 26280
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 146
+      PageIndex: 27
+      NoteType: 0
+      Tick: 26400
+      Y: 0.125
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 147
+      PageIndex: 27
+      NoteType: 0
+      Tick: 26400
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 148
+      PageIndex: 27
+      NoteType: 0
+      Tick: 26400
+      Y: 0.875
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 149
+      PageIndex: 27
+      NoteType: 0
+      Tick: 26640
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 150
+      PageIndex: 27
+      NoteType: 0
+      Tick: 26640
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 151
+      PageIndex: 28
+      NoteType: 0
+      Tick: 27000
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 152
+      PageIndex: 28
+      NoteType: 0
+      Tick: 27120
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 153
+      PageIndex: 28
+      NoteType: 0
+      Tick: 27240
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 154
+      PageIndex: 28
+      NoteType: 0
+      Tick: 27360
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 155
+      PageIndex: 28
+      NoteType: 0
+      Tick: 27480
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 156
+      PageIndex: 28
+      NoteType: 0
+      Tick: 27600
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 157
+      PageIndex: 28
+      NoteType: 0
+      Tick: 27720
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 158
+      PageIndex: 29
+      NoteType: 0
+      Tick: 27960
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 159
+      PageIndex: 29
+      NoteType: 0
+      Tick: 28080
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 160
+      PageIndex: 29
+      NoteType: 0
+      Tick: 28200
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 161
+      PageIndex: 29
+      NoteType: 0
+      Tick: 28320
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 162
+      PageIndex: 29
+      NoteType: 0
+      Tick: 28440
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 163
+      PageIndex: 29
+      NoteType: 0
+      Tick: 28560
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 164
+      PageIndex: 29
+      NoteType: 0
+      Tick: 28680
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 165
+      PageIndex: 30
+      NoteType: 0
+      Tick: 28920
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 166
+      PageIndex: 30
+      NoteType: 0
+      Tick: 28920
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 167
+      PageIndex: 30
+      NoteType: 0
+      Tick: 29040
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 168
+      PageIndex: 30
+      NoteType: 0
+      Tick: 29040
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 169
+      PageIndex: 30
+      NoteType: 0
+      Tick: 29160
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 170
+      PageIndex: 30
+      NoteType: 0
+      Tick: 29160
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 171
+      PageIndex: 30
+      NoteType: 0
+      Tick: 29280
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 172
+      PageIndex: 30
+      NoteType: 0
+      Tick: 29280
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 173
+      PageIndex: 30
+      NoteType: 0
+      Tick: 29400
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 174
+      PageIndex: 30
+      NoteType: 0
+      Tick: 29400
+      Y: 0.875
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 175
+      PageIndex: 30
+      NoteType: 0
+      Tick: 29640
+      Y: 0.125
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 176
+      PageIndex: 30
+      NoteType: 0
+      Tick: 29640
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 177
+      PageIndex: 31
+      NoteType: 0
+      Tick: 29880
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 178
+      PageIndex: 31
+      NoteType: 0
+      Tick: 29880
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 179
+      PageIndex: 31
+      NoteType: 0
+      Tick: 30000
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 180
+      PageIndex: 31
+      NoteType: 0
+      Tick: 30000
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 181
+      PageIndex: 31
+      NoteType: 0
+      Tick: 30120
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 182
+      PageIndex: 31
+      NoteType: 0
+      Tick: 30120
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 183
+      PageIndex: 31
+      NoteType: 0
+      Tick: 30240
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 184
+      PageIndex: 31
+      NoteType: 0
+      Tick: 30240
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 185
+      PageIndex: 31
+      NoteType: 0
+      Tick: 30600
+      Y: 0.125
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 186
+      PageIndex: 31
+      NoteType: 0
+      Tick: 30600
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 187
+      PageIndex: 31
+      NoteType: 0
+      Tick: 30600
+      Y: 0.875
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 188
+      PageIndex: 32
+      NoteType: 0
+      Tick: 30840
+      Y: 0.125
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 189
+      PageIndex: 32
+      NoteType: 0
+      Tick: 30840
+      Y: 0.875
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 190
+      PageIndex: 32
+      NoteType: 0
+      Tick: 30960
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 191
+      PageIndex: 32
+      NoteType: 0
+      Tick: 30960
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 192
+      PageIndex: 32
+      NoteType: 0
+      Tick: 31260
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 193
+      PageIndex: 32
+      NoteType: 0
+      Tick: 31260
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 194
+      PageIndex: 32
+      NoteType: 0
+      Tick: 31320
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 195
+      PageIndex: 32
+      NoteType: 0
+      Tick: 31320
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 196
+      PageIndex: 32
+      NoteType: 0
+      Tick: 31380
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 197
+      PageIndex: 32
+      NoteType: 0
+      Tick: 31380
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 198
+      PageIndex: 32
+      NoteType: 0
+      Tick: 31620
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 199
+      PageIndex: 33
+      NoteType: 0
+      Tick: 31740
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 200
+      PageIndex: 33
+      NoteType: 0
+      Tick: 31740
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 201
+      PageIndex: 33
+      NoteType: 0
+      Tick: 32040
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 202
+      PageIndex: 33
+      NoteType: 0
+      Tick: 32040
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 203
+      PageIndex: 33
+      NoteType: 0
+      Tick: 32160
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 204
+      PageIndex: 33
+      NoteType: 0
+      Tick: 32160
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 205
+      PageIndex: 33
+      NoteType: 0
+      Tick: 32520
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 206
+      PageIndex: 33
+      NoteType: 0
+      Tick: 32520
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 207
+      PageIndex: 34
+      NoteType: 0
+      Tick: 32640
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 208
+      PageIndex: 34
+      NoteType: 0
+      Tick: 32640
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 209
+      PageIndex: 34
+      NoteType: 1
+      Tick: 32760
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 720
+      NextID: 0
+      FlowLongMeta:
+        CurvePoints:
+        - t: 0
+          y01: 0.25
+        - t: 1
+          y01: 0.75
+        SampledPoints:
+        - t: 0
+          y01: 0.25
+        - t: 0.04347826
+          y01: 0.2714213
+        - t: 0.08695652
+          y01: 0.29326734
+        - t: 0.13043478
+          y01: 0.31497422
+        - t: 0.17391305
+          y01: 0.3367731
+        - t: 0.2173913
+          y01: 0.35855043
+        - t: 0.26086956
+          y01: 0.38030636
+        - t: 0.3043478
+          y01: 0.4020592
+        - t: 0.3478261
+          y01: 0.4238209
+        - t: 0.39130434
+          y01: 0.44559297
+        - t: 0.4347826
+          y01: 0.46736723
+        - t: 0.47826087
+          y01: 0.48912913
+        - t: 0.5217391
+          y01: 0.5108708
+        - t: 0.5652174
+          y01: 0.5326327
+        - t: 0.6086956
+          y01: 0.554407
+        - t: 0.65217394
+          y01: 0.57617897
+        - t: 0.6956522
+          y01: 0.59794074
+        - t: 0.73913044
+          y01: 0.6196936
+        - t: 0.7826087
+          y01: 0.64144945
+        - t: 0.82608694
+          y01: 0.66322684
+        - t: 0.8695652
+          y01: 0.6850257
+        - t: 0.9130435
+          y01: 0.70673263
+        - t: 0.95652175
+          y01: 0.7285786
+        - t: 1
+          y01: 0.75
+    - ID: 210
+      PageIndex: 35
+      NoteType: 1
+      Tick: 33720
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 720
+      NextID: 0
+      FlowLongMeta:
+        CurvePoints:
+        - t: 0
+          y01: 0.25
+        - t: 1
+          y01: 0.75
+        SampledPoints:
+        - t: 0
+          y01: 0.25
+        - t: 0.04347826
+          y01: 0.2714213
+        - t: 0.08695652
+          y01: 0.29326734
+        - t: 0.13043478
+          y01: 0.31497422
+        - t: 0.17391305
+          y01: 0.3367731
+        - t: 0.2173913
+          y01: 0.35855043
+        - t: 0.26086956
+          y01: 0.38030636
+        - t: 0.3043478
+          y01: 0.4020592
+        - t: 0.3478261
+          y01: 0.4238209
+        - t: 0.39130434
+          y01: 0.44559297
+        - t: 0.4347826
+          y01: 0.46736723
+        - t: 0.47826087
+          y01: 0.48912913
+        - t: 0.5217391
+          y01: 0.5108708
+        - t: 0.5652174
+          y01: 0.5326327
+        - t: 0.6086956
+          y01: 0.554407
+        - t: 0.65217394
+          y01: 0.57617897
+        - t: 0.6956522
+          y01: 0.59794074
+        - t: 0.73913044
+          y01: 0.6196936
+        - t: 0.7826087
+          y01: 0.64144945
+        - t: 0.82608694
+          y01: 0.66322684
+        - t: 0.8695652
+          y01: 0.6850257
+        - t: 0.9130435
+          y01: 0.70673263
+        - t: 0.95652175
+          y01: 0.7285786
+        - t: 1
+          y01: 0.75
+    - ID: 211
+      PageIndex: 36
+      NoteType: 0
+      Tick: 34620
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 212
+      PageIndex: 36
+      NoteType: 0
+      Tick: 34680
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 213
+      PageIndex: 36
+      NoteType: 0
+      Tick: 34740
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 214
+      PageIndex: 36
+      NoteType: 0
+      Tick: 35040
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 215
+      PageIndex: 36
+      NoteType: 0
+      Tick: 35040
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 216
+      PageIndex: 36
+      NoteType: 0
+      Tick: 35100
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 217
+      PageIndex: 36
+      NoteType: 0
+      Tick: 35100
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 218
+      PageIndex: 36
+      NoteType: 0
+      Tick: 35280
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 219
+      PageIndex: 36
+      NoteType: 0
+      Tick: 35400
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 220
+      PageIndex: 37
+      NoteType: 0
+      Tick: 35760
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 221
+      PageIndex: 37
+      NoteType: 0
+      Tick: 36240
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 222
+      PageIndex: 38
+      NoteType: 0
+      Tick: 36720
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 223
+      PageIndex: 38
+      NoteType: 0
+      Tick: 36720
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 224
+      PageIndex: 38
+      NoteType: 0
+      Tick: 36960
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 225
+      PageIndex: 38
+      NoteType: 0
+      Tick: 36960
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 226
+      PageIndex: 38
+      NoteType: 0
+      Tick: 37200
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 227
+      PageIndex: 38
+      NoteType: 0
+      Tick: 37200
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 228
+      PageIndex: 39
+      NoteType: 0
+      Tick: 37680
+      Y: 0.125
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 229
+      PageIndex: 39
+      NoteType: 0
+      Tick: 37680
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 230
+      PageIndex: 39
+      NoteType: 0
+      Tick: 37680
+      Y: 0.875
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 231
+      PageIndex: 39
+      NoteType: 0
+      Tick: 38160
+      Y: 0.125
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 232
+      PageIndex: 39
+      NoteType: 0
+      Tick: 38160
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 233
+      PageIndex: 39
+      NoteType: 0
+      Tick: 38160
+      Y: 0.875
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 234
+      PageIndex: 40
+      NoteType: 0
+      Tick: 38520
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 235
+      PageIndex: 40
+      NoteType: 0
+      Tick: 38520
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 236
+      PageIndex: 40
+      NoteType: 0
+      Tick: 38640
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 237
+      PageIndex: 40
+      NoteType: 0
+      Tick: 38640
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 238
+      PageIndex: 40
+      NoteType: 0
+      Tick: 38760
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 239
+      PageIndex: 40
+      NoteType: 0
+      Tick: 38760
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 240
+      PageIndex: 40
+      NoteType: 0
+      Tick: 38880
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 241
+      PageIndex: 40
+      NoteType: 0
+      Tick: 38880
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 242
+      PageIndex: 40
+      NoteType: 0
+      Tick: 39060
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 243
+      PageIndex: 40
+      NoteType: 0
+      Tick: 39060
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 244
+      PageIndex: 40
+      NoteType: 0
+      Tick: 39180
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 245
+      PageIndex: 40
+      NoteType: 0
+      Tick: 39180
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 246
+      PageIndex: 41
+      NoteType: 0
+      Tick: 39480
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 247
+      PageIndex: 41
+      NoteType: 0
+      Tick: 39600
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 248
+      PageIndex: 41
+      NoteType: 1
+      Tick: 39840
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 360
+      NextID: 0
+      FlowLongMeta:
+        CurvePoints:
+        - t: 0
+          y01: 0.75
+        - t: 1
+          y01: 0.25
+        SampledPoints:
+        - t: 0
+          y01: 0.75
+        - t: 0.04347826
+          y01: 0.7285787
+        - t: 0.08695652
+          y01: 0.7067327
+        - t: 0.13043478
+          y01: 0.68502575
+        - t: 0.17391305
+          y01: 0.66322696
+        - t: 0.2173913
+          y01: 0.6414495
+        - t: 0.26086956
+          y01: 0.61969364
+        - t: 0.3043478
+          y01: 0.59794086
+        - t: 0.3478261
+          y01: 0.5761791
+        - t: 0.39130434
+          y01: 0.55440706
+        - t: 0.4347826
+          y01: 0.53263277
+        - t: 0.47826087
+          y01: 0.5108709
+        - t: 0.5217391
+          y01: 0.48912928
+        - t: 0.5652174
+          y01: 0.4673673
+        - t: 0.6086956
+          y01: 0.445593
+        - t: 0.65217394
+          y01: 0.42382103
+        - t: 0.6956522
+          y01: 0.40205926
+        - t: 0.73913044
+          y01: 0.38030642
+        - t: 0.7826087
+          y01: 0.35855055
+        - t: 0.82608694
+          y01: 0.33677316
+        - t: 0.8695652
+          y01: 0.31497428
+        - t: 0.9130435
+          y01: 0.29326737
+        - t: 0.95652175
+          y01: 0.27142137
+        - t: 1
+          y01: 0.25
+    - ID: 249
+      PageIndex: 42
+      NoteType: 0
+      Tick: 40440
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 250
+      PageIndex: 42
+      NoteType: 0
+      Tick: 40560
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 251
+      PageIndex: 42
+      NoteType: 0
+      Tick: 40680
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 252
+      PageIndex: 42
+      NoteType: 0
+      Tick: 40800
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 253
+      PageIndex: 42
+      NoteType: 0
+      Tick: 40800
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 254
+      PageIndex: 42
+      NoteType: 0
+      Tick: 40920
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 255
+      PageIndex: 42
+      NoteType: 0
+      Tick: 40920
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 256
+      PageIndex: 42
+      NoteType: 0
+      Tick: 41040
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 257
+      PageIndex: 42
+      NoteType: 0
+      Tick: 41040
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 258
+      PageIndex: 42
+      NoteType: 0
+      Tick: 41160
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 259
+      PageIndex: 42
+      NoteType: 0
+      Tick: 41160
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 260
+      PageIndex: 43
+      NoteType: 0
+      Tick: 41280
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 261
+      PageIndex: 43
+      NoteType: 0
+      Tick: 41400
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 262
+      PageIndex: 43
+      NoteType: 0
+      Tick: 41400
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 263
+      PageIndex: 43
+      NoteType: 0
+      Tick: 41520
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 264
+      PageIndex: 43
+      NoteType: 0
+      Tick: 41640
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 265
+      PageIndex: 43
+      NoteType: 0
+      Tick: 41640
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 266
+      PageIndex: 43
+      NoteType: 0
+      Tick: 41760
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 267
+      PageIndex: 43
+      NoteType: 0
+      Tick: 41880
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 268
+      PageIndex: 43
+      NoteType: 0
+      Tick: 41880
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 269
+      PageIndex: 43
+      NoteType: 0
+      Tick: 42000
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 270
+      PageIndex: 43
+      NoteType: 0
+      Tick: 42120
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 271
+      PageIndex: 43
+      NoteType: 0
+      Tick: 42120
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 272
+      PageIndex: 44
+      NoteType: 0
+      Tick: 42240
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 273
+      PageIndex: 44
+      NoteType: 0
+      Tick: 42480
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 274
+      PageIndex: 44
+      NoteType: 0
+      Tick: 42480
+      Y: 0.875
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 275
+      PageIndex: 44
+      NoteType: 0
+      Tick: 42720
+      Y: 0.125
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 276
+      PageIndex: 44
+      NoteType: 0
+      Tick: 42720
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 277
+      PageIndex: 44
+      NoteType: 0
+      Tick: 42960
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 278
+      PageIndex: 45
+      NoteType: 1
+      Tick: 43200
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 480
+      NextID: 0
+      FlowLongMeta:
+        CurvePoints:
+        - t: 0
+          y01: 0.75
+        - t: 0.5
+          y01: 0.25
+        - t: 1
+          y01: 0.25
+        SampledPoints: []
+    - ID: 279
+      PageIndex: 45
+      NoteType: 1
+      Tick: 43800
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 240
+      NextID: 0
+      FlowLongMeta:
+        CurvePoints:
+        - t: 0
+          y01: 0.25
+        - t: 1
+          y01: 0.5
+        SampledPoints:
+        - t: 0
+          y01: 0.25
+        - t: 0.04347826
+          y01: 0.26071066
+        - t: 0.08695652
+          y01: 0.27163368
+        - t: 0.13043478
+          y01: 0.2824871
+        - t: 0.17391305
+          y01: 0.29338655
+        - t: 0.2173913
+          y01: 0.30427524
+        - t: 0.26086956
+          y01: 0.31515318
+        - t: 0.3043478
+          y01: 0.3260296
+        - t: 0.3478261
+          y01: 0.3369105
+        - t: 0.39130434
+          y01: 0.3477965
+        - t: 0.4347826
+          y01: 0.35868362
+        - t: 0.47826087
+          y01: 0.3695646
+        - t: 0.5217391
+          y01: 0.3804354
+        - t: 0.5652174
+          y01: 0.39131638
+        - t: 0.6086956
+          y01: 0.4022035
+        - t: 0.65217394
+          y01: 0.4130895
+        - t: 0.6956522
+          y01: 0.4239704
+        - t: 0.73913044
+          y01: 0.43484682
+        - t: 0.7826087
+          y01: 0.4457248
+        - t: 0.82608694
+          y01: 0.45661342
+        - t: 0.8695652
+          y01: 0.4675129
+        - t: 0.9130435
+          y01: 0.47836632
+        - t: 0.95652175
+          y01: 0.48928934
+        - t: 1
+          y01: 0.5
+    - ID: 280
+      PageIndex: 46
+      NoteType: 0
+      Tick: 44400
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 281
+      PageIndex: 46
+      NoteType: 0
+      Tick: 44520
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 282
+      PageIndex: 46
+      NoteType: 0
+      Tick: 44640
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 283
+      PageIndex: 46
+      NoteType: 0
+      Tick: 44760
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 284
+      PageIndex: 46
+      NoteType: 0
+      Tick: 44880
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 285
+      PageIndex: 46
+      NoteType: 0
+      Tick: 45000
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 286
+      PageIndex: 47
+      NoteType: 0
+      Tick: 45120
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 287
+      PageIndex: 47
+      NoteType: 0
+      Tick: 45120
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 288
+      PageIndex: 47
+      NoteType: 0
+      Tick: 45360
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 289
+      PageIndex: 47
+      NoteType: 0
+      Tick: 45360
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 290
+      PageIndex: 47
+      NoteType: 0
+      Tick: 45600
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 291
+      PageIndex: 47
+      NoteType: 0
+      Tick: 45600
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 292
+      PageIndex: 47
+      NoteType: 0
+      Tick: 45600
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 293
+      PageIndex: 47
+      NoteType: 0
+      Tick: 45840
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 294
+      PageIndex: 47
+      NoteType: 0
+      Tick: 45840
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 295
+      PageIndex: 47
+      NoteType: 0
+      Tick: 45840
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 296
+      PageIndex: 48
+      NoteType: 0
+      Tick: 46080
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 297
+      PageIndex: 48
+      NoteType: 0
+      Tick: 46080
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 298
+      PageIndex: 48
+      NoteType: 0
+      Tick: 46320
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 299
+      PageIndex: 48
+      NoteType: 0
+      Tick: 46380
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 300
+      PageIndex: 48
+      NoteType: 0
+      Tick: 46440
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 301
+      PageIndex: 48
+      NoteType: 0
+      Tick: 46800
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 302
+      PageIndex: 48
+      NoteType: 0
+      Tick: 46860
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 303
+      PageIndex: 48
+      NoteType: 0
+      Tick: 46920
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 304
+      PageIndex: 49
+      NoteType: 0
+      Tick: 47040
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 305
+      PageIndex: 49
+      NoteType: 0
+      Tick: 47160
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 306
+      PageIndex: 49
+      NoteType: 0
+      Tick: 47280
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 307
+      PageIndex: 49
+      NoteType: 0
+      Tick: 47400
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 308
+      PageIndex: 49
+      NoteType: 1
+      Tick: 47520
+      Y: 0.125
+      HasSibling: 0
+      HoldTick: 360
+      NextID: 0
+      FlowLongMeta:
+        CurvePoints:
+        - t: 0
+          y01: 0.125
+        - t: 1
+          y01: 0.125
+        SampledPoints:
+        - t: 0
+          y01: 0.125
+        - t: 0.04347826
+          y01: 0.125
+        - t: 0.08695652
+          y01: 0.125
+        - t: 0.13043478
+          y01: 0.125
+        - t: 0.17391305
+          y01: 0.12499999
+        - t: 0.2173913
+          y01: 0.125
+        - t: 0.26086956
+          y01: 0.125
+        - t: 0.3043478
+          y01: 0.125
+        - t: 0.3478261
+          y01: 0.125
+        - t: 0.39130434
+          y01: 0.125
+        - t: 0.4347826
+          y01: 0.12499999
+        - t: 0.47826087
+          y01: 0.125
+        - t: 0.5217391
+          y01: 0.125
+        - t: 0.5652174
+          y01: 0.125
+        - t: 0.6086956
+          y01: 0.125
+        - t: 0.65217394
+          y01: 0.125
+        - t: 0.6956522
+          y01: 0.125
+        - t: 0.73913044
+          y01: 0.125
+        - t: 0.7826087
+          y01: 0.125
+        - t: 0.82608694
+          y01: 0.125
+        - t: 0.8695652
+          y01: 0.125
+        - t: 0.9130435
+          y01: 0.125
+        - t: 0.95652175
+          y01: 0.125
+        - t: 1
+          y01: 0.125
+    - ID: 309
+      PageIndex: 49
+      NoteType: 0
+      Tick: 47520
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 310
+      PageIndex: 49
+      NoteType: 0
+      Tick: 47640
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 311
+      PageIndex: 49
+      NoteType: 0
+      Tick: 47760
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 312
+      PageIndex: 49
+      NoteType: 0
+      Tick: 47880
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 313
+      PageIndex: 50
+      NoteType: 0
+      Tick: 48000
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 314
+      PageIndex: 50
+      NoteType: 0
+      Tick: 48000
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 315
+      PageIndex: 50
+      NoteType: 0
+      Tick: 48240
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 316
+      PageIndex: 50
+      NoteType: 0
+      Tick: 48240
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 317
+      PageIndex: 50
+      NoteType: 0
+      Tick: 48480
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 318
+      PageIndex: 50
+      NoteType: 0
+      Tick: 48480
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 319
+      PageIndex: 50
+      NoteType: 0
+      Tick: 48720
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 320
+      PageIndex: 50
+      NoteType: 0
+      Tick: 48720
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 321
+      PageIndex: 51
+      NoteType: 0
+      Tick: 48960
+      Y: 0.125
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 322
+      PageIndex: 51
+      NoteType: 0
+      Tick: 48960
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 323
+      PageIndex: 51
+      NoteType: 0
+      Tick: 49200
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 324
+      PageIndex: 51
+      NoteType: 0
+      Tick: 49200
+      Y: 0.875
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 325
+      PageIndex: 51
+      NoteType: 0
+      Tick: 49320
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 326
+      PageIndex: 51
+      NoteType: 0
+      Tick: 49320
+      Y: 0.875
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 327
+      PageIndex: 51
+      NoteType: 0
+      Tick: 49680
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 328
+      PageIndex: 51
+      NoteType: 0
+      Tick: 49680
+      Y: 0.875
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 329
+      PageIndex: 51
+      NoteType: 0
+      Tick: 49800
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 330
+      PageIndex: 51
+      NoteType: 0
+      Tick: 49800
+      Y: 0.875
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 331
+      PageIndex: 52
+      NoteType: 0
+      Tick: 49920
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 332
+      PageIndex: 52
+      NoteType: 0
+      Tick: 49920
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 333
+      PageIndex: 52
+      NoteType: 0
+      Tick: 50160
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 334
+      PageIndex: 52
+      NoteType: 0
+      Tick: 50400
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 335
+      PageIndex: 52
+      NoteType: 0
+      Tick: 50640
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 336
+      PageIndex: 53
+      NoteType: 0
+      Tick: 50880
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 337
+      PageIndex: 53
+      NoteType: 0
+      Tick: 51000
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 338
+      PageIndex: 53
+      NoteType: 0
+      Tick: 51120
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 339
+      PageIndex: 53
+      NoteType: 0
+      Tick: 51240
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 340
+      PageIndex: 53
+      NoteType: 0
+      Tick: 51360
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 341
+      PageIndex: 53
+      NoteType: 0
+      Tick: 51480
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 342
+      PageIndex: 53
+      NoteType: 0
+      Tick: 51480
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 343
+      PageIndex: 53
+      NoteType: 0
+      Tick: 51600
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 344
+      PageIndex: 53
+      NoteType: 0
+      Tick: 51720
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 345
+      PageIndex: 53
+      NoteType: 0
+      Tick: 51720
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 346
+      PageIndex: 54
+      NoteType: 0
+      Tick: 51840
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 347
+      PageIndex: 54
+      NoteType: 0
+      Tick: 51840
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 348
+      PageIndex: 54
+      NoteType: 0
+      Tick: 52080
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 349
+      PageIndex: 54
+      NoteType: 0
+      Tick: 52080
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 350
+      PageIndex: 54
+      NoteType: 0
+      Tick: 52080
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 351
+      PageIndex: 54
+      NoteType: 0
+      Tick: 52320
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 352
+      PageIndex: 54
+      NoteType: 0
+      Tick: 52320
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 353
+      PageIndex: 54
+      NoteType: 0
+      Tick: 52560
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 354
+      PageIndex: 54
+      NoteType: 0
+      Tick: 52560
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 355
+      PageIndex: 55
+      NoteType: 0
+      Tick: 52800
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 356
+      PageIndex: 55
+      NoteType: 0
+      Tick: 52920
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 357
+      PageIndex: 55
+      NoteType: 0
+      Tick: 53040
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 358
+      PageIndex: 55
+      NoteType: 0
+      Tick: 53280
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 359
+      PageIndex: 55
+      NoteType: 0
+      Tick: 53280
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 360
+      PageIndex: 55
+      NoteType: 0
+      Tick: 53520
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 361
+      PageIndex: 55
+      NoteType: 0
+      Tick: 53520
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 362
+      PageIndex: 55
+      NoteType: 0
+      Tick: 53640
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 363
+      PageIndex: 55
+      NoteType: 0
+      Tick: 53640
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 364
+      PageIndex: 56
+      NoteType: 0
+      Tick: 53760
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 365
+      PageIndex: 56
+      NoteType: 0
+      Tick: 53760
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 366
+      PageIndex: 56
+      NoteType: 0
+      Tick: 54000
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 367
+      PageIndex: 56
+      NoteType: 0
+      Tick: 54000
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 368
+      PageIndex: 56
+      NoteType: 0
+      Tick: 54240
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 369
+      PageIndex: 56
+      NoteType: 0
+      Tick: 54480
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 370
+      PageIndex: 56
+      NoteType: 0
+      Tick: 54480
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 371
+      PageIndex: 57
+      NoteType: 1
+      Tick: 54720
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 840
+      NextID: 0
+      FlowLongMeta:
+        CurvePoints:
+        - t: 0
+          y01: 0.75
+        - t: 0.2857143
+          y01: 0.75
+        - t: 0.64285713
+          y01: 0.625
+        - t: 1
+          y01: 0.25
+        SampledPoints: []
+    - ID: 372
+      PageIndex: 57
+      NoteType: 0
+      Tick: 54960
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 373
+      PageIndex: 57
+      NoteType: 0
+      Tick: 55200
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 374
+      PageIndex: 57
+      NoteType: 0
+      Tick: 55440
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 375
+      PageIndex: 58
+      NoteType: 0
+      Tick: 55680
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 376
+      PageIndex: 58
+      NoteType: 0
+      Tick: 55800
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 377
+      PageIndex: 58
+      NoteType: 0
+      Tick: 55800
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 378
+      PageIndex: 58
+      NoteType: 0
+      Tick: 55920
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 379
+      PageIndex: 58
+      NoteType: 0
+      Tick: 55920
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 380
+      PageIndex: 58
+      NoteType: 0
+      Tick: 56040
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 381
+      PageIndex: 58
+      NoteType: 0
+      Tick: 56040
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 382
+      PageIndex: 58
+      NoteType: 0
+      Tick: 56280
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 383
+      PageIndex: 58
+      NoteType: 0
+      Tick: 56280
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 384
+      PageIndex: 58
+      NoteType: 0
+      Tick: 56460
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 385
+      PageIndex: 58
+      NoteType: 0
+      Tick: 56460
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 386
+      PageIndex: 59
+      NoteType: 0
+      Tick: 56640
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 387
+      PageIndex: 59
+      NoteType: 0
+      Tick: 56640
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 388
+      PageIndex: 59
+      NoteType: 0
+      Tick: 56880
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 389
+      PageIndex: 59
+      NoteType: 0
+      Tick: 56880
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 390
+      PageIndex: 59
+      NoteType: 0
+      Tick: 57120
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 391
+      PageIndex: 59
+      NoteType: 0
+      Tick: 57360
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 392
+      PageIndex: 59
+      NoteType: 0
+      Tick: 57360
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 393
+      PageIndex: 60
+      NoteType: 0
+      Tick: 57600
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 394
+      PageIndex: 60
+      NoteType: 0
+      Tick: 57660
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 395
+      PageIndex: 60
+      NoteType: 0
+      Tick: 57720
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 396
+      PageIndex: 60
+      NoteType: 0
+      Tick: 57780
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 397
+      PageIndex: 60
+      NoteType: 0
+      Tick: 57840
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 398
+      PageIndex: 60
+      NoteType: 0
+      Tick: 58080
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 399
+      PageIndex: 60
+      NoteType: 0
+      Tick: 58140
+      Y: 0.375
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 400
+      PageIndex: 60
+      NoteType: 0
+      Tick: 58200
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 401
+      PageIndex: 60
+      NoteType: 0
+      Tick: 58260
+      Y: 0.625
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 402
+      PageIndex: 60
+      NoteType: 0
+      Tick: 58320
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 403
+      PageIndex: 61
+      NoteType: 0
+      Tick: 58560
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 404
+      PageIndex: 61
+      NoteType: 0
+      Tick: 58560
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 405
+      PageIndex: 61
+      NoteType: 0
+      Tick: 58800
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 406
+      PageIndex: 61
+      NoteType: 0
+      Tick: 58800
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 407
+      PageIndex: 61
+      NoteType: 0
+      Tick: 59040
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 408
+      PageIndex: 61
+      NoteType: 0
+      Tick: 59040
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 409
+      PageIndex: 61
+      NoteType: 0
+      Tick: 59280
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 410
+      PageIndex: 61
+      NoteType: 0
+      Tick: 59280
+      Y: 0.5
+      HasSibling: 0
+      HoldTick: 0
+      NextID: -1
+      FlowLongMeta:
+        CurvePoints: []
+        SampledPoints: []
+    - ID: 411
+      PageIndex: 62
+      NoteType: 1
+      Tick: 59520
+      Y: 0.25
+      HasSibling: 0
+      HoldTick: 900
+      NextID: 0
+      FlowLongMeta:
+        CurvePoints:
+        - t: 0
+          y01: 0.25
+        - t: 1
+          y01: 0.25
+        SampledPoints:
+        - t: 0
+          y01: 0.25
+        - t: 0.04347826
+          y01: 0.25
+        - t: 0.08695652
+          y01: 0.25
+        - t: 0.13043478
+          y01: 0.25
+        - t: 0.17391305
+          y01: 0.24999999
+        - t: 0.2173913
+          y01: 0.25
+        - t: 0.26086956
+          y01: 0.25
+        - t: 0.3043478
+          y01: 0.25
+        - t: 0.3478261
+          y01: 0.25
+        - t: 0.39130434
+          y01: 0.25
+        - t: 0.4347826
+          y01: 0.24999999
+        - t: 0.47826087
+          y01: 0.25
+        - t: 0.5217391
+          y01: 0.25
+        - t: 0.5652174
+          y01: 0.25
+        - t: 0.6086956
+          y01: 0.25
+        - t: 0.65217394
+          y01: 0.25
+        - t: 0.6956522
+          y01: 0.25
+        - t: 0.73913044
+          y01: 0.25
+        - t: 0.7826087
+          y01: 0.25
+        - t: 0.82608694
+          y01: 0.25
+        - t: 0.8695652
+          y01: 0.25
+        - t: 0.9130435
+          y01: 0.25
+        - t: 0.95652175
+          y01: 0.25
+        - t: 1
+          y01: 0.25
+    - ID: 412
+      PageIndex: 62
+      NoteType: 1
+      Tick: 59520
+      Y: 0.75
+      HasSibling: 0
+      HoldTick: 900
+      NextID: 0
+      FlowLongMeta:
+        CurvePoints:
+        - t: 0
+          y01: 0.75
+        - t: 1
+          y01: 0.75
+        SampledPoints:
+        - t: 0
+          y01: 0.75
+        - t: 0.04347826
+          y01: 0.74999994
+        - t: 0.08695652
+          y01: 0.75
+        - t: 0.13043478
+          y01: 0.75
+        - t: 0.17391305
+          y01: 0.75
+        - t: 0.2173913
+          y01: 0.74999994
+        - t: 0.26086956
+          y01: 0.75
+        - t: 0.3043478
+          y01: 0.75
+        - t: 0.3478261
+          y01: 0.75
+        - t: 0.39130434
+          y01: 0.75
+        - t: 0.4347826
+          y01: 0.75
+        - t: 0.47826087
+          y01: 0.75
+        - t: 0.5217391
+          y01: 0.75
+        - t: 0.5652174
+          y01: 0.75
+        - t: 0.6086956
+          y01: 0.75
+        - t: 0.65217394
+          y01: 0.75
+        - t: 0.6956522
+          y01: 0.75
+        - t: 0.73913044
+          y01: 0.75
+        - t: 0.7826087
+          y01: 0.75
+        - t: 0.82608694
+          y01: 0.75
+        - t: 0.8695652
+          y01: 0.75
+        - t: 0.9130435
+          y01: 0.75
+        - t: 0.95652175
+          y01: 0.75
+        - t: 1
+          y01: 0.75
   - Diff: 1
     DifficultyValue: 3
     Notes:
