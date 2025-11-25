@@ -7,7 +7,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
 {
     public event Action<Note, EJudgementType> OnJudgeResult;
     // 롱노트 시작/종료 (isEnd=true면 종료)
-    public event Action<Note, EJudgementType, bool> OnHoldJudgeResult;
+    public event Action<Note, EJudgementType, bool, Vector2> OnHoldJudgeResult;
 
     [Header("Judge SFX")]
     [SerializeField] private SFXEventChannelSO _sfxEventChannel;
@@ -213,7 +213,6 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             diff <= _yellowStarRange ? EJudgementType.YellowStar :
             EJudgementType.RedStar;
 
-        // 롱노트 여부 판단
         bool isHold =
             note.NoteType == ENoteType.FlowHold ||
             note.NoteType == ENoteType.LongHold ||
@@ -226,7 +225,6 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         }
 
         int endTick = noteTick + Mathf.Max(0, note.HoldTick);
-
         int id = note.ID;
         if (_activeHoldStates.ContainsKey(id))
             return;
@@ -240,7 +238,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             Started = true,
             Completed = false,
             ReleasedEarly = false,
-            StartJudgeType = judgeType
+            StartJudgeType = judgeType,
         };
 
         _activeHoldStates.Add(id, holdState);
@@ -248,7 +246,10 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             _pointerToNoteId.Add(pointerId, id);
 
         PlayJudgeSFX(judgeType);
-        OnHoldJudgeResult?.Invoke(note, judgeType, false);
+
+        // 🔹 시작 이펙트 위치 = 노트 시작 위치(Head)
+        Vector2 startLocalPos = GetExpectedLocalPositionForTap(note, songTick);
+        OnHoldJudgeResult?.Invoke(note, judgeType, false, startLocalPos);
     }
 
     private EJudgementType GetEndJudgeType(int endTick, int songTick)
@@ -274,8 +275,25 @@ public class NoteTouchJudgeSystem : MonoBehaviour
 
         Debug.Log($"<color=yellow>[{note.ID}]롱 노트 최종 판정: [{endJudge}]</color>");
 
+        // 🔹 이펙트 위치 계산
+        Vector2 effectLocalPos;
+
+        // 1) 커서가 아직 잡히면 → 커서 위치
+        if (TryGetPointerLocalPosition(hs.PointerId, out var pointerLocal))
+        {
+            effectLocalPos = pointerLocal;
+        }
+        else
+        {
+            // 2) 커서를 못 읽으면 → 현재 Tick 기준 FlowHold 이상적인 위치
+            effectLocalPos = GetExpectedLocalPositionForHold(note, songTick);
+        }
+
         PlayJudgeSFX(endJudge);
-        OnHoldJudgeResult?.Invoke(note, endJudge, true);
+
+        // 🔹 isEnd = true, effectLocalPos = 여기서 계산한 위치
+        OnHoldJudgeResult?.Invoke(note, endJudge, true, effectLocalPos);
+
         ApplyJudgeFinal(note, endJudge);
     }
 

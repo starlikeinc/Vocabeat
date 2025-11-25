@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.Tracing;
 using LUIZ.UI;
 using TMPro;
 using UnityEngine;
@@ -125,7 +126,12 @@ public class UIFrameResult : UIFrameBase
     }
 
     public void OnResume()
-    {
-        Debug.Log("Resume");
+    {        
+        UIChannel.UIShow<UIFrameBlinder>().BlindWithNextStep(() =>
+        {
+            _eventChannel.StopAudio();
+            UIChannel.UIHide<UIFrameResult>();
+            UIChannel.UIShow<UIFrameSongMenu>().DoFrameSongMenuSetting(false);
+        });        
     }
 }

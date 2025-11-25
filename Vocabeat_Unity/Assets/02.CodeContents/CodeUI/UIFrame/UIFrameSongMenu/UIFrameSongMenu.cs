@@ -1,6 +1,7 @@
 using LUIZ.UI;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public enum ESongMenuSfxKey
 {    
@@ -8,7 +9,8 @@ public enum ESongMenuSfxKey
     Slide,
     Play,
     Unlock,
-    BtnClick,    
+    BtnClick,
+    FreeLabel,
 }
 
 public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
@@ -25,6 +27,9 @@ public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
     [Header("언락")]
     [SerializeField] private UIWidgetUnlock _widgetUnlock;
 
+    [Header("옵션")]
+    [SerializeField] private UIWidgetOption _widgetOption;
+    
     [Header("이벤트")]
     [SerializeField] private UnityEvent _onFrameShowFromMain;
     [SerializeField] private UnityEvent _onFrameShowFromInGame;
@@ -82,6 +87,7 @@ public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
             return;
         }
 
+        PlayFrameSfx(ESongMenuSfxKey.Play);
         UIChannel.UIShow<UIFrameBlinder>().BlindWithNextStep(() =>
         {
             StopFrameBgm();
@@ -97,7 +103,12 @@ public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
 
     public void OnOption()
     {
+        _widgetOption.DoUIWidgetShow();
+    }
 
+    public void OnBtnClickSFXPlay()
+    {
+        PlayFrameSfx(ESongMenuSfxKey.BtnClick);
     }
 
     private void HandleCenterChanged(int index, SongDataSO songData)

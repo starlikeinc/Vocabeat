@@ -87,6 +87,11 @@ public class UIFrameLogo : UIFrameBase
     private void PrivMoveToPatcher()
     {
         //Network.Instance.DoNetworkSessionStart(Network.ENetSessionType.Virtual);
-        SceneManager.LoadScene("FrontPatcher");
+        //SceneManager.LoadScene("FrontPatcher");
+
+        ManagerLoaderScene.Instance.DoLoadSceneMaster(() =>
+        {
+            SceneManager.UnloadSceneAsync("FrontLogo");            
+        });
     }
 }

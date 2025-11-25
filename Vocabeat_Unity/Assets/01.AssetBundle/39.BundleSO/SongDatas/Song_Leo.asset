@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: CodeContents::SongDataSO
   _songId: 39003
   _songName: "\u96F6"
-  _songComposer: 
+  _songComposer: "\u97F3\u7121\u3042\u3075"
   _bpm: 210
   _songThumb: {fileID: 21300000, guid: 4a2e5c80066df0e43ade81df906cfa0a, type: 3}
   _songBG: {fileID: 21300000, guid: d2d48808c1ed10d408a8b774f1b70700, type: 3}

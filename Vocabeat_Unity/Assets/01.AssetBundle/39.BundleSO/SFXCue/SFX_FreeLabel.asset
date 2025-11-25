@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66d069e16034348478b969d35cf26c36, type: 3}
-  m_Name: SFX_XXXXXX
+  m_Name: SFX_FreeLabel
   m_EditorClassIdentifier: CodeContents::AudioCueSO
-  _listClips: []
+  _listClips:
+  - {fileID: 8300000, guid: a08b6721b054e6a4e8981c64259ffecf, type: 3}
   _volume: 1
   _pitch: 1
   _loop: 0

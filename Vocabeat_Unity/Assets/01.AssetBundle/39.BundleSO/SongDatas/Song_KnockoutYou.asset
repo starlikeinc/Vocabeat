@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: CodeContents::SongDataSO
   _songId: 39002
   _songName: KnockoutYou
-  _songComposer: 
+  _songComposer: Rukaku
   _bpm: 200
   _songThumb: {fileID: 21300000, guid: 9669571e98726d64fb9eda4947cdd723, type: 3}
   _songBG: {fileID: 21300000, guid: 58d70618db197b742ae3d7c9a9bd2ec2, type: 3}

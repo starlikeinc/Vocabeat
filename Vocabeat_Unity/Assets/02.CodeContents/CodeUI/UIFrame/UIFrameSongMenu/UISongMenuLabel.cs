@@ -14,15 +14,19 @@ public class UISongMenuLabel : UIWidgetBase
 
     private Sequence _labelSequence;
 
+    private UIFrameSongMenu _frameSongMenu;
+
     protected override void OnUIWidgetInitialize(UIFrameBase parentFrame)
     {
         base.OnUIWidgetInitialize(parentFrame);
+        _frameSongMenu = parentFrame as UIFrameSongMenu;
         CacheSequnce();
     }
 
     public void OnLabelShow()
     {
         ResetSequnceTargets();
+        _frameSongMenu.PlayFrameSfx(ESongMenuSfxKey.FreeLabel);
         _labelSequence.Restart();                
     }
 

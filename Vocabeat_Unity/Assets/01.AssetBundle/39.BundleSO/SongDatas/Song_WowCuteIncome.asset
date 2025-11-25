@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: CodeContents::SongDataSO
   _songId: 39006
   _songName: WowCuteIncome
-  _songComposer: 
+  _songComposer: Shu
   _bpm: 200
   _songThumb: {fileID: 21300000, guid: 3f1810892b9833d4c9beb3192f20f60c, type: 3}
   _songBG: {fileID: 21300000, guid: a46d380cf87fbf4499e26351e882dadb, type: 3}

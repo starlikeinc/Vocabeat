@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: CodeContents::SongDataSO
   _songId: 39005
   _songName: Variathyella
-  _songComposer: 
+  _songComposer: "\u5409\u7530\u591C\u4E16"
   _bpm: 150
   _songThumb: {fileID: 21300000, guid: d4367a462ae152945998aa53e96b6c32, type: 3}
   _songBG: {fileID: 21300000, guid: 40582df261707324db63ba8d43790930, type: 3}

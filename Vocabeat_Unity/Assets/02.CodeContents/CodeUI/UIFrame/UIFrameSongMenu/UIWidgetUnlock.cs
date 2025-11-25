@@ -8,6 +8,8 @@ public class UIWidgetUnlock : UIWidgetCanvasBase
     [SerializeField] private Image _imgSongThumb;
     [SerializeField] private TMP_Text _textUnlockValue;
 
+    [SerializeField] private TMP_Text _textKeyAmount;
+
     [SerializeField] private RectTransform _layoutRect;
 
     private SongDataSO _songDataSO;
@@ -25,6 +27,7 @@ public class UIWidgetUnlock : UIWidgetCanvasBase
         _songDataSO = songDataSO;
         _imgSongThumb.overrideSprite = songDataSO.SongThumb;
         _textUnlockValue.text = songDataSO.UnlockCondition.CostAmount.ToString();
+        _textKeyAmount.text = ManagerRhythm.Instance.MusicKey.ToString();
         LayoutRebuilder.ForceRebuildLayoutImmediate(_layoutRect);
 
         DoUIWidgetShow();
@@ -36,8 +39,13 @@ public class UIWidgetUnlock : UIWidgetCanvasBase
         {
             ManagerUnlock.Instance.Unlock(_songDataSO);
             _frameSongMenu.RefreshSongList();
+            _frameSongMenu.PlayFrameSfx(ESongMenuSfxKey.Unlock);
             DoUIWidgetHide();
-        }        
+        }
+        else
+        {
+            _frameSongMenu.PlayFrameSfx(ESongMenuSfxKey.BtnClick);
+        }
     }
 
     public void OnAddKey()
@@ -47,6 +55,7 @@ public class UIWidgetUnlock : UIWidgetCanvasBase
 
     public void OnCancel()
     {
+        _frameSongMenu.PlayFrameSfx(ESongMenuSfxKey.BtnClick);
         DoUIWidgetHide();
     }
 }

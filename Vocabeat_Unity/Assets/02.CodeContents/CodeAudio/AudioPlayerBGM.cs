@@ -7,6 +7,9 @@ public class AudioPlayerBGM : AudioPlayerBase
         base.OnBaseChannelEnable();
         if (_eventChannel is BGMEventChannelSO bgmChannel)
             bgmChannel.OnPlayScheduled += OnPlayScheduled;
+
+        if (ManagerAudio.Instance != null)
+            ManagerAudio.Instance.OnBGMVolumeChanged += RefreshVolume;
     }
 
     protected override void OnBaseChannelDisable()
@@ -14,7 +17,12 @@ public class AudioPlayerBGM : AudioPlayerBase
         base.OnBaseChannelDisable();
         if (_eventChannel is BGMEventChannelSO bgmChannel)
             bgmChannel.OnPlayScheduled -= OnPlayScheduled;
+
+        if (ManagerAudio.Instance != null)
+            ManagerAudio.Instance.OnBGMVolumeChanged -= RefreshVolume;
     }
+
+    private AudioCueSO _currentCue; // 마지막으로 받은 Cue 저장
 
     protected override void OnAudioEvent(AudioCueSO cue)
     {
@@ -33,7 +41,8 @@ public class AudioPlayerBGM : AudioPlayerBase
         _audioSource.clip = clip;
         _audioSource.loop = cue.Loop;
         _audioSource.volume = cue.Volume;
-        
+
+        ApplyVolumeFromSettings();
         // BGM쪽은 클립 설정만 하고 Play는 따로.
     }
 
@@ -52,6 +61,20 @@ public class AudioPlayerBGM : AudioPlayerBase
     {
         if (_audioSource != null)
             _audioSource.UnPause();
+    }
+
+    private void ApplyVolumeFromSettings()
+    {
+        if (ManagerAudio.Instance == null || _audioSource == null)
+            return;
+
+        _audioSource.volume = ManagerAudio.Instance.BgmVolume;
+    }
+
+    private void RefreshVolume()
+    {
+        // 옵션 슬라이더 변경 시 호출됨
+        ApplyVolumeFromSettings();
     }
 
     private void OnPlayScheduled(double time, bool isLoop)
