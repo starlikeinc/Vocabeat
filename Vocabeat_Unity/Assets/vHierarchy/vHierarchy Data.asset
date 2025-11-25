@@ -73,6 +73,7 @@ MonoBehaviour:
         keys:
         - globalObjectIdString: GlobalObjectId_V1-2-76f687f49b2c5b345a836c365c2e96e6-809374470-0
         - globalObjectIdString: GlobalObjectId_V1-2-76f687f49b2c5b345a836c365c2e96e6-1964378103-0
+        - globalObjectIdString: GlobalObjectId_V1-2-76f687f49b2c5b345a836c365c2e96e6-427346452-0
         values:
         - colorIndex: 2
           iconNameOrGuid: BoxCollider Icon
@@ -82,5 +83,9 @@ MonoBehaviour:
           iconNameOrGuid: TrailRenderer Icon
           isIconRecursive: 1
           isColorRecursive: 1
+        - colorIndex: 7
+          iconNameOrGuid: Canvas Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
   bookmarks: []
   bookmarkedScenePaths: []

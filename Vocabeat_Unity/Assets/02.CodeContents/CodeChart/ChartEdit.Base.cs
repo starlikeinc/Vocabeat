@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public enum EEditState { None, Nomral, Long_Place, Long_Curve }
@@ -74,6 +75,16 @@ public partial class ChartEdit
     {
         if (!Application.isPlaying)
             return;
+
+        void OnPlayModeChanged(PlayModeStateChange state)
+        {
+            if (state == PlayModeStateChange.ExitingPlayMode)
+            {
+                Debug.Log("플레이모드 종료. 현재 난이도 SO 저장");
+                SaveCurrentDifficulty();
+            }
+        }
+        EditorApplication.playModeStateChanged += OnPlayModeChanged;
 
         InitFromSO();
         InitEditState();
