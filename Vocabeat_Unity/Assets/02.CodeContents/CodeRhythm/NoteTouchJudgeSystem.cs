@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class NoteTouchJudgeSystem : MonoBehaviour
 {
@@ -82,21 +83,35 @@ public class NoteTouchJudgeSystem : MonoBehaviour
 
     private void MobileInput()
     {
-        int touchCount = Input.touchCount;
-        if (touchCount == 0)
+        // Touchscreen 디바이스 존재 여부 체크
+        if (Touchscreen.current == null)
             return;
 
-        for (int i = 0; i < touchCount; i++)
+        var touches = Touchscreen.current.touches;
+
+        for (int i = 0; i < touches.Count; i++)
         {
-            var touch = Input.GetTouch(i);
-            switch (touch.phase)
+            var touch = touches[i];
+
+            // 눌린 상태가 아니면 스킵 (Began/Moved/Stationary만 남음)
+            if (!touch.press.isPressed &&
+                touch.phase.ReadValue() != UnityEngine.InputSystem.TouchPhase.Began &&
+                touch.phase.ReadValue() != UnityEngine.InputSystem.TouchPhase.Ended)
+                continue;
+
+            var phase = touch.phase.ReadValue();
+            var fingerId = touch.touchId.ReadValue();
+            var pos = touch.position.ReadValue();
+
+            switch (phase)
             {
-                case TouchPhase.Began:
-                    TryTouchNoteFromPointer(touch.position, touch.fingerId);
+                case UnityEngine.InputSystem.TouchPhase.Began:
+                    TryTouchNoteFromPointer(pos, fingerId);
                     break;
-                case TouchPhase.Ended:
-                case TouchPhase.Canceled:
-                    HandlePointerRelease(touch.fingerId);
+
+                case UnityEngine.InputSystem.TouchPhase.Ended:
+                case UnityEngine.InputSystem.TouchPhase.Canceled:
+                    HandlePointerRelease(fingerId);
                     break;
             }
         }
@@ -363,24 +378,45 @@ public class NoteTouchJudgeSystem : MonoBehaviour
     private bool IsPointerStillActive(int pointerId)
     {
 #if UNITY_EDITOR
+        // 에디터에서는 마우스 사용
         if (pointerId == -1)
-            return Input.GetMouseButton(0);
+            return Mouse.current.leftButton.isPressed;
 #endif
+
 #if UNITY_ANDROID || UNITY_IOS
+        // 모바일에서 실제 터치인지 확인
         if (pointerId >= 0)
         {
-            for (int i = 0; i < Input.touchCount; i++)
+            var touches = Touchscreen.current?.touches;
+            if (touches == null)
+                return false;
+
+            foreach (var t in touches)
             {
-                var t = Input.GetTouch(i);
-                if (t.fingerId == pointerId &&
-                    (t.phase == TouchPhase.Moved || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Began))
+                int id = t.touchId.ReadValue();
+                if (id != pointerId)
+                    continue;
+
+                var phase = t.phase.ReadValue();
+
+                // New Input System의 TouchPhase 사용
+                if (phase == UnityEngine.InputSystem.TouchPhase.Began ||
+                    phase == UnityEngine.InputSystem.TouchPhase.Moved ||
+                    phase == UnityEngine.InputSystem.TouchPhase.Stationary)
+                {
                     return true;
+                }
             }
+
             return false;
         }
 #endif
+
+        // fallback
+#if UNITY_EDITOR
         if (pointerId == -1)
-            return Input.GetMouseButton(0);
+            return Mouse.current.leftButton.isPressed;
+#endif
 
         return false;
     }
