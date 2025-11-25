@@ -124,6 +124,8 @@ public partial class ChartEdit
         if (_undoStack.Count == 0)
             return;
 
+        Debug.Log("Undo!");
+
         var prev = _undoStack.Pop();
         SortAndReindexNotes(prev);
         EditNotesDict[_currentDifficulty] = prev;

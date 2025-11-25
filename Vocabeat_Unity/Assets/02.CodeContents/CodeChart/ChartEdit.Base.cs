@@ -76,6 +76,7 @@ public partial class ChartEdit
         if (!Application.isPlaying)
             return;
 
+#if UNITY_EDITOR
         void OnPlayModeChanged(PlayModeStateChange state)
         {
             if (state == PlayModeStateChange.ExitingPlayMode)
@@ -85,7 +86,7 @@ public partial class ChartEdit
             }
         }
         EditorApplication.playModeStateChanged += OnPlayModeChanged;
-
+#endif
         InitFromSO();
         InitEditState();
 

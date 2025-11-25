@@ -598,7 +598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6536304066720092496}
-  - component: {fileID: 1646144376674684295}
+  - component: {fileID: 3405700526901734720}
   - component: {fileID: 5877765852433376210}
   - component: {fileID: 7128331239498329833}
   - component: {fileID: 7310050431963361545}
@@ -624,7 +624,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1251142626324955456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1646144376674684295
+--- !u!114 &3405700526901734720
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -635,7 +635,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30f947ef28228c2458079a2d19fccffc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: CodeContents::ManagerInput
   DontDestroy: 1
   PlayerInputSO: {fileID: 11400000, guid: 03cc52af1379f6d49970077e5979fea3, type: 2}
 --- !u!114 &5877765852433376210
@@ -668,7 +668,7 @@ MonoBehaviour:
     m_ActionId: 3d069a4d-86e7-43d4-86f3-4976dbfb45f3
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]'
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: PC_Default
+  m_DefaultControlScheme: 
   m_DefaultActionMap: PC_Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -705,7 +705,7 @@ MonoBehaviour:
   m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: 7657ee17bc03e7c4d9096c13f3195fee, type: 3}
   m_PointAction: {fileID: -7604588657019205643, guid: 7657ee17bc03e7c4d9096c13f3195fee, type: 3}
-  m_MoveAction: {fileID: -9061817219295490838, guid: 7657ee17bc03e7c4d9096c13f3195fee, type: 3}
+  m_MoveAction: {fileID: -3694531713302363433, guid: 7657ee17bc03e7c4d9096c13f3195fee, type: 3}
   m_SubmitAction: {fileID: 1037105544005604515, guid: 7657ee17bc03e7c4d9096c13f3195fee, type: 3}
   m_CancelAction: {fileID: -492513034544843667, guid: 7657ee17bc03e7c4d9096c13f3195fee, type: 3}
   m_LeftClickAction: {fileID: -6482254507822143265, guid: 7657ee17bc03e7c4d9096c13f3195fee, type: 3}

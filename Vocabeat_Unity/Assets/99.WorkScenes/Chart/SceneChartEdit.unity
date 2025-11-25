@@ -3530,7 +3530,7 @@ MonoBehaviour:
   _visualizer: {fileID: 427346454}
   _bgmAudioSource: {fileID: 809374473}
   _scanline: {fileID: 556030396}
-  _currentDifficulty: 0
+  _currentDifficulty: 1
   _currentDifficultyLevel: 1
   _currentPageIndex: 0
   _pageCount: 1
