@@ -1065,7 +1065,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: CodeContents::NoteTouchJudgeSystem
   _sfxEventChannel: {fileID: 11400000, guid: 6e6dbd00ef99ab147a87cd3c041f5e51, type: 2}
   _judgeSFXTable: {fileID: 11400000, guid: 98f673aaf0c2d714ab1d727142c10c21, type: 2}
-  _touchRadius: 150
+  _touchRadius: 250
   _blueStarRange: 50
   _whiteStarRange: 100
   _yellowStarRange: 150
