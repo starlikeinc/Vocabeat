@@ -21,7 +21,7 @@ MonoBehaviour:
   _bgmCue: {fileID: 11400000, guid: b4da4b0c41cf703408086b2ccb328a29, type: 2}
   _diffNotes:
   - Diff: 0
-    DifficultyValue: 1
+    DifficultyValue: 2
     Notes:
     - ID: 0
       PageIndex: 1
@@ -9116,7 +9116,7 @@ MonoBehaviour:
         - t: 1
           y01: 0.375
   - Diff: 1
-    DifficultyValue: 2
+    DifficultyValue: 4
     Notes:
     - ID: 0
       PageIndex: 1
@@ -21037,7 +21037,7 @@ MonoBehaviour:
         - t: 1
           y01: 0.375
   - Diff: 2
-    DifficultyValue: 3
+    DifficultyValue: 7
     Notes:
     - ID: 0
       PageIndex: 1
@@ -37079,10 +37079,10 @@ MonoBehaviour:
         - t: 1
           y01: 0.375
   _unlockCondition:
-    UnlockType: 0
+    UnlockType: 4
     RequiredSong: {fileID: 0}
     RequiredDiff: 0
     RequiredRank: 0
     RequiredPlayerLevel: 0
-    CostCurrencyTid: 0
-    CostAmount: 0
+    CostCurrencyTid: 10001
+    CostAmount: 20

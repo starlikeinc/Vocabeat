@@ -346,7 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DontDestroy: 1
   TargetFrameRate: 60
-  ShowFPS: 1
+  ShowFPS: 0
 --- !u!114 &2075153173078591176
 MonoBehaviour:
   m_ObjectHideFlags: 0

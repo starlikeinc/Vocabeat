@@ -4245,7 +4245,7 @@ MonoBehaviour:
   TemplateItem: {fileID: 1646570484755135425}
   SlotRoot: {fileID: 5082553558104171848}
   VisibleSlotCount: 3
-  SlotSpacing: 1000
+  SlotSpacing: 1500
   FocusedScale: 1
   NormalScale: 0.8
   MoveDuration: 0.25
@@ -4270,7 +4270,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - MenuIcon: {fileID: 21300000, guid: 1a8c9ade78e404b4cb18fd0b190a7b53, type: 3}
+  - MenuIcon: {fileID: 21300000, guid: 284ccdd35c76fcb43b78cc725a3a3b7b, type: 3}
     MenuName: SHOP
     OnClicked:
       m_PersistentCalls:

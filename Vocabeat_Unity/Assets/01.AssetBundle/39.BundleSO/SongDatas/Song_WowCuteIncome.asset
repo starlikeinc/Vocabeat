@@ -21,19 +21,19 @@ MonoBehaviour:
   _bgmCue: {fileID: 11400000, guid: e829a1f07852a8d499fd13172b6a31c4, type: 2}
   _diffNotes:
   - Diff: 0
-    DifficultyValue: 1
+    DifficultyValue: 4
     Notes: []
   - Diff: 1
-    DifficultyValue: 2
+    DifficultyValue: 7
     Notes: []
   - Diff: 2
-    DifficultyValue: 3
+    DifficultyValue: 12
     Notes: []
   _unlockCondition:
-    UnlockType: 4
+    UnlockType: 5
     RequiredSong: {fileID: 0}
     RequiredDiff: 0
     RequiredRank: 0
     RequiredPlayerLevel: 0
-    CostCurrencyTid: 10001
-    CostAmount: 30
+    CostCurrencyTid: 0
+    CostAmount: 0

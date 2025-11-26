@@ -64,6 +64,9 @@ public class ManagerUnlock : SingletonBase<ManagerUnlock>, IManagerInstance
 
         foreach (var song in allSongs)
         {
+            if (song.UnlockCondition.UnlockType == ESongUnlockType.ComingSoon)
+                continue;
+
             int songId = GetSongId(song);
             _unlockedSongIds.Add(songId);
         }

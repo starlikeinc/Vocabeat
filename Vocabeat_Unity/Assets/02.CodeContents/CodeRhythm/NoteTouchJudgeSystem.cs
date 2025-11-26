@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class NoteTouchJudgeSystem : MonoBehaviour
 {
@@ -70,6 +69,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         }
     }
 
+    // ----------------- PC (마우스) -----------------
     private void PCInput()
     {
         if (Input.GetMouseButtonDown(0))
@@ -82,36 +82,29 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         }
     }
 
+    // ----------------- Mobile (Old Input) -----------------
     private void MobileInput()
     {
-        // Touchscreen 디바이스 존재 여부 체크
-        if (Touchscreen.current == null)
+        int touchCount = Input.touchCount;
+        if (touchCount <= 0)
             return;
 
-        var touches = Touchscreen.current.touches;
-
-        for (int i = 0; i < touches.Count; i++)
+        for (int i = 0; i < touchCount; i++)
         {
-            var touch = touches[i];
+            Touch touch = Input.GetTouch(i);
 
-            // 눌린 상태가 아니면 스킵 (Began/Moved/Stationary만 남음)
-            if (!touch.press.isPressed &&
-                touch.phase.ReadValue() != UnityEngine.InputSystem.TouchPhase.Began &&
-                touch.phase.ReadValue() != UnityEngine.InputSystem.TouchPhase.Ended)
-                continue;
-
-            var phase = touch.phase.ReadValue();
-            var fingerId = touch.touchId.ReadValue();
-            var pos = touch.position.ReadValue();
+            var phase = touch.phase;
+            int fingerId = touch.fingerId;
+            Vector2 pos = touch.position;
 
             switch (phase)
             {
-                case UnityEngine.InputSystem.TouchPhase.Began:
+                case TouchPhase.Began:
                     TryTouchNoteFromPointer(pos, fingerId);
                     break;
 
-                case UnityEngine.InputSystem.TouchPhase.Ended:
-                case UnityEngine.InputSystem.TouchPhase.Canceled:
+                case TouchPhase.Ended:
+                case TouchPhase.Canceled:
                     HandlePointerRelease(fingerId);
                     break;
             }
@@ -195,11 +188,10 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             if (deltaTick < -_redStarRange)
                 continue;
 
-            // 2) Tick 이후에는 아예 새 터치로 판정하지 않음 (늦게 친 건 무시)
+            // 2) Tick 이후 일정 시간 지나면 새 터치로는 판정하지 않음
             if (deltaTick > _autoMissDelayTicks)
                 continue;
 
-            // 여기까지 통과했으면 deltaTick은 [-_redStarRange, 0] 구간
             int absDiffTick = Mathf.Abs(deltaTick);
 
             Vector2 idealLocal = GetExpectedLocalPositionForTap(note, songTick);
@@ -282,7 +274,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
 
         PlayJudgeSFX(judgeType);
 
-        // 🔹 시작 이펙트 위치 = 노트 시작 위치(Head)
+        // 시작 이펙트 위치 = 노트 시작 위치(Head)
         Vector2 startLocalPos = GetExpectedLocalPositionForTap(note, songTick);
         OnHoldJudgeResult?.Invoke(note, judgeType, false, startLocalPos);
     }
@@ -395,47 +387,39 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         }
     }
 
+    // ----------------- Old Input 기반 포인터 상태 체크 -----------------
     private bool IsPointerStillActive(int pointerId)
     {
-#if UNITY_EDITOR
-        // 에디터에서는 마우스 사용
+#if UNITY_STANDALONE || UNITY_EDITOR
+        // 에디터 / PC: 마우스 왼쪽 버튼
         if (pointerId == -1)
-            return Mouse.current.leftButton.isPressed;
+            return Input.GetMouseButton(0);
 #endif
 
 #if UNITY_ANDROID || UNITY_IOS
-        // 모바일에서 실제 터치인지 확인
+        // 모바일: 해당 fingerId가 아직 Began/Moved/Stationary 상태인지 확인
         if (pointerId >= 0)
         {
-            var touches = Touchscreen.current?.touches;
-            if (touches == null)
-                return false;
-
-            foreach (var t in touches)
+            int touchCount = Input.touchCount;
+            for (int i = 0; i < touchCount; i++)
             {
-                int id = t.touchId.ReadValue();
-                if (id != pointerId)
+                Touch t = Input.GetTouch(i);
+                if (t.fingerId != pointerId)
                     continue;
 
-                var phase = t.phase.ReadValue();
-
-                // New Input System의 TouchPhase 사용
-                if (phase == UnityEngine.InputSystem.TouchPhase.Began ||
-                    phase == UnityEngine.InputSystem.TouchPhase.Moved ||
-                    phase == UnityEngine.InputSystem.TouchPhase.Stationary)
+                TouchPhase phase = t.phase;
+                if (phase == TouchPhase.Began ||
+                    phase == TouchPhase.Moved ||
+                    phase == TouchPhase.Stationary)
                 {
                     return true;
                 }
+
+                return false; // 같은 fingerId인데 Ended/Cancelled면 false
             }
 
             return false;
         }
-#endif
-
-        // fallback
-#if UNITY_EDITOR
-        if (pointerId == -1)
-            return Mouse.current.leftButton.isPressed;
 #endif
 
         return false;
@@ -443,27 +427,38 @@ public class NoteTouchJudgeSystem : MonoBehaviour
 
     private bool TryGetPointerLocalPosition(int pointerId, out Vector2 localPos)
     {
-#if UNITY_EDITOR
+#if UNITY_STANDALONE || UNITY_EDITOR
         if (pointerId == -1)
         {
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(_touchArea, Input.mousePosition, _uiCam, out localPos);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                _touchArea,
+                Input.mousePosition,
+                _uiCam,
+                out localPos);
             return true;
         }
 #endif
+
 #if UNITY_ANDROID || UNITY_IOS
         if (pointerId >= 0)
         {
-            for (int i = 0; i < Input.touchCount; i++)
+            int touchCount = Input.touchCount;
+            for (int i = 0; i < touchCount; i++)
             {
-                var t = Input.GetTouch(i);
+                Touch t = Input.GetTouch(i);
                 if (t.fingerId == pointerId)
                 {
-                    RectTransformUtility.ScreenPointToLocalPointInRectangle(_touchArea, t.position, _uiCam, out localPos);
+                    RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                        _touchArea,
+                        t.position,
+                        _uiCam,
+                        out localPos);
                     return true;
                 }
             }
         }
 #endif
+
         localPos = Vector2.zero;
         return false;
     }
@@ -481,7 +476,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
                 int endTick = hs.EndTick;
 
                 hs.ReleasedEarly = songTick < endTick;
-                
+
                 FinalizeHoldByEnd(hs.Note, hs, songTick);
 
                 RemoveHoldState(noteId);
@@ -651,9 +646,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         Vector3 forward = Vector3.forward;
         float radius = _touchRadius * _touchArea.lossyScale.x;
 
-        // ================================
-        // NORMAL 노트 판정 유효 범위 표시
-        // ================================
+        // ================================ NORMAL 노트 판정 유효 범위 표시
         Handles.color = new Color(0.2f, 0.7f, 1f, 0.6f); // 파란색
 
         if (_listNotes != null)
@@ -669,7 +662,6 @@ public class NoteTouchJudgeSystem : MonoBehaviour
                 if (_judgedNoteIds.Contains(note.ID)) continue;
                 if (_activeHoldStates.ContainsKey(note.ID)) continue;
 
-                // Normal은 GetExpectedLocalPositionForTap()
                 Vector2 idealLocal = GetExpectedLocalPositionForTap(note, songTick);
                 Vector3 world = _touchArea.TransformPoint(idealLocal);
 
@@ -677,9 +669,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
             }
         }
 
-        // ================================
-        // FLOW HOLD 현재 진행 중 판정 범위
-        // ================================
+        // ================================ FLOW HOLD 현재 진행 중 판정 범위
         Handles.color = new Color(1f, 0.2f, 0.2f, 0.6f); // 빨간색
 
         foreach (var kv in _activeHoldStates)
@@ -689,7 +679,6 @@ public class NoteTouchJudgeSystem : MonoBehaviour
 
             Note note = hs.Note;
 
-            // FlowHold 진행 중 기대 위치
             Vector2 idealLocal = GetExpectedLocalPositionForHold(note, songTick);
             Vector3 world = _touchArea.TransformPoint(idealLocal);
 
@@ -697,5 +686,4 @@ public class NoteTouchJudgeSystem : MonoBehaviour
         }
     }
 #endif
-
 }

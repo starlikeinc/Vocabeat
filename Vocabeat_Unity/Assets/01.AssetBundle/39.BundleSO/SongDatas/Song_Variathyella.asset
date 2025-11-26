@@ -21,7 +21,7 @@ MonoBehaviour:
   _bgmCue: {fileID: 11400000, guid: 90b9aec2ac8cc5249b63b11b0e31beae, type: 2}
   _diffNotes:
   - Diff: 0
-    DifficultyValue: 1
+    DifficultyValue: 4
     Notes:
     - ID: 0
       PageIndex: 1
@@ -7571,7 +7571,7 @@ MonoBehaviour:
         CurvePoints: []
         SampledPoints: []
   - Diff: 1
-    DifficultyValue: 1
+    DifficultyValue: 8
     Notes:
     - ID: 0
       PageIndex: 1
@@ -9474,7 +9474,7 @@ MonoBehaviour:
       Tick: 14400
       Y: 0.75
       HasSibling: 0
-      HoldTick: 960
+      HoldTick: 959
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -16609,7 +16609,7 @@ MonoBehaviour:
         CurvePoints: []
         SampledPoints: []
   - Diff: 2
-    DifficultyValue: 1
+    DifficultyValue: 11
     Notes:
     - ID: 0
       PageIndex: 1
@@ -19388,7 +19388,7 @@ MonoBehaviour:
       Tick: 14400
       Y: 0.75
       HasSibling: 0
-      HoldTick: 960
+      HoldTick: 959
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -20912,7 +20912,7 @@ MonoBehaviour:
       Tick: 27600
       Y: 0.5
       HasSibling: 0
-      HoldTick: 240
+      HoldTick: 239
       NextID: 0
       FlowLongMeta:
         CurvePoints:

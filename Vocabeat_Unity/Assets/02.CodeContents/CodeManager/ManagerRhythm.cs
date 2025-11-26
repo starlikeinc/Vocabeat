@@ -83,15 +83,15 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
 
     private void Update()
     {
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            if (!_rTimeline.IsPlaying)
-                StartTestPlay();
-            else
-                StopTestPlay();
-        }
-#endif
+//#if UNITY_EDITOR || DEVELOPMENT_BUILD
+//        if (Input.GetKeyUp(KeyCode.Space))
+//        {
+//            if (!_rTimeline.IsPlaying)
+//                StartTestPlay();
+//            else
+//                StopTestPlay();
+//        }
+//#endif
         if (_rTimeline == null || !_rTimeline.IsPlaying)
             return;
 

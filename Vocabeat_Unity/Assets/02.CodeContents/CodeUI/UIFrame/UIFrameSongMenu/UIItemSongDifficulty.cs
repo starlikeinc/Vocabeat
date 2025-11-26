@@ -49,6 +49,7 @@ public class UIItemSongDifficulty : UITemplateItemBase
         if (itemDifficulty == this)
         {
             transform.DOScale(1.2f, 0.2f).SetEase(Ease.OutQuad);
+            _frameSongMenu.PlayFrameSfx(ESongMenuSfxKey.DifficultySelect);
         }
         else
         {

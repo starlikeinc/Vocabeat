@@ -21,7 +21,7 @@ MonoBehaviour:
   _bgmCue: {fileID: 11400000, guid: 571458efe997c254ba7d6fe8a78cfe28, type: 2}
   _diffNotes:
   - Diff: 0
-    DifficultyValue: 1
+    DifficultyValue: 4
     Notes:
     - ID: 0
       PageIndex: 1
@@ -10068,7 +10068,7 @@ MonoBehaviour:
         CurvePoints: []
         SampledPoints: []
   - Diff: 1
-    DifficultyValue: 3
+    DifficultyValue: 8
     Notes:
     - ID: 0
       PageIndex: 1
@@ -23993,7 +23993,7 @@ MonoBehaviour:
         - t: 1
           y01: 0.625
   - Diff: 2
-    DifficultyValue: 3
+    DifficultyValue: 14
     Notes:
     - ID: 0
       PageIndex: 1
@@ -24001,7 +24001,7 @@ MonoBehaviour:
       Tick: 960
       Y: 0.125
       HasSibling: 0
-      HoldTick: 960
+      HoldTick: 959
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -24268,7 +24268,7 @@ MonoBehaviour:
       Tick: 3360
       Y: 0.25
       HasSibling: 0
-      HoldTick: 480
+      HoldTick: 479
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -24513,7 +24513,7 @@ MonoBehaviour:
       Tick: 5280
       Y: 0.75
       HasSibling: 0
-      HoldTick: 480
+      HoldTick: 479
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -27170,7 +27170,7 @@ MonoBehaviour:
       Tick: 23520
       Y: 0.75
       HasSibling: 0
-      HoldTick: 480
+      HoldTick: 479
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -27821,7 +27821,7 @@ MonoBehaviour:
       Tick: 29760
       Y: 0.25
       HasSibling: 0
-      HoldTick: 960
+      HoldTick: 959
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -30330,7 +30330,7 @@ MonoBehaviour:
       Tick: 48000
       Y: 0.75
       HasSibling: 0
-      HoldTick: 960
+      HoldTick: 959
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -30604,7 +30604,7 @@ MonoBehaviour:
       Tick: 50640
       Y: 0.75
       HasSibling: 0
-      HoldTick: 240
+      HoldTick: 239
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -31091,7 +31091,7 @@ MonoBehaviour:
       Tick: 54480
       Y: 0.25
       HasSibling: 0
-      HoldTick: 240
+      HoldTick: 239
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -31694,7 +31694,7 @@ MonoBehaviour:
       Tick: 59280
       Y: 0.75
       HasSibling: 0
-      HoldTick: 240
+      HoldTick: 239
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -32077,7 +32077,7 @@ MonoBehaviour:
       Tick: 62160
       Y: 0.25
       HasSibling: 0
-      HoldTick: 240
+      HoldTick: 239
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -32565,7 +32565,7 @@ MonoBehaviour:
       Tick: 67680
       Y: 0.5
       HasSibling: 0
-      HoldTick: 480
+      HoldTick: 479
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -33476,7 +33476,7 @@ MonoBehaviour:
       Tick: 73680
       Y: 0.25
       HasSibling: 0
-      HoldTick: 240
+      HoldTick: 239
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -33668,7 +33668,7 @@ MonoBehaviour:
       Tick: 74880
       Y: 0.75
       HasSibling: 0
-      HoldTick: 960
+      HoldTick: 959
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -35449,7 +35449,7 @@ MonoBehaviour:
       Tick: 85920
       Y: 0.25
       HasSibling: 0
-      HoldTick: 480
+      HoldTick: 479
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -36880,7 +36880,7 @@ MonoBehaviour:
       Tick: 95760
       Y: 0.25
       HasSibling: 0
-      HoldTick: 240
+      HoldTick: 239
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -37316,7 +37316,7 @@ MonoBehaviour:
       Tick: 99120
       Y: 0.5
       HasSibling: 0
-      HoldTick: 720
+      HoldTick: 719
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -37547,7 +37547,7 @@ MonoBehaviour:
       Tick: 101280
       Y: 0.5
       HasSibling: 0
-      HoldTick: 480
+      HoldTick: 479
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -37994,7 +37994,7 @@ MonoBehaviour:
       Tick: 104640
       Y: 0.375
       HasSibling: 0
-      HoldTick: 960
+      HoldTick: 959
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -38401,7 +38401,7 @@ MonoBehaviour:
       Tick: 107280
       Y: 0.75
       HasSibling: 0
-      HoldTick: 240
+      HoldTick: 239
       NextID: 0
       FlowLongMeta:
         CurvePoints:
@@ -38579,7 +38579,7 @@ MonoBehaviour:
       Tick: 108960
       Y: 0.375
       HasSibling: 0
-      HoldTick: 480
+      HoldTick: 479
       NextID: 0
       FlowLongMeta:
         CurvePoints:

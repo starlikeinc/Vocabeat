@@ -29,7 +29,9 @@ public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
 
     [Header("옵션")]
     [SerializeField] private UIWidgetOption _widgetOption;
-    
+    [Header("ComingSoon")]
+    [SerializeField] private UIWidgetComingSoon _widgetComingSoon;
+
     [Header("이벤트")]
     [SerializeField] private UnityEvent _onFrameShowFromMain;
     [SerializeField] private UnityEvent _onFrameShowFromInGame;
@@ -89,7 +91,16 @@ public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
 
         if (!ManagerUnlock.Instance.IsUnlocked(_songData))
         {
-            _widgetUnlock.DoWidgetUnlockSetting(_songData);
+            if(_songData.UnlockCondition.UnlockType == ESongUnlockType.ByPurchase)
+            {
+                _widgetUnlock.DoWidgetUnlockSetting(_songData);
+                return;
+            }
+            else if(_songData.UnlockCondition.UnlockType == ESongUnlockType.ComingSoon)
+            {
+                _widgetComingSoon.DoUIWidgetShow();
+                return;
+            }
             return;
         }
 
