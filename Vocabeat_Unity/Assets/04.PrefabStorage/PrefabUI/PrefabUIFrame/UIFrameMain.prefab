@@ -827,6 +827,7 @@ GameObject:
   - component: {fileID: 5128638838542809335}
   - component: {fileID: 3729927071179450219}
   - component: {fileID: 6981248575469336188}
+  - component: {fileID: 4311226390205487019}
   m_Layer: 5
   m_Name: UIFrameMain
   m_TagString: Untagged
@@ -921,6 +922,21 @@ MonoBehaviour:
     Cue: {fileID: 11400000, guid: ecf5b21ae21ecd84d8facd2d99728230, type: 2}
   _widgetMainShop: {fileID: 4065695274086824269}
   _carouselMainMenu: {fileID: 1826432610968967750}
+--- !u!114 &4311226390205487019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403768883763223376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c02e863bfb85d7c4784d983abae5e8f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CodeContents::UISafeArea
+  rectTransfrom: {fileID: 5793733886921915894}
+  conformX: 1
+  conformY: 1
 --- !u!1 &1489213060003571523
 GameObject:
   m_ObjectHideFlags: 0
@@ -5306,6 +5322,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6970461567959021653, guid: e92c69c0a56f7ea48b0bef8e0e85c510, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6970461567959021653, guid: e92c69c0a56f7ea48b0bef8e0e85c510, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9036801320266202613, guid: e92c69c0a56f7ea48b0bef8e0e85c510, type: 3}

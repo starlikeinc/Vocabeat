@@ -45,6 +45,10 @@ public class ManagerLoaderScene : ManagerAddressableSceneBase
 {
     public new static ManagerLoaderScene Instance => ManagerAddressableSceneBase.Instance as ManagerLoaderScene;
 
+    public bool IsAdditionalWorkRunning { get; private set; }
+    
+    public static event Action<bool> OnAdditionalWorkRunningChanged;
+
     //------------------------------------------------------------------------
     private const string c_SceneMasterName    = "SceneMaster";
     private const string c_SceneUIMainName    = "SceneUIContainerMain";
@@ -106,9 +110,17 @@ public class ManagerLoaderScene : ManagerAddressableSceneBase
     //------------------------------------------------------------------------
     private async Task PrivTaskWaitForAdditionalLoadWorks(IEnumerable<ISceneLoadingWork> additionalSceneWorks, Action delFinish)
     {
+        if (additionalSceneWorks == null)
+        {
+            delFinish?.Invoke();
+            return;
+        }
+
         m_listAdditionLoadWork.Clear();
         m_listAdditionLoadWorkLast.Clear();
-        
+
+        SetAdditionalWorkRunning(true);
+
         foreach (var additionalWork in additionalSceneWorks)
         {
             if (!additionalWork.LoadAtLastStep)
@@ -130,12 +142,20 @@ public class ManagerLoaderScene : ManagerAddressableSceneBase
         await Task.WhenAll(m_listAdditionLoadWork);
         Debug.Log("<color=green>병렬 작업 모두 완료됨</color>");
 
+        SetAdditionalWorkRunning(false);
+
         foreach (var lastWork in m_listAdditionLoadWorkLast)
         {
             if(lastWork != null)
                 await lastWork();
         }
         delFinish?.Invoke();
+    }
+
+    private void SetAdditionalWorkRunning(bool isRunning)
+    {
+        IsAdditionalWorkRunning = isRunning;
+        OnAdditionalWorkRunningChanged?.Invoke(isRunning);
     }
 
     private void PrivUnloadSceneLoading(Action delFinish)
