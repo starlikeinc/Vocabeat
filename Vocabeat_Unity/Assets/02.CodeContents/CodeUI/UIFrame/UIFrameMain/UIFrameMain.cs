@@ -21,6 +21,11 @@ public class UIFrameMain : UIFrameUsage<EMainSfxKey>
         PlayFrameBgm();
     }
 
+    public void DoShowCarousel()
+    {
+        _carouselMainMenu.DoUIWidgetShow();
+    }
+
     public void OnGoToSongMenu()
     {
         StopFrameBgm();
@@ -33,6 +38,7 @@ public class UIFrameMain : UIFrameUsage<EMainSfxKey>
 
     public void OnShopPopupOpen()
     {
+        _carouselMainMenu.DoUIWidgetHide();
         _widgetMainShop.DoUIWidgetShow();
     }
 }

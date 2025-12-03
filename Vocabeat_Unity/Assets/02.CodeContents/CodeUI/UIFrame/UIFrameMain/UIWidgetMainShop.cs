@@ -8,6 +8,14 @@ public class UIWidgetMainShop : UIWidgetCanvasBase
     [SerializeField] private RectTransform _keyLayout;
     [SerializeField] private TMP_Text _textKeyValue;
 
+    private UIFrameMain _frameMain;
+
+    protected override void OnUIWidgetInitialize(UIFrameBase parentFrame)
+    {
+        base.OnUIWidgetInitialize(parentFrame);
+        _frameMain = parentFrame as UIFrameMain;
+    }
+
     protected override void OnUIWidgetShow()
     {
         base.OnUIWidgetShow();
@@ -22,6 +30,7 @@ public class UIWidgetMainShop : UIWidgetCanvasBase
 
     public void OnClose()
     {
+        _frameMain.DoShowCarousel();
         DoUIWidgetHide();
     }
 }
