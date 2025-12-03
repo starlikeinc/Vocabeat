@@ -52,9 +52,10 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     private int _musicKey;
     public bool IsPlaying => _rTimeline.IsPlaying;
 
+    public EDifficulty CurDiff => _lastDiff;
+    private EDifficulty _lastDiff;
 
     private SongDataSO _lastSongData;
-    private EDifficulty _lastDiff;
     private RectTransform _touchArea;
     private Camera _uiCam;
     private bool _hasBindContext;

@@ -55,7 +55,7 @@ public class NoteTouchJudgeSystem : MonoBehaviour
     // ========================================
     private void Update()
     {
-#if UNITY_STANDALONE
+#if UNITY_STANDALONE || UNITY_EDITOR
         PCInput();
 #endif
 #if UNITY_ANDROID || UNITY_IOS
