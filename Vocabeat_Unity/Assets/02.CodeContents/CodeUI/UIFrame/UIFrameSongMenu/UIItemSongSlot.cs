@@ -9,7 +9,8 @@ public class UIItemSongSlot : UITemplateCarouselItemBase
     [Header("[ Unit Slot ]")]
     [SerializeField] private Button _button;
     [SerializeField] private GameObject _contLock;
-    [SerializeField] private Image _icon;        
+    [SerializeField] private Image _icon;
+    [SerializeField] private GameObject _selectedBG;
 
     [Header("HighlightOption")]
     [SerializeField] private float _focusScale = 1.2f;
@@ -45,7 +46,9 @@ public class UIItemSongSlot : UITemplateCarouselItemBase
     {
         transform.DOKill(true);
 
-        _isCenter = isCenter;                
+        _isCenter = isCenter;
+
+        _selectedBG.SetActive(_isCenter);
         float targetScale = isCenter ? _focusScale : 1f;
         transform.DOScale(targetScale, _duration)
                  .SetEase(Ease.OutQuad);

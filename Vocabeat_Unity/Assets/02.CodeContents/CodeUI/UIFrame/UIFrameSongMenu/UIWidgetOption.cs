@@ -1,4 +1,5 @@
 using LUIZ.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,9 @@ public class UIWidgetOption : UIWidgetCanvasBase
 {    
     [SerializeField] private Slider _sliderBgm;
     [SerializeField] private Slider _sliderSfx;
+
+    [SerializeField] private TMP_Text _textBGMValue;
+    [SerializeField] private TMP_Text _textSFXValue;
 
     private UIFrameSongMenu _frameSongMenu;
 
@@ -29,8 +33,19 @@ public class UIWidgetOption : UIWidgetCanvasBase
         _sliderBgm.SetValueWithoutNotify(audioMgr.BgmVolume);
         _sliderSfx.SetValueWithoutNotify(audioMgr.SfxVolume);
 
-        _sliderBgm.onValueChanged.AddListener(v => audioMgr.SetBgmVolume(v));
-        _sliderSfx.onValueChanged.AddListener(v => audioMgr.SetSfxVolume(v));
+        _textBGMValue.text = $"{audioMgr.BgmVolume * 100:N0}";
+        _textSFXValue.text = $"{audioMgr.SfxVolume * 100:N0}";
+
+        _sliderBgm.onValueChanged.AddListener(v =>
+        {
+            audioMgr.SetBgmVolume(v);
+            _textBGMValue.text = $"{v * 100:N0}";
+        });
+        _sliderSfx.onValueChanged.AddListener(v =>
+        {
+            audioMgr.SetSfxVolume(v);
+            _textSFXValue.text = $"{v * 100:N0}";
+        });
     }    
 
     public void OnClose()

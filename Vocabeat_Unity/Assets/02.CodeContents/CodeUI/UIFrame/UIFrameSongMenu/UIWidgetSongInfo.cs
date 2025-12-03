@@ -8,7 +8,7 @@ public class UIWidgetSongInfo : UIWidgetBase
 
     [SerializeField] private TMP_Text _textSongName;
     [SerializeField] private TMP_Text _textSongBPM;
-    [SerializeField] private TMP_Text _textSongDifficulty;
+    [SerializeField] private TMP_Text _textSongComposer;
 
     public void WidgetSongInfoSetting(int songIndex)
     {
@@ -16,12 +16,8 @@ public class UIWidgetSongInfo : UIWidgetBase
 
         _textSongName.text = songDataSO.SongName;
         _textSongBPM.text = $"BPM {songDataSO.BPM}";
+        _textSongComposer.text = songDataSO.SongComposer;
         SongDifficultySetting(songDataSO);
-    }
-
-    public void SetDifficulty(EDifficulty difficulty)
-    {
-        _textSongDifficulty.text = difficulty.ToString();
     }
 
     private void SongDifficultySetting(SongDataSO songData)

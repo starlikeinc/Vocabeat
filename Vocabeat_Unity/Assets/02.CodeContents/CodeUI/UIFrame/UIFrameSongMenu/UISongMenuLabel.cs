@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UISongMenuLabel : UIWidgetBase
+public class UISongMenuLabel : UIWidgetCanvasBase
 {
     [SerializeField] private RectTransform _labelRectTrs;
     [SerializeField] private float _scaleTweenDuration;
@@ -21,6 +21,7 @@ public class UISongMenuLabel : UIWidgetBase
         base.OnUIWidgetInitialize(parentFrame);
         _frameSongMenu = parentFrame as UIFrameSongMenu;
         CacheSequnce();
+        this.DoUIWidgetHide();
     }
 
     public void OnLabelShow()

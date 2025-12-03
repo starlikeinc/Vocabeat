@@ -17,6 +17,7 @@ MonoBehaviour:
     - 0135c8f5ead72004cad25a6194f995b6
     - 736bd84aa25186c42879685f67200dee
     - 76f687f49b2c5b345a836c365c2e96e6
+    - c661adb670781134492bf774d1946ce4
     values:
     - goDatas_byGlobalId:
         keys:
@@ -87,5 +88,18 @@ MonoBehaviour:
           iconNameOrGuid: Canvas Icon
           isIconRecursive: 0
           isColorRecursive: 0
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-1-c661adb670781134492bf774d1946ce4-1190851344755830568-0
+        - globalObjectIdString: GlobalObjectId_V1-1-c661adb670781134492bf774d1946ce4-523389807782823443-0
+        values:
+        - colorIndex: 2
+          iconNameOrGuid: 
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 4
+          iconNameOrGuid: 
+          isIconRecursive: 0
+          isColorRecursive: 1
   bookmarks: []
   bookmarkedScenePaths: []

@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class UIWidgetUnlock : UIWidgetCanvasBase
 {
-    [SerializeField] private Image _imgSongThumb;
+    [SerializeField] private TMP_Text _textSongName;
+
+    [SerializeField] private TMP_Text _textSongComposer;
+
     [SerializeField] private TMP_Text _textUnlockValue;
 
     [SerializeField] private TMP_Text _textKeyAmount;
@@ -25,7 +28,10 @@ public class UIWidgetUnlock : UIWidgetCanvasBase
     public void DoWidgetUnlockSetting(SongDataSO songDataSO)
     {
         _songDataSO = songDataSO;
-        _imgSongThumb.overrideSprite = songDataSO.SongThumb;
+
+        _textSongName.text = songDataSO.SongName;
+        _textSongComposer.text = songDataSO.SongComposer;
+
         _textUnlockValue.text = songDataSO.UnlockCondition.CostAmount.ToString();
         _textKeyAmount.text = ManagerRhythm.Instance.MusicKey.ToString();
         LayoutRebuilder.ForceRebuildLayoutImmediate(_layoutRect);

@@ -1,4 +1,5 @@
 using LUIZ.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -15,9 +16,6 @@ public enum ESongMenuSfxKey
 
 public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
 {
-    [Header("곡 배경")]
-    [SerializeField] private UISongBGScroll _bgScroll;
-
     [Header("캐러셀")]
     [SerializeField] private UICarouselSong _carouselSong;
 
@@ -29,6 +27,10 @@ public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
 
     [Header("옵션")]
     [SerializeField] private UIWidgetOption _widgetOption;
+
+    [Header("SongKey")]
+    [SerializeField] private TMP_Text _textKeyAmount;
+
     [Header("ComingSoon")]
     [SerializeField] private UIWidgetComingSoon _widgetComingSoon;
 
@@ -45,7 +47,7 @@ public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
     {
         base.OnUIFrameInitialize();
         _carouselSong.OnCenterChanged -= HandleCenterChanged;
-        _carouselSong.OnCenterChanged += HandleCenterChanged;
+        _carouselSong.OnCenterChanged += HandleCenterChanged;        
     }
 
     public void DoFrameSongMenuSetting(bool bFromMain) // 메인 메뉴에서 접속하면 FreePlay 토스트 띄우기
@@ -53,14 +55,14 @@ public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
         if (bFromMain)
         {
             _onFrameShowFromMain?.Invoke();
-            _carouselSong.Initialize();
-            _bgScroll.DoBGScrollInfinite();
+            _carouselSong.Initialize();            
         }
         else
         {
             _onFrameShowFromInGame?.Invoke();
             _carouselSong.RefreshAll(_lastSongIndex);
         }
+        _textKeyAmount.text = $"{ManagerRhythm.Instance.MusicKey}";
     }
 
     public void SongDifficultySetting()
@@ -76,12 +78,12 @@ public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
     public void RefreshSongList()
     {
         _carouselSong.RefreshSlotsVisualOnly();
+        _textKeyAmount.text = $"{ManagerRhythm.Instance.MusicKey}";
     }
 
     public void SetCurrentSongDifficulty(EDifficulty diff)
     {
-        _difficulty = diff;
-        _widgetSongInfo.SetDifficulty(diff);
+        _difficulty = diff;        
     }
 
     public void OnPlay()
@@ -137,7 +139,6 @@ public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
     {
         _songData = songData;
         _lastSongIndex = index;
-        ChangeFrameBGM(songData.BGMCue);
-        _bgScroll.DoBGChange(songData.SongBG);
+        ChangeFrameBGM(songData.BGMCue);        
     }
 }

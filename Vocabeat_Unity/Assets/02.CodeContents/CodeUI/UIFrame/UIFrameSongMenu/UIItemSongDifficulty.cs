@@ -9,6 +9,7 @@ public class UIItemSongDifficulty : UITemplateItemBase
 {
     [SerializeField] private Image _imgDiffIcon;
     [SerializeField] private TMP_Text _textDiffValue;
+    [SerializeField] private GameObject _contSelected;
 
     private EDifficulty _diff;
 
@@ -20,6 +21,8 @@ public class UIItemSongDifficulty : UITemplateItemBase
     {
         base.OnUIWidgetInitialize(parentFrame);
         _frameSongMenu = parentFrame as UIFrameSongMenu;
+
+        _contSelected.SetActive(false);
 
         _onSongDifficultyChanged -= HandleSelectScale;
         _onSongDifficultyChanged += HandleSelectScale;
@@ -50,10 +53,12 @@ public class UIItemSongDifficulty : UITemplateItemBase
         {
             transform.DOScale(1.2f, 0.2f).SetEase(Ease.OutQuad);
             _frameSongMenu.PlayFrameSfx(ESongMenuSfxKey.DifficultySelect);
+            _contSelected.SetActive(true);
         }
         else
         {
             transform.DOScale(1f, 0.2f).SetEase(Ease.OutQuad);
+            _contSelected.SetActive(false);
         }        
     }
 }
