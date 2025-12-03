@@ -2748,7 +2748,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 80da2592533ccfb43bc1822fa9299e01, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c0a8e994fcb7e4d4dbc99268e8399bfc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2759,7 +2759,7 @@ MonoBehaviour:
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
   points: []
-  targetSprite: {fileID: 21300000, guid: 80da2592533ccfb43bc1822fa9299e01, type: 3}
+  targetSprite: {fileID: 21300000, guid: c0a8e994fcb7e4d4dbc99268e8399bfc, type: 3}
   tintColor: {r: 1, g: 0.9543277, b: 0.5415094, a: 1}
   thickness: 100
   lineSegment: 5
