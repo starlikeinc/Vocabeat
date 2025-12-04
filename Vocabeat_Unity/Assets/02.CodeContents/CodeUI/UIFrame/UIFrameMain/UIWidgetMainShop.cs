@@ -1,12 +1,14 @@
 using LUIZ.UI;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UIWidgetMainShop : UIWidgetCanvasBase
 {
-    [SerializeField] private RectTransform _keyLayout;
+    [Header("Key")]
     [SerializeField] private TMP_Text _textKeyValue;
+
+    [Header("Point")]
+    [SerializeField] private TMP_Text _textPointValue;
 
     private UIFrameMain _frameMain;
 
@@ -19,13 +21,13 @@ public class UIWidgetMainShop : UIWidgetCanvasBase
     protected override void OnUIWidgetShow()
     {
         base.OnUIWidgetShow();
-        RefreshKey();
+        RefreshCurrency();
     }
 
-    public void RefreshKey()
+    public void RefreshCurrency()
     {
         _textKeyValue.text = $"{ManagerRhythm.Instance.MusicKey}";
-        LayoutRebuilder.ForceRebuildLayoutImmediate(_keyLayout);
+        _textPointValue.text = $"{ManagerRhythm.Instance.MusicPoint}";
     }
 
     public void OnClose()

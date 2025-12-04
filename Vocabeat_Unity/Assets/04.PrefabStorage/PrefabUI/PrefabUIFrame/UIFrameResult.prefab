@@ -28,7 +28,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7850911418212784536}
+  - {fileID: 3607785875046404810}
   - {fileID: 6516188645132469444}
   - {fileID: 6801672144133484844}
   - {fileID: 2070626521355551767}
@@ -624,8 +624,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4934542380284951224}
+  m_Children: []
   m_Father: {fileID: 2740750753330418277}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -1252,8 +1251,9 @@ MonoBehaviour:
   _objFail: {fileID: 5462285702497493255}
   _imgThumb: {fileID: 2121331045685998953}
   _imgBG: {fileID: 4274051771678230958}
-  _pivotKey: {fileID: 8078952114136862131}
-  _tweenKeyAcquire: {fileID: 4162891973151175531}
+  _pivotPoint: {fileID: 8078952114136862131}
+  _tweenPointAcquire: {fileID: 4162891973151175531}
+  _textPointAcquireValue: {fileID: 586899848915411284}
   OnFailed:
     m_PersistentCalls:
       m_Calls:
@@ -1293,6 +1293,43 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!1 &3137772791435801970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3607785875046404810}
+  m_Layer: 5
+  m_Name: UIContSongThumb
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3607785875046404810
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3137772791435801970}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7850911418212784536}
+  - {fileID: 2105367381831948545}
+  m_Father: {fileID: 324749733688937006}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 30, y: -30}
+  m_SizeDelta: {x: 300, y: 300}
+  m_Pivot: {x: 0, y: 1}
 --- !u!1 &3289242557819985121
 GameObject:
   m_ObjectHideFlags: 0
@@ -2168,7 +2205,7 @@ GameObject:
   - component: {fileID: 5537219231187694964}
   - component: {fileID: 5066406189848726932}
   m_Layer: 5
-  m_Name: UIImgKey
+  m_Name: UIImgPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2221,7 +2258,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4c651378d9d34994eb59ba0e9ad4b558, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eec32c98416ff5542aabb3a9094982b1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2405,6 +2442,42 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &6933173865866590671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2105367381831948545}
+  m_Layer: 5
+  m_Name: UIContMusicPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2105367381831948545
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6933173865866590671}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4934542380284951224}
+  m_Father: {fileID: 3607785875046404810}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -224}
+  m_SizeDelta: {x: 0, y: -212}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7038879259730338947
 GameObject:
   m_ObjectHideFlags: 0
@@ -2927,17 +3000,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7471825165107067789}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2740750753330418277}
-  m_Father: {fileID: 324749733688937006}
+  m_Father: {fileID: 3607785875046404810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 30, y: -30}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &972334496235196756
@@ -3176,7 +3249,7 @@ GameObject:
   - component: {fileID: 5124044043574603868}
   - component: {fileID: 586899848915411284}
   m_Layer: 5
-  m_Name: UITextKeyValue
+  m_Name: UITextPointValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3199,7 +3272,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 75}
+  m_SizeDelta: {x: 185.6075, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5124044043574603868
 CanvasRenderer:
@@ -3229,7 +3302,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +1
+  m_text: +393
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: eb12cf3f5f174d249ba9b1f0fcac3d6b, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: be8b9eff3b4f42045b4067ab3d494b84, type: 2}
@@ -3263,7 +3336,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -3312,7 +3385,7 @@ GameObject:
   - component: {fileID: 5566295084940895443}
   - component: {fileID: 4162891973151175531}
   m_Layer: 5
-  m_Name: PivotMusicKey
+  m_Name: PivotMusicPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3325,14 +3398,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8078952114136862131}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4353719127266361053}
   - {fileID: 682565186421635862}
-  m_Father: {fileID: 8774569027371544188}
+  m_Father: {fileID: 2105367381831948545}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3356,7 +3429,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 5
   m_Spacing: 5
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0

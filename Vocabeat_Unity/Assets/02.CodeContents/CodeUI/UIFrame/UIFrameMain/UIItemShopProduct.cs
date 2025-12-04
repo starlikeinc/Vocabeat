@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum EProductType
 {
@@ -25,6 +26,7 @@ public class UIItemShopProduct : MonoBehaviour
 
     [SerializeField] private UIWidgetMainShop _widgetShop;
     [SerializeField] private UIWidgetPurchasePopup _purchasePopup;
+    [SerializeField] private UIWidgetNotEnoughPointPopup _notEnoughPointPopup;
 
     private void Awake()
     {
@@ -33,17 +35,24 @@ public class UIItemShopProduct : MonoBehaviour
 
         if (_textAmount != null)
             _textAmount.text = $"{_shopData.Amount:N0}";
-        _textPrice.text = $"{_shopData.Price:N0} ₩";
+        _textPrice.text = $"{_shopData.Price:N0}";
     }
 
     public void OnPurchase()
     {
-        if (_shopData.ProductType == EProductType.Key)
-            ManagerRhythm.Instance.AddMusicKey(_shopData.Amount);
-        else if (_shopData.ProductType == EProductType.SongPack)
-            ManagerUnlock.Instance.UnlockAllSongs();
+        if(ManagerRhythm.Instance.MusicPoint < _shopData.Price)
+        {
+            _notEnoughPointPopup.DoUIWidgetShow();
+        }
+        else
+        {
+            if (_shopData.ProductType == EProductType.Key)
+                ManagerRhythm.Instance.AddMusicKey(_shopData.Amount);
+            else if (_shopData.ProductType == EProductType.SongPack)
+                ManagerUnlock.Instance.UnlockAllSongs();
 
-        _widgetShop.RefreshKey();
-        _purchasePopup.DoUIWidgetShow();
+            _widgetShop.RefreshCurrency();
+            _purchasePopup.DoUIWidgetShow();
+        }        
     }
 }

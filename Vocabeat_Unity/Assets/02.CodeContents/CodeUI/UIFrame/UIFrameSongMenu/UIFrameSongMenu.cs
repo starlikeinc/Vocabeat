@@ -28,8 +28,9 @@ public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
     [Header("옵션")]
     [SerializeField] private UIWidgetOption _widgetOption;
 
-    [Header("SongKey")]
+    [Header("Currency")]
     [SerializeField] private TMP_Text _textKeyAmount;
+    [SerializeField] private TMP_Text _textPointAmount;
 
     [Header("ComingSoon")]
     [SerializeField] private UIWidgetComingSoon _widgetComingSoon;
@@ -63,6 +64,7 @@ public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
             _carouselSong.RefreshAll(_lastSongIndex);
         }
         _textKeyAmount.text = $"{ManagerRhythm.Instance.MusicKey}";
+        _textPointAmount.text = $"{ManagerRhythm.Instance.MusicPoint}";
     }
 
     public void SongDifficultySetting()
@@ -79,6 +81,7 @@ public class UIFrameSongMenu : UIFrameUsage<ESongMenuSfxKey>
     {
         _carouselSong.RefreshSlotsVisualOnly();
         _textKeyAmount.text = $"{ManagerRhythm.Instance.MusicKey}";
+        _textPointAmount.text = $"{ManagerRhythm.Instance.MusicPoint}";
     }
 
     public void SetCurrentSongDifficulty(EDifficulty diff)

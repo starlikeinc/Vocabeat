@@ -26,8 +26,6 @@ public class UIFrameResult : UIFrameBase
         public Sprite RankSprite;
     }
 
-    private const int c_AddKeyValue = 1;
-
     [Header("BGM")]
     [SerializeField] private BGMEventChannelSO _eventChannel;
     [SerializeField] private AudioCueSO _audioCue;
@@ -59,9 +57,10 @@ public class UIFrameResult : UIFrameBase
     [Header("BG")]
     [SerializeField] private Image _imgBG;
 
-    [Header("키 획득 연출")]
-    [SerializeField] private GameObject _pivotKey;
-    [SerializeField] private DOTweenAnimation _tweenKeyAcquire;
+    [Header("포인트 획득 연출")]
+    [SerializeField] private GameObject _pivotPoint;
+    [SerializeField] private DOTweenAnimation _tweenPointAcquire;
+    [SerializeField] private TMP_Text _textPointAcquireValue;
 
     [Header("실패 연출")]
     [SerializeField] private UnityEvent OnFailed;        
@@ -124,16 +123,41 @@ public class UIFrameResult : UIFrameBase
 
     private void TryInvokeFailEvent()
     {
-        bool isFail = ManagerRhythm.Instance.CurrentScore < GameConstant.RequirePoint_C;
-        _pivotKey.SetActive(!isFail);
+        int currentScore = ManagerRhythm.Instance.CurrentScore;
+
+        bool isFail = currentScore < GameConstant.RequirePoint_C;
+        _pivotPoint.SetActive(!isFail);
 
         if (isFail)
             OnFailed?.Invoke();
         else
         {
-            _tweenKeyAcquire.RecreateTweenAndPlay();
-            ManagerRhythm.Instance.AddMusicKey(c_AddKeyValue);
+            _tweenPointAcquire.RecreateTweenAndPlay();
+            int pointValue = CalculatePoint(currentScore);
+
+            _textPointAcquireValue.text = $"+{pointValue}";
+
+            ManagerRhythm.Instance.AddMusicPoint(pointValue);
         }
+    }
+
+    private int CalculatePoint(int score)
+    {
+        const int minScore = 5000;
+        const int maxScore = 1_000_000;
+        const int minPoint = 50;
+        const int maxPoint = 100;
+
+        if (score <= minScore)
+            return minPoint;
+
+        if (score >= maxScore)
+            return maxPoint;
+
+        float t = (score - minScore) / (float)(maxScore - minScore); // 0~1 비율
+        float point = Mathf.Lerp(minPoint, maxPoint, t);
+
+        return Mathf.RoundToInt(point);
     }
 
     private Sprite GetRankSpriteByType(ERank rank)

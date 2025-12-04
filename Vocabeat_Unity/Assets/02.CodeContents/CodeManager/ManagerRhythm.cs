@@ -5,6 +5,7 @@ using UnityEngine;
 public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
 {
     private const string MusicKey_Key = "MusicKey";
+    private const string MusicPoint_Key = "MusicPoint";
 
     public event Action<float> OnTickUpdate;
     public event Action OnSongBinded;
@@ -48,8 +49,20 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
             _musicKey = Mathf.Clamp(value, 0, int.MaxValue);
             SecurePrefs.SetInt(MusicKey_Key, _musicKey);
         }
-    }
+    }    
     private int _musicKey;
+
+    public int MusicPoint
+    {
+        get => _musicPoint;
+        set
+        {
+            _musicPoint = Mathf.Clamp(value, 0, int.MaxValue);
+            SecurePrefs.SetInt(MusicPoint_Key, _musicPoint);
+        }
+    }
+    private int _musicPoint;
+
     public bool IsPlaying => _rTimeline.IsPlaying;
 
     public EDifficulty CurDiff => _lastDiff;
@@ -72,7 +85,7 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
             RTimeline.OnSongComplete += HandleSongComplete;
 
         PreWarmSong();
-        LoadKey();
+        LoadCurrency();
     }
 
     protected override void OnUnityDestroy()
@@ -177,10 +190,12 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
         }
     }
 
-    private void LoadKey()
+    private void LoadCurrency()
     {
         MusicKey = SecurePrefs.GetInt(MusicKey_Key);
+        MusicPoint = SecurePrefs.GetInt(MusicPoint_Key);
         Debug.Log($"Load된 키 개수 {MusicKey}");
+        Debug.Log($"Load된 포인트 개수 {MusicPoint}");
     }
 
     // ========================================
@@ -257,9 +272,10 @@ public class ManagerRhythm : SingletonBase<ManagerRhythm>, IManagerInstance
     }
     
     public void AddMusicKey(int addValue)
-    {
-        MusicKey += addValue;        
-    }
+        => MusicKey += addValue;     
+
+    public void AddMusicPoint(int addValue)
+        => MusicPoint += addValue;
 
     // ======================================== 점수관련 - 어차피 기획 상 따로 저장 안 하는 거 같아서 그냥 여기다 함
     public void SetScoreValueByJudgeType(EJudgementType judgeType)
